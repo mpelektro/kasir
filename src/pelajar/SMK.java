@@ -1,0 +1,1 @@
+package pelajar;public class SMK extends Siswa{}

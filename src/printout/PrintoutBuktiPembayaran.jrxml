@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintoutBuktiPembayaran" pageWidth="468" pageHeight="595" columnWidth="377" leftMargin="72" rightMargin="19" topMargin="20" bottomMargin="20" uuid="774f77e3-b2e7-4ced-9b65-8b6927fc08fc">
+	<property name="ireport.zoom" value="1.4641000000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="428"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="Param_TransactionSummary_ID" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\printout\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Param_Profil_ID" class="java.lang.String">
+		<parameterDescription><![CDATA[Profil_ID from TranscationSummary]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Param_Clerk_ID" class="java.lang.Integer"/>
+	<parameter name="Param_TotalAmountTerbilang" class="java.lang.String"/>
+	<parameter name="Param_Tunggakan_IPP" class="java.lang.String"/>
+	<parameter name="Param_Tunggakan_IPP_Amount" class="java.lang.Float"/>
+	<parameter name="Param_Tunggakan_IPP_Each_Amount" class="java.lang.String"/>
+	<parameter name="Param_Tunggakan_Seragam" class="java.lang.String"/>
+	<parameter name="Param_Tunggakan_Seragam_Amount" class="java.lang.Float"/>
+	<parameter name="Param_Tunggakan_Almamater" class="java.lang.String"/>
+	<parameter name="Param_Tunggakan_Almamater_Amount" class="java.lang.Float"/>
+	<parameter name="Param_Tunggakan_Buku" class="java.lang.String"/>
+	<parameter name="Param_Tunggakan_Buku_Amount" class="java.lang.Float"/>
+	<parameter name="Param_Tunggakan_IPSP" class="java.lang.String"/>
+	<parameter name="Param_Tunggakan_IPSP_Amount" class="java.lang.Float"/>
+	<parameter name="Param_Tunggakan" class="java.lang.String"/>
+	<parameter name="Param_Tunggakan_Amount" class="java.lang.String"/>
+	<parameter name="Param_Tunggakan_Total_Amount" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     TransactionSummary.`NomorInduk` AS TransactionSummary_NomorInduk,
+     TransactionSummary.`IDClerk` AS TransactionSummary_IDClerk,
+     TransactionSummary.`CreateDate` AS TransactionSummary_CreateDate,
+     TransactionSummary.`LastUpdateDate` AS TransactionSummary_LastUpdateDate,
+     TransactionSummary.`TotalAmount` AS TransactionSummary_TotalAmount,
+     TransactionSummary.`Note` AS TransactionSummary_Note,
+     TransactionSummary.`ID` AS TransactionSummary_ID,
+     TransactionSummary.`UUID` AS TransactionSummary_UUID,
+     Profil.`NomorInduk` AS Profil_NomorInduk,
+     Profil.`Nama` AS Profil_Nama,
+     Profil.`CurrentLevel` AS Profil_CurrentLevel,
+     Clerk.`ID` AS Clerk_ID,
+     Clerk.`Nama` AS Clerk_Nama,
+     Clerk.`Jabatan` AS Clerk_Jabatan,
+     Clerk.`NIP` AS Clerk_NIP,
+     Profil.`Alamat` AS Profil_Alamat
+FROM
+     `TransactionSummary` TransactionSummary,
+     `Profil` Profil,
+     `Clerk` Clerk
+WHERE
+     TransactionSummary.`ID` = $P{Param_TransactionSummary_ID}
+ AND Profil.`NomorInduk` = $P{Param_Profil_ID}
+ AND Clerk.`ID` = $P{Param_Clerk_ID}]]>
+	</queryString>
+	<field name="TransactionSummary_NomorInduk" class="java.lang.String"/>
+	<field name="TransactionSummary_IDClerk" class="java.lang.Integer"/>
+	<field name="TransactionSummary_CreateDate" class="java.sql.Timestamp"/>
+	<field name="TransactionSummary_LastUpdateDate" class="java.sql.Timestamp"/>
+	<field name="TransactionSummary_TotalAmount" class="java.lang.Float"/>
+	<field name="TransactionSummary_Note" class="java.lang.String"/>
+	<field name="TransactionSummary_ID" class="java.math.BigInteger"/>
+	<field name="TransactionSummary_UUID" class="java.lang.String"/>
+	<field name="Profil_NomorInduk" class="java.lang.String"/>
+	<field name="Profil_Nama" class="java.lang.String"/>
+	<field name="Profil_CurrentLevel" class="java.lang.String"/>
+	<field name="Clerk_ID" class="java.lang.Long"/>
+	<field name="Clerk_Nama" class="java.lang.String"/>
+	<field name="Clerk_Jabatan" class="java.lang.String"/>
+	<field name="Clerk_NIP" class="java.lang.String"/>
+	<field name="Profil_Alamat" class="java.lang.String"/>
+	<variable name="CURRENT_TIME" class="java.util.Date">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[new Date()]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="82" splitType="Prevent">
+			<staticText>
+				<reportElement x="73" y="0" width="304" height="14" uuid="a27c8882-2eaa-4a3d-a866-195aef56b331"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[YAYASAN DARMA SETIA KOSGORO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="73" y="14" width="304" height="14" uuid="79a4e343-ce30-4cec-9ea5-f892ff5c81fa"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{Profil_CurrentLevel}.split("-")[0]).concat(" KOSGORO KOTA BOGOR")]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement positionType="Float" x="0" y="0" width="73" height="70" uuid="c1881b03-7ecb-48fe-a326-012d1c5e8c14"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"SMA_Kosgoro_Logo.gif"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="73" y="28" width="304" height="14" uuid="501e5b25-b48b-4b27-b1c9-8a3258119b48"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Jalan Pajajaran No 217 A  Telp(0251)345168 - 312505"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="42" width="304" height="14" uuid="8e370de2-a0e3-47ab-b963-42a1e0dd34d3"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Website : www.".concat(($F{Profil_CurrentLevel}.split("-")[0]).toLowerCase()).concat("-kosgoro.sch.id")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="56" width="304" height="14" uuid="9b8f872c-f57f-41bb-93e7-b4e98178ed76"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Email  : info@".concat(($F{Profil_CurrentLevel}.split("-")[0]).toLowerCase()).concat("-kosgoro.sch.id")]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="69" width="377" height="1" uuid="459395c7-57f4-464f-9308-16ca973265a4"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="98">
+			<staticText>
+				<reportElement x="0" y="30" width="73" height="12" uuid="14ea0555-4bc4-4d4a-b2ad-cd99b6378dbc"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Alamat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="30" width="41" height="12" uuid="f474bc01-2515-4ed9-af45-2bb1d6c1dfa0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Kelas]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement x="79" y="18" width="207" height="12" uuid="1befa59d-d770-4b86-b473-cfc6fa6c04b7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Profil_Nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="327" y="30" width="50" height="12" uuid="c072a313-fdf3-4295-925f-3fc851c9b917"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[": ".concat($F{Profil_CurrentLevel}.split("-")[1].concat(" - ").concat($F{Profil_CurrentLevel}.split("-")[2]))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="18" width="73" height="12" uuid="31b8b465-7aef-4d61-9324-b2fa08242514"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Dari Peserta Didik]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="0" width="377" height="18" uuid="3838b615-0879-4d1c-80b1-899d8d1b6e40"/>
+				<textElement textAlignment="Center">
+					<font size="10" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new String("BUKTI PENERIMAAN KAS NOMOR : ").concat(($F{TransactionSummary_ID}).toString())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="286" y="18" width="41" height="12" uuid="d77186a1-c784-47fd-9d96-3e9af07d60e3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[No. Induk ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="327" y="18" width="50" height="12" uuid="0a87621c-cedd-4f1b-93ba-413cc7a82cd6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[": ".concat($F{Profil_NomorInduk})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="79" y="30" width="207" height="24" uuid="567fd235-f979-4f13-9a84-3bffdd171385"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Profil_Alamat}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="82" width="73" height="12" uuid="2d6ef4f4-a06d-4626-a87e-221a7595073d"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Dengan Rincian]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="54" width="73" height="12" uuid="1d9c178e-0f10-4544-9a80-9fbc04e5a54b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Jumlah Uang]]></text>
+			</staticText>
+			<textField pattern="Rp #,##0">
+				<reportElement x="79" y="54" width="59" height="12" uuid="01979890-1096-4bb0-a901-afcf6a0442c4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TransactionSummary_TotalAmount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0">
+				<reportElement x="138" y="54" width="239" height="12" uuid="0b705b3d-45c7-4b43-88f9-0d2d63908397"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(".concat($P{Param_TotalAmountTerbilang}).concat(")")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="73" y="18" width="6" height="12" uuid="d69c92e4-c080-4ae0-a520-db5276572edd"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="30" width="6" height="12" uuid="88f315fb-38c3-46bc-a01d-e7e13a3ece62"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="54" width="6" height="12" uuid="448fe82a-c54d-4f0f-8b99-b8bbbfe3f8e1"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="82" width="6" height="12" uuid="222aa1d1-3c86-46b7-aae3-c58778adaac5"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="507355a8-4623-4519-ab5c-69d5c9ddcdb0"/>
+				<subreportParameter name="Param_PASB_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_PASB.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="507355a8-4623-4519-ab5c-69d5c9ddcdb0"/>
+				<subreportParameter name="Param_IPP_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_IPP.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Prevent">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT}>0]]></printWhenExpression>
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="01af9f58-2e18-4394-bddf-2dff3d3d1538"/>
+				<subreportParameter name="Param_IPSP_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_IPSP.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Prevent">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT}>0]]></printWhenExpression>
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="d97a031b-c25b-46c4-8e39-03b994de4f77"/>
+				<subreportParameter name="Param_IKS_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_IKS.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="80967a56-3bcf-4cd7-8e62-0855833fe96c"/>
+				<subreportParameter name="Param_Seragam_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_Seragam.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="f2a97902-c76a-44e0-9ef7-75e454104098"/>
+				<subreportParameter name="Param_IUS_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_IUS.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="6f24aa23-77e6-47db-b522-3fa3abbe38b4"/>
+				<subreportParameter name="Param_OSIS_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_OSIS.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="202d1250-c15f-475a-bc70-52a094f9b350"/>
+				<subreportParameter name="Param_IPS_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_IPS.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="d0e0de80-022e-4310-9f2e-9c32169481a1"/>
+				<subreportParameter name="Param_IUA_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_IUA.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="d0e0de80-022e-4310-9f2e-9c32169481a1"/>
+				<subreportParameter name="Param_IUAP_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_IUAP.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="1ed48b68-f02e-43bd-bd64-83a85d11342a"/>
+				<subreportParameter name="Param_IPSB_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_IPSB.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="1ed48b68-f02e-43bd-bd64-83a85d11342a"/>
+				<subreportParameter name="Param_PVT_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_PVT.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="231b0f5f-b558-41ce-b532-5ca7f8d4131e"/>
+				<subreportParameter name="Param_ILL_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_ILL.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="c3846b96-1783-4d98-be5c-1e83fccb25ad"/>
+				<subreportParameter name="Param_Sumbangan_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_Sumbangan.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="eb2b5a52-c43a-416f-90f8-5956c00520ad"/>
+				<subreportParameter name="Param_IDD_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_IDD.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="eb2b5a52-c43a-416f-90f8-5956c00520ae"/>
+				<subreportParameter name="Param_BUKU_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_BUKU.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="eb2b5a52-c43a-416f-90f8-5956c00520ae"/>
+				<subreportParameter name="Param_Attribute_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_Attribute.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="80967a56-3bcf-4cd7-8e62-0855833fe96d"/>
+				<subreportParameter name="Param_Almamater_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_Almamater.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="29">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="222" height="12" uuid="2ba7f026-a954-4d20-aeb4-b10e4de72fc7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TransactionSummary_Note}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="222" y="0" width="79" height="12" uuid="3cab53cb-1b25-4b5d-8234-ccd6992d32b8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total  Uang:]]></text>
+			</staticText>
+			<textField pattern="Rp #,##0">
+				<reportElement x="301" y="0" width="76" height="12" uuid="530c8fce-2e04-4599-bdc4-58bf22b3a710"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TransactionSummary_TotalAmount}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="377" height="1" uuid="83b2dd3e-4fd9-4a43-92d7-9dcc0abe9658"/>
+			</line>
+			<line>
+				<reportElement x="0" y="12" width="377" height="1" uuid="72b30ae9-7a24-431f-bb27-4065483cc2aa"/>
+			</line>
+		</band>
+		<band height="13">
+			<textField pattern="Rp #,##0">
+				<reportElement x="0" y="0" width="189" height="12" uuid="dd124c3d-29b3-409b-8cf2-aa973323ead2"/>
+				<textElement>
+					<font size="8" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{Param_Tunggakan}.isEmpty())?"":"INFORMASI TUNGGAKAN PESERTA DIDIK"]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="14">
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="301" height="11" isRemoveLineWhenBlank="true" uuid="24aadf8f-0b21-4d60-bb79-49374bd60102"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Param_Tunggakan}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="301" y="0" width="76" height="11" isRemoveLineWhenBlank="true" uuid="7caa7086-d9c2-46c6-b5e3-f9ef6ab635c4"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Param_Tunggakan_Amount}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="24">
+			<textField pattern="Rp #,##0">
+				<reportElement x="222" y="0" width="79" height="12" uuid="20224df1-b8a4-416d-9970-6d78840f013d"/>
+				<textElement>
+					<font size="8" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{Param_Tunggakan}.isEmpty())?"":"Total Tunggakan:"]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0">
+				<reportElement x="301" y="0" width="76" height="12" uuid="fb6a77e3-6a84-4fa2-b522-a4dffee8593e"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Param_Tunggakan_Total_Amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="77" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="274" y="65" width="103" height="12" isPrintWhenDetailOverflows="true" uuid="8ed9acab-cbe2-40e4-9439-89545c9518b9"/>
+				<textElement textAlignment="Center">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(".concat($F{Clerk_Nama}).concat(")")]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="301" y="0" width="76" height="12" uuid="06f1b94f-beff-4507-9cd7-f603c290edc7"/>
+				<textElement textAlignment="Right">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TransactionSummary_CreateDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="274" y="0" width="27" height="12" uuid="8ee8e0ca-ed33-4b8f-bc79-810e096121f0"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Bogor, "]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="274" y="12" width="103" height="12" uuid="af89a23c-6b9d-4abe-b0c0-8ad97a9d883d"/>
+				<textElement textAlignment="Center">
+					<font size="8" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Diterima Kasir"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="0" y="12" width="152" height="12" uuid="23138c89-4a0b-4864-b278-2b6ebef34926"/>
+				<textElement textAlignment="Center">
+					<font size="8" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Yang Membayar: "]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="0" y="65" width="152" height="12" uuid="2d66aba9-6de9-41de-87f7-b4251bb66748"/>
+				<textElement textAlignment="Center">
+					<font size="8" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(Tanda Tangan Dan Nama Jelas)"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2" y="65" width="150" height="1" uuid="fd0281ac-f70e-4c13-986a-ea455b1e2639"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+</jasperReport>

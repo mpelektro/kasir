@@ -1,0 +1,31 @@
+IPP
+IPSP
+Seragam
+Iuran DIbayar Dimuka
+Buku
+IKS
+ILL
+IPSB
+IUA
+IUS
+OSIS
+Attribute
+PVT
+Tabungan
+Sumbangan
+
+IKS bisa dicicil
+Report IPP belum bisa di pc lain
+Iuran lain-lain belom ada frame
+IPSB / MOPD belum ada frame
+IUA belum ada frame
+Iuran Ujian Semester belum ada frame
+OSIS blum ada frame
+PASB blm ada frame, blm ada backend, blm ada report
+Praktek sinematografi blom ada frame, blm ada report
+Tabungan blm ada frame, blm ada report
+Sumbangan blm ada frame
+LKS1 blm ada button, frame, backend, blm ada report
+LKS2 blm ada button, frame, backend, blm ada report
+
+printout, total masih salah, tunggakan seragam belum dikurangin pembayaran

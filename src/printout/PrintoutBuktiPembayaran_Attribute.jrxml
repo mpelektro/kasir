@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintoutBuktiPembayaran_Attribute" pageWidth="378" pageHeight="410" columnWidth="378" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ea135a9b-6c60-4be0-bb44-2c446b74907a">
+	<property name="ireport.zoom" value="3.1384283767210035"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Param_Attribute_TransactionSummary_ID" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     AttributeTransaction.`ID` AS AttributeTransaction_ID,
+     AttributeTransaction.`UUID` AS AttributeTransaction_UUID,
+     AttributeTransaction.`IDIuran` AS AttributeTransaction_IDIuran,
+     AttributeTransaction.`IDClerk` AS AttributeTransaction_IDClerk,
+     AttributeTransaction.`IDTransactionSummary` AS AttributeTransaction_IDTransactionSummary,
+     AttributeTransaction.`NomorInduk` AS AttributeTransaction_NomorInduk,
+     AttributeTransaction.`Amount` AS AttributeTransaction_Amount,
+     AttributeTransaction.`PaymentMethod` AS AttributeTransaction_PaymentMethod,
+     AttributeTransaction.`CreateDate` AS AttributeTransaction_CreateDate,
+     AttributeTransaction.`LastUpdateDate` AS AttributeTransaction_LastUpdateDate,
+     AttributeTransaction.`Note` AS AttributeTransaction_Note
+FROM
+     `AttributeTransaction` AttributeTransaction
+WHERE
+     AttributeTransaction.`IDTransactionSummary` = $P{Param_Attribute_TransactionSummary_ID}]]>
+	</queryString>
+	<field name="AttributeTransaction_ID" class="java.math.BigInteger"/>
+	<field name="AttributeTransaction_UUID" class="java.lang.String"/>
+	<field name="AttributeTransaction_IDIuran" class="java.math.BigInteger"/>
+	<field name="AttributeTransaction_IDClerk" class="java.lang.Long"/>
+	<field name="AttributeTransaction_IDTransactionSummary" class="java.math.BigInteger"/>
+	<field name="AttributeTransaction_NomorInduk" class="java.lang.String"/>
+	<field name="AttributeTransaction_Amount" class="java.lang.Float"/>
+	<field name="AttributeTransaction_PaymentMethod" class="java.lang.String"/>
+	<field name="AttributeTransaction_CreateDate" class="java.sql.Timestamp"/>
+	<field name="AttributeTransaction_LastUpdateDate" class="java.sql.Timestamp"/>
+	<field name="AttributeTransaction_Note" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField pattern=".">
+				<reportElement x="35" y="1" width="20" height="12" uuid="da3f73e3-5217-462d-b8f3-8e1218bf71b5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="55" y="1" width="157" height="12" uuid="44374756-5259-49e2-bd09-bf852e4d3eef"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AttributeTransaction_Note}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="212" y="1" width="59" height="12" uuid="975c3055-8dfc-4fd5-a903-4a229ce7dd4d"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AttributeTransaction_PaymentMethod}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="271" y="1" width="49" height="12" uuid="3014fa51-d92c-4778-ad33-6f272259ecc0"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AttributeTransaction_LastUpdateDate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="Rp #,##0">
+				<reportElement x="320" y="1" width="58" height="12" uuid="a6fc6f52-f0ad-48ff-a422-d906939c0a7e"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AttributeTransaction_Amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1" width="35" height="12" uuid="a32d175f-12ef-475f-aba0-c15046b534ca"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Atribut]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

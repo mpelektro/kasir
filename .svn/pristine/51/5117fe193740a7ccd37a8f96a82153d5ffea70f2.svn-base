@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintoutBuktiPembayaran_Sumbangan" pageWidth="378" pageHeight="410" columnWidth="378" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ea135a9b-6c60-4be0-bb44-2c446b74907a">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Param_Sumbangan_TransactionSummary_ID" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     SumbanganTransaction.`ID` AS SumbanganTransaction_ID,
+     SumbanganTransaction.`UUID` AS SumbanganTransaction_UUID,
+     SumbanganTransaction.`IDIuran` AS SumbanganTransaction_IDIuran,
+     SumbanganTransaction.`IDClerk` AS SumbanganTransaction_IDClerk,
+     SumbanganTransaction.`IDTransactionSummary` AS SumbanganTransaction_IDTransactionSummary,
+     SumbanganTransaction.`NomorInduk` AS SumbanganTransaction_NomorInduk,
+     SumbanganTransaction.`Amount` AS SumbanganTransaction_Amount,
+     SumbanganTransaction.`PaymentMethod` AS SumbanganTransaction_PaymentMethod,
+     SumbanganTransaction.`CreateDate` AS SumbanganTransaction_CreateDate,
+     SumbanganTransaction.`LastUpdateDate` AS SumbanganTransaction_LastUpdateDate,
+     SumbanganTransaction.`Note` AS SumbanganTransaction_Note
+FROM
+     `SumbanganTransaction` SumbanganTransaction
+WHERE
+     SumbanganTransaction.`IDTransactionSummary` = $P{Param_Sumbangan_TransactionSummary_ID}]]>
+	</queryString>
+	<field name="SumbanganTransaction_ID" class="java.math.BigInteger"/>
+	<field name="SumbanganTransaction_UUID" class="java.lang.String"/>
+	<field name="SumbanganTransaction_IDIuran" class="java.math.BigInteger"/>
+	<field name="SumbanganTransaction_IDClerk" class="java.lang.Long"/>
+	<field name="SumbanganTransaction_IDTransactionSummary" class="java.math.BigInteger"/>
+	<field name="SumbanganTransaction_NomorInduk" class="java.lang.String"/>
+	<field name="SumbanganTransaction_Amount" class="java.lang.Float"/>
+	<field name="SumbanganTransaction_PaymentMethod" class="java.lang.String"/>
+	<field name="SumbanganTransaction_CreateDate" class="java.sql.Timestamp"/>
+	<field name="SumbanganTransaction_LastUpdateDate" class="java.sql.Timestamp"/>
+	<field name="SumbanganTransaction_Note" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField pattern=".">
+				<reportElement x="35" y="0" width="20" height="12" uuid="da3f73e3-5217-462d-b8f3-8e1218bf71b5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="55" y="0" width="157" height="12" uuid="44374756-5259-49e2-bd09-bf852e4d3eef"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SumbanganTransaction_Note}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="212" y="0" width="59" height="12" uuid="975c3055-8dfc-4fd5-a903-4a229ce7dd4d"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SumbanganTransaction_PaymentMethod}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="271" y="0" width="49" height="12" uuid="3014fa51-d92c-4778-ad33-6f272259ecc0"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SumbanganTransaction_LastUpdateDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0">
+				<reportElement x="320" y="0" width="58" height="12" uuid="a6fc6f52-f0ad-48ff-a422-d906939c0a7e"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SumbanganTransaction_Amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="35" height="12" uuid="a32d175f-12ef-475f-aba0-c15046b534ca"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[SUMB]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

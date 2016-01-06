@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintoutBuktiPembayaran_IPP" pageWidth="378" pageHeight="410" columnWidth="378" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="82dd9f8c-8229-4774-af0e-436a8ecbecbf">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="158"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#8FAFCC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="Param_IPP_TransactionSummary_ID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     IPPTransaction.`ID` AS IPPTransaction_ID,
+     IPPTransaction.`UUID` AS IPPTransaction_UUID,
+     IPPTransaction.`IDIuran` AS IPPTransaction_IDIuran,
+     IPPTransaction.`IDClerk` AS IPPTransaction_IDClerk,
+     IPPTransaction.`IDTransactionSummary` AS IPPTransaction_IDTransactionSummary,
+     IPPTransaction.`NomorInduk` AS IPPTransaction_NomorInduk,
+     IPPTransaction.`Amount` AS IPPTransaction_Amount,
+     IPPTransaction.`PaymentMethod` AS IPPTransaction_PaymentMethod,
+     IPPTransaction.`CreateDate` AS IPPTransaction_CreateDate,
+     IPPTransaction.`LastUpdateDate` AS IPPTransaction_LastUpdateDate,
+     IPPTransaction.`Note` AS IPPTransaction_Note,
+     CicilanHutangTransaction.`ID` AS CicilanHutangTransaction_ID,
+     CicilanHutangTransaction.`UUID` AS CicilanHutangTransaction_UUID,
+     CicilanHutangTransaction.`IDIuran` AS CicilanHutangTransaction_IDIuran,
+     CicilanHutangTransaction.`IDClerk` AS CicilanHutangTransaction_IDClerk,
+     CicilanHutangTransaction.`IDTransactionSummary` AS CicilanHutangTransaction_IDTransactionSummary,
+     CicilanHutangTransaction.`NomorInduk` AS CicilanHutangTransaction_NomorInduk,
+     CicilanHutangTransaction.`Level1` AS CicilanHutangTransaction_Level1,
+     CicilanHutangTransaction.`Amount` AS CicilanHutangTransaction_Amount,
+     CicilanHutangTransaction.`PaymentMethod` AS CicilanHutangTransaction_PaymentMethod,
+     CicilanHutangTransaction.`CreateDate` AS CicilanHutangTransaction_CreateDate,
+     CicilanHutangTransaction.`LastUpdateDate` AS CicilanHutangTransaction_LastUpdateDate,
+     CicilanHutangTransaction.`Note` AS CicilanHutangTransaction_Note,
+     CicilanHutangTransaction.`Settled` AS CicilanHutangTransaction_Settled,
+     CicilanHutangTransaction.`Piutang` AS CicilanHutangTransaction_Piutang
+FROM
+     `CicilanHutangTransaction` CicilanHutangTransaction INNER JOIN `IPPTransaction` IPPTransaction ON CicilanHutangTransaction.`IDTransactionSummary` = IPPTransaction.`IDTransactionSummary`
+WHERE
+     IPPTransaction.`IDTransactionSummary` = $P{Param_IPP_TransactionSummary_ID}]]>
+	</queryString>
+	<field name="IPPTransaction_ID" class="java.math.BigInteger"/>
+	<field name="IPPTransaction_UUID" class="java.lang.String"/>
+	<field name="IPPTransaction_IDIuran" class="java.math.BigInteger"/>
+	<field name="IPPTransaction_IDClerk" class="java.lang.Long"/>
+	<field name="IPPTransaction_IDTransactionSummary" class="java.math.BigInteger"/>
+	<field name="IPPTransaction_NomorInduk" class="java.lang.String"/>
+	<field name="IPPTransaction_Amount" class="java.lang.Float"/>
+	<field name="IPPTransaction_PaymentMethod" class="java.lang.String"/>
+	<field name="IPPTransaction_CreateDate" class="java.sql.Timestamp"/>
+	<field name="IPPTransaction_LastUpdateDate" class="java.sql.Timestamp"/>
+	<field name="IPPTransaction_Note" class="java.lang.String"/>
+	<field name="CicilanHutangTransaction_ID" class="java.math.BigInteger"/>
+	<field name="CicilanHutangTransaction_UUID" class="java.lang.String"/>
+	<field name="CicilanHutangTransaction_IDIuran" class="java.math.BigInteger"/>
+	<field name="CicilanHutangTransaction_IDClerk" class="java.lang.Long"/>
+	<field name="CicilanHutangTransaction_IDTransactionSummary" class="java.math.BigInteger"/>
+	<field name="CicilanHutangTransaction_NomorInduk" class="java.lang.String"/>
+	<field name="CicilanHutangTransaction_Level1" class="java.lang.String"/>
+	<field name="CicilanHutangTransaction_Amount" class="java.lang.Float"/>
+	<field name="CicilanHutangTransaction_PaymentMethod" class="java.lang.String"/>
+	<field name="CicilanHutangTransaction_CreateDate" class="java.sql.Timestamp"/>
+	<field name="CicilanHutangTransaction_LastUpdateDate" class="java.sql.Timestamp"/>
+	<field name="CicilanHutangTransaction_Note" class="java.lang.String"/>
+	<field name="CicilanHutangTransaction_Settled" class="java.lang.Boolean"/>
+	<field name="CicilanHutangTransaction_Piutang" class="java.lang.Boolean"/>
+	<group name="IPPTransaction_IDTransactionSummary">
+		<groupExpression><![CDATA[$F{IPPTransaction_IDTransactionSummary}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="55" y="1" width="157" height="12" uuid="579ae1d8-aefb-4769-a26a-65b8838143c2"/>
+				<textElement textAlignment="Justified">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IPPTransaction_Note}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="212" y="1" width="59" height="12" uuid="ead615a6-c61b-4777-9a01-87269ff07d0a"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IPPTransaction_PaymentMethod}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="271" y="1" width="49" height="12" uuid="3f3fadea-f9db-406f-b79c-f6cda86e4318"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IPPTransaction_LastUpdateDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0">
+				<reportElement x="320" y="1" width="58" height="12" uuid="571d225c-c943-477a-b20f-f0677a88668a"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IPPTransaction_Amount}+$F{CicilanHutangTransaction_Amount}]]></textFieldExpression>
+			</textField>
+			<textField pattern=".">
+				<reportElement x="35" y="1" width="20" height="12" uuid="971b7658-886d-4ea2-b9aa-3e05f2057d14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1" width="35" height="12" uuid="4913ee4e-fd9e-4cec-9363-1d83071038f8"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[IPP]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

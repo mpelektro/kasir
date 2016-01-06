@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutReportIPPKasir" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="64a527d2-9b7c-4dde-b8ca-ee908cdb19d5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Param_Clerk_ID" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Param_Start_Date" class="java.sql.Timestamp">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Param_End_Date" class="java.sql.Timestamp" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Param_Level" class="java.lang.String">
+		<defaultValueExpression><![CDATA["%"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     *,
+     ipptransaction.`ID` AS ipptransaction_ID,
+     ipptransaction.`UUID` AS ipptransaction_UUID,
+     ipptransaction.`IDIuran` AS ipptransaction_IDIuran,
+     ipptransaction.`IDClerk` AS ipptransaction_IDClerk,
+     ipptransaction.`IDTransactionSummary` AS ipptransaction_IDTransactionSummary,
+     ipptransaction.`NomorInduk` AS ipptransaction_NomorInduk,
+     ipptransaction.`Level1` AS ipptransaction_Level1,
+     ipptransaction.`Amount` AS ipptransaction_Amount,
+     ipptransaction.`PaymentMethod` AS ipptransaction_PaymentMethod,
+     ipptransaction.`CreateDate` AS ipptransaction_CreateDate,
+     ipptransaction.`LastUpdateDate` AS ipptransaction_LastUpdateDate,
+     ipptransaction.`Note` AS ipptransaction_Note,
+     ipptransaction.`Settled` AS ipptransaction_Settled,
+     ipptransaction.`Piutang` AS ipptransaction_Piutang,
+     clerk.`ID` AS clerk_ID,
+     clerk.`NIP` AS clerk_NIP,
+     clerk.`Nama` AS clerk_Nama,
+     clerk.`Jabatan` AS clerk_Jabatan,
+     clerk.`Username` AS clerk_Username,
+     clerk.`Password` AS clerk_Password,
+     profil.`NomorInduk` AS profil_NomorInduk,
+     profil.`Nama` AS profil_Nama,
+     profil.`JenisKelamin` AS profil_JenisKelamin,
+     profil.`Agama` AS profil_Agama,
+     profil.`AsalSekolah` AS profil_AsalSekolah,
+     profil.`TanggalLahir` AS profil_TanggalLahir,
+     profil.`TempatLahir` AS profil_TempatLahir,
+     profil.`Alamat` AS profil_Alamat,
+     profil.`NamaAyah` AS profil_NamaAyah,
+     profil.`NamaIbu` AS profil_NamaIbu,
+     profil.`Telpon1` AS profil_Telpon1,
+     profil.`Telpon2` AS profil_Telpon2,
+     profil.`CurrentLevel` AS profil_CurrentLevel,
+     profil.`TanggalMasuk` AS profil_TanggalMasuk,
+     profil.`TanggalLulus` AS profil_TanggalLulus,
+     profil.`Gelombang` AS profil_Gelombang,
+     profil.`TotalIuran` AS profil_TotalIuran,
+     profil.`StatusPendaftaran` AS profil_StatusPendaftaran,
+     profil.`LastUpdateDate` AS profil_LastUpdateDate
+FROM
+     `clerk` clerk INNER JOIN `ipptransaction` ipptransaction ON clerk.`ID` = ipptransaction.`IDClerk`
+     INNER JOIN `profil` profil ON ipptransaction.`NomorInduk` = profil.`NomorInduk`
+WHERE
+ipptransaction.`Level1`= $P{Param_Level}]]>
+	</queryString>
+	<field name="ID" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NIP" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Jabatan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Username" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Password" class="java.lang.String">
+		<fieldDescription><![CDATA[SHA1]]></fieldDescription>
+	</field>
+	<field name="UUID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="IDIuran" class="java.math.BigInteger">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="IDClerk" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="IDTransactionSummary" class="java.math.BigInteger">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NomorInduk" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Level1" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Amount" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PaymentMethod" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CreateDate" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="LastUpdateDate" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Note" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Settled" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Piutang" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JenisKelamin" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Agama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="AsalSekolah" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TanggalLahir" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TempatLahir" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Alamat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NamaAyah" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NamaIbu" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Telpon1" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Telpon2" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CurrentLevel" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TanggalMasuk" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TanggalLulus" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Gelombang" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotalIuran" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="StatusPendaftaran" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ipptransaction_ID" class="java.math.BigInteger"/>
+	<field name="ipptransaction_UUID" class="java.lang.String"/>
+	<field name="ipptransaction_IDIuran" class="java.math.BigInteger"/>
+	<field name="ipptransaction_IDClerk" class="java.lang.Long"/>
+	<field name="ipptransaction_IDTransactionSummary" class="java.math.BigInteger"/>
+	<field name="ipptransaction_NomorInduk" class="java.lang.String"/>
+	<field name="ipptransaction_Level1" class="java.lang.String"/>
+	<field name="ipptransaction_Amount" class="java.lang.Float"/>
+	<field name="ipptransaction_PaymentMethod" class="java.lang.String"/>
+	<field name="ipptransaction_CreateDate" class="java.sql.Timestamp"/>
+	<field name="ipptransaction_LastUpdateDate" class="java.sql.Timestamp"/>
+	<field name="ipptransaction_Note" class="java.lang.String"/>
+	<field name="ipptransaction_Settled" class="java.lang.Boolean"/>
+	<field name="ipptransaction_Piutang" class="java.lang.Boolean"/>
+	<field name="clerk_ID" class="java.lang.Long"/>
+	<field name="clerk_NIP" class="java.lang.String"/>
+	<field name="clerk_Nama" class="java.lang.String"/>
+	<field name="clerk_Jabatan" class="java.lang.String"/>
+	<field name="clerk_Username" class="java.lang.String"/>
+	<field name="clerk_Password" class="java.lang.String"/>
+	<field name="profil_NomorInduk" class="java.lang.String"/>
+	<field name="profil_Nama" class="java.lang.String"/>
+	<field name="profil_JenisKelamin" class="java.lang.String"/>
+	<field name="profil_Agama" class="java.lang.String"/>
+	<field name="profil_AsalSekolah" class="java.lang.String"/>
+	<field name="profil_TanggalLahir" class="java.sql.Date"/>
+	<field name="profil_TempatLahir" class="java.lang.String"/>
+	<field name="profil_Alamat" class="java.lang.String"/>
+	<field name="profil_NamaAyah" class="java.lang.String"/>
+	<field name="profil_NamaIbu" class="java.lang.String"/>
+	<field name="profil_Telpon1" class="java.lang.String"/>
+	<field name="profil_Telpon2" class="java.lang.String"/>
+	<field name="profil_CurrentLevel" class="java.lang.String"/>
+	<field name="profil_TanggalMasuk" class="java.sql.Date"/>
+	<field name="profil_TanggalLulus" class="java.sql.Date"/>
+	<field name="profil_Gelombang" class="java.lang.String"/>
+	<field name="profil_TotalIuran" class="java.lang.Float"/>
+	<field name="profil_StatusPendaftaran" class="java.lang.String"/>
+	<field name="profil_LastUpdateDate" class="java.sql.Date"/>
+	<variable name="IPPTransaction_TotalAmount_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{ipptransaction_Amount}]]></variableExpression>
+	</variable>
+	<variable name="IPPTransaction_TotalAmount_2" class="java.lang.Float" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{ipptransaction_Amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20" uuid="c773061c-e9e1-45c2-9254-b1671824421c"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[IPP]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="39" y="2" width="72" height="20" uuid="2aef9ca9-70fc-45d1-baca-7b6645265e30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nomor Induk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="264" y="3" width="100" height="20" uuid="9427b637-2273-4702-b64e-0cd3597921ca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="437" y="3" width="100" height="20" uuid="c8d2302a-89e5-4cd1-8e29-1a71255e2bc0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Jumlah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="364" y="3" width="73" height="20" uuid="808f9170-23cc-4bbb-8ded-741b285fc4f3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No. Kuitansi]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="2" width="39" height="20" uuid="3b886b4b-34d1-4652-9971-0db7b79ee38a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["No."]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="21" width="537" height="1" uuid="cda580a0-e2e2-402c-958e-2aa368b37a03"/>
+			</line>
+			<line>
+				<reportElement x="0" y="2" width="537" height="1" uuid="e7293df4-f1ea-4983-ab52-919752b9dcca"/>
+			</line>
+			<staticText>
+				<reportElement x="111" y="3" width="153" height="20" uuid="b0b847d7-d99b-47c6-9d8a-51011af2daaa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama Siswa]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="39" y="0" width="72" height="20" uuid="d5aafe15-7ccd-4277-b4cd-8bf93a88f01b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ipptransaction_NomorInduk}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="39" height="20" uuid="7f2a4eb9-0ae3-4f32-9b3b-2fd80eac1459"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="19" width="537" height="1" uuid="bf4d08e2-7f05-4548-9c76-c6c9c60b51a0"/>
+			</line>
+			<textField pattern="Rp #,##0">
+				<reportElement x="437" y="1" width="100" height="20" uuid="4c0f04fb-8a41-4de2-81e6-50f524e6bb1a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{ipptransaction_Amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="364" y="1" width="73" height="20" uuid="38410c77-33ee-4cb8-81d1-354abdf67cc5"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ipptransaction_IDTransactionSummary}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="1" width="153" height="20" uuid="be02d20d-c61e-4cb2-9b80-ca4851adaa76"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{profil_Nama}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="264" y="1" width="100" height="20" uuid="43131513-9fa9-4229-aaa5-28ec07caa760"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ipptransaction_LastUpdateDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="50" splitType="Stretch">
+			<textField>
+				<reportElement x="364" y="0" width="190" height="13" uuid="4f2bf63e-f502-40ce-8da2-ff2b0b784eb0"/>
+				<textElement textAlignment="Right">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Halaman : ".concat($V{PAGE_NUMBER}.toString())]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="141" splitType="Stretch">
+			<staticText>
+				<reportElement x="310" y="3" width="127" height="20" uuid="f602d177-d086-43a9-a222-636e2cf52e51"/>
+				<text><![CDATA[Total Kas Diterima Kasir]]></text>
+			</staticText>
+			<textField pattern="Rp #,##0">
+				<reportElement x="437" y="3" width="100" height="20" uuid="3a0a91f6-07b3-4808-8fe0-f4e7facfd399"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{IPPTransaction_TotalAmount_2}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="537" height="1" uuid="2b60149b-9bde-4874-b18e-60d3a5e60eb8"/>
+			</line>
+			<line>
+				<reportElement x="310" y="23" width="227" height="1" uuid="e973ec35-026f-41a9-9370-d5bec6c50319"/>
+				<graphicElement>
+					<pen lineWidth="1.5" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

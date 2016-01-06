@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintoutBuktiPembayaran_IKK" pageWidth="266" pageHeight="410" columnWidth="266" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ea135a9b-6c60-4be0-bb44-2c446b74907a">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Param_IKK_TransactionSummary_ID" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT
+     IKKTransaction.`ID` AS IKKTransaction_ID,
+     IKKTransaction.`UUID` AS IKKTransaction_UUID,
+     IKKTransaction.`IDIuran` AS IKKTransaction_IDIuran,
+     IKKTransaction.`IDClerk` AS IKKTransaction_IDClerk,
+     IKKTransaction.`IDTransactionSummary` AS IKKTransaction_IDTransactionSummary,
+     IKKTransaction.`NomorInduk` AS IKKTransaction_NomorInduk,
+     IKKTransaction.`Amount` AS IKKTransaction_Amount,
+     IKKTransaction.`PaymentMethod` AS IKKTransaction_PaymentMethod,
+     IKKTransaction.`CreateDate` AS IKKTransaction_CreateDate,
+     IKKTransaction.`LastUpdateDate` AS IKKTransaction_LastUpdateDate,
+     IKKTransaction.`Note` AS IKKTransaction_Note
+FROM
+     `IKKTransaction` IKKTransaction
+WHERE
+     IKKTransaction.`IDTransactionSummary` = $P{Param_IKK_TransactionSummary_ID}]]>
+	</queryString>
+	<field name="IKKTransaction_ID" class="java.math.BigInteger"/>
+	<field name="IKKTransaction_UUID" class="java.lang.String"/>
+	<field name="IKKTransaction_IDIuran" class="java.math.BigInteger"/>
+	<field name="IKKTransaction_IDClerk" class="java.lang.Long"/>
+	<field name="IKKTransaction_IDTransactionSummary" class="java.math.BigInteger"/>
+	<field name="IKKTransaction_NomorInduk" class="java.lang.String"/>
+	<field name="IKKTransaction_Amount" class="java.lang.Float"/>
+	<field name="IKKTransaction_PaymentMethod" class="java.lang.String"/>
+	<field name="IKKTransaction_CreateDate" class="java.sql.Timestamp"/>
+	<field name="IKKTransaction_LastUpdateDate" class="java.sql.Timestamp"/>
+	<field name="IKKTransaction_Note" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="14" splitType="Stretch">
+			<elementGroup>
+				<line>
+					<reportElement x="0" y="0" width="266" height="1" uuid="c8321e3a-5fc7-458a-9eff-ad529470c043"/>
+				</line>
+				<staticText>
+					<reportElement x="0" y="0" width="100" height="13" uuid="a32d175f-12ef-475f-aba0-c15046b534ca"/>
+					<textElement>
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[IKK]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="13" width="266" height="1" uuid="8c65b21d-6a8a-4ab2-b61a-f8730fc64311"/>
+				</line>
+			</elementGroup>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<printWhenExpression><![CDATA[false]]></printWhenExpression>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<printWhenExpression><![CDATA[false]]></printWhenExpression>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField pattern=".">
+				<reportElement x="0" y="0" width="20" height="12" uuid="da3f73e3-5217-462d-b8f3-8e1218bf71b5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="20" y="0" width="95" height="12" uuid="44374756-5259-49e2-bd09-bf852e4d3eef"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IKKTransaction_Note}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="0" width="59" height="12" uuid="975c3055-8dfc-4fd5-a903-4a229ce7dd4d"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IKKTransaction_PaymentMethod}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="174" y="0" width="49" height="12" uuid="3014fa51-d92c-4778-ad33-6f272259ecc0"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IKKTransaction_LastUpdateDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0">
+				<reportElement x="223" y="0" width="43" height="12" uuid="a6fc6f52-f0ad-48ff-a422-d906939c0a7e"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IKKTransaction_Amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<printWhenExpression><![CDATA[false]]></printWhenExpression>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<printWhenExpression><![CDATA[false]]></printWhenExpression>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<printWhenExpression><![CDATA[false]]></printWhenExpression>
+		</band>
+	</summary>
+</jasperReport>
