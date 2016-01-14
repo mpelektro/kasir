@@ -38,10 +38,13 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
     private ArrayList<Beasiswa> beasiswaS;
     private ArrayList<BeasiswaCost> beasiswaCostS;
     private TableModel tableModelIDD;
+    private TableModel tableModelBeasiswa;
+    private TableModel tableModelBeasiswaCost;
     private IDD idd;
     private Beasiswa beasiswa;
     private BeasiswaCost beasiswaCost;
     private Level level;
+    private UUID tSumUUID;
     /**
      * Creates new form InputIuranFrame
      */
@@ -110,7 +113,7 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
         jLabelAmount8 = new javax.swing.JLabel();
         jTextFieldBeasiswaTransactionName = new javax.swing.JTextField();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jTableIDD1 = new javax.swing.JTable();
+        jTableBeasiswa = new javax.swing.JTable();
         jPanelBeasiswaCost = new javax.swing.JPanel();
         jLabelIDDTitle2 = new javax.swing.JLabel();
         jLabelAmount9 = new javax.swing.JLabel();
@@ -124,7 +127,7 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
         jTextAreaBeasiswaCostNote = new javax.swing.JTextArea();
         jLabelAmount10 = new javax.swing.JLabel();
         jScrollPane12 = new javax.swing.JScrollPane();
-        jTableIDD2 = new javax.swing.JTable();
+        jTableBeasiswaCost = new javax.swing.JTable();
         jTextFieldBeasiswaCostTransactionName = new javax.swing.JTextField();
         jTextFieldBeasiswaCostAmount = new javax.swing.JTextField();
         jPanelButton = new javax.swing.JPanel();
@@ -411,12 +414,12 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
         });
 
         try{
-            tableModelIDD = buildIDDTableModel(profil);
+            tableModelBeasiswa = buildBeasiswaTableModel(profil);
         }catch(Exception e){
             e.printStackTrace();
         }
-        jTableIDD1.setModel(tableModelIDD);
-        jScrollPane10.setViewportView(jTableIDD1);
+        jTableBeasiswa.setModel(tableModelBeasiswa);
+        jScrollPane10.setViewportView(jTableBeasiswa);
 
         javax.swing.GroupLayout jPanelBeasiswaLayout = new javax.swing.GroupLayout(jPanelBeasiswa);
         jPanelBeasiswa.setLayout(jPanelBeasiswaLayout);
@@ -511,12 +514,12 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
         jLabelAmount10.setText(org.openide.util.NbBundle.getMessage(InputBeasiswaFrame.class, "InputBeasiswaFrame.jLabelAmount10.text")); // NOI18N
 
         try{
-            tableModelIDD = buildIDDTableModel(profil);
+            tableModelBeasiswaCost = buildBeasiswaCostTableModel(profil);
         }catch(Exception e){
             e.printStackTrace();
         }
-        jTableIDD2.setModel(tableModelIDD);
-        jScrollPane12.setViewportView(jTableIDD2);
+        jTableBeasiswaCost.setModel(tableModelBeasiswaCost);
+        jScrollPane12.setViewportView(jTableBeasiswaCost);
 
         jTextFieldBeasiswaCostTransactionName.setText(org.openide.util.NbBundle.getMessage(InputBeasiswaFrame.class, "InputBeasiswaFrame.jTextFieldBeasiswaCostTransactionName.text")); // NOI18N
         jTextFieldBeasiswaCostTransactionName.addActionListener(new java.awt.event.ActionListener() {
@@ -683,7 +686,6 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
             StringValidators.REQUIRE_VALID_NUMBER,
             StringValidators.REQUIRE_NON_NEGATIVE_NUMBER));
     //validationPanel.getValidationGroup().add(jTextFieldIPSPAmount, d);
-    jButtonSaveAll.setEnabled(false);
 
     pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -880,9 +882,9 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTableBeasiswa;
+    private javax.swing.JTable jTableBeasiswaCost;
     private javax.swing.JTable jTableIDD;
-    private javax.swing.JTable jTableIDD1;
-    private javax.swing.JTable jTableIDD2;
     private javax.swing.JTextArea jTextAreaBeasiswaCostNote;
     private javax.swing.JTextArea jTextAreaBeasiswaNote;
     private javax.swing.JTextArea jTextAreaIDDNote;
@@ -899,23 +901,59 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
 
     
     private void saveInsertIuran() throws SQLException, KasirException {
-        
+        Float totalAmount = 0f;
+        String tSumNote= "";
+        tSumUUID = UUID.randomUUID();
+        TransactionSummary transactionSummary = new TransactionSummary(tSumUUID,profil.noInduk, this.clerk.id, new sak.Kalender(System.currentTimeMillis()), new sak.Kalender(System.currentTimeMillis()), totalAmount, tSumNote);
         //IDD
+        IDDTransactionDetail iddTDetail = null;BeasiswaTransactionDetail beasiswaTDetail = null; BeasiswaCostTransactionDetail beasiswaCostTDetail = null;
+        
         if(!jTextFieldIDDAmount.getText().equals("0") &&(!jTextFieldIDDTransactionName.getText().equals("") || jTextFieldIDDTransactionName.getText() != null )){
             IDD idd = new IDD(profil.noInduk, profil.currentLevel, jTextFieldIDDTransactionName.getText(), Float.valueOf(jTextFieldIDDAmount.getText()), jTextAreaIDDNote.getText());
             checkIDDRecordsThenInsertOrUpdate(idd);
+            totalAmount += Float.valueOf(jTextFieldIDDAmount.getText());
+            tSumNote = tSumNote.concat(" "+jTextAreaIDDNote.getText());
+            iddTDetail = new IDDTransactionDetail(tSumUUID, idd.id, this.clerk.id, 0L, profil.noInduk, profil.currentLevel.level1
+                        , Float.valueOf(jTextFieldIDDAmount.getText()), TransactionDetail.PaymentMethod.CASH, jTextAreaIDDNote.getText());
         }
         
         //Beasiswa
         if(!jTextFieldBeasiswaAmount.getText().equals("0") &&(!jTextFieldBeasiswaTransactionName.getText().equals("") || jTextFieldBeasiswaTransactionName.getText() != null )){
-            Beasiswa idd = new Beasiswa(profil.noInduk, profil.currentLevel, jTextFieldBeasiswaTransactionName.getText(), Float.valueOf(jTextFieldBeasiswaAmount.getText()), jTextAreaBeasiswaNote.getText());
-            checkBeasiswaRecordsThenInsertOrUpdate(idd);
+            Beasiswa beasiswa = new Beasiswa(profil.noInduk, profil.currentLevel, jTextFieldBeasiswaTransactionName.getText(), Float.valueOf(jTextFieldBeasiswaAmount.getText()), jTextAreaBeasiswaNote.getText());
+            checkBeasiswaRecordsThenInsertOrUpdate(beasiswa);
+            totalAmount += Float.valueOf(jTextFieldBeasiswaAmount.getText());
+            tSumNote = tSumNote.concat(" "+jTextAreaBeasiswaNote.getText());
+            beasiswaTDetail = new BeasiswaTransactionDetail(tSumUUID, beasiswa.id, this.clerk.id, 0L, profil.noInduk, profil.currentLevel.level1
+                        , Float.valueOf(jTextFieldBeasiswaAmount.getText()), TransactionDetail.PaymentMethod.CASH, jTextAreaBeasiswaNote.getText());
         }
         
         //BeasiswaCost
         if(!jTextFieldBeasiswaCostAmount.getText().equals("0") &&(!jTextFieldBeasiswaCostTransactionName.getText().equals("") || jTextFieldBeasiswaCostTransactionName.getText() != null )){
-            BeasiswaCost idd = new BeasiswaCost(profil.noInduk, profil.currentLevel, jTextFieldBeasiswaCostTransactionName.getText(), Float.valueOf(jTextFieldBeasiswaCostAmount.getText()), jTextAreaBeasiswaCostNote.getText());
-            checkBeasiswaCostRecordsThenInsertOrUpdate(idd);
+            BeasiswaCost beasiswaCost = new BeasiswaCost(profil.noInduk, profil.currentLevel, jTextFieldBeasiswaCostTransactionName.getText(), Float.valueOf(jTextFieldBeasiswaCostAmount.getText()), jTextAreaBeasiswaCostNote.getText());
+            checkBeasiswaCostRecordsThenInsertOrUpdate(beasiswaCost);
+            totalAmount += Float.valueOf(jTextFieldBeasiswaCostAmount.getText());
+            tSumNote = tSumNote.concat(" "+jTextAreaBeasiswaCostNote.getText());    
+            beasiswaCostTDetail = new BeasiswaCostTransactionDetail(tSumUUID, beasiswaCost.id, this.clerk.id, 0L, profil.noInduk, profil.currentLevel.level1
+                        , Float.valueOf(jTextFieldBeasiswaCostAmount.getText()), TransactionDetail.PaymentMethod.CASH, jTextAreaBeasiswaCostNote.getText());
+        }
+        transactionSummary.totalAmount = totalAmount;
+        transactionSummary.note = tSumNote;
+        Control.insertTSummary(transactionSummary);
+        transactionSummary = Control.selectTSummary(TransactionSummary.uuidColName, false, tSumUUID.toString());
+        if(iddTDetail !=null){
+            iddTDetail.transactSummaryID = transactionSummary.id;
+            iddTDetail.uuid = transactionSummary.uuid;
+            Control.insertTDetail(TransactionDetail.Tipe.IDDTransaction, iddTDetail);
+        }
+        if(beasiswaTDetail !=null){
+            beasiswaTDetail.transactSummaryID = transactionSummary.id;
+            beasiswaTDetail.uuid = transactionSummary.uuid;
+            Control.insertTDetail(TransactionDetail.Tipe.BeasiswaTransaction, beasiswaTDetail);
+        }
+        if(beasiswaCostTDetail !=null){
+            beasiswaCostTDetail.transactSummaryID = transactionSummary.id;
+            beasiswaCostTDetail.uuid = transactionSummary.uuid;
+            Control.insertTDetail(TransactionDetail.Tipe.BeasiswaCostTransaction, beasiswaCostTDetail);
         }
     }
     
@@ -1071,10 +1109,10 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
                     idd.id = tempIDD.id;
                     idd.note = tempIDD.note.concat(" Biaya IDD Sebelumnya:").concat(String.valueOf(tempIDD.amount));
                     idd.amount = tempIDD.amount + Float.valueOf(jTextFieldIDDAmount.getText());
-                    idd.note = jTextAreaIDDNote.getText().concat("<--").concat(idd.note);
+                    idd.debt = 0;
+                    idd.note = "<--".concat(jTextAreaIDDNote.getText().concat(idd.note));
                 }
              }
-             
              
             Control.updateIuran(Iuran.Tipe.IDD, idd);
         } catch (KasirException ex) {
@@ -1107,7 +1145,8 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
                     beasiswa.id = tempBeasiswa.id;
                     beasiswa.note = tempBeasiswa.note.concat(" Biaya Beasiswa Sebelumnya:").concat(String.valueOf(tempBeasiswa.amount));
                     beasiswa.amount = tempBeasiswa.amount + Float.valueOf(jTextFieldBeasiswaAmount.getText());
-                    beasiswa.note = jTextAreaBeasiswaNote.getText().concat("<--").concat(beasiswa.note);
+                    beasiswa.debt = 0;
+                    beasiswa.note = "<--".concat(jTextAreaBeasiswaNote.getText().concat(beasiswa.note));
                 }
              }
              
@@ -1143,7 +1182,8 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
                     beasiswacost.id = tempBeasiswaCost.id;
                     beasiswacost.note = tempBeasiswaCost.note.concat(" Biaya BeasiswaCost Sebelumnya:").concat(String.valueOf(tempBeasiswaCost.amount));
                     beasiswacost.amount = tempBeasiswaCost.amount + Float.valueOf(jTextFieldBeasiswaCostAmount.getText());
-                    beasiswacost.note = jTextAreaBeasiswaCostNote.getText().concat("<--").concat(beasiswacost.note);
+                    beasiswacost.debt = 0;
+                    beasiswacost.note = "<--".concat(jTextAreaBeasiswaCostNote.getText().concat(beasiswacost.note));
                 }
              }
              
