@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintoutBuktiPembayaran_BeasiswaCost" pageWidth="378" pageHeight="410" columnWidth="378" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ea135a9b-6c60-4be0-bb44-2c446b74907a">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Param_BeasiswaCost_TransactionSummary_ID" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     BeasiswaCostTransaction.`ID` AS BeasiswaCostTransaction_ID,
+     BeasiswaCostTransaction.`UUID` AS BeasiswaCostTransaction_UUID,
+     BeasiswaCostTransaction.`IDIuran` AS BeasiswaCostTransaction_IDIuran,
+     BeasiswaCostTransaction.`IDClerk` AS BeasiswaCostTransaction_IDClerk,
+     BeasiswaCostTransaction.`IDTransactionSummary` AS BeasiswaCostTransaction_IDTransactionSummary,
+     BeasiswaCostTransaction.`NomorInduk` AS BeasiswaCostTransaction_NomorInduk,
+     BeasiswaCostTransaction.`Amount` AS BeasiswaCostTransaction_Amount,
+     BeasiswaCostTransaction.`PaymentMethod` AS BeasiswaCostTransaction_PaymentMethod,
+     BeasiswaCostTransaction.`CreateDate` AS BeasiswaCostTransaction_CreateDate,
+     BeasiswaCostTransaction.`LastUpdateDate` AS BeasiswaCostTransaction_LastUpdateDate,
+     BeasiswaCostTransaction.`Note` AS BeasiswaCostTransaction_Note
+FROM
+     `BeasiswaCostTransaction` BeasiswaCostTransaction
+WHERE
+	BeasiswaCostTransaction.`IDTransactionSummary` = $P{Param_BeasiswaCost_TransactionSummary_ID}
+AND BeasiswaCostTransaction.`Amount` > 0]]>
+	</queryString>
+	<field name="BeasiswaCostTransaction_ID" class="java.math.BigInteger"/>
+	<field name="BeasiswaCostTransaction_UUID" class="java.lang.String"/>
+	<field name="BeasiswaCostTransaction_IDIuran" class="java.math.BigInteger"/>
+	<field name="BeasiswaCostTransaction_IDClerk" class="java.lang.Long"/>
+	<field name="BeasiswaCostTransaction_IDTransactionSummary" class="java.math.BigInteger"/>
+	<field name="BeasiswaCostTransaction_NomorInduk" class="java.lang.String"/>
+	<field name="BeasiswaCostTransaction_Amount" class="java.lang.Float"/>
+	<field name="BeasiswaCostTransaction_PaymentMethod" class="java.lang.String"/>
+	<field name="BeasiswaCostTransaction_CreateDate" class="java.sql.Timestamp"/>
+	<field name="BeasiswaCostTransaction_LastUpdateDate" class="java.sql.Timestamp"/>
+	<field name="BeasiswaCostTransaction_Note" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField pattern=".">
+				<reportElement x="35" y="0" width="20" height="12" uuid="da3f73e3-5217-462d-b8f3-8e1218bf71b5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="211" y="0" width="59" height="12" uuid="975c3055-8dfc-4fd5-a903-4a229ce7dd4d"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BeasiswaCostTransaction_PaymentMethod}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="270" y="0" width="49" height="12" uuid="3014fa51-d92c-4778-ad33-6f272259ecc0"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BeasiswaCostTransaction_LastUpdateDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0">
+				<reportElement x="320" y="0" width="58" height="12" uuid="a6fc6f52-f0ad-48ff-a422-d906939c0a7e"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BeasiswaCostTransaction_Amount}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="54" y="0" width="157" height="12" uuid="735d9826-129c-4e5a-be3c-03bb8799b8a4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BeasiswaCostTransaction_Note}==null ? "Dana Siswa" : $F{BeasiswaCostTransaction_Note}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="35" height="12" uuid="a32d175f-12ef-475f-aba0-c15046b534ca"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[BeasiswaCost]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

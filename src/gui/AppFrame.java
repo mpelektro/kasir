@@ -10,7 +10,9 @@ import iuran.TransactionSummary;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -140,6 +142,7 @@ public class AppFrame extends javax.swing.JFrame {
         jButtonSettingIuran = new javax.swing.JButton();
         jButtonSettingGL = new javax.swing.JButton();
         jButtonSettlement = new javax.swing.JButton();
+        jButtonRekapPenerimaan = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableInitialSearch = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -327,6 +330,18 @@ public class AppFrame extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButtonSettlement);
+
+        jButtonRekapPenerimaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/News.png"))); // NOI18N
+        jButtonRekapPenerimaan.setText(org.openide.util.NbBundle.getMessage(AppFrame.class, "AppFrame.jButtonRekapPenerimaan.text")); // NOI18N
+        jButtonRekapPenerimaan.setFocusable(false);
+        jButtonRekapPenerimaan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonRekapPenerimaan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonRekapPenerimaan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRekapPenerimaanActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonRekapPenerimaan);
 
         jTableInitialSearch.setAutoCreateRowSorter(true);
         jTableInitialSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -711,11 +726,11 @@ public class AppFrame extends javax.swing.JFrame {
     private void jButtonTSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTSumActionPerformed
         // TODO add your handling code here:
         Kalender kalS = new Kalender(dateChooserComboTSumS.getSelectedDate().getTime());
-        kalS.set(Calendar.HOUR, 0);
+        kalS.set(Calendar.HOUR_OF_DAY, 0);
         kalS.set(Calendar.MINUTE, 0);
         kalS.set(Calendar.SECOND, 0);
         Kalender kalE = new Kalender(dateChooserComboTSumE.getSelectedDate().getTime());
-        kalE.set(Calendar.HOUR, 23);
+        kalE.set(Calendar.HOUR_OF_DAY, 23);
         kalE.set(Calendar.MINUTE, 59);
         kalE.set(Calendar.SECOND, 59);
         //Ngakalin CreateDate End biar sama dapet hari satu hari.
@@ -764,10 +779,10 @@ public class AppFrame extends javax.swing.JFrame {
         try{
             Kalender start = new Kalender(dateChooserComboTSumS.getSelectedDate().getTime());
             Kalender end = new Kalender(dateChooserComboTSumE.getSelectedDate().getTime());
-            start.set(Calendar.HOUR, 0);
+            start.set(Calendar.HOUR_OF_DAY, 0);
             start.set(Calendar.MINUTE, 0);
             start.set(Calendar.SECOND, 0);
-            end.set(Calendar.HOUR, 23);
+            end.set(Calendar.HOUR_OF_DAY, 23);
             end.set(Calendar.MINUTE, 59);
             end.set(Calendar.SECOND, 59);
             printPenerimaanKasKasir(clerk, start, end);
@@ -846,6 +861,15 @@ public class AppFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Login Invalid!\r\n".concat(ex.toString()));
         }
     }//GEN-LAST:event_jTextFieldNamaSiswaActionPerformed
+
+    private void jButtonRekapPenerimaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRekapPenerimaanActionPerformed
+        // TODO add your handling code here:
+         try{
+            printRekapPenerimaan(new Kalender(dateChooserComboTSumS.getSelectedDate().getTime()), new Kalender(dateChooserComboTSumE.getSelectedDate().getTime()));
+        } catch (JRException | PrinterException | SQLException | KasirException e){
+            Exceptions.printStackTrace(e);
+        }
+    }//GEN-LAST:event_jButtonRekapPenerimaanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1548,6 +1572,7 @@ public class AppFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEditDeleteProfil;
     private javax.swing.JButton jButtonInsertKasir;
     private javax.swing.JButton jButtonPrintReportKasir;
+    private javax.swing.JButton jButtonRekapPenerimaan;
     private javax.swing.JButton jButtonRips;
     private javax.swing.JButton jButtonSearch;
     private javax.swing.JButton jButtonSettingGL;
@@ -1790,6 +1815,3085 @@ public class AppFrame extends javax.swing.JFrame {
 //        job.print(printRequestAttributeSet);
         
     }
+    
+    private void printRekapPenerimaan(Kalender startDate, Kalender endDate) throws JRException, PrinterException, SQLException, KasirException {
+        // connection is the data source we used to fetch the data from
+        startDate.set(Kalender.HOUR_OF_DAY, 0);
+        startDate.set(Kalender.MINUTE, 0);
+        startDate.set(Kalender.SECOND,0);
+        endDate = new Kalender(startDate);
+        endDate.set(Kalender.HOUR_OF_DAY, 23);
+        endDate.set(Kalender.MINUTE, 59);
+        endDate.set(Kalender.SECOND, 59);
+        List<Float> paramIPP = farmIPP(startDate,endDate);
+        List<Float> paramAlmamater = farmAlmamater(startDate,endDate);
+        List<Float> paramAttribute = farmAttribute(startDate,endDate);
+        List<Float> paramBeasiswa = farmBeasiswa(startDate,endDate);
+        List<Float> paramBeasiswaCost = farmBeasiswaCost(startDate,endDate);
+        List<Float> paramBuku = farmBuku(startDate,endDate);
+        List<Float> paramCicilanHutang = farmCicilanHutang(startDate,endDate);
+        List<Float> paramIDD = farmIDD(startDate,endDate);
+        List<Float> paramIKS = farmIKS(startDate,endDate);
+        List<Float> paramILL = farmILL(startDate,endDate);
+        List<Float> paramIPS = farmIPS(startDate,endDate);
+        List<Float> paramIPSB = farmIPSB(startDate,endDate);
+        List<Float> paramIPSP = farmIPSP(startDate,endDate);
+        List<Float> paramIUA = farmIUA(startDate,endDate);
+        List<Float> paramIUAP = farmIUAP(startDate,endDate);
+        List<Float> paramIUS = farmIUS(startDate,endDate);
+        List<Float> paramOSIS = farmOSIS(startDate,endDate);
+        List<Float> paramPASB = farmPASB(startDate,endDate);
+        List<Float> paramPVT = farmPVT(startDate,endDate);
+        List<Float> paramSeragam = farmSeragam(startDate,endDate);
+        List<Float> paramSumbangan = farmSumbangan(startDate,endDate);
+        List<Float> paramTabungan = farmTabungan(startDate,endDate);
+        
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection();
+        // jasperParameter is a Hashmap contains the parameters
+        // passed from application to the jrxml layout
+        HashMap jasperParameter = new HashMap();
+        jasperParameter.put("PARAM_IDCLERK", this.clerk.id);
+        jasperParameter.put("PARAM_TANGGAL_TRANSAKSI", startDate.toDate());
+        jasperParameter.put("PARAM_IPPSMP7", paramIPP.get(0));
+        jasperParameter.put("PARAM_IPPSMP8", paramIPP.get(1));
+        jasperParameter.put("PARAM_IPPSMP9", paramIPP.get(2));
+        jasperParameter.put("PARAM_IPPSMPTOTAL", paramIPP.get(3));
+        jasperParameter.put("PARAM_IPPSMPPASCA", paramIPP.get(4));
+        jasperParameter.put("PARAM_IPPSMA10", paramIPP.get(5));
+        jasperParameter.put("PARAM_IPPSMA11", paramIPP.get(6));
+        jasperParameter.put("PARAM_IPPSMA12", paramIPP.get(7));
+        jasperParameter.put("PARAM_IPPSMATOTAL", paramIPP.get(8));
+        jasperParameter.put("PARAM_IPPSMAPASCA", paramIPP.get(9));
+        jasperParameter.put("PARAM_IPPSMK10", paramIPP.get(10));
+        jasperParameter.put("PARAM_IPPSMK11", paramIPP.get(11));
+        jasperParameter.put("PARAM_IPPSMK12", paramIPP.get(12));
+        jasperParameter.put("PARAM_IPPSMKTOTAL", paramIPP.get(13));
+        jasperParameter.put("PARAM_IPPSMKPASCA", paramIPP.get(14));
+        
+        
+        jasperParameter.put("PARAM_AlmamaterSMP7", paramAlmamater.get(0));
+        jasperParameter.put("PARAM_AlmamaterSMP8", paramAlmamater.get(1));
+        jasperParameter.put("PARAM_AlmamaterSMP9", paramAlmamater.get(2));
+        jasperParameter.put("PARAM_AlmamaterSMPTOTAL", paramAlmamater.get(3));
+        jasperParameter.put("PARAM_AlmamaterSMPPASCA", paramAlmamater.get(4));
+        jasperParameter.put("PARAM_AlmamaterSMA10", paramAlmamater.get(5));
+        jasperParameter.put("PARAM_AlmamaterSMA11", paramAlmamater.get(6));
+        jasperParameter.put("PARAM_AlmamaterSMA12", paramAlmamater.get(7));
+        jasperParameter.put("PARAM_AlmamaterSMATOTAL", paramAlmamater.get(8));
+        jasperParameter.put("PARAM_AlmamaterSMAPASCA", paramAlmamater.get(9));
+        jasperParameter.put("PARAM_AlmamaterSMK10", paramAlmamater.get(10));
+        jasperParameter.put("PARAM_AlmamaterSMK11", paramAlmamater.get(11));
+        jasperParameter.put("PARAM_AlmamaterSMK12", paramAlmamater.get(12));
+        jasperParameter.put("PARAM_AlmamaterSMKTOTAL", paramAlmamater.get(13));
+        jasperParameter.put("PARAM_AlmamaterSMKPASCA", paramAlmamater.get(14));
+        
+        jasperParameter.put("PARAM_AttributeSMP7", paramAttribute.get(0));
+        jasperParameter.put("PARAM_AttributeSMP8", paramAttribute.get(1));
+        jasperParameter.put("PARAM_AttributeSMP9", paramAttribute.get(2));
+        jasperParameter.put("PARAM_AttributeSMPTOTAL", paramAttribute.get(3));
+        jasperParameter.put("PARAM_AttributeSMPPASCA", paramAttribute.get(4));
+        jasperParameter.put("PARAM_AttributeSMA10", paramAttribute.get(5));
+        jasperParameter.put("PARAM_AttributeSMA11", paramAttribute.get(6));
+        jasperParameter.put("PARAM_AttributeSMA12", paramAttribute.get(7));
+        jasperParameter.put("PARAM_AttributeSMATOTAL", paramAttribute.get(8));
+        jasperParameter.put("PARAM_AttributeSMAPASCA", paramAttribute.get(9));
+        jasperParameter.put("PARAM_AttributeSMK10", paramAttribute.get(10));
+        jasperParameter.put("PARAM_AttributeSMK11", paramAttribute.get(11));
+        jasperParameter.put("PARAM_AttributeSMK12", paramAttribute.get(12));
+        jasperParameter.put("PARAM_AttributeSMKTOTAL", paramAttribute.get(13));
+        jasperParameter.put("PARAM_AttributeSMKPASCA", paramAttribute.get(14));
+        
+        jasperParameter.put("PARAM_BeasiswaSMP7", paramBeasiswa.get(0));
+        jasperParameter.put("PARAM_BeasiswaSMP8", paramBeasiswa.get(1));
+        jasperParameter.put("PARAM_BeasiswaSMP9", paramBeasiswa.get(2));
+        jasperParameter.put("PARAM_BeasiswaSMPTOTAL", paramBeasiswa.get(3));
+        jasperParameter.put("PARAM_BeasiswaSMPPASCA", paramBeasiswa.get(4));
+        jasperParameter.put("PARAM_BeasiswaSMA10", paramBeasiswa.get(5));
+        jasperParameter.put("PARAM_BeasiswaSMA11", paramBeasiswa.get(6));
+        jasperParameter.put("PARAM_BeasiswaSMA12", paramBeasiswa.get(7));
+        jasperParameter.put("PARAM_BeasiswaSMATOTAL", paramBeasiswa.get(8));
+        jasperParameter.put("PARAM_BeasiswaSMAPASCA", paramBeasiswa.get(9));
+        jasperParameter.put("PARAM_BeasiswaSMK10", paramBeasiswa.get(10));
+        jasperParameter.put("PARAM_BeasiswaSMK11", paramBeasiswa.get(11));
+        jasperParameter.put("PARAM_BeasiswaSMK12", paramBeasiswa.get(12));
+        jasperParameter.put("PARAM_BeasiswaSMKTOTAL", paramBeasiswa.get(13));
+        jasperParameter.put("PARAM_BeasiswaSMKPASCA", paramBeasiswa.get(14));
+        
+        
+        jasperParameter.put("PARAM_BeasiswaCostSMP7", paramBeasiswaCost.get(0));
+        jasperParameter.put("PARAM_BeasiswaCostSMP8", paramBeasiswaCost.get(1));
+        jasperParameter.put("PARAM_BeasiswaCostSMP9", paramBeasiswaCost.get(2));
+        jasperParameter.put("PARAM_BeasiswaCostSMPTOTAL", paramBeasiswaCost.get(3));
+        jasperParameter.put("PARAM_BeasiswaCostSMPPASCA", paramBeasiswaCost.get(4));
+        jasperParameter.put("PARAM_BeasiswaCostSMA10", paramBeasiswaCost.get(5));
+        jasperParameter.put("PARAM_BeasiswaCostSMA11", paramBeasiswaCost.get(6));
+        jasperParameter.put("PARAM_BeasiswaCostSMA12", paramBeasiswaCost.get(7));
+        jasperParameter.put("PARAM_BeasiswaCostSMATOTAL", paramBeasiswaCost.get(8));
+        jasperParameter.put("PARAM_BeasiswaCostSMAPASCA", paramBeasiswaCost.get(9));
+        jasperParameter.put("PARAM_BeasiswaCostSMK10", paramBeasiswaCost.get(10));
+        jasperParameter.put("PARAM_BeasiswaCostSMK11", paramBeasiswaCost.get(11));
+        jasperParameter.put("PARAM_BeasiswaCostSMK12", paramBeasiswaCost.get(12));
+        jasperParameter.put("PARAM_BeasiswaCostSMKTOTAL", paramBeasiswaCost.get(13));
+        jasperParameter.put("PARAM_BeasiswaCostSMKPASCA", paramBeasiswaCost.get(14));
+        
+        jasperParameter.put("PARAM_BukuSMP7", paramBuku.get(0));
+        jasperParameter.put("PARAM_BukuSMP8", paramBuku.get(1));
+        jasperParameter.put("PARAM_BukuSMP9", paramBuku.get(2));
+        jasperParameter.put("PARAM_BukuSMPTOTAL", paramBuku.get(3));
+        jasperParameter.put("PARAM_BukuSMPPASCA", paramBuku.get(4));
+        jasperParameter.put("PARAM_BukuSMA10", paramBuku.get(5));
+        jasperParameter.put("PARAM_BukuSMA11", paramBuku.get(6));
+        jasperParameter.put("PARAM_BukuSMA12", paramBuku.get(7));
+        jasperParameter.put("PARAM_BukuSMATOTAL", paramBuku.get(8));
+        jasperParameter.put("PARAM_BukuSMAPASCA", paramBuku.get(9));
+        jasperParameter.put("PARAM_BukuSMK10", paramBuku.get(10));
+        jasperParameter.put("PARAM_BukuSMK11", paramBuku.get(11));
+        jasperParameter.put("PARAM_BukuSMK12", paramBuku.get(12));
+        jasperParameter.put("PARAM_BukuSMKTOTAL", paramBuku.get(13));
+        jasperParameter.put("PARAM_BukuSMKPASCA", paramBuku.get(14));
+        
+        jasperParameter.put("PARAM_CicilanHutangSMP7", paramCicilanHutang.get(0));
+        jasperParameter.put("PARAM_CicilanHutangSMP8", paramCicilanHutang.get(1));
+        jasperParameter.put("PARAM_CicilanHutangSMP9", paramCicilanHutang.get(2));
+        jasperParameter.put("PARAM_CicilanHutangSMPTOTAL", paramCicilanHutang.get(3));
+        jasperParameter.put("PARAM_CicilanHutangSMPPASCA", paramCicilanHutang.get(4));
+        jasperParameter.put("PARAM_CicilanHutangSMA10", paramCicilanHutang.get(5));
+        jasperParameter.put("PARAM_CicilanHutangSMA11", paramCicilanHutang.get(6));
+        jasperParameter.put("PARAM_CicilanHutangSMA12", paramCicilanHutang.get(7));
+        jasperParameter.put("PARAM_CicilanHutangSMATOTAL", paramCicilanHutang.get(8));
+        jasperParameter.put("PARAM_CicilanHutangSMAPASCA", paramCicilanHutang.get(9));
+        jasperParameter.put("PARAM_CicilanHutangSMK10", paramCicilanHutang.get(10));
+        jasperParameter.put("PARAM_CicilanHutangSMK11", paramCicilanHutang.get(11));
+        jasperParameter.put("PARAM_CicilanHutangSMK12", paramCicilanHutang.get(12));
+        jasperParameter.put("PARAM_CicilanHutangSMKTOTAL", paramCicilanHutang.get(13));
+        jasperParameter.put("PARAM_CicilanHutangSMKPASCA", paramCicilanHutang.get(14));
+        
+        jasperParameter.put("PARAM_IDDSMP7", paramIDD.get(0));
+        jasperParameter.put("PARAM_IDDSMP8", paramIDD.get(1));
+        jasperParameter.put("PARAM_IDDSMP9", paramIDD.get(2));
+        jasperParameter.put("PARAM_IDDSMPTOTAL", paramIDD.get(3));
+        jasperParameter.put("PARAM_IDDSMPPASCA", paramIDD.get(4));
+        jasperParameter.put("PARAM_IDDSMA10", paramIDD.get(5));
+        jasperParameter.put("PARAM_IDDSMA11", paramIDD.get(6));
+        jasperParameter.put("PARAM_IDDSMA12", paramIDD.get(7));
+        jasperParameter.put("PARAM_IDDSMATOTAL", paramIDD.get(8));
+        jasperParameter.put("PARAM_IDDSMAPASCA", paramIDD.get(9));
+        jasperParameter.put("PARAM_IDDSMK10", paramIDD.get(10));
+        jasperParameter.put("PARAM_IDDSMK11", paramIDD.get(11));
+        jasperParameter.put("PARAM_IDDSMK12", paramIDD.get(12));
+        jasperParameter.put("PARAM_IDDSMKTOTAL", paramIDD.get(13));
+        jasperParameter.put("PARAM_IDDSMKPASCA", paramIDD.get(14));
+        
+        jasperParameter.put("PARAM_IKSSMP7", paramIKS.get(0));
+        jasperParameter.put("PARAM_IKSSMP8", paramIKS.get(1));
+        jasperParameter.put("PARAM_IKSSMP9", paramIKS.get(2));
+        jasperParameter.put("PARAM_IKSSMPTOTAL", paramIKS.get(3));
+        jasperParameter.put("PARAM_IKSSMPPASCA", paramIKS.get(4));
+        jasperParameter.put("PARAM_IKSSMA10", paramIKS.get(5));
+        jasperParameter.put("PARAM_IKSSMA11", paramIKS.get(6));
+        jasperParameter.put("PARAM_IKSSMA12", paramIKS.get(7));
+        jasperParameter.put("PARAM_IKSSMATOTAL", paramIKS.get(8));
+        jasperParameter.put("PARAM_IKSSMAPASCA", paramIKS.get(9));
+        jasperParameter.put("PARAM_IKSSMK10", paramIKS.get(10));
+        jasperParameter.put("PARAM_IKSSMK11", paramIKS.get(11));
+        jasperParameter.put("PARAM_IKSSMK12", paramIKS.get(12));
+        jasperParameter.put("PARAM_IKSSMKTOTAL", paramIKS.get(13));
+        jasperParameter.put("PARAM_IKSSMKPASCA", paramIKS.get(14));
+        
+        jasperParameter.put("PARAM_ILLSMP7", paramILL.get(0));
+        jasperParameter.put("PARAM_ILLSMP8", paramILL.get(1));
+        jasperParameter.put("PARAM_ILLSMP9", paramILL.get(2));
+        jasperParameter.put("PARAM_ILLSMPTOTAL", paramILL.get(3));
+        jasperParameter.put("PARAM_ILLSMPPASCA", paramILL.get(4));
+        jasperParameter.put("PARAM_ILLSMA10", paramILL.get(5));
+        jasperParameter.put("PARAM_ILLSMA11", paramILL.get(6));
+        jasperParameter.put("PARAM_ILLSMA12", paramILL.get(7));
+        jasperParameter.put("PARAM_ILLSMATOTAL", paramILL.get(8));
+        jasperParameter.put("PARAM_ILLSMAPASCA", paramILL.get(9));
+        jasperParameter.put("PARAM_ILLSMK10", paramILL.get(10));
+        jasperParameter.put("PARAM_ILLSMK11", paramILL.get(11));
+        jasperParameter.put("PARAM_ILLSMK12", paramILL.get(12));
+        jasperParameter.put("PARAM_ILLSMKTOTAL", paramILL.get(13));
+        jasperParameter.put("PARAM_ILLSMKPASCA", paramILL.get(14));
+        
+        jasperParameter.put("PARAM_IPSSMP7", paramIPS.get(0));
+        jasperParameter.put("PARAM_IPSSMP8", paramIPS.get(1));
+        jasperParameter.put("PARAM_IPSSMP9", paramIPS.get(2));
+        jasperParameter.put("PARAM_IPSSMPTOTAL", paramIPS.get(3));
+        jasperParameter.put("PARAM_IPSSMPPASCA", paramIPS.get(4));
+        jasperParameter.put("PARAM_IPSSMA10", paramIPS.get(5));
+        jasperParameter.put("PARAM_IPSSMA11", paramIPS.get(6));
+        jasperParameter.put("PARAM_IPSSMA12", paramIPS.get(7));
+        jasperParameter.put("PARAM_IPSSMATOTAL", paramIPS.get(8));
+        jasperParameter.put("PARAM_IPSSMAPASCA", paramIPS.get(9));
+        jasperParameter.put("PARAM_IPSSMK10", paramIPS.get(10));
+        jasperParameter.put("PARAM_IPSSMK11", paramIPS.get(11));
+        jasperParameter.put("PARAM_IPSSMK12", paramIPS.get(12));
+        jasperParameter.put("PARAM_IPSSMKTOTAL", paramIPS.get(13));
+        jasperParameter.put("PARAM_IPSSMKPASCA", paramIPS.get(14));
+        
+        jasperParameter.put("PARAM_IPSBSMP7", paramIPSB.get(0));
+        jasperParameter.put("PARAM_IPSBSMP8", paramIPSB.get(1));
+        jasperParameter.put("PARAM_IPSBSMP9", paramIPSB.get(2));
+        jasperParameter.put("PARAM_IPSBSMPTOTAL", paramIPSB.get(3));
+        jasperParameter.put("PARAM_IPSBSMPPASCA", paramIPSB.get(4));
+        jasperParameter.put("PARAM_IPSBSMA10", paramIPSB.get(5));
+        jasperParameter.put("PARAM_IPSBSMA11", paramIPSB.get(6));
+        jasperParameter.put("PARAM_IPSBSMA12", paramIPSB.get(7));
+        jasperParameter.put("PARAM_IPSBSMATOTAL", paramIPSB.get(8));
+        jasperParameter.put("PARAM_IPSBSMAPASCA", paramIPSB.get(9));
+        jasperParameter.put("PARAM_IPSBSMK10", paramIPSB.get(10));
+        jasperParameter.put("PARAM_IPSBSMK11", paramIPSB.get(11));
+        jasperParameter.put("PARAM_IPSBSMK12", paramIPSB.get(12));
+        jasperParameter.put("PARAM_IPSBSMKTOTAL", paramIPSB.get(13));
+        jasperParameter.put("PARAM_IPSBSMKPASCA", paramIPSB.get(14));
+        
+        jasperParameter.put("PARAM_IPSPSMP7", paramIPSP.get(0));
+        jasperParameter.put("PARAM_IPSPSMP8", paramIPSP.get(1));
+        jasperParameter.put("PARAM_IPSPSMP9", paramIPSP.get(2));
+        jasperParameter.put("PARAM_IPSPSMPTOTAL", paramIPSP.get(3));
+        jasperParameter.put("PARAM_IPSPSMPPASCA", paramIPSP.get(4));
+        jasperParameter.put("PARAM_IPSPSMA10", paramIPSP.get(5));
+        jasperParameter.put("PARAM_IPSPSMA11", paramIPSP.get(6));
+        jasperParameter.put("PARAM_IPSPSMA12", paramIPSP.get(7));
+        jasperParameter.put("PARAM_IPSPSMATOTAL", paramIPSP.get(8));
+        jasperParameter.put("PARAM_IPSPSMAPASCA", paramIPSP.get(9));
+        jasperParameter.put("PARAM_IPSPSMK10", paramIPSP.get(10));
+        jasperParameter.put("PARAM_IPSPSMK11", paramIPSP.get(11));
+        jasperParameter.put("PARAM_IPSPSMK12", paramIPSP.get(12));
+        jasperParameter.put("PARAM_IPSPSMKTOTAL", paramIPSP.get(13));
+        jasperParameter.put("PARAM_IPSPSMKPASCA", paramIPSP.get(14));
+        
+        jasperParameter.put("PARAM_IUASMP7", paramIUA.get(0));
+        jasperParameter.put("PARAM_IUASMP8", paramIUA.get(1));
+        jasperParameter.put("PARAM_IUASMP9", paramIUA.get(2));
+        jasperParameter.put("PARAM_IUASMPTOTAL", paramIUA.get(3));
+        jasperParameter.put("PARAM_IUASMPPASCA", paramIUA.get(4));
+        jasperParameter.put("PARAM_IUASMA10", paramIUA.get(5));
+        jasperParameter.put("PARAM_IUASMA11", paramIUA.get(6));
+        jasperParameter.put("PARAM_IUASMA12", paramIUA.get(7));
+        jasperParameter.put("PARAM_IUASMATOTAL", paramIUA.get(8));
+        jasperParameter.put("PARAM_IUASMAPASCA", paramIUA.get(9));
+        jasperParameter.put("PARAM_IUASMK10", paramIUA.get(10));
+        jasperParameter.put("PARAM_IUASMK11", paramIUA.get(11));
+        jasperParameter.put("PARAM_IUASMK12", paramIUA.get(12));
+        jasperParameter.put("PARAM_IUASMKTOTAL", paramIUA.get(13));
+        jasperParameter.put("PARAM_IUASMKPASCA", paramIUA.get(14));
+        
+        jasperParameter.put("PARAM_IUAPSMP7", paramIUAP.get(0));
+        jasperParameter.put("PARAM_IUAPSMP8", paramIUAP.get(1));
+        jasperParameter.put("PARAM_IUAPSMP9", paramIUAP.get(2));
+        jasperParameter.put("PARAM_IUAPSMPTOTAL", paramIUAP.get(3));
+        jasperParameter.put("PARAM_IUAPSMPPASCA", paramIUAP.get(4));
+        jasperParameter.put("PARAM_IUAPSMA10", paramIUAP.get(5));
+        jasperParameter.put("PARAM_IUAPSMA11", paramIUAP.get(6));
+        jasperParameter.put("PARAM_IUAPSMA12", paramIUAP.get(7));
+        jasperParameter.put("PARAM_IUAPSMATOTAL", paramIUAP.get(8));
+        jasperParameter.put("PARAM_IUAPSMAPASCA", paramIUAP.get(9));
+        jasperParameter.put("PARAM_IUAPSMK10", paramIUAP.get(10));
+        jasperParameter.put("PARAM_IUAPSMK11", paramIUAP.get(11));
+        jasperParameter.put("PARAM_IUAPSMK12", paramIUAP.get(12));
+        jasperParameter.put("PARAM_IUAPSMKTOTAL", paramIUAP.get(13));
+        jasperParameter.put("PARAM_IUAPSMKPASCA", paramIUAP.get(14));
+        
+        jasperParameter.put("PARAM_IUSSMP7", paramIUS.get(0));
+        jasperParameter.put("PARAM_IUSSMP8", paramIUS.get(1));
+        jasperParameter.put("PARAM_IUSSMP9", paramIUS.get(2));
+        jasperParameter.put("PARAM_IUSSMPTOTAL", paramIUS.get(3));
+        jasperParameter.put("PARAM_IUSSMPPASCA", paramIUS.get(4));
+        jasperParameter.put("PARAM_IUSSMA10", paramIUS.get(5));
+        jasperParameter.put("PARAM_IUSSMA11", paramIUS.get(6));
+        jasperParameter.put("PARAM_IUSSMA12", paramIUS.get(7));
+        jasperParameter.put("PARAM_IUSSMATOTAL", paramIUS.get(8));
+        jasperParameter.put("PARAM_IUSSMAPASCA", paramIUS.get(9));
+        jasperParameter.put("PARAM_IUSSMK10", paramIUS.get(10));
+        jasperParameter.put("PARAM_IUSSMK11", paramIUS.get(11));
+        jasperParameter.put("PARAM_IUSSMK12", paramIUS.get(12));
+        jasperParameter.put("PARAM_IUSSMKTOTAL", paramIUS.get(13));
+        jasperParameter.put("PARAM_IUSSMKPASCA", paramIUS.get(14));
+        
+        jasperParameter.put("PARAM_OSISSMP7", paramOSIS.get(0));
+        jasperParameter.put("PARAM_OSISSMP8", paramOSIS.get(1));
+        jasperParameter.put("PARAM_OSISSMP9", paramOSIS.get(2));
+        jasperParameter.put("PARAM_OSISSMPTOTAL", paramOSIS.get(3));
+        jasperParameter.put("PARAM_OSISSMPPASCA", paramOSIS.get(4));
+        jasperParameter.put("PARAM_OSISSMA10", paramOSIS.get(5));
+        jasperParameter.put("PARAM_OSISSMA11", paramOSIS.get(6));
+        jasperParameter.put("PARAM_OSISSMA12", paramOSIS.get(7));
+        jasperParameter.put("PARAM_OSISSMATOTAL", paramOSIS.get(8));
+        jasperParameter.put("PARAM_OSISSMAPASCA", paramOSIS.get(9));
+        jasperParameter.put("PARAM_OSISSMK10", paramOSIS.get(10));
+        jasperParameter.put("PARAM_OSISSMK11", paramOSIS.get(11));
+        jasperParameter.put("PARAM_OSISSMK12", paramOSIS.get(12));
+        jasperParameter.put("PARAM_OSISSMKTOTAL", paramOSIS.get(13));
+        jasperParameter.put("PARAM_OSISSMKPASCA", paramOSIS.get(14));
+        
+        jasperParameter.put("PARAM_PASBSMP7", paramPASB.get(0));
+        jasperParameter.put("PARAM_PASBSMP8", paramPASB.get(1));
+        jasperParameter.put("PARAM_PASBSMP9", paramPASB.get(2));
+        jasperParameter.put("PARAM_PASBSMPTOTAL", paramPASB.get(3));
+        jasperParameter.put("PARAM_PASBSMPPASCA", paramPASB.get(4));
+        jasperParameter.put("PARAM_PASBSMA10", paramPASB.get(5));
+        jasperParameter.put("PARAM_PASBSMA11", paramPASB.get(6));
+        jasperParameter.put("PARAM_PASBSMA12", paramPASB.get(7));
+        jasperParameter.put("PARAM_PASBSMATOTAL", paramPASB.get(8));
+        jasperParameter.put("PARAM_PASBSMAPASCA", paramPASB.get(9));
+        jasperParameter.put("PARAM_PASBSMK10", paramPASB.get(10));
+        jasperParameter.put("PARAM_PASBSMK11", paramPASB.get(11));
+        jasperParameter.put("PARAM_PASBSMK12", paramPASB.get(12));
+        jasperParameter.put("PARAM_PASBSMKTOTAL", paramPASB.get(13));
+        jasperParameter.put("PARAM_PASBSMKPASCA", paramPASB.get(14));
+        
+        jasperParameter.put("PARAM_PVTSMP7", paramPVT.get(0));
+        jasperParameter.put("PARAM_PVTSMP8", paramPVT.get(1));
+        jasperParameter.put("PARAM_PVTSMP9", paramPVT.get(2));
+        jasperParameter.put("PARAM_PVTSMPTOTAL", paramPVT.get(3));
+        jasperParameter.put("PARAM_PVTSMPPASCA", paramPVT.get(4));
+        jasperParameter.put("PARAM_PVTSMA10", paramPVT.get(5));
+        jasperParameter.put("PARAM_PVTSMA11", paramPVT.get(6));
+        jasperParameter.put("PARAM_PVTSMA12", paramPVT.get(7));
+        jasperParameter.put("PARAM_PVTSMATOTAL", paramPVT.get(8));
+        jasperParameter.put("PARAM_PVTSMAPASCA", paramPVT.get(9));
+        jasperParameter.put("PARAM_PVTSMK10", paramPVT.get(10));
+        jasperParameter.put("PARAM_PVTSMK11", paramPVT.get(11));
+        jasperParameter.put("PARAM_PVTSMK12", paramPVT.get(12));
+        jasperParameter.put("PARAM_PVTSMKTOTAL", paramPVT.get(13));
+        jasperParameter.put("PARAM_PVTSMKPASCA", paramPVT.get(14));
+        
+        jasperParameter.put("PARAM_SeragamSMP7", paramSeragam.get(0));
+        jasperParameter.put("PARAM_SeragamSMP8", paramSeragam.get(1));
+        jasperParameter.put("PARAM_SeragamSMP9", paramSeragam.get(2));
+        jasperParameter.put("PARAM_SeragamSMPTOTAL", paramSeragam.get(3));
+        jasperParameter.put("PARAM_SeragamSMPPASCA", paramSeragam.get(4));
+        jasperParameter.put("PARAM_SeragamSMA10", paramSeragam.get(5));
+        jasperParameter.put("PARAM_SeragamSMA11", paramSeragam.get(6));
+        jasperParameter.put("PARAM_SeragamSMA12", paramSeragam.get(7));
+        jasperParameter.put("PARAM_SeragamSMATOTAL", paramSeragam.get(8));
+        jasperParameter.put("PARAM_SeragamSMAPASCA", paramSeragam.get(9));
+        jasperParameter.put("PARAM_SeragamSMK10", paramSeragam.get(10));
+        jasperParameter.put("PARAM_SeragamSMK11", paramSeragam.get(11));
+        jasperParameter.put("PARAM_SeragamSMK12", paramSeragam.get(12));
+        jasperParameter.put("PARAM_SeragamSMKTOTAL", paramSeragam.get(13));
+        jasperParameter.put("PARAM_SeragamSMKPASCA", paramSeragam.get(14));
+        
+        jasperParameter.put("PARAM_SumbanganSMP7", paramSumbangan.get(0));
+        jasperParameter.put("PARAM_SumbanganSMP8", paramSumbangan.get(1));
+        jasperParameter.put("PARAM_SumbanganSMP9", paramSumbangan.get(2));
+        jasperParameter.put("PARAM_SumbanganSMPTOTAL", paramSumbangan.get(3));
+        jasperParameter.put("PARAM_SumbanganSMPPASCA", paramSumbangan.get(4));
+        jasperParameter.put("PARAM_SumbanganSMA10", paramSumbangan.get(5));
+        jasperParameter.put("PARAM_SumbanganSMA11", paramSumbangan.get(6));
+        jasperParameter.put("PARAM_SumbanganSMA12", paramSumbangan.get(7));
+        jasperParameter.put("PARAM_SumbanganSMATOTAL", paramSumbangan.get(8));
+        jasperParameter.put("PARAM_SumbanganSMAPASCA", paramSumbangan.get(9));
+        jasperParameter.put("PARAM_SumbanganSMK10", paramSumbangan.get(10));
+        jasperParameter.put("PARAM_SumbanganSMK11", paramSumbangan.get(11));
+        jasperParameter.put("PARAM_SumbanganSMK12", paramSumbangan.get(12));
+        jasperParameter.put("PARAM_SumbanganSMKTOTAL", paramSumbangan.get(13));
+        jasperParameter.put("PARAM_SumbanganSMKPASCA", paramSumbangan.get(14));
+        
+        jasperParameter.put("PARAM_TabunganSMP7", paramTabungan.get(0));
+        jasperParameter.put("PARAM_TabunganSMP8", paramTabungan.get(1));
+        jasperParameter.put("PARAM_TabunganSMP9", paramTabungan.get(2));
+        jasperParameter.put("PARAM_TabunganSMPTOTAL", paramTabungan.get(3));
+        jasperParameter.put("PARAM_TabunganSMPPASCA", paramTabungan.get(4));
+        jasperParameter.put("PARAM_TabunganSMA10", paramTabungan.get(5));
+        jasperParameter.put("PARAM_TabunganSMA11", paramTabungan.get(6));
+        jasperParameter.put("PARAM_TabunganSMA12", paramTabungan.get(7));
+        jasperParameter.put("PARAM_TabunganSMATOTAL", paramTabungan.get(8));
+        jasperParameter.put("PARAM_TabunganSMAPASCA", paramTabungan.get(9));
+        jasperParameter.put("PARAM_TabunganSMK10", paramTabungan.get(10));
+        jasperParameter.put("PARAM_TabunganSMK11", paramTabungan.get(11));
+        jasperParameter.put("PARAM_TabunganSMK12", paramTabungan.get(12));
+        jasperParameter.put("PARAM_TabunganSMKTOTAL", paramTabungan.get(13));
+        jasperParameter.put("PARAM_TabunganSMKPASCA", paramTabungan.get(14));
+        
+        
+        String fileName = "C://printout//PrintOutRekapPenerimaan.jrxml";
+        String filetoPrint = "C://printout//PrintOutRekapPenerimaan.jrprint";
+        String filetoFill = "C://printout//PrintOutRekapPenerimaan.jasper";
+        //String filePdf = "C://printout//PrintOutRekapPenerimaan.pdf";
+        String filePdf = "C://printout//PrintOutRekapPenerimaan.pdf";
+        JasperCompileManager.compileReportToFile(fileName);
+        JasperFillManager.fillReportToFile(filetoFill, jasperParameter , connection);
+        JasperPrint jp = JasperFillManager.fillReport(filetoFill, jasperParameter, connection);
+        JasperViewer.viewReport(jp, false);
+        JasperExportManager.exportReportToPdfFile(jp, filePdf);
+        JasperPrintManager.printReport(filetoPrint, true);
+        jasperReport = JasperCompileManager.compileReport
+        ("C://printout//PrintOutRekapPenerimaan.jrxml");
+     
+        // filling report with data from data source
+        jasperPrint = JasperFillManager.fillReport(jasperReport,jasperParameter, connection); 
+        // exporting process
+        // 1- export to PDF
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "C://printout//PrintOutRekapPenerimaan.pdf");
+
+        // 2- export to HTML
+        JasperExportManager.exportReportToHtmlFile(jasperPrint, "C://printout//PrintOutRekapPenerimaan.html" ); 
+
+        // 3- export to Excel sheet
+        JRXlsExporter exporter = new JRXlsExporter();
+        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "C://printout//PrintOutRekapPenerimaan.xls" );
+
+        exporter.exportReport();
+                
+    }
+    
+    private ArrayList<Float> farmIPP(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+       
+        List<TransactionDetail> ippTransactionDetails = new ArrayList<>();
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM IPPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           ippTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.IPPTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<ippTransactionDetails.size();i++){
+            temp = Control.selectProfil(ippTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += ippTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += ippTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += ippTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += ippTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += ippTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += ippTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += ippTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += ippTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += ippTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  ippTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  ippTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  ippTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+    }
+    
+    private ArrayList<Float> farmAlmamater(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+        List<TransactionDetail> almamaterTransactionDetails = new ArrayList<>();
+        
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM AlmamaterTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           almamaterTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.AlmamaterTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<almamaterTransactionDetails.size();i++){
+            temp = Control.selectProfil(almamaterTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += almamaterTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += almamaterTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += almamaterTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += almamaterTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += almamaterTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += almamaterTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += almamaterTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += almamaterTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += almamaterTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  almamaterTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  almamaterTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  almamaterTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+      }
+    
+    private ArrayList<Float> farmAttribute(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+        List<TransactionDetail> attributeTransactionDetails = new ArrayList<>();
+        
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM AttributeTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           attributeTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.AttributeTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<attributeTransactionDetails.size();i++){
+            temp = Control.selectProfil(attributeTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += attributeTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += attributeTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += attributeTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += attributeTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += attributeTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += attributeTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += attributeTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += attributeTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += attributeTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  attributeTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  attributeTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  attributeTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+      }
+    
+    private ArrayList<Float> farmBeasiswa(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+        List<TransactionDetail> beasiswaTransactionDetails = new ArrayList<>();
+        
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM BeasiswaTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           beasiswaTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.BeasiswaTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<beasiswaTransactionDetails.size();i++){
+            temp = Control.selectProfil(beasiswaTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += beasiswaTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += beasiswaTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += beasiswaTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += beasiswaTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += beasiswaTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += beasiswaTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += beasiswaTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += beasiswaTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += beasiswaTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  beasiswaTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  beasiswaTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  beasiswaTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+      }
+    
+    private ArrayList<Float> farmBeasiswaCost(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+        List<TransactionDetail> beasiswacostTransactionDetails = new ArrayList<>();
+        
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM BeasiswaCostTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           beasiswacostTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.BeasiswaCostTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<beasiswacostTransactionDetails.size();i++){
+            temp = Control.selectProfil(beasiswacostTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += beasiswacostTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += beasiswacostTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += beasiswacostTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += beasiswacostTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += beasiswacostTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += beasiswacostTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += beasiswacostTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += beasiswacostTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += beasiswacostTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  beasiswacostTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  beasiswacostTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  beasiswacostTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+      }
+    
+    private ArrayList<Float> farmBuku(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+        List<TransactionDetail> bukuTransactionDetails = new ArrayList<>();
+        
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM BukuTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           bukuTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.BukuTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<bukuTransactionDetails.size();i++){
+            temp = Control.selectProfil(bukuTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += bukuTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += bukuTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += bukuTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += bukuTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += bukuTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += bukuTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += bukuTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += bukuTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += bukuTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  bukuTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  bukuTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  bukuTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+      }
+    
+    private ArrayList<Float> farmCicilanHutang(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+        List<TransactionDetail> cicilanhutangTransactionDetails = new ArrayList<>();
+        
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM CicilanHutangTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           cicilanhutangTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<cicilanhutangTransactionDetails.size();i++){
+            temp = Control.selectProfil(cicilanhutangTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += cicilanhutangTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += cicilanhutangTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += cicilanhutangTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += cicilanhutangTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += cicilanhutangTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += cicilanhutangTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += cicilanhutangTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += cicilanhutangTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += cicilanhutangTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  cicilanhutangTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  cicilanhutangTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  cicilanhutangTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+      }
+    
+    private ArrayList<Float> farmIDD(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+       
+        List<TransactionDetail> iddTransactionDetails = new ArrayList<>();
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM IDDTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           iddTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.IDDTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<iddTransactionDetails.size();i++){
+            temp = Control.selectProfil(iddTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += iddTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += iddTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += iddTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += iddTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += iddTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += iddTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += iddTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += iddTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += iddTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  iddTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  iddTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  iddTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+    }
+
+    private ArrayList<Float> farmIKS(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+       
+        List<TransactionDetail> iksTransactionDetails = new ArrayList<>();
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM IKSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           iksTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.IKSTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<iksTransactionDetails.size();i++){
+            temp = Control.selectProfil(iksTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += iksTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += iksTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += iksTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += iksTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += iksTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += iksTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += iksTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += iksTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += iksTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  iksTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  iksTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  iksTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+    }
+
+    private ArrayList<Float> farmILL(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+       
+        List<TransactionDetail> illTransactionDetails = new ArrayList<>();
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM ILLTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           illTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.ILLTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<illTransactionDetails.size();i++){
+            temp = Control.selectProfil(illTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += illTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += illTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += illTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += illTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += illTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += illTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += illTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += illTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += illTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  illTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  illTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  illTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+    }
+
+    private ArrayList<Float> farmIPS(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+       
+        List<TransactionDetail> ipsTransactionDetails = new ArrayList<>();
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM IPSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           ipsTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.IPSTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<ipsTransactionDetails.size();i++){
+            temp = Control.selectProfil(ipsTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += ipsTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += ipsTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += ipsTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += ipsTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += ipsTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += ipsTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += ipsTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += ipsTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += ipsTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  ipsTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  ipsTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  ipsTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+    }
+
+    private ArrayList<Float> farmIPSB(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+       
+        List<TransactionDetail> ipsbTransactionDetails = new ArrayList<>();
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM IPSBTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           ipsbTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.IPSBTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<ipsbTransactionDetails.size();i++){
+            temp = Control.selectProfil(ipsbTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += ipsbTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += ipsbTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += ipsbTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += ipsbTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += ipsbTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += ipsbTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += ipsbTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += ipsbTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += ipsbTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  ipsbTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  ipsbTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  ipsbTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+    }
+
+    private ArrayList<Float> farmIPSP(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+       
+        List<TransactionDetail> ipspTransactionDetails = new ArrayList<>();
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM IPSPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           ipspTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.IPSPTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<ipspTransactionDetails.size();i++){
+            temp = Control.selectProfil(ipspTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += ipspTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += ipspTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += ipspTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += ipspTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += ipspTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += ipspTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += ipspTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += ipspTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += ipspTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  ipspTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  ipspTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  ipspTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+    }
+    
+    private ArrayList<Float> farmIUA(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+       
+        List<TransactionDetail> iuaTransactionDetails = new ArrayList<>();
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM IUATransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           iuaTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.IUATransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<iuaTransactionDetails.size();i++){
+            temp = Control.selectProfil(iuaTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += iuaTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += iuaTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += iuaTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += iuaTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += iuaTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += iuaTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += iuaTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += iuaTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += iuaTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  iuaTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  iuaTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  iuaTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+    }
+
+    private ArrayList<Float> farmIUAP(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+       
+        List<TransactionDetail> iuapTransactionDetails = new ArrayList<>();
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM IUAPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           iuapTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.IUAPTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<iuapTransactionDetails.size();i++){
+            temp = Control.selectProfil(iuapTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += iuapTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += iuapTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += iuapTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += iuapTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += iuapTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += iuapTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += iuapTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += iuapTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += iuapTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  iuapTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  iuapTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  iuapTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+    }
+
+    private ArrayList<Float> farmIUS(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+       
+        List<TransactionDetail> iusTransactionDetails = new ArrayList<>();
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM IUSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           iusTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.IUSTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<iusTransactionDetails.size();i++){
+            temp = Control.selectProfil(iusTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += iusTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += iusTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += iusTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += iusTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += iusTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += iusTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += iusTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += iusTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += iusTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  iusTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  iusTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  iusTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+    }
+    
+    private ArrayList<Float> farmOSIS(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+       
+        List<TransactionDetail> osisTransactionDetails = new ArrayList<>();
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM OSISTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           osisTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.OSISTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<osisTransactionDetails.size();i++){
+            temp = Control.selectProfil(osisTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += osisTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += osisTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += osisTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += osisTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += osisTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += osisTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += osisTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += osisTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += osisTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  osisTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  osisTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  osisTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+    }
+    
+    private ArrayList<Float> farmPASB(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+       
+        List<TransactionDetail> pasbTransactionDetails = new ArrayList<>();
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM PASBTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           pasbTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.PASBTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<pasbTransactionDetails.size();i++){
+            temp = Control.selectProfil(pasbTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += pasbTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += pasbTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += pasbTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += pasbTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += pasbTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += pasbTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += pasbTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += pasbTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += pasbTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  pasbTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  pasbTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  pasbTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+    }
+
+    private ArrayList<Float> farmPVT(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+       
+        List<TransactionDetail> pvtTransactionDetails = new ArrayList<>();
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM PVTTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           pvtTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.PVTTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<pvtTransactionDetails.size();i++){
+            temp = Control.selectProfil(pvtTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += pvtTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += pvtTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += pvtTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += pvtTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += pvtTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += pvtTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += pvtTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += pvtTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += pvtTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  pvtTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  pvtTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  pvtTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+    }
+
+    private ArrayList<Float> farmSeragam(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+        List<TransactionDetail> seragamTransactionDetails = new ArrayList<>();
+        
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM SeragamTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           seragamTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.SeragamTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<seragamTransactionDetails.size();i++){
+            temp = Control.selectProfil(seragamTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += seragamTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += seragamTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += seragamTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += seragamTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += seragamTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += seragamTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += seragamTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += seragamTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += seragamTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  seragamTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  seragamTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  seragamTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+      }
+
+    private ArrayList<Float> farmSumbangan(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+        List<TransactionDetail> sumbanganTransactionDetails = new ArrayList<>();
+        
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM SumbanganTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           sumbanganTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.SumbanganTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<sumbanganTransactionDetails.size();i++){
+            temp = Control.selectProfil(sumbanganTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += sumbanganTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += sumbanganTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += sumbanganTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += sumbanganTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += sumbanganTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += sumbanganTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += sumbanganTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += sumbanganTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += sumbanganTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  sumbanganTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  sumbanganTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  sumbanganTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+      }
+
+    private ArrayList<Float> farmTabungan(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+        ArrayList<Float> retVal = new ArrayList();
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        Float amountSMA10=0f;
+        Float amountSMA11=0f;
+        Float amountSMA12=0f;
+        Float amountSMK10=0f;
+        Float amountSMK11=0f;
+        Float amountSMK12=0f;
+        Float amountSMP7=0f;
+        Float amountSMP8=0f;
+        Float amountSMP9=0f;
+        Float amountSMAPasca=0f;
+        Float amountSMKPasca=0f;
+        Float amountSMPPasca=0f;
+        List<TransactionDetail> tabunganTransactionDetails = new ArrayList<>();
+        
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM TabunganTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           int id  = rs.getInt("ID");
+           tabunganTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.TabunganTransaction, id));
+        }
+        Profil temp = new Profil();
+        for(int i=0;i<tabunganTransactionDetails.size();i++){
+            temp = Control.selectProfil(tabunganTransactionDetails.get(i).noIndukProfil);
+            if(temp.tanggalLulus==null){
+                switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMA10 += tabunganTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMA11 += tabunganTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMA12 += tabunganTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMP":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "7":
+                              amountSMP7 += tabunganTransactionDetails.get(i).amount;
+                              break;
+                          case "8":
+                              amountSMP8 += tabunganTransactionDetails.get(i).amount;
+                              break;
+                          case "9":
+                              amountSMP9 += tabunganTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  case "SMK":
+                      switch(temp.currentLevel.level2.toString()){
+                          case "10":
+                              amountSMK10 += tabunganTransactionDetails.get(i).amount;
+                              break;
+                          case "11":
+                              amountSMK11 += tabunganTransactionDetails.get(i).amount;
+                              break;
+                          case "12":
+                              amountSMK12 += tabunganTransactionDetails.get(i).amount;
+                              break;
+                          default:
+                              break;
+                      }
+                      break;
+                  default : 
+                      break;
+                 }
+            }else{ // FOR PASCA
+                 switch(temp.currentLevel.level1.toString()){
+                  case "SMA" : 
+                      amountSMAPasca +=  tabunganTransactionDetails.get(i).amount;
+                      break;
+                  case "SMP":
+                      amountSMPPasca +=  tabunganTransactionDetails.get(i).amount;
+                      break;
+                  case "SMK":
+                      amountSMKPasca +=  tabunganTransactionDetails.get(i).amount;
+                      break;
+                  default : ;
+                      break;
+                 }
+            }
+        }
+          rs.close();
+          stmt.close();
+          connection.close();
+          retVal.add(amountSMP7);
+          retVal.add(amountSMP8);
+          retVal.add(amountSMP9);
+          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMPPasca);
+          retVal.add(amountSMA10);
+          retVal.add(amountSMA11);
+          retVal.add(amountSMA12);
+          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMAPasca);
+          retVal.add(amountSMK10);
+          retVal.add(amountSMK11);
+          retVal.add(amountSMK12);
+          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMKPasca);
+          return retVal;
+      }
 }
 
 class Tunggakan{

@@ -16,19 +16,12 @@
      IDDTransaction.`PaymentMethod` AS IDDTransaction_PaymentMethod,
      IDDTransaction.`CreateDate` AS IDDTransaction_CreateDate,
      IDDTransaction.`LastUpdateDate` AS IDDTransaction_LastUpdateDate,
-     IDDTransaction.`Note` AS IDDTransaction_Note,
-     IDD.`ID` AS IDD_ID,
-     IDD.`NomorInduk` AS IDD_NomorInduk,
-     IDD.`ChargedLevel` AS IDD_ChargedLevel,
-     IDD.`TransactionName` AS IDD_TransactionName,
-     IDD.`Amount` AS IDD_Amount,
-     IDD.`Note` AS IDD_Note,
-     IDD.`IDsTransactionDetail` AS IDD_IDsTransactionDetail
+     IDDTransaction.`Note` AS IDDTransaction_Note
 FROM
-     `IDDTransaction` IDDTransaction,
-     `IDD` IDD
+     `IDDTransaction` IDDTransaction
 WHERE
-     IDDTransaction.`IDTransactionSummary` = $P{Param_IDD_TransactionSummary_ID}]]>
+	IDDTransaction.`IDTransactionSummary` = $P{Param_IDD_TransactionSummary_ID}
+AND IDDTransaction.`Amount` > 0]]>
 	</queryString>
 	<field name="IDDTransaction_ID" class="java.math.BigInteger"/>
 	<field name="IDDTransaction_UUID" class="java.lang.String"/>
@@ -41,19 +34,11 @@ WHERE
 	<field name="IDDTransaction_CreateDate" class="java.sql.Timestamp"/>
 	<field name="IDDTransaction_LastUpdateDate" class="java.sql.Timestamp"/>
 	<field name="IDDTransaction_Note" class="java.lang.String"/>
-	<field name="IDD_ID" class="java.math.BigInteger"/>
-	<field name="IDD_NomorInduk" class="java.lang.String"/>
-	<field name="IDD_ChargedLevel" class="java.lang.String"/>
-	<field name="IDD_TransactionName" class="java.lang.String"/>
-	<field name="IDD_Amount" class="java.lang.Float"/>
-	<field name="IDD_Note" class="java.lang.String"/>
-	<field name="IDD_IDsTransactionDetail" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
 		<band height="13" splitType="Stretch">
-			<printWhenExpression><![CDATA[$F{IDDTransaction_Amount}>0]]></printWhenExpression>
 			<textField pattern=".">
 				<reportElement x="35" y="0" width="20" height="12" uuid="da3f73e3-5217-462d-b8f3-8e1218bf71b5"/>
 				<textElement>
@@ -62,32 +47,32 @@ WHERE
 				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="227" y="0" width="59" height="12" uuid="975c3055-8dfc-4fd5-a903-4a229ce7dd4d"/>
+				<reportElement x="211" y="0" width="59" height="12" uuid="975c3055-8dfc-4fd5-a903-4a229ce7dd4d"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{IDDTransaction_PaymentMethod}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd-MMM-yyyy">
-				<reportElement x="286" y="0" width="49" height="12" uuid="3014fa51-d92c-4778-ad33-6f272259ecc0"/>
+				<reportElement x="270" y="0" width="49" height="12" uuid="3014fa51-d92c-4778-ad33-6f272259ecc0"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{IDDTransaction_LastUpdateDate}]]></textFieldExpression>
 			</textField>
 			<textField pattern="Rp #,##0">
-				<reportElement x="335" y="0" width="43" height="12" uuid="a6fc6f52-f0ad-48ff-a422-d906939c0a7e"/>
+				<reportElement x="320" y="0" width="58" height="12" uuid="a6fc6f52-f0ad-48ff-a422-d906939c0a7e"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{IDDTransaction_Amount}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="55" y="0" width="172" height="12" uuid="735d9826-129c-4e5a-be3c-03bb8799b8a4"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="54" y="0" width="157" height="12" uuid="735d9826-129c-4e5a-be3c-03bb8799b8a4"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{IDD_TransactionName}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{IDDTransaction_Note}==null ? "Dana Siswa" : $F{IDDTransaction_Note}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="0" width="35" height="12" uuid="a32d175f-12ef-475f-aba0-c15046b534ca"/>

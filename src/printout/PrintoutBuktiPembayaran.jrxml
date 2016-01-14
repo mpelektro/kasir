@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintoutBuktiPembayaran" pageWidth="468" pageHeight="595" columnWidth="377" leftMargin="72" rightMargin="19" topMargin="20" bottomMargin="20" uuid="774f77e3-b2e7-4ced-9b65-8b6927fc08fc">
 	<property name="ireport.zoom" value="1.4641000000000013"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="428"/>
+	<property name="ireport.y" value="48"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -64,7 +64,8 @@
      Clerk.`Nama` AS Clerk_Nama,
      Clerk.`Jabatan` AS Clerk_Jabatan,
      Clerk.`NIP` AS Clerk_NIP,
-     Profil.`Alamat` AS Profil_Alamat
+     Profil.`NamaAyah` AS Profil_NamaAyah,
+     Profil.`NamaIbu` AS Profil_NamaIbu
 FROM
      `TransactionSummary` TransactionSummary,
      `Profil` Profil,
@@ -85,11 +86,12 @@ WHERE
 	<field name="Profil_NomorInduk" class="java.lang.String"/>
 	<field name="Profil_Nama" class="java.lang.String"/>
 	<field name="Profil_CurrentLevel" class="java.lang.String"/>
+	<field name="Profil_NamaAyah" class="java.lang.String"/>
+	<field name="Profil_NamaIbu" class="java.lang.String"/>
 	<field name="Clerk_ID" class="java.lang.Long"/>
 	<field name="Clerk_Nama" class="java.lang.String"/>
 	<field name="Clerk_Jabatan" class="java.lang.String"/>
 	<field name="Clerk_NIP" class="java.lang.String"/>
-	<field name="Profil_Alamat" class="java.lang.String"/>
 	<variable name="CURRENT_TIME" class="java.util.Date">
 		<variableExpression><![CDATA[]]></variableExpression>
 		<initialValueExpression><![CDATA[new Date()]]></initialValueExpression>
@@ -153,7 +155,7 @@ WHERE
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[Alamat]]></text>
+				<text><![CDATA[Orang Tua / Wali]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="286" y="30" width="41" height="12" uuid="f474bc01-2515-4ed9-af45-2bb1d6c1dfa0"/>
@@ -184,11 +186,11 @@ WHERE
 				<text><![CDATA[Dari Peserta Didik]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="0" width="377" height="18" uuid="3838b615-0879-4d1c-80b1-899d8d1b6e40"/>
+				<reportElement x="113" y="0" width="142" height="18" uuid="3838b615-0879-4d1c-80b1-899d8d1b6e40"/>
 				<textElement textAlignment="Center">
 					<font size="10" isUnderline="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new String("BUKTI PENERIMAAN KAS NOMOR : ").concat(($F{TransactionSummary_ID}).toString())]]></textFieldExpression>
+				<textFieldExpression><![CDATA["BUKTI PENERIMAAN KASIR"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="286" y="18" width="41" height="12" uuid="d77186a1-c784-47fd-9d96-3e9af07d60e3"/>
@@ -209,7 +211,7 @@ WHERE
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Profil_Alamat}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{Profil_NamaAyah}==null)?($F{Profil_NamaIbu}):$F{Profil_NamaAyah}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="82" width="73" height="12" uuid="2d6ef4f4-a06d-4626-a87e-221a7595073d"/>
@@ -267,6 +269,13 @@ WHERE
 				</textElement>
 				<text><![CDATA[:]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="252" y="0" width="124" height="18" uuid="c256baf2-6c62-4176-ac40-9ac7253eaedb"/>
+				<textElement textAlignment="Right">
+					<font size="10" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new String("NO: ").concat(($F{TransactionSummary_ID}).toString())]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
@@ -450,6 +459,26 @@ WHERE
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_Almamater.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+                <band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="80967a56-3bcf-4cd7-8e62-0855833fe96d"/>
+				<subreportParameter name="Param_Beasiswa_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_Beasiswa.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+                <band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="80967a56-3bcf-4cd7-8e62-0855833fe96d"/>
+				<subreportParameter name="Param_BeasiswaCost_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_BeasiswaCost.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band height="29">
