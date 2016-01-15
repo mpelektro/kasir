@@ -143,6 +143,7 @@ public class AppFrame extends javax.swing.JFrame {
         jButtonSettingGL = new javax.swing.JButton();
         jButtonSettlement = new javax.swing.JButton();
         jButtonRekapPenerimaan = new javax.swing.JButton();
+        jButtonRekapPenerimaanPerKasir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableInitialSearch = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -342,6 +343,18 @@ public class AppFrame extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButtonRekapPenerimaan);
+
+        jButtonRekapPenerimaanPerKasir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/document_pencil_16.png"))); // NOI18N
+        jButtonRekapPenerimaanPerKasir.setText(org.openide.util.NbBundle.getMessage(AppFrame.class, "AppFrame.jButtonRekapPenerimaanPerKasir.text")); // NOI18N
+        jButtonRekapPenerimaanPerKasir.setFocusable(false);
+        jButtonRekapPenerimaanPerKasir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonRekapPenerimaanPerKasir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonRekapPenerimaanPerKasir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRekapPenerimaanPerKasirActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonRekapPenerimaanPerKasir);
 
         jTableInitialSearch.setAutoCreateRowSorter(true);
         jTableInitialSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -865,11 +878,20 @@ public class AppFrame extends javax.swing.JFrame {
     private void jButtonRekapPenerimaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRekapPenerimaanActionPerformed
         // TODO add your handling code here:
          try{
-            printRekapPenerimaan(new Kalender(dateChooserComboTSumS.getSelectedDate().getTime()), new Kalender(dateChooserComboTSumE.getSelectedDate().getTime()));
+            printRekapPenerimaan(new Kalender(dateChooserComboTSumS.getSelectedDate().getTime()), new Kalender(dateChooserComboTSumE.getSelectedDate().getTime()), null);
         } catch (JRException | PrinterException | SQLException | KasirException e){
             Exceptions.printStackTrace(e);
         }
     }//GEN-LAST:event_jButtonRekapPenerimaanActionPerformed
+
+    private void jButtonRekapPenerimaanPerKasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRekapPenerimaanPerKasirActionPerformed
+        // TODO add your handling code here:
+        try{
+            printRekapPenerimaan(new Kalender(dateChooserComboTSumS.getSelectedDate().getTime()), new Kalender(dateChooserComboTSumE.getSelectedDate().getTime()), this.clerk);
+        } catch (JRException | PrinterException | SQLException | KasirException e){
+            Exceptions.printStackTrace(e);
+        }
+    }//GEN-LAST:event_jButtonRekapPenerimaanPerKasirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1573,6 +1595,7 @@ public class AppFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonInsertKasir;
     private javax.swing.JButton jButtonPrintReportKasir;
     private javax.swing.JButton jButtonRekapPenerimaan;
+    private javax.swing.JButton jButtonRekapPenerimaanPerKasir;
     private javax.swing.JButton jButtonRips;
     private javax.swing.JButton jButtonSearch;
     private javax.swing.JButton jButtonSettingGL;
@@ -1816,7 +1839,7 @@ public class AppFrame extends javax.swing.JFrame {
         
     }
     
-    private void printRekapPenerimaan(Kalender startDate, Kalender endDate) throws JRException, PrinterException, SQLException, KasirException {
+    private void printRekapPenerimaan(Kalender startDate, Kalender endDate, Clerk clerk) throws JRException, PrinterException, SQLException, KasirException {
         // connection is the data source we used to fetch the data from
         startDate.set(Kalender.HOUR_OF_DAY, 0);
         startDate.set(Kalender.MINUTE, 0);
@@ -1825,34 +1848,38 @@ public class AppFrame extends javax.swing.JFrame {
         endDate.set(Kalender.HOUR_OF_DAY, 23);
         endDate.set(Kalender.MINUTE, 59);
         endDate.set(Kalender.SECOND, 59);
-        List<Float> paramIPP = farmIPP(startDate,endDate);
-        List<Float> paramAlmamater = farmAlmamater(startDate,endDate);
-        List<Float> paramAttribute = farmAttribute(startDate,endDate);
-        List<Float> paramBeasiswa = farmBeasiswa(startDate,endDate);
-        List<Float> paramBeasiswaCost = farmBeasiswaCost(startDate,endDate);
-        List<Float> paramBuku = farmBuku(startDate,endDate);
-        List<Float> paramCicilanHutang = farmCicilanHutang(startDate,endDate);
-        List<Float> paramIDD = farmIDD(startDate,endDate);
-        List<Float> paramIKS = farmIKS(startDate,endDate);
-        List<Float> paramILL = farmILL(startDate,endDate);
-        List<Float> paramIPS = farmIPS(startDate,endDate);
-        List<Float> paramIPSB = farmIPSB(startDate,endDate);
-        List<Float> paramIPSP = farmIPSP(startDate,endDate);
-        List<Float> paramIUA = farmIUA(startDate,endDate);
-        List<Float> paramIUAP = farmIUAP(startDate,endDate);
-        List<Float> paramIUS = farmIUS(startDate,endDate);
-        List<Float> paramOSIS = farmOSIS(startDate,endDate);
-        List<Float> paramPASB = farmPASB(startDate,endDate);
-        List<Float> paramPVT = farmPVT(startDate,endDate);
-        List<Float> paramSeragam = farmSeragam(startDate,endDate);
-        List<Float> paramSumbangan = farmSumbangan(startDate,endDate);
-        List<Float> paramTabungan = farmTabungan(startDate,endDate);
+        List<Float> paramIPP = farmIPP(startDate,endDate,clerk);
+        List<Float> paramAlmamater = farmAlmamater(startDate,endDate,clerk);
+        List<Float> paramAttribute = farmAttribute(startDate,endDate,clerk);
+        List<Float> paramBeasiswa = farmBeasiswa(startDate,endDate,clerk);
+        List<Float> paramBeasiswaCost = farmBeasiswaCost(startDate,endDate,clerk);
+        List<Float> paramBuku = farmBuku(startDate,endDate,clerk);
+        List<Float> paramCicilanHutang = farmCicilanHutang(startDate,endDate,clerk);
+        List<Float> paramIDD = farmIDD(startDate,endDate,clerk);
+        List<Float> paramIKS = farmIKS(startDate,endDate,clerk);
+        List<Float> paramILL = farmILL(startDate,endDate,clerk);
+        List<Float> paramIPS = farmIPS(startDate,endDate,clerk);
+        List<Float> paramIPSB = farmIPSB(startDate,endDate,clerk);
+        List<Float> paramIPSP = farmIPSP(startDate,endDate,clerk);
+        List<Float> paramIUA = farmIUA(startDate,endDate,clerk);
+        List<Float> paramIUAP = farmIUAP(startDate,endDate,clerk);
+        List<Float> paramIUS = farmIUS(startDate,endDate,clerk);
+        List<Float> paramOSIS = farmOSIS(startDate,endDate,clerk);
+        List<Float> paramPASB = farmPASB(startDate,endDate,clerk);
+        List<Float> paramPVT = farmPVT(startDate,endDate,clerk);
+        List<Float> paramSeragam = farmSeragam(startDate,endDate,clerk);
+        List<Float> paramSumbangan = farmSumbangan(startDate,endDate,clerk);
+        List<Float> paramTabungan = farmTabungan(startDate,endDate,clerk);
         
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection();
         // jasperParameter is a Hashmap contains the parameters
         // passed from application to the jrxml layout
         HashMap jasperParameter = new HashMap();
+        if(clerk==null)
+        jasperParameter.put("PARAM_ISREKAP", true);
+        else
+            jasperParameter.put("PARAM_ISREKAP", false);
         jasperParameter.put("PARAM_IDCLERK", this.clerk.id);
         jasperParameter.put("PARAM_TANGGAL_TRANSAKSI", startDate.toDate());
         jasperParameter.put("PARAM_IPPSMP7", paramIPP.get(0));
@@ -2242,7 +2269,7 @@ public class AppFrame extends javax.swing.JFrame {
                 
     }
     
-    private ArrayList<Float> farmIPP(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmIPP(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -2264,6 +2291,9 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
+        if(clerk !=null)
+        sql = "SELECT * FROM IPPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk ="+clerk.id;
+        else
         sql = "SELECT * FROM IPPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
@@ -2363,7 +2393,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
     }
     
-    private ArrayList<Float> farmAlmamater(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmAlmamater(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -2385,7 +2415,10 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM AlmamaterTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
+        if(clerk !=null)
+            sql = "SELECT * FROM AlmamaterTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
+            sql = "SELECT * FROM AlmamaterTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
         while(rs.next()){
@@ -2483,7 +2516,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
       }
     
-    private ArrayList<Float> farmAttribute(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmAttribute(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -2505,7 +2538,10 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM AttributeTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
+        if(clerk!=null)
+            sql = "SELECT * FROM AttributeTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
+            sql = "SELECT * FROM AttributeTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
         while(rs.next()){
@@ -2603,7 +2639,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
       }
     
-    private ArrayList<Float> farmBeasiswa(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmBeasiswa(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -2625,7 +2661,10 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM BeasiswaTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
+        if(clerk!=null)
+            sql = "SELECT * FROM BeasiswaTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
+            sql = "SELECT * FROM BeasiswaTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
         while(rs.next()){
@@ -2723,7 +2762,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
       }
     
-    private ArrayList<Float> farmBeasiswaCost(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmBeasiswaCost(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -2745,7 +2784,10 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM BeasiswaCostTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
+        if(clerk!=null)
+            sql = "SELECT * FROM BeasiswaCostTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
+            sql = "SELECT * FROM BeasiswaCostTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
         while(rs.next()){
@@ -2843,7 +2885,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
       }
     
-    private ArrayList<Float> farmBuku(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmBuku(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -2865,7 +2907,10 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM BukuTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
+        if(clerk!=null)
+            sql = "SELECT * FROM BukuTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
+           sql = "SELECT * FROM BukuTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
         while(rs.next()){
@@ -2963,7 +3008,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
       }
     
-    private ArrayList<Float> farmCicilanHutang(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmCicilanHutang(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -2985,7 +3030,10 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM CicilanHutangTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
+        if(clerk!=null)
+            sql = "SELECT * FROM CicilanHutangTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
+            sql = "SELECT * FROM CicilanHutangTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
         while(rs.next()){
@@ -3083,7 +3131,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
       }
     
-    private ArrayList<Float> farmIDD(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmIDD(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -3105,7 +3153,10 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IDDTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
+        if(clerk!=null)
+            sql = "SELECT * FROM IDDTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
+            sql = "SELECT * FROM IDDTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -3204,7 +3255,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
     }
 
-    private ArrayList<Float> farmIKS(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmIKS(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -3226,7 +3277,10 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IKSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
+        if(clerk!=null)
+            sql = "SELECT * FROM IKSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
+            sql = "SELECT * FROM IKSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -3325,7 +3379,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
     }
 
-    private ArrayList<Float> farmILL(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmILL(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -3347,7 +3401,10 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM ILLTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
+        if(clerk!=null)
+            sql = "SELECT * FROM ILLTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
+            sql = "SELECT * FROM ILLTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -3446,7 +3503,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
     }
 
-    private ArrayList<Float> farmIPS(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmIPS(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -3468,7 +3525,10 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IPSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
+        if(clerk!=null)
+            sql = "SELECT * FROM IPSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
+            sql = "SELECT * FROM IPSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -3567,7 +3627,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
     }
 
-    private ArrayList<Float> farmIPSB(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmIPSB(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -3589,7 +3649,10 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IPSBTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
+        if(clerk!=null)
+            sql = "SELECT * FROM IPSBTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
+            sql = "SELECT * FROM IPSBTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -3688,7 +3751,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
     }
 
-    private ArrayList<Float> farmIPSP(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmIPSP(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -3710,7 +3773,10 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IPSPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
+        if(clerk!=null)
+            sql = "SELECT * FROM IPSPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
+            sql = "SELECT * FROM IPSPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -3809,7 +3875,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
     }
     
-    private ArrayList<Float> farmIUA(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmIUA(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -3831,7 +3897,10 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IUATransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
+        if(clerk!=null)
+            sql = "SELECT * FROM IUATransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
+            sql = "SELECT * FROM IUATransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -3930,7 +3999,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
     }
 
-    private ArrayList<Float> farmIUAP(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmIUAP(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -3952,7 +4021,10 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IUAPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
+        if(clerk!=null)
+            sql = "SELECT * FROM IUAPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
+            sql = "SELECT * FROM IUAPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -4051,7 +4123,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
     }
 
-    private ArrayList<Float> farmIUS(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmIUS(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -4073,7 +4145,10 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IUSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
+        if(clerk!=null)
+            sql = "SELECT * FROM IUSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
+            sql = "SELECT * FROM IUSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -4172,7 +4247,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
     }
     
-    private ArrayList<Float> farmOSIS(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmOSIS(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -4194,6 +4269,9 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
+        if(clerk!=null)
+            sql = "SELECT * FROM OSISTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
         sql = "SELECT * FROM OSISTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
@@ -4293,7 +4371,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
     }
     
-    private ArrayList<Float> farmPASB(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmPASB(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -4315,6 +4393,9 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
+        if(clerk!=null)
+            sql = "SELECT * FROM PASBTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
         sql = "SELECT * FROM PASBTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
@@ -4414,7 +4495,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
     }
 
-    private ArrayList<Float> farmPVT(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmPVT(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -4436,6 +4517,9 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
+        if(clerk!=null)
+            sql = "SELECT * FROM PVTTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
         sql = "SELECT * FROM PVTTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
@@ -4535,7 +4619,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
     }
 
-    private ArrayList<Float> farmSeragam(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmSeragam(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -4557,6 +4641,9 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
+        if(clerk!=null)
+            sql = "SELECT * FROM SeragamTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
         sql = "SELECT * FROM SeragamTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
@@ -4655,7 +4742,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
       }
 
-    private ArrayList<Float> farmSumbangan(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmSumbangan(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -4677,6 +4764,9 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
+        if(clerk!=null)
+            sql = "SELECT * FROM SumbanganTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
         sql = "SELECT * FROM SumbanganTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
@@ -4775,7 +4865,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
       }
 
-    private ArrayList<Float> farmTabungan(Kalender startDate, Kalender endDate) throws SQLException, KasirException{
+    private ArrayList<Float> farmTabungan(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -4797,6 +4887,9 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
+        if(clerk!=null)
+            sql = "SELECT * FROM TabunganTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+        else
         sql = "SELECT * FROM TabunganTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set

@@ -274,6 +274,9 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
     private IDDTransactionDetail iddTDetail;
     private float iddRequest = 0f;
     
+    //Bank PART
+    private ArrayList<Float> bankAmounts;
+    private float bankRequest = 0f;
     
     //Beasiswa PART
     private ArrayList<Float> beasiswaAmounts;
@@ -3196,6 +3199,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         iDDAmounts = new ArrayList();
         beasiswaAmounts = new ArrayList();
         beasiswaCostAmounts = new ArrayList();
+        bankAmounts = new ArrayList();
         /////BLOOOOOOOOOOM SELESAIIIIIIIIIIIIIIIIIIII
         int i = 0;
         ippCurrent=new IPP();
@@ -3211,9 +3215,11 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     jTableIPP.setValueAt(0f, i,4);
                     jTableIPP.setValueAt(0f, i,5);
                     jTableIPP.setValueAt(0f, i,6);
+                    jTableIPP.setValueAt(0f, i,7);
                     iDDAmounts.add(0f);
                     beasiswaAmounts.add(0f);
                     beasiswaCostAmounts.add(0f);
+                    bankAmounts.add(0f);
                 //below is when jTableIPP property changed, especially check box is Changed or Editing IDD, Beasiswa, Beasiswa Cost 
                 }else if ((ippCurrent.entries.get(i) !=null) ^ (ippFromDB.entries.get(i).transactDetailIDs.size() > 0)){
                     System.out.println("IDD dari db ");
@@ -3223,8 +3229,9 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     iDDAmounts.add((Float)jTableIPP.getValueAt(i,4));
                     beasiswaAmounts.add((Float)jTableIPP.getValueAt(i,5));
                     beasiswaCostAmounts.add((Float)jTableIPP.getValueAt(i,6));
+                    bankAmounts.add((Float)jTableIPP.getValueAt(i,7));
                     //jTableIPP.setValueAt(ippFromDB.entries.get(i).amount - (iDDAmounts.get(i) + beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)), i,3);
-                    ippStoreToDB.entries.add(new Entry(i, inputTransactionIPP.iPPAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)));
+                    ippStoreToDB.entries.add(new Entry(i, inputTransactionIPP.iPPAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)+bankAmounts.get(i)));
                     
                 }else{
                     try {
@@ -3233,13 +3240,15 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                             iDDAmounts.add(0f);
                             beasiswaAmounts.add(0f);
                             beasiswaCostAmounts.add(0f);
+                            bankAmounts.add(0f);
                             ippStoreToDB.entries.add(null);
                         }else{
                             
                             iDDAmounts.add((Float) jTableIPP.getValueAt(i, 4));
                             beasiswaAmounts.add((Float) jTableIPP.getValueAt(i, 5));
                             beasiswaCostAmounts.add((Float) jTableIPP.getValueAt(i, 6));
-                            ippStoreToDB.entries.add(new Entry(i, inputTransactionIPP.iPPAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)));
+                            bankAmounts.add((Float)jTableIPP.getValueAt(i,7));
+                            ippStoreToDB.entries.add(new Entry(i, inputTransactionIPP.iPPAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)+bankAmounts.get(i)));
                         }
                     } catch (SQLException ex) {
                         Exceptions.printStackTrace(ex);
@@ -4454,6 +4463,16 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                         BeasiswaCost.transactOut(profil, transactionSummary.id, beasiswaCostAmounts.get(i));
                         transactionSummary.note = "TIDAK_TUNAI";
                     }
+                    if(inputTransactionIPP.bankAmounts.get(i) > 0f){
+                        IPPTransactionDetail ippTransactionDetail = new IPPTransactionDetail(ippTDetailUUID, 
+                                                                                            ippFromDB.id, 
+                                                                                            clerk.id, 
+                                                                                            transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (inputTransactionIPP.bankAmounts.get(i)), TransactionDetail.PaymentMethod.TRANSFER,
+                                                                                            jTableIPP.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+
+                        ippTransactionDetails.add(ippTransactionDetail);
+                        transactionSummary.note = "TIDAK_TUNAI";
+                    }
                     Control.insertTDetails(TransactionDetail.Tipe.IPPTransaction, ippTransactionDetails);
                     ippTransactionDetails.clear();
                     ippTransactionDetails = new ArrayList(Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, TransactionDetail.uuidColName, false, ippTDetailUUID.toString()));
@@ -5170,10 +5189,11 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             for(int i = 0 ; i<12; i++){
                 if(ippStoreToDB.entries.get(i) != null){
                     //totalAmount = totalAmount + (ippFromDB.entries.get(i).amount - iDDAmounts.get(i));
-                    totalAmount += iDDAmounts.get(i)+inputTransactionIPP.iPPAmounts.get(i)+inputTransactionIPP.beasiswaAmounts.get(i)+inputTransactionIPP.beasiswaCostAmounts.get(i);
+                    totalAmount += iDDAmounts.get(i)+inputTransactionIPP.iPPAmounts.get(i)+inputTransactionIPP.beasiswaAmounts.get(i)+inputTransactionIPP.beasiswaCostAmounts.get(i)+inputTransactionIPP.bankAmounts.get(i);
                     beasiswaRequest +=inputTransactionIPP.beasiswaAmounts.get(i);
                     beasiswaCostRequest += inputTransactionIPP.beasiswaCostAmounts.get(i);
                     iddRequest += iDDAmounts.get(i);
+                    bankRequest += inputTransactionIPP.bankAmounts.get(i);
                     if(ippStoreToDB.entries.get(i).amount != 0.0f)
                     transactionList.add(new Transaction(Iuran.Tipe.IPP, ippStoreToDB.entries.get(i).amount, "IPP Bulan ".concat(getMonthName(i+1))));
                 }

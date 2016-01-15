@@ -33,6 +33,7 @@ public class InputTransactionIPP extends javax.swing.JFrame {
     public ArrayList<Float> beasiswaAmounts;
     public ArrayList<Float> beasiswaCostAmounts;
     public ArrayList<Float> iPPAmounts;
+    public ArrayList<Float> bankAmounts;
     private IPP ippCurrent;
     private IPP ippStoreToDB;
     private float ippDebt;
@@ -84,7 +85,7 @@ public class InputTransactionIPP extends javax.swing.JFrame {
 
         setTitle(org.openide.util.NbBundle.getMessage(InputTransactionIPP.class, "InputTransactionIPP.title")); // NOI18N
 
-        jPanelIPP.setMinimumSize(new java.awt.Dimension(570, 380));
+        jPanelIPP.setMinimumSize(new java.awt.Dimension(630, 380));
         jPanelIPP.setPreferredSize(new java.awt.Dimension(680, 450));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -207,7 +208,7 @@ public class InputTransactionIPP extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelIPP, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+            .addComponent(jPanelIPP, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,6 +259,7 @@ public class InputTransactionIPP extends javax.swing.JFrame {
         iDDAmounts = new ArrayList();
         beasiswaAmounts = new ArrayList();
         beasiswaCostAmounts = new ArrayList();
+        bankAmounts = new ArrayList();
         /////BLOOOOOOOOOOM SELESAIIIIIIIIIIIIIIIIIIII
         int i = 0;
         ippCurrent = new IPP();
@@ -273,10 +275,12 @@ public class InputTransactionIPP extends javax.swing.JFrame {
                     jTableIPP.setValueAt(0f, i, 4);
                     jTableIPP.setValueAt(0f, i, 5);
                     jTableIPP.setValueAt(0f, i, 6);
+                    jTableIPP.setValueAt(0f, i, 7);
                     iPPAmounts.add(0f);
                     iDDAmounts.add(0f);
                     beasiswaAmounts.add(0f);
                     beasiswaCostAmounts.add(0f);
+                    bankAmounts.add(0f);
                     //below is when jTableIPP property changed, especially check box is Changed or Editing IDD, Beasiswa, Beasiswa Cost 
                 } else if ((ippCurrent.entries.get(i) != null) ^ (ippFromDB.entries.get(i).transactDetailIDs.size() > 0)) {
                     System.out.println("IDD dari db ");
@@ -287,6 +291,7 @@ public class InputTransactionIPP extends javax.swing.JFrame {
                     iDDAmounts.add((Float) jTableIPP.getValueAt(i, 4));
                     beasiswaAmounts.add((Float) jTableIPP.getValueAt(i, 5));
                     beasiswaCostAmounts.add((Float) jTableIPP.getValueAt(i, 6));
+                    bankAmounts.add((Float)jTableIPP.getValueAt(i,7));
                     //jTableIPP.setValueAt(ippFromDB.entries.get(i).amount - (iDDAmounts.get(i) + beasiswaAmounts.get(i) + beasiswaCostAmounts.get(i)), i, 3);
                     //ippStoreToDB.entries.add(new Entry(i, ippFromDB.entries.get(i).amount));
                     ippStoreToDB.entries.add(new Entry(i, iPPAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)));
@@ -297,12 +302,14 @@ public class InputTransactionIPP extends javax.swing.JFrame {
                             iDDAmounts.add(0f);
                             beasiswaAmounts.add(0f);
                             beasiswaCostAmounts.add(0f);
+                            bankAmounts.add(0f);
                             ippStoreToDB.entries.add(null);
                         }else{
                             iPPAmounts.add((Float) jTableIPP.getModel().getValueAt(i,3));
                             iDDAmounts.add((Float) jTableIPP.getValueAt(i, 4));
                             beasiswaAmounts.add((Float) jTableIPP.getValueAt(i, 5));
                             beasiswaCostAmounts.add((Float) jTableIPP.getValueAt(i, 6));
+                            bankAmounts.add((Float)jTableIPP.getValueAt(i,7));
                             ippStoreToDB.entries.add(new Entry(i, iPPAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)));
                         }
                     } catch (SQLException ex) {
@@ -329,7 +336,8 @@ public class InputTransactionIPP extends javax.swing.JFrame {
                 ippAmountTemp = ippAmountTemp + (Float)jTableIPP.getModel().getValueAt(i,3)
                                 +(Float)jTableIPP.getModel().getValueAt(i,4)
                                 +(Float)jTableIPP.getModel().getValueAt(i,5)
-                                +(Float)jTableIPP.getModel().getValueAt(i,6);
+                                +(Float)jTableIPP.getModel().getValueAt(i,6)
+                                +(Float)jTableIPP.getModel().getValueAt(i,7);
             }
         }
         itfs.jTextFieldIPPAmountSimple.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
@@ -403,13 +411,13 @@ public class InputTransactionIPP extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public TableModel buildIPPTableModel(Profil profil, int tahun) throws SQLException, KasirException {
-       String columnNames[] = {"Bulan", "Biaya IPP", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan"};
+       String columnNames[] = {"Bulan", "Biaya IPP", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan", "Bank"};
        Set<IPP> ippFilters = new HashSet<>();
        ArrayList<Entry> entries = new ArrayList<>();
        ippFilters.clear();
        ippFilters.add(new IPP(profil.noInduk, new Level(null,null,null,tahun), entries));
        Map<Long, IPP> searchResultMap = Control.exactFilterSelectIurans(Iuran.Tipe.IPP, ippFilters);
-       Object[][] data = new Object[12][7];
+       Object[][] data = new Object[12][8];
        int i = 0;
        final boolean[] canEdit = new boolean [12];
        ippFromDB = new IPP();
@@ -449,6 +457,7 @@ public class InputTransactionIPP extends javax.swing.JFrame {
                     Float data4 = 0f;
                     Float data5 = 0f;
                     Float data6 = 0f;
+                    Float data7 = 0f;
                     
                     for(Long setTDetailIds:entry.getValue().entries.get(j).transactDetailIDs){
                         System.out.println(setTDetailIds + " Set TDetailsID");
@@ -468,6 +477,10 @@ public class InputTransactionIPP extends javax.swing.JFrame {
                             data6 += Control.selectTDetail(TransactionDetail.Tipe.IPPTransaction, setTDetailIds).amount;
                             data[j][6] = data6;
                         }
+                        if(Control.selectTDetail(TransactionDetail.Tipe.IPPTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.TRANSFER){
+                            data7 += Control.selectTDetail(TransactionDetail.Tipe.IPPTransaction, setTDetailIds).amount;
+                            data[j][7] = data7;
+                        }
                     }
                     if(data[j][3] == null){
                         data[j][3] = 0f;
@@ -481,7 +494,9 @@ public class InputTransactionIPP extends javax.swing.JFrame {
                     if(data[j][6] == null){
                         data[j][6] = 0f;
                     }
-                            
+                    if(data[j][7] == null){
+                        data[j][7] = 0f;
+                    }       
                 }else{
                     data[j][2] = new Boolean(false);
                     if(entry.getValue().entries.get(j).transactDetailIDs.size() > 0){
@@ -499,6 +514,9 @@ public class InputTransactionIPP extends javax.swing.JFrame {
                             if(Control.selectTDetail(TransactionDetail.Tipe.IPPTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.BEASISWA_COST){
                                 data[j][6] = Control.selectTDetail(TransactionDetail.Tipe.IPPTransaction, setTDetailIds).amount;
                             }
+                            if(Control.selectTDetail(TransactionDetail.Tipe.IPPTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.TRANSFER){
+                                data[j][7] = Control.selectTDetail(TransactionDetail.Tipe.IPPTransaction, setTDetailIds).amount;
+                            }
                         }
                         if(data[j][3] == null){
                         data[j][3] = 0f;
@@ -512,11 +530,15 @@ public class InputTransactionIPP extends javax.swing.JFrame {
                         if(data[j][6] == null){
                             data[j][6] = 0f;
                         }
+                        if(data[j][7] == null){
+                            data[j][7] = 0f;
+                        }
                     }else{
                         data[j][3]=0f;
                         data[j][4]=0f;
                         data[j][5]=0f;
                         data[j][6]=0f;
+                        data[j][7]=0f;
                     }
                 }
                 
@@ -576,8 +598,8 @@ public class InputTransactionIPP extends javax.swing.JFrame {
        
     }
     public TableModel buildIPPSubmitTableModel(Profil profil, int tahun) throws SQLException, KasirException {
-       String columnNames[] = {"Bulan", "Biaya IPP", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan"};
-       Object[][] data = new Object[12][7];
+       String columnNames[] = {"Bulan", "Biaya IPP", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan", "Bank"};
+       Object[][] data = new Object[12][8];
        
        final boolean[] canEdit = new boolean [12];
          
@@ -594,6 +616,7 @@ public class InputTransactionIPP extends javax.swing.JFrame {
                         data[i][4] = iDDAmounts.get(i);
                         data[i][5] = beasiswaAmounts.get(i);
                         data[i][6] = beasiswaCostAmounts.get(i);
+                        data[i][7] = bankAmounts.get(i);
 //                    }
                 }else{
 //                    if(jTableIPP !=null){
@@ -605,6 +628,7 @@ public class InputTransactionIPP extends javax.swing.JFrame {
                         data[i][4] = iDDAmounts.get(i);
                         data[i][5] = beasiswaAmounts.get(i);
                         data[i][6] = beasiswaCostAmounts.get(i);
+                        data[i][7] = bankAmounts.get(i);
 //                    }
                 }
        }
