@@ -181,7 +181,7 @@ public class MapAccountGLFrame extends javax.swing.JFrame {
         String IuranLongName = tfKeterangan.getText();
         Level level = new Level();
         level.level1=(Level1) cbLevel1.getSelectedItem();
-        MapAccountGL magl = new MapAccountGL(IuranName,level.level1, AccountGLIuran, IuranLongName, AccountGLKas, AccountGLBank);
+        MapAccountGL magl = new MapAccountGL(IuranName,level.level1, AccountGLIuran, IuranLongName, AccountGLKas, AccountGLBank,"", "", "");
         try {
             Control.insertMapAccGL(magl);
         } catch (SQLException ex) {

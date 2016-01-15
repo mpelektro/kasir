@@ -42,7 +42,28 @@ public class GLTransRecordSet {
         }
         if(magl!=null){
             String iuranGL =magl.accountGLIuran;
-            String kasBankGL = pm == TransactionDetail.PaymentMethod.TRANSFER? magl.accountGLBank : magl.accountGLKas;
+            String kasBankGL = "";
+            //String kasBankGL = pm == TransactionDetail.PaymentMethod.TRANSFER? magl.accountGLBank : magl.accountGLKas;
+            switch(pm){
+                case CASH:
+                    kasBankGL = magl.accountGLKas;
+                    break;
+                case TRANSFER:
+                    kasBankGL = magl.accountGLBank;
+                    break;
+                case IDD:
+                    kasBankGL = magl.accountGLIDD;
+                    break;
+                case BEASISWA:
+                    kasBankGL = magl.accountGLBeasiswa;
+                    break;
+                case BEASISWA_COST:
+                    kasBankGL = magl.accountGLBeasiswaCost;
+                    break;
+                default:
+                    kasBankGL = null;
+                    break;
+            }
             double totalAmount = 0;
 
             tDetailsRec = new ArrayList<>();

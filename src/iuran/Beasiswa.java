@@ -43,7 +43,7 @@ public class Beasiswa extends IuranRegular<Beasiswa, BeasiswaTransactionDetail>{
         return Tipe.Beasiswa;
     }
     public TransactionDetail.Tipe getTipeTDetail(){
-        return TransactionDetail.Tipe.SeragamTransaction;
+        return TransactionDetail.Tipe.BeasiswaTransaction;
     }
     
     public Beasiswa dynFromResultSet(ResultSet rs, boolean onCallingObj) throws SQLException, KasirException{
@@ -63,13 +63,13 @@ public class Beasiswa extends IuranRegular<Beasiswa, BeasiswaTransactionDetail>{
         if(beasiswa.amount < amount){
             return false;
         }
-        UUID uuid = UUID.randomUUID();
-        BeasiswaTransactionDetail beasiswaTDetail = new BeasiswaTransactionDetail(uuid, beasiswa.id, Clerk.current.id, tSummaryID, profil.noInduk, profil.currentLevel.level1, -amount, TransactionDetail.PaymentMethod.CASH, null);
-        Control.insertTDetail(TransactionDetail.Tipe.BeasiswaTransaction, beasiswaTDetail);
+        //UUID uuid = UUID.randomUUID();
+       // BeasiswaTransactionDetail beasiswaTDetail = new BeasiswaTransactionDetail(uuid, beasiswa.id, Clerk.current.id, tSummaryID, profil.noInduk, profil.currentLevel.level1, -amount, TransactionDetail.PaymentMethod.CASH, null);
+        //Control.insertTDetail(TransactionDetail.Tipe.BeasiswaTransaction, beasiswaTDetail);
         
-        beasiswaTDetail = Control.selectTDetail(TransactionDetail.Tipe.BeasiswaTransaction, TransactionDetail.uuidColName, false, uuid.toString());
-        beasiswa.transactDetailIDs.add(beasiswaTDetail.id);
-        beasiswa.amount += beasiswaTDetail.amount;
+        //beasiswaTDetail = Control.selectTDetail(TransactionDetail.Tipe.BeasiswaTransaction, TransactionDetail.uuidColName, false, uuid.toString());
+        //beasiswa.transactDetailIDs.add(beasiswaTDetail.id);
+        beasiswa.amount -= amount;
         return Control.updateIuran(Tipe.Beasiswa, beasiswa);
     }
 }

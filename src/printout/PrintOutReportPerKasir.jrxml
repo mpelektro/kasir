@@ -40,6 +40,7 @@ WHERE
  AND Clerk.`ID` = $P{Param_Clerk_ID}
  AND TransactionSummary.`CreateDate` >= $P{Param_Start_Date}
  AND TransactionSummary.`CreateDate` <= $P{Param_End_Date}
+ AND TransactionSummary.`Note` NOT LIKE 'TIDAK_TUNAI'
 ORDER BY
      TransactionSummary.`ID` ASC]]>
 	</queryString>

@@ -13,7 +13,7 @@ import sak.*;
  *
  * @author kedra
  */
-public class IDDTransactionDetail extends TransactionDetailRegular<IDDTransactionDetail, Seragam>{
+public class IDDTransactionDetail extends TransactionDetailRegular<IDDTransactionDetail, IDD>{
     public static final String tableName = Tipe.IDDTransaction.toString();
     
     //create filter
@@ -38,7 +38,7 @@ public class IDDTransactionDetail extends TransactionDetailRegular<IDDTransactio
         return Tipe.IDDTransaction;
     }
     public Iuran.Tipe getTipeIuran() {
-        return Iuran.Tipe.Seragam;
+        return Iuran.Tipe.IDD;
     }
 
     

@@ -533,14 +533,14 @@ public class Control {
             
             ArrayList<GLTransRecordSet> gltrsS = new ArrayList<>();
             for(Level.Level1 lv1 : Level.Level1.values()){
-                //for(TransactionDetail.PaymentMethod pm : TransactionDetail.PaymentMethod.values()){
+                for(TransactionDetail.PaymentMethod pm : TransactionDetail.PaymentMethod.values()){
                 //for normal
-                    GLTransRecordSet gltrs = GLTransRecordSet.create(type_no, tipe, lv1, TransactionDetail.PaymentMethod.CASH, normalTDetails, mapAccGLs);
+                    GLTransRecordSet gltrs = GLTransRecordSet.create(type_no, tipe, lv1, pm, normalTDetails, mapAccGLs);
                     if(gltrs != null){
                         gltrsS.add(gltrs);
                         ++type_no;
                     }
-                //}
+                }
                     
                     //for piutang
 //                    gltrs = GLTransRecordSet.create(type_no, TransactionDetail.Tipe.PiutangTransaction, lv1, TransactionDetail.PaymentMethod.CASH, piutangTDetails, mapAccGLs);

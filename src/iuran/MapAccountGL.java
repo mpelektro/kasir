@@ -26,7 +26,7 @@ public class MapAccountGL extends KasirObject<MapAccountGL,MapAccountGL,Integer>
     public static final String tableName = "MapAccountGL";
     public static final String idColName = "ID", iuranNameColName = "IuranName", level1ColName = "Level1", accountGLIuranColName = "AccountGLIuran";
     public static final String iuranLongNameColName = "IuranLongName", accountGLKasColName = "AccountGLKas", accountGLBankColName = "AccountGLBank";
-    
+    public static final String accountGLIDDColName = "AccountGLIDD", accountGLBeasiswaColName = "AccountGLBeasiswa", accountGLBeasiswaCostColName = "AccountGLBeasiswaCost";
     public int id;
     public String iuranName;
     public Level.Level1 level1;
@@ -34,30 +34,35 @@ public class MapAccountGL extends KasirObject<MapAccountGL,MapAccountGL,Integer>
     public String iuranLongName;
     public String accountGLKas;
     public String accountGLBank;
-    
+    public String accountGLIDD;
+    public String accountGLBeasiswa;
+    public String accountGLBeasiswaCost;
     //for filter & insertion
-    public MapAccountGL(String iuranName, Level.Level1 lv1, String accGLIuran, String iuranLongName, String accGLKas, String accGLBank){
+    public MapAccountGL(String iuranName, Level.Level1 lv1, String accGLIuran, String iuranLongName, String accGLKas, String accGLBank, String accGLIDD, String accGLBeasiswa, String accGLBeasiswaCost){
         this.iuranName = iuranName;
         level1 = lv1;
         accountGLIuran = accGLIuran;
         this.iuranLongName = iuranLongName;
         accountGLKas = accGLKas;
         accountGLBank = accGLBank;
+        accountGLIDD = accGLIDD;
+        accountGLBeasiswa = accGLBeasiswa;
+        accountGLBeasiswaCost = accGLBeasiswaCost;
     }
     
     //for from db
     public MapAccountGL(){}
     
     public MapAccountGL(MapAccountGL magl){
-        this(magl.iuranName, magl.level1, magl.accountGLIuran, magl.iuranLongName, magl.accountGLKas, magl.accountGLBank);
+        this(magl.iuranName, magl.level1, magl.accountGLIuran, magl.iuranLongName, magl.accountGLKas, magl.accountGLBank, magl.accountGLIDD, magl.accountGLBeasiswa, magl.accountGLBeasiswaCost);
         id = magl.id;
     }
     
     public static String toStringHeader(){
-        return idColName + "|" + iuranNameColName + "|" + level1ColName + "|" + accountGLIuranColName + "|" + iuranLongNameColName + "|" + accountGLKasColName + "|" + accountGLBankColName;
+        return idColName + "|" + iuranNameColName + "|" + level1ColName + "|" + accountGLIuranColName + "|" + iuranLongNameColName + "|" + accountGLKasColName + "|" + accountGLBankColName  + "|" + accountGLIDDColName  + "|" + accountGLBeasiswaColName  + "|" + accountGLBeasiswaCostColName ;
     }
     public String toString(){
-        return id + "|" + iuranName + "|" + level1 + "|" + accountGLIuran + "|" + iuranLongName + "|" + accountGLKas + "|" + accountGLBank;
+        return id + "|" + iuranName + "|" + level1 + "|" + accountGLIuran + "|" + iuranLongName + "|" + accountGLKas + "|" + accountGLBank + "|" + accountGLIDD + "|" + accountGLBeasiswa + "|" + accountGLBeasiswaCost;
     }
     public boolean equals(MapAccountGL magl){
         if(magl != null){
@@ -81,8 +86,14 @@ public class MapAccountGL extends KasirObject<MapAccountGL,MapAccountGL,Integer>
             if(level1 != null){
                 if(accountGLIuran != null && !accountGLIuran.isEmpty()){
                     if(accountGLKas != null && !accountGLKas.isEmpty()){
-                        if(accountGLBank != null && !accountGLBank.isEmpty())
-                            return true;
+                        if(accountGLBank != null && !accountGLBank.isEmpty()){
+                            if(accountGLIDD != null && !accountGLIDD.isEmpty()){
+                                if(accountGLBeasiswa != null && !accountGLBeasiswa.isEmpty()){
+                                    if(accountGLBeasiswaCost !=null && !accountGLBeasiswaCost.isEmpty())
+                                        return true;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -113,7 +124,9 @@ public class MapAccountGL extends KasirObject<MapAccountGL,MapAccountGL,Integer>
         iuranLongName = rs.getString(iuranLongNameColName);
         accountGLKas = rs.getString(accountGLKasColName);
         accountGLBank = rs.getString(accountGLBankColName);
-        
+        accountGLIDD = rs.getString(accountGLIDDColName);
+        accountGLBeasiswa = rs.getString(accountGLBeasiswaColName);
+        accountGLBeasiswaCost = rs.getString(accountGLBeasiswaCostColName);
         if(magl.isDBValid())
             return magl;
         else
@@ -148,6 +161,9 @@ public class MapAccountGL extends KasirObject<MapAccountGL,MapAccountGL,Integer>
         rs.updateString(iuranLongNameColName, iuranLongName);
         rs.updateString(accountGLKasColName, accountGLKas);
         rs.updateString(accountGLBankColName, accountGLBank);
+        rs.updateString(accountGLIDDColName, accountGLIDD);
+        rs.updateString(accountGLBeasiswaColName, accountGLBeasiswa);
+        rs.updateString(accountGLBeasiswaCostColName, accountGLBeasiswaCost);
         return true;
     }
     
@@ -184,7 +200,12 @@ public class MapAccountGL extends KasirObject<MapAccountGL,MapAccountGL,Integer>
             whereClause.add(accountGLKasColName + " LIKE '%" + accountGLKas + "%'");
         if(accountGLBank != null && !accountGLBank.isEmpty())
             whereClause.add(accountGLBankColName + " LIKE '%" + accountGLBank + "%'");
-        
+        if(accountGLIDD != null && !accountGLIDD.isEmpty())
+            whereClause.add(accountGLIDDColName + " LIKE '%" + accountGLIDD + "%'");
+        if(accountGLBeasiswa != null && !accountGLBeasiswa.isEmpty())
+            whereClause.add(accountGLBeasiswaColName + " LIKE '%" + accountGLBeasiswa + "%'");
+        if(accountGLBeasiswaCost != null && !accountGLBeasiswaCost.isEmpty())
+            whereClause.add(accountGLBeasiswaCostColName + " LIKE '%" + accountGLBeasiswaCost + "%'");
         return whereClause.isEmpty()? "" : StringUtils.join(whereClause, " AND ");
     }
     public String asWhereClauseExact(){

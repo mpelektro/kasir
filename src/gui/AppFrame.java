@@ -2264,7 +2264,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IPPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM IPPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -2385,7 +2385,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM AlmamaterTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM AlmamaterTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
         while(rs.next()){
@@ -2505,7 +2505,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM AttributeTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM AttributeTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
         while(rs.next()){
@@ -2625,7 +2625,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM BeasiswaTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM BeasiswaTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
         while(rs.next()){
@@ -2745,7 +2745,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM BeasiswaCostTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM BeasiswaCostTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
         while(rs.next()){
@@ -2865,7 +2865,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM BukuTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM BukuTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
         while(rs.next()){
@@ -2985,7 +2985,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM CicilanHutangTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM CicilanHutangTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
         while(rs.next()){
@@ -3105,7 +3105,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IDDTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM IDDTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -3226,7 +3226,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IKSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM IKSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -3347,7 +3347,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM ILLTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM ILLTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -3468,7 +3468,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IPSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM IPSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -3589,7 +3589,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IPSBTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM IPSBTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -3710,7 +3710,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IPSPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM IPSPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -3831,7 +3831,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IUATransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM IUATransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -3952,7 +3952,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IUAPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM IUAPTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -4073,7 +4073,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM IUSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM IUSTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -4194,7 +4194,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM OSISTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM OSISTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -4315,7 +4315,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM PASBTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM PASBTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -4436,7 +4436,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM PVTTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM PVTTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
 
         //STEP 5: Extract data from result set
@@ -4557,7 +4557,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM SeragamTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM SeragamTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
         while(rs.next()){
@@ -4677,7 +4677,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM SumbanganTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM SumbanganTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
         while(rs.next()){
@@ -4797,7 +4797,7 @@ public class AppFrame extends javax.swing.JFrame {
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM TabunganTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"'";
+        sql = "SELECT * FROM TabunganTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
         while(rs.next()){

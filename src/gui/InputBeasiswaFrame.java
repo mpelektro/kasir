@@ -7,6 +7,7 @@ package gui;
 import iuran.*;
 import iuran.Iuran.Tipe;
 import java.awt.Container;
+import java.awt.print.PrinterException;
 import java.sql.SQLException;
 import java.util.*;
 import javax.swing.DefaultComboBoxModel;
@@ -16,6 +17,7 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
 import kasir.Clerk;
 import kasir.Control;
+import net.sf.jasperreports.engine.JRException;
 import pelajar.Profil;
 import org.netbeans.validation.api.Validator;
 import org.netbeans.validation.api.ValidatorUtils;
@@ -45,6 +47,7 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
     private BeasiswaCost beasiswaCost;
     private Level level;
     private UUID tSumUUID;
+    private InputTransactionFrameSeparated itfs;
     /**
      * Creates new form InputIuranFrame
      */
@@ -52,10 +55,11 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
         initComponents();
     }
     
-    public InputBeasiswaFrame(Clerk clerk, Profil profil){
+    public InputBeasiswaFrame(Clerk clerk, Profil profil, InputTransactionFrameSeparated itfs){
         this.clerk = clerk;
         this.profil = profil;
         this.level = profil.currentLevel;
+        this.itfs = itfs;
         initComponents();
     }
 
@@ -955,6 +959,27 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
             beasiswaCostTDetail.uuid = transactionSummary.uuid;
             Control.insertTDetail(TransactionDetail.Tipe.BeasiswaCostTransaction, beasiswaCostTDetail);
         }
+        
+        if (JOptionPane.showConfirmDialog(null, "Print Bukti Pembayaran?", "WARNING",
+            JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                try {
+                        // yes option
+                        //printBuktiPembayaran(totalAmount);
+                    
+                        itfs.printBuktiPembayaran(transactionSummary, null, 0f);
+                } catch (JRException ex) {
+                    Exceptions.printStackTrace(ex);
+                    JOptionPane.showMessageDialog(rootPane, "Print Bukti Pembayaran Gagal!".concat("\r\n"+ex.toString()));
+                } catch (PrinterException ex) {
+                        Exceptions.printStackTrace(ex);
+                        JOptionPane.showMessageDialog(rootPane, "Print Bukti Pembayaran Gagal!".concat("\r\n"+ex.toString()));
+                }
+            } else {
+                // no option
+                JOptionPane.showMessageDialog(rootPane, "Simpan Data Ke Database Berhasil!");
+            }
+        this.dispose();
+        this.itfs.dispose();
     }
     
     private boolean validatePanel(){

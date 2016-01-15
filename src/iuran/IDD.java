@@ -18,7 +18,7 @@ import sak.KasirException;
  *
  * @author kedra
  */
-public class IDD extends IuranRegular<IDD, SeragamTransactionDetail>{
+public class IDD extends IuranRegular<IDD, IDDTransactionDetail>{
     public static final String tableName = Tipe.IDD.toString();
     
     //create filter
@@ -62,14 +62,16 @@ public class IDD extends IuranRegular<IDD, SeragamTransactionDetail>{
     //---------------------------------
     public static boolean transactOut(Profil profil, long tSummaryID, float amount) throws SQLException, KasirException{
         IDD idd = Control.selectIuran(Tipe.IDD, Iuran.noIndukColName, false, profil.noInduk);
+        if(idd.amount < amount){
+            return false;
+        }
+        //UUID uuid = UUID.randomUUID();
+        //IDDTransactionDetail iddTDetail = new IDDTransactionDetail(uuid, idd.id, Clerk.current.id, tSummaryID, profil.noInduk, profil.currentLevel.level1, -amount, TransactionDetail.PaymentMethod.CASH, null);
+        //Control.insertTDetail(TransactionDetail.Tipe.IDDTransaction, iddTDetail);
         
-        UUID uuid = UUID.randomUUID();
-        IDDTransactionDetail iddTDetail = new IDDTransactionDetail(uuid, idd.id, Clerk.current.id, tSummaryID, profil.noInduk, profil.currentLevel.level1, -amount, TransactionDetail.PaymentMethod.CASH, null);
-        Control.insertTDetail(TransactionDetail.Tipe.IDDTransaction, iddTDetail);
-        
-        iddTDetail = Control.selectTDetail(TransactionDetail.Tipe.IDDTransaction, TransactionDetail.uuidColName, false, uuid.toString());
-        idd.transactDetailIDs.add(iddTDetail.id);
-        idd.amount += iddTDetail.amount;
+        //iddTDetail = Control.selectTDetail(TransactionDetail.Tipe.IDDTransaction, TransactionDetail.uuidColName, false, uuid.toString());
+        //idd.transactDetailIDs.add(iddTDetail.id);
+        idd.amount -= amount;
         return Control.updateIuran(Tipe.IDD, idd);
     }
     public static boolean transactIn(Profil profil, long tSummaryID, float amount) throws SQLException, KasirException{
