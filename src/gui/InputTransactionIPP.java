@@ -460,7 +460,6 @@ public class InputTransactionIPP extends javax.swing.JFrame {
                     Float data7 = 0f;
                     
                     for(Long setTDetailIds:entry.getValue().entries.get(j).transactDetailIDs){
-                        System.out.println(setTDetailIds + " Set TDetailsID");
                         if(Control.selectTDetail(TransactionDetail.Tipe.IPPTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.CASH){
                             data3 += Control.selectTDetail(TransactionDetail.Tipe.IPPTransaction, setTDetailIds).amount;
                             data[j][3] = data3;
@@ -546,7 +545,7 @@ public class InputTransactionIPP extends javax.swing.JFrame {
                 //canEdit[j] = (entry.getValue().entries.get(j).transactDetailIDs.size() > 0);
                 
                 for(Long id : entry.getValue().entries.get(j).transactDetailIDs){
-                    canEdit[j] = Control.selectTDetail(TransactionDetail.Tipe.IPPTransaction, id).settled;
+                   canEdit[j] = Control.selectTDetail(TransactionDetail.Tipe.IPPTransaction, id).settled;
                 }
                 
                 

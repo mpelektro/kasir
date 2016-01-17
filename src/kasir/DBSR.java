@@ -377,7 +377,7 @@ public class DBSR{
         String limitClause = rowNum < 1? "" : " LIMIT " + rowNum;
 
         String sql = "SELECT * FROM " + tableName + whereClause + " ORDER BY " + colName + limitClause;
-        System.out.println(sql);
+        //System.out.println(sql);
         initStatement();
         return stmt.executeQuery(sql);
     }
@@ -419,7 +419,7 @@ public class DBSR{
         String limitClause = rowNum < 1? "" : " LIMIT " + rowNum;
 
         String sql = "SELECT * FROM " + tableName + whereClause + " ORDER BY " + colName + limitClause;
-        System.out.println(sql);
+        //System.out.println(sql);
         initStatement();
         return stmt.executeQuery(sql);
     }
@@ -471,7 +471,7 @@ public class DBSR{
 
         String sql = "SELECT * FROM " + tableName + whereClause + orderClause;
         
-        System.out.println(sql);
+        //System.out.println(sql);
         initStatement();
         return stmt.executeQuery(sql);
     }
@@ -509,7 +509,7 @@ public class DBSR{
 
 
         String sql = "SELECT * FROM " + tableName + whereClause + orderClause;
-        System.out.println(sql);
+        //System.out.println(sql);
         initStatement();
         return stmt.executeQuery(sql);
     }

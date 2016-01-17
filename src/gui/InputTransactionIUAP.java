@@ -33,6 +33,7 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
     public ArrayList<Float> beasiswaAmounts;
     public ArrayList<Float> beasiswaCostAmounts;
     public ArrayList<Float> iUAPAmounts;
+    public ArrayList<Float> bankAmounts;
     private IUAP iuapCurrent;
     private IUAP iuapStoreToDB;
     private float iuapDebt;
@@ -83,6 +84,7 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
         jTextFieldIUAPDebt = new javax.swing.JFormattedTextField();
 
         setTitle(org.openide.util.NbBundle.getMessage(InputTransactionIUAP.class, "InputTransactionIUAP.title")); // NOI18N
+        setPreferredSize(new java.awt.Dimension(630, 380));
 
         jPanelIUAP.setMinimumSize(new java.awt.Dimension(570, 380));
         jPanelIUAP.setPreferredSize(new java.awt.Dimension(680, 450));
@@ -258,6 +260,7 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
         iDDAmounts = new ArrayList();
         beasiswaAmounts = new ArrayList();
         beasiswaCostAmounts = new ArrayList();
+        bankAmounts = new ArrayList();
         /////BLOOOOOOOOOOM SELESAIIIIIIIIIIIIIIIIIIII
         int i = 0;
         iuapCurrent = new IUAP();
@@ -277,6 +280,7 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
                     iDDAmounts.add(0f);
                     beasiswaAmounts.add(0f);
                     beasiswaCostAmounts.add(0f);
+                    bankAmounts.add(0f);
                     //below is when jTableIUAP property changed, especially check box is Changed or Editing IDD, Beasiswa, Beasiswa Cost 
                 } else if ((iuapCurrent.entries.get(i) != null) ^ (iuapFromDB.entries.get(i).transactDetailIDs.size() > 0)) {
                     System.out.println("IDD dari db ");
@@ -287,6 +291,7 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
                     iDDAmounts.add((Float) jTableIUAP.getValueAt(i, 4));
                     beasiswaAmounts.add((Float) jTableIUAP.getValueAt(i, 5));
                     beasiswaCostAmounts.add((Float) jTableIUAP.getValueAt(i, 6));
+                    bankAmounts.add((Float)jTableIUAP.getValueAt(i,7));
                     //jTableIUAP.setValueAt(iuapFromDB.entries.get(i).amount - (iDDAmounts.get(i) + beasiswaAmounts.get(i) + beasiswaCostAmounts.get(i)), i, 3);
                     //iuapStoreToDB.entries.add(new Entry(i, iuapFromDB.entries.get(i).amount));
                     iuapStoreToDB.entries.add(new Entry(i, iUAPAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)));
@@ -297,12 +302,14 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
                             iDDAmounts.add(0f);
                             beasiswaAmounts.add(0f);
                             beasiswaCostAmounts.add(0f);
+                            bankAmounts.add(0f);
                             iuapStoreToDB.entries.add(null);
                         }else{
                             iUAPAmounts.add((Float) jTableIUAP.getModel().getValueAt(i,3));
                             iDDAmounts.add((Float) jTableIUAP.getValueAt(i, 4));
                             beasiswaAmounts.add((Float) jTableIUAP.getValueAt(i, 5));
                             beasiswaCostAmounts.add((Float) jTableIUAP.getValueAt(i, 6));
+                            bankAmounts.add((Float)jTableIUAP.getValueAt(i,7));
                             iuapStoreToDB.entries.add(new Entry(i, iUAPAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)));
                         }
                     } catch (SQLException ex) {
@@ -329,7 +336,8 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
                 iuapAmountTemp = iuapAmountTemp + (Float)jTableIUAP.getModel().getValueAt(i,3)
                                 +(Float)jTableIUAP.getModel().getValueAt(i,4)
                                 +(Float)jTableIUAP.getModel().getValueAt(i,5)
-                                +(Float)jTableIUAP.getModel().getValueAt(i,6);
+                                +(Float)jTableIUAP.getModel().getValueAt(i,6)
+                                +(Float)jTableIUAP.getModel().getValueAt(i,7);
             }
         }
         itfs.jTextFieldIUAAmountSimple.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
@@ -403,13 +411,13 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public TableModel buildIUAPTableModel(Profil profil, int tahun) throws SQLException, KasirException {
-       String columnNames[] = {"Bulan", "Biaya IUAP", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan"};
+       String columnNames[] = {"Bulan", "Biaya IUAP", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan", "Bank"};
        Set<IUAP> iuapFilters = new HashSet<>();
        ArrayList<Entry> entries = new ArrayList<>();
        iuapFilters.clear();
        iuapFilters.add(new IUAP(profil.noInduk, new Level(null,null,null,tahun), entries));
        Map<Long, IUAP> searchResultMap = Control.exactFilterSelectIurans(Iuran.Tipe.IUAP, iuapFilters);
-       Object[][] data = new Object[12][7];
+       Object[][] data = new Object[12][8];
        int i = 0;
        final boolean[] canEdit = new boolean [12];
        iuapFromDB = new IUAP();
@@ -449,6 +457,7 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
                     Float data4 = 0f;
                     Float data5 = 0f;
                     Float data6 = 0f;
+                    Float data7 = 0f;
                     
                     for(Long setTDetailIds:entry.getValue().entries.get(j).transactDetailIDs){
                         System.out.println(setTDetailIds + " Set TDetailsID");
@@ -468,6 +477,10 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
                             data6 += Control.selectTDetail(TransactionDetail.Tipe.IUAPTransaction, setTDetailIds).amount;
                             data[j][6] = data6;
                         }
+                        if(Control.selectTDetail(TransactionDetail.Tipe.IUAPTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.TRANSFER){
+                            data7 += Control.selectTDetail(TransactionDetail.Tipe.IUAPTransaction, setTDetailIds).amount;
+                            data[j][7] = data7;
+                        }
                     }
                     if(data[j][3] == null){
                         data[j][3] = 0f;
@@ -481,7 +494,9 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
                     if(data[j][6] == null){
                         data[j][6] = 0f;
                     }
-                            
+                    if(data[j][7] == null){
+                        data[j][7] = 0f;
+                    }       
                 }else{
                     data[j][2] = new Boolean(false);
                     if(entry.getValue().entries.get(j).transactDetailIDs.size() > 0){
@@ -499,6 +514,9 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
                             if(Control.selectTDetail(TransactionDetail.Tipe.IUAPTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.BEASISWA_COST){
                                 data[j][6] = Control.selectTDetail(TransactionDetail.Tipe.IUAPTransaction, setTDetailIds).amount;
                             }
+                            if(Control.selectTDetail(TransactionDetail.Tipe.IUAPTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.TRANSFER){
+                                data[j][7] = Control.selectTDetail(TransactionDetail.Tipe.IUAPTransaction, setTDetailIds).amount;
+                            }
                         }
                         if(data[j][3] == null){
                         data[j][3] = 0f;
@@ -512,11 +530,15 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
                         if(data[j][6] == null){
                             data[j][6] = 0f;
                         }
+                        if(data[j][7] == null){
+                            data[j][7] = 0f;
+                        }
                     }else{
                         data[j][3]=0f;
                         data[j][4]=0f;
                         data[j][5]=0f;
                         data[j][6]=0f;
+                        data[j][7]=0f;
                     }
                 }
                 
@@ -576,8 +598,8 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
        
     }
     public TableModel buildIUAPSubmitTableModel(Profil profil, int tahun) throws SQLException, KasirException {
-       String columnNames[] = {"Bulan", "Biaya IUAP", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan"};
-       Object[][] data = new Object[12][7];
+       String columnNames[] = {"Bulan", "Biaya IUAP", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan", "Bank"};
+       Object[][] data = new Object[12][8];
        
        final boolean[] canEdit = new boolean [12];
          
@@ -594,6 +616,7 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
                         data[i][4] = iDDAmounts.get(i);
                         data[i][5] = beasiswaAmounts.get(i);
                         data[i][6] = beasiswaCostAmounts.get(i);
+                        data[i][7] = bankAmounts.get(i);
 //                    }
                 }else{
 //                    if(jTableIUAP !=null){
@@ -605,6 +628,7 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
                         data[i][4] = iDDAmounts.get(i);
                         data[i][5] = beasiswaAmounts.get(i);
                         data[i][6] = beasiswaCostAmounts.get(i);
+                        data[i][7] = bankAmounts.get(i);
 //                    }
                 }
        }
