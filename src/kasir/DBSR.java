@@ -1,15 +1,18 @@
 package kasir;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.sql.*;
 import pelajar.*;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.ini4j.Ini;
+import org.openide.util.Exceptions;
 import sak.*;
 
 public class DBSR{
-    public static final String dbURL = "jdbc:mysql://ark3.dayarka.com/rusly_kasirdb", dbUsername = "marbun", dbPass = "marbun123456";
-    //public static final String dbURL = "jdbc:mysql://ark3.dayarka.com/rusly_ppdbdb", dbUsername = "marbun", dbPass = "marbun123456";
+    public static final String dbURL = "jdbc:mysql://ark3.dayarka.com/rusly_kasirdb", dbURLppdb = "jdbc:mysql://ark3.dayarka.com/rusly_ppdbdb", dbUsername = "marbun", dbPass = "marbun123456";
     public static Connection conn;
     public static Statement stmt;
 
@@ -21,9 +24,19 @@ public class DBSR{
 
     public static void initStatement() throws SQLException{
         if(stmt == null || stmt.isClosed()){
-            if (conn == null || conn.isValid(0))
+            if (conn == null || conn.isValid(0)){
+                try{
+                    Ini ppdbIni = new Ini(new File("lib/ini/ppdb.ini"));
+                    if(ppdbIni.get("program", "name", String.class).equals("ppdb")){
+                         conn = DriverManager.getConnection(dbURLppdb, dbUsername, dbPass);
+                    }else{
+                         conn = DriverManager.getConnection(dbURL, dbUsername, dbPass);
+                    }
+                } catch (IOException ex) {
+                    Exceptions.printStackTrace(ex);
+                }
                 //conn = DriverManager.getConnection(dbURL, "root", "admin");    //all db access auth
-                conn = DriverManager.getConnection(dbURL, dbUsername, dbPass);    //all db access auth                    
+            }
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
         }
     }

@@ -9,6 +9,8 @@ import iuran.*;
 import iuran.Iuran;
 import iuran.Seragam;
 import java.awt.Component;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 import javax.swing.*;
@@ -17,6 +19,7 @@ import javax.swing.table.TableModel;
 import javax.swing.text.BadLocationException;
 import kasir.Clerk;
 import kasir.Control;
+import org.ini4j.Ini;
 import org.netbeans.validation.api.Validator;
 import org.netbeans.validation.api.ValidatorUtils;
 import org.netbeans.validation.api.ui.swing.ValidationPanel;
@@ -1136,6 +1139,8 @@ d = StringValidators.trimString(ValidatorUtils.merge(
         } catch (KasirException ex) {
             Exceptions.printStackTrace(ex);
             JOptionPane.showMessageDialog(rootPane, "Input Siswa Gagal!\r\n".concat(ex.toString()));
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
         }
 
     }//GEN-LAST:event_jButtonSave1ActionPerformed
@@ -1357,7 +1362,7 @@ d = StringValidators.trimString(ValidatorUtils.merge(
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
-    private void insertProfil() throws SQLException, KasirException {
+    private void insertProfil() throws SQLException, KasirException, IOException {
         Biodata biodata = new Biodata(jNamaTextField1.getText()
                 , (pelajar.Biodata.Kelamin)jJenisKelaminComboBox1.getSelectedItem()
                 , (pelajar.Biodata.Agama)jAgamaComboBox1.getSelectedItem()
@@ -1388,44 +1393,47 @@ d = StringValidators.trimString(ValidatorUtils.merge(
             ArrayList<Entry> entryIPP = new ArrayList<>();
             ArrayList<Entry> entryOSIS = new ArrayList<>();
             ArrayList<Entry> entryPVT = new ArrayList<>();
+            
+            Ini ppdbIni = new Ini(new File("lib/ini/ppdb.ini"));
+            
             switch(profilData.currentLevel.level1){
                 case SMA:
-                    ipsp.amount = 3500000f;
-                    pasb.amount = 200000f;
-                    attribute.amount = 310000f;
-                    seragam.amount = 400000f;
-                    entryIKS.add(new Entry(0, 400000f));
-                    entryOSIS.add(new Entry(0, 250000f));
+                    ipsp.amount = ppdbIni.get("sma", "ipsp", float.class);
+                    pasb.amount = ppdbIni.get("sma", "pasb", float.class);
+                    attribute.amount = ppdbIni.get("sma", "attribute", float.class);
+                    seragam.amount = ppdbIni.get("sma", "seragam", float.class);
+                    entryIKS.add(new Entry(0, ppdbIni.get("sma", "iks", float.class)));
+                    entryOSIS.add(new Entry(0, ppdbIni.get("sma", "osis", float.class)));
                     for(int i = 0; i<12 ; i++){
-                        entryIPP.add(new Entry(i,380000f));
+                        entryIPP.add(new Entry(i,ppdbIni.get("sma", "ipp", float.class)));
                     }
                     break;
                 case SMP:
-                    ipsp.amount = 1500000f;
-                    pasb.amount = 100000f;
-                    attribute.amount = 100000f;
-                    seragam.amount = 350000f;
-                    entryIKS.add(new Entry(0, 200000f));
-                    entryOSIS.add(new Entry(0, 150000f));
+                    ipsp.amount = ppdbIni.get("smp", "ipsp", float.class);
+                    pasb.amount = ppdbIni.get("smp", "pasb", float.class);
+                    attribute.amount = ppdbIni.get("smp", "attribute", float.class);
+                    seragam.amount = ppdbIni.get("smp", "seragam", float.class);
+                    entryIKS.add(new Entry(0, ppdbIni.get("smp", "iks", float.class)));
+                    entryOSIS.add(new Entry(0, ppdbIni.get("smp", "osis", float.class)));
                     for(int i = 0; i<12 ; i++){
-                        entryIPP.add(new Entry(i,225000f));
+                        entryIPP.add(new Entry(i,ppdbIni.get("smp", "ipp", float.class)));
                     }
 
                     break;
                 case SMK:
-                    ipsp.amount = 2000000f;
-                    pasb.amount = 150000f;
-                    attribute.amount = 100000f;
-                    seragam.amount = 360000f;
-                    entryIKS.add(new Entry(0, 300000f));
-                    entryOSIS.add(new Entry(0, 225000f));
-                    entryPVT.add(new Entry(0, 720000f));
-                    almamater.amount = 250000f;
+                    ipsp.amount = ppdbIni.get("smk", "ipsp", float.class);
+                    pasb.amount = ppdbIni.get("smk", "pasb", float.class);
+                    attribute.amount = ppdbIni.get("smk", "attribute", float.class);
+                    seragam.amount = ppdbIni.get("smk", "seragam", float.class);
+                    entryIKS.add(new Entry(0, ppdbIni.get("smk", "iks", float.class)));
+                    entryOSIS.add(new Entry(0, ppdbIni.get("smk", "osis", float.class)));
+                    entryPVT.add(new Entry(0, ppdbIni.get("smk", "pvt", float.class)));
+                    almamater.amount = ppdbIni.get("smk", "almamater", float.class);
                     PVT pvt = new PVT(profilData.noInduk, profilData.currentLevel, entryPVT);
                     pvt.entries.get(0).debt = pvt.entries.get(0).amount;
                     Control.insertIuran(Iuran.Tipe.PVT, pvt);
                     for(int i = 0; i<12 ; i++){
-                        entryIPP.add(new Entry(i,275000f));
+                        entryIPP.add(new Entry(i,ppdbIni.get("smk", "ipp", float.class)));
                     }
                     break;
                 default:

@@ -9,7 +9,10 @@ import iuran.Iuran;
 import iuran.TransactionSummary;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -27,11 +30,17 @@ import javax.swing.table.TableModel;
 import kasir.Clerk;
 import kasir.Control;
 import kasir.DBSR;
+import static kasir.DBSR.conn;
+import static kasir.DBSR.dbPass;
+import static kasir.DBSR.dbURL;
+import static kasir.DBSR.dbURLppdb;
+import static kasir.DBSR.dbUsername;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
 import net.sf.jasperreports.engine.export.JRPrintServiceExporterParameter;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.view.JasperViewer;
+import org.ini4j.Ini;
 import org.openide.util.Exceptions;
 import pelajar.Biodata;
 import pelajar.Level;
@@ -92,12 +101,16 @@ public class AppFrame extends javax.swing.JFrame {
     }
     
     public AppFrame(Clerk clerk){
-        if(DBSR.dbURL.equals("jdbc:mysql://ark3.dayarka.com/rusly_ppdbdb")){
-            isPPDB = true;
-        }else{
-            isPPDB = false;
+        try{
+            Ini ppdbIni = new Ini(new File("lib/ini/ppdb.ini"));
+            if(ppdbIni.get("program", "name", String.class).equals("ppdb")){
+                 isPPDB = true;
+            }else{
+                 isPPDB = false;
+            }
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
         }
-
         initComponents();
         this.clerk = clerk;
     }
