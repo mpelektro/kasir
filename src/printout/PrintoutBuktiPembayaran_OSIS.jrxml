@@ -57,7 +57,7 @@ WHERE
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{OSISTransaction_PaymentMethod}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{OSISTransaction_PaymentMethod}.equals("CASH")?"TUNAI":($F{OSISTransaction_PaymentMethod}.equals("TRANSFER")?"BANK":($F{OSISTransaction_PaymentMethod}.equals("IDD")?"DANA SISWA":($F{OSISTransaction_PaymentMethod}.equals("BEASISWA")?"BEASISWA":"B. AKADEMIK")))]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd-MMM-yyyy">
 				<reportElement x="271" y="0" width="49" height="12" uuid="3014fa51-d92c-4778-ad33-6f272259ecc0"/>

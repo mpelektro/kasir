@@ -7,7 +7,10 @@
         <Property name="defaultCloseOperation" type="int" value="2"/>
         <Property name="title" type="java.lang.String" value="Konfirmasi Input Siswa"/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[437, 800]"/>
+          <Dimension value="[630, 800]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[610, 600]"/>
         </Property>
       </Properties>
 
@@ -17,10 +20,13 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTitleLabel1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jTitleLabel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="430" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="jPanel3" pref="590" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -31,7 +37,7 @@
                   <Component id="jTitleLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="14" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -43,11 +49,11 @@
               <Dimension value="[700, 800]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[447, 530]"/>
+              <Dimension value="[500, 530]"/>
             </Property>
             <Property name="name" type="java.lang.String" value="Konfirmasi Input Siswa" noResource="true"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[447, 580]"/>
+              <Dimension value="[500, 580]"/>
             </Property>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
@@ -60,7 +66,40 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jNomorIndukLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jAgamaLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jAsalSekolahLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTingkatSekolah1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jTanggalLahirLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jTempatLahirLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jAlamatLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jNamaAyahLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jNamaIbuLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jTelepon1Label1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jTelepon2Label1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jTanggalMasuk1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jTingkatKelas1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jComboBoxTingkatKelas1" min="-2" pref="207" max="-2" attributes="0"/>
+                                          <Component id="dateChooserComboTanggalMasuk1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
+                                          <Component id="jTelepon2TextField1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
+                                          <Component id="jTelepon1TextField1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
+                                          <Component id="jTempatLahirTextField1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
+                                          <Component id="jScrollPane2" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
+                                          <Component id="jNamaAyahTextField1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
+                                          <Component id="jNamaIbuTextField1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
+                                          <Component id="dateChooserComboTanggalLahir1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
+                                          <Component id="jAsalSekolahTextField1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jNamaLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jJenisKelaminLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -70,74 +109,57 @@
                                       <Component id="jButtonSave1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jButtonCancel1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jNamaTextField1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
-                                          <Component id="jNomorIndukTextField1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
-                                          <Component id="jJenisKelaminComboBox1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
-                                          <Component id="jAgamaComboBox1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jNamaTextField1" min="-2" pref="206" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="jNomorIndukLabel1" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="jNomorIndukTextField1" min="-2" pref="131" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="jComboBoxTingkatSekolah1" alignment="0" pref="206" max="32767" attributes="0"/>
+                                                  <Component id="jJenisKelaminComboBox1" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jAgamaComboBox1" alignment="0" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTanggalLahirLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTempatLahirLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jAlamatLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jNamaAyahLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jNamaIbuLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTelepon1Label1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTelepon2Label1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTanggalMasuk1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTingkatSekolah1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTingkatKelas1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTingkatSubKelas1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jTingkatSubKelas1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jComboBoxTingkatSekolah1" max="32767" attributes="0"/>
-                                  <Component id="jComboBoxTingkatKelas1" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="dateChooserComboTanggalMasuk1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
-                                          <Component id="jTelepon2TextField1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
-                                          <Component id="jTelepon1TextField1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
-                                          <Component id="jTempatLahirTextField1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
-                                          <Component id="jScrollPane2" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
-                                          <Component id="jNamaAyahTextField1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
-                                          <Component id="jNamaIbuTextField1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
-                                          <Component id="dateChooserComboTanggalLahir1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
-                                          <Component id="jComboBoxTingkatSubKelas1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
-                                          <Component id="jAsalSekolahTextField1" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
+                              <Component id="jComboBoxTingkatSubKelas1" min="-2" pref="206" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jAgamaLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jAsalSekolahLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="128" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jNomorIndukTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jNomorIndukLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jNamaLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jNamaTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jNomorIndukLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jNomorIndukTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jTingkatSekolah1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxTingkatSekolah1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jJenisKelaminLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jJenisKelaminComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -192,22 +214,17 @@
                           <Component id="jTanggalMasuk1" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="dateChooserComboTanggalMasuk1" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTingkatSekolah1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBoxTingkatSekolah1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTingkatKelas1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBoxTingkatKelas1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTingkatSubKelas1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBoxTingkatSubKelas1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="81" max="32767" attributes="0"/>
+                      <EmptySpace pref="76" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButtonSave1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonCancel1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -218,25 +235,6 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="jNomorIndukTextField1">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="1"/>
-                </Property>
-              </Properties>
-              <BindingProperties>
-                <BindingProperty name="text" source="jNomorIndukTextField" sourcePath="${text}" target="jNomorIndukTextField1" targetPath="text" updateStrategy="0" immediately="false">
-                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-                </BindingProperty>
-              </BindingProperties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jNomorIndukTextField1ActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="InputProfilFrame_jNomorIndukTextField1"/>
-              </AuxValues>
-            </Component>
             <Component class="javax.swing.JLabel" name="jNomorIndukLabel1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nomor Induk"/>
@@ -454,6 +452,9 @@
               <Events>
                 <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jComboBoxTingkatSekolah1PropertyChange"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jComboBoxTingkatSekolah1.setBackground(jComboBoxTingkatSekolah.getBackground());&#xa;jComboBoxTingkatSekolah1.setForeground(jComboBoxTingkatSekolah.getForeground());"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jTingkatKelas1">
               <Properties>
@@ -526,6 +527,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Asal Sekolah"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jNomorIndukTextField1">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="11" style="1"/>
+                </Property>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="text" source="jNomorIndukTextField" sourcePath="${text}" target="jNomorIndukTextField1" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+              </BindingProperties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jNomorIndukTextField1ActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="InputProfilFrame_jNomorIndukTextField1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -664,7 +684,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace pref="66" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -693,28 +713,34 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jNomorIndukLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jNamaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jJenisKelaminLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTanggalMasuk2" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                   <Component id="jButtonSave" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="71" max="32767" attributes="0"/>
+                                  <EmptySpace pref="190" max="32767" attributes="0"/>
                                   <Component id="jCheckBoxInsertProfils" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jNamaTextField" max="32767" attributes="0"/>
-                                      <Component id="jNomorIndukTextField" max="32767" attributes="0"/>
-                                      <Component id="jJenisKelaminComboBox" alignment="0" pref="215" max="32767" attributes="0"/>
-                                      <Component id="jAgamaComboBox" max="32767" attributes="0"/>
+                                      <Component id="jComboBoxTingkatSekolah" pref="215" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jNamaTextField" max="32767" attributes="0"/>
+                                          <Component id="jJenisKelaminComboBox" alignment="0" pref="215" max="32767" attributes="0"/>
+                                          <Component id="jAgamaComboBox" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jNomorIndukLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jNomorIndukTextField" min="-2" pref="97" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -722,45 +748,56 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jTitleLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jAgamaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jAsalSekolahLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jAsalSekolahTextField" min="-2" pref="215" max="-2" attributes="0"/>
+                              </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jTanggalLahirLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTempatLahirLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jAlamatLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jNamaAyahLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jNamaIbuLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jTelepon1Label" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jTelepon2Label" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jTanggalMasuk" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTanggalMasuk4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTanggalMasuk2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTanggalMasuk3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Component id="jTelepon2TextField" max="32767" attributes="0"/>
                                               <Component id="jTelepon1TextField" max="32767" attributes="0"/>
-                                              <Component id="jTempatLahirTextField" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jScrollPane1" pref="215" max="32767" attributes="0"/>
                                               <Component id="jNamaAyahTextField" max="32767" attributes="0"/>
                                               <Component id="jNamaIbuTextField" max="32767" attributes="0"/>
-                                              <Component id="dateChooserComboTanggalLahir" alignment="0" max="32767" attributes="0"/>
                                               <Component id="dateChooserComboTanggalMasuk" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="jComboBoxTingkatKelas" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="jComboBoxTingkatSekolah" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="jComboBoxTingkatSubKelas" alignment="1" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace pref="19" max="32767" attributes="0"/>
+                                          <Component id="dateChooserComboTanggalLahir" min="-2" pref="215" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
-                              <Component id="jAgamaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jAsalSekolahLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="43" max="32767" attributes="0"/>
-                                  <Component id="jAsalSekolahTextField" min="-2" pref="215" max="-2" attributes="0"/>
+                                  <Component id="jTempatLahirLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jTempatLahirTextField" min="-2" pref="215" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jTanggalMasuk4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jTanggalMasuk3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jComboBoxTingkatKelas" max="32767" attributes="0"/>
+                                      <Component id="jComboBoxTingkatSubKelas" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -774,40 +811,52 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jTitleLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jNomorIndukTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jNomorIndukLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jNamaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jNamaTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jJenisKelaminLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jJenisKelaminComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jAgamaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jAgamaComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jAsalSekolahLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jAsalSekolahTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jTanggalLahirLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="dateChooserComboTanggalLahir" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTempatLahirLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTempatLahirTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jNamaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jNamaTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jNomorIndukLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jNomorIndukTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jTanggalMasuk2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jComboBoxTingkatSekolah" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jJenisKelaminLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jJenisKelaminComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jAgamaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jAgamaComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jAsalSekolahLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jAsalSekolahTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                  <Component id="jTempatLahirLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="jTempatLahirTextField" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jTanggalLahirLabel" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="dateChooserComboTanggalLahir" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -841,11 +890,6 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTanggalMasuk2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBoxTingkatSekolah" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jTanggalMasuk3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBoxTingkatKelas" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -854,7 +898,7 @@
                       <Component id="jTanggalMasuk4" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBoxTingkatSubKelas" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButtonSave" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -883,6 +927,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Nomor Induk"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if(ppdbIni.get(&quot;program&quot;, &quot;name&quot;, String.class).equals(&quot;ppdb&quot;))&#xa;jNomorIndukLabel.setText(&quot;Nomor Pendaftaran&quot;);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jNamaLabel">
           <Properties>
@@ -1116,9 +1163,16 @@
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBoxTingkatSekolah">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="66" red="0" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="level1ComboBoxModel" type="code"/>
             </Property>
+            <Property name="doubleBuffered" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxTingkatSekolahActionPerformed"/>
@@ -1135,6 +1189,7 @@
             </Property>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="if(ppdbIni.get(&quot;program&quot;, &quot;name&quot;, String.class).equals(&quot;ppdb&quot;))&#xa;jComboBoxTingkatKelas.setEnabled(false);"/>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jComboBoxTingkatKelas.setSelectedItem(profil!=null?profil.currentLevel.level2:Level.Level2.TUJUH);"/>
           </AuxValues>
         </Component>
@@ -1150,6 +1205,7 @@
             </Property>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="if(ppdbIni.get(&quot;program&quot;, &quot;name&quot;, String.class).equals(&quot;ppdb&quot;))&#xa;jComboBoxTingkatSubKelas.setEnabled(false);"/>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jComboBoxTingkatSubKelas.setSelectedItem(profil!=null?profil.currentLevel.level3: Level.Level3.SATU);"/>
           </AuxValues>
         </Component>
@@ -1160,6 +1216,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Input Siswa"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if(ppdbIni.get(&quot;program&quot;, &quot;name&quot;, String.class).equals(&quot;ppdb&quot;))&#xa;jTitleLabel.setText(&quot;Input Data Pendaftaran Peserta Didik Baru&quot;);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBoxInsertProfils">
           <Properties>

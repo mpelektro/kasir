@@ -828,6 +828,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jTextFieldTransactionSummaryNote = new javax.swing.JTextField();
         jButtonIBF = new javax.swing.JButton();
+        jToggleButtonLunas = new javax.swing.JToggleButton();
         jButtonSubmit = new javax.swing.JButton();
         jButtonIPP = new javax.swing.JButton();
         jButtonIPSP = new javax.swing.JButton();
@@ -2399,19 +2400,9 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         );
 
         jFrameIUAP.setMinimumSize(new java.awt.Dimension(680, 450));
-        jFrameIUAP.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jFrameIUAPPropertyChange(evt);
-            }
-        });
 
         jPanelIUAP.setMinimumSize(new java.awt.Dimension(570, 380));
         jPanelIUAP.setPreferredSize(new java.awt.Dimension(680, 450));
-        jPanelIUAP.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jPanelIUAPPropertyChange(evt);
-            }
-        });
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel40.setText(org.openide.util.NbBundle.getMessage(InputTransactionFrameSeparated.class, "InputTransactionFrameSeparated.jLabel40.text")); // NOI18N
@@ -2496,7 +2487,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                 .addGroup(jPanelIUAPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jUnpaidIUAP, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                                     .addComponent(jFormattedTextFieldIDDSaldo3))))
-                        .addGap(0, 65, Short.MAX_VALUE)))
+                        .addGap(0, 117, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelIUAPLayout.setVerticalGroup(
@@ -2517,7 +2508,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                 .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonBayarIUAP)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jFrameIUAPLayout = new javax.swing.GroupLayout(jFrameIUAP.getContentPane());
@@ -2575,6 +2566,14 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             }
         });
 
+        jToggleButtonLunas.setText(org.openide.util.NbBundle.getMessage(InputTransactionFrameSeparated.class, "InputTransactionFrameSeparated.jToggleButtonLunas.text")); // NOI18N
+        jToggleButtonLunas.setEnabled(false);
+        jToggleButtonLunas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButtonLunasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelProfilLayout = new javax.swing.GroupLayout(jPanelProfil);
         jPanelProfil.setLayout(jPanelProfilLayout);
         jPanelProfilLayout.setHorizontalGroup(
@@ -2603,7 +2602,10 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                         .addComponent(jLabelLevel2Level3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldLevel2Level3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButtonIBF))
+                    .addGroup(jPanelProfilLayout.createSequentialGroup()
+                        .addComponent(jButtonIBF)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButtonLunas)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelProfilLayout.setVerticalGroup(
@@ -2624,7 +2626,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                 .addGroup(jPanelProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(jTextFieldTransactionSummaryNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonIBF))
+                    .addComponent(jButtonIBF)
+                    .addComponent(jToggleButtonLunas))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2657,6 +2660,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         });
 
         jButtonIDD.setText(org.openide.util.NbBundle.getMessage(InputTransactionFrameSeparated.class, "InputTransactionFrameSeparated.jButtonIDD.text")); // NOI18N
+        jButtonIDD.setEnabled(false);
         jButtonIDD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonIDDActionPerformed(evt);
@@ -3827,6 +3831,15 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFrameIUAPPropertyChange
 
+    private void jToggleButtonLunasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonLunasActionPerformed
+        // TODO add your handling code here:
+        if(this.jToggleButtonLunas.isSelected()){
+            jTextFieldIPPAmountSimple.setValue(300000);
+        }else{
+            jTextFieldIPPAmountSimple.setText("");
+        }
+    }//GEN-LAST:event_jToggleButtonLunasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -4086,6 +4099,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldTransactionSummaryNote;
     private javax.swing.JTextField jTextFieldTransactionSummaryNote1;
     private javax.swing.JTextField jTextFieldTransactionSummaryNote2;
+    private javax.swing.JToggleButton jToggleButtonLunas;
     private javax.swing.JTextField jUnpaidAlmamater;
     private javax.swing.JTextField jUnpaidBuku;
     private javax.swing.JTextField jUnpaidCicilanHutang;
@@ -4868,7 +4882,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                                 pvtFromDB.id, 
                                                                                                 clerk.id, 
                                                                                                 transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (inputTransactionPVT.pVTAmounts.get(i)), TransactionDetail.PaymentMethod.CASH,
-                                                                                                inputTransactionPVT.jTablePVT.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                                "Praktikum".concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
 
                             pvtTransactionDetails.add(pvtTransactionDetail);
                         }
@@ -4877,7 +4891,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                                 pvtFromDB.id, 
                                                                                                 clerk.id, 
                                                                                                 transactionSummary.id, profil.noInduk, profil.currentLevel.level1, inputTransactionPVT.iDDAmounts.get(i), TransactionDetail.PaymentMethod.IDD,
-                                                                                                inputTransactionPVT.jTablePVT.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                                "Praktikum".concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
                             pvtTransactionDetails.add(pvtTransactionDetail);
                             IDD.transactOut(profil, transactionSummary.id, inputTransactionPVT.iDDAmounts.get(i));
                             transactionSummary.note = "TIDAK_TUNAI";
@@ -4888,7 +4902,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                                 pvtFromDB.id, 
                                                                                                 clerk.id, 
                                                                                                 transactionSummary.id, profil.noInduk, profil.currentLevel.level1, beasiswaAmounts.get(i), TransactionDetail.PaymentMethod.BEASISWA,
-                                                                                                inputTransactionPVT.jTablePVT.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                                "Praktikum".concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
                             pvtTransactionDetails.add(pvtTransactionDetail);
                             }
                             transactionSummary.note = "TIDAK_TUNAI";
@@ -4898,7 +4912,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                                 pvtFromDB.id, 
                                                                                                 clerk.id, 
                                                                                                 transactionSummary.id, profil.noInduk, profil.currentLevel.level1, beasiswaCostAmounts.get(i), TransactionDetail.PaymentMethod.BEASISWA_COST,
-                                                                                                inputTransactionPVT.jTablePVT.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                                "Praktikum".concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
                             pvtTransactionDetails.add(pvtTransactionDetail);
                             BeasiswaCost.transactOut(profil, transactionSummary.id, inputTransactionPVT.beasiswaCostAmounts.get(i));
                             transactionSummary.note = "TIDAK_TUNAI";
@@ -5004,7 +5018,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             Control.updateTSummary(transactionSummary);
         }
 //SMS GATEWAY PART
-/*        
+        
         String pesanDetail = "%20Detail%20(x1000):%20";
         for(int i=0; i<transactionList.size();i++){
             pesanDetail = pesanDetail.concat("%20").concat(transactionList.get(i).iuranTipe.toString()).concat("%20").concat(String.format("%1$,.0f", transactionList.get(i).amount/1000));       
@@ -5013,8 +5027,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         try {
             
             URL myURL = new URL("http://smsfortunata.com/api?user=mpelektro@yahoo.com&pass=spyderco123&"
-                    + "pesan=Total%20Transaksi%20Rp.%20"+String.format("%1$,.0f", transactionSummary.totalAmount)
-                    + pesanDetail.concat("%20No.%20Transaksi%20"+String.valueOf(transactionSummary.id))
+                    + "pesan=Total%20Rp.%20"+String.format("%1$,.0f", transactionSummary.totalAmount)
+                    + pesanDetail.concat("%20No.%20"+String.valueOf(transactionSummary.id))
                     + "%20-YDS%20Kosgoro-"
                     +"&senderid=modem2&nomor="
                     +profil.biodata.telpon1);
@@ -5028,7 +5042,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         catch (IOException e){   
             System.err.println(e);
         }
-*/
+
     }
 
     private void prepareSubmitObjects() throws SQLException, KasirException, IOException {
@@ -5212,7 +5226,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         
         
 //IPP PART
-        if(jTextFieldIPPAmountSimple.getValue() != null){
+        if(jTextFieldIPPAmountSimple.getValue() != null && !jToggleButtonLunas.isSelected()){
             this.tableModelIPP = inputTransactionIPP.buildIPPSubmitTableModel(this.profil, this.tahunIPP.get(jComboBoxTahun.getSelectedIndex()));
             jTableIPP.setModel(this.tableModelIPP);
 //            jTableIPP1.setModel(this.tableModelIPP);
@@ -5231,6 +5245,15 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                 }
             }
             
+        }else if(jTextFieldIPPAmountSimple.getValue() != null && jToggleButtonLunas.isSelected()){
+             ippTDetailUUID = UUID.randomUUID();
+             buildIPPTableModel(profil, profil.currentLevel.tahun);
+                    IPPTransactionDetail ippTransactionDetail = new IPPTransactionDetail(ippTDetailUUID, ippFromDB.id, clerk.id, 0L, profil.noInduk,profil.currentLevel.level1, ippFromDB.entries.get(0).amount, TransactionDetail.PaymentMethod.CASH, "IPP Bulan JULI", false);
+                    theCreatedDate = new sak.Kalender(System.currentTimeMillis());
+                    //ippTransactionDetail;
+                    
+                    totalAmount = totalAmount + ippTransactionDetail.amount;
+                    transactionList.add(new Transaction(Iuran.Tipe.IPP, ippTransactionDetail.amount, ippTransactionDetail.note));
         }
         
         //IUAP PART

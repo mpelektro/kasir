@@ -405,7 +405,7 @@ public class InputTransactionIPP extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTahun;
     private javax.swing.JPanel jPanelIPP;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTableIPP;
+    public javax.swing.JTable jTableIPP;
     private javax.swing.JFormattedTextField jTextFieldIPPDebt;
     private javax.swing.JTextField jUnpaidIPP;
     // End of variables declaration//GEN-END:variables
