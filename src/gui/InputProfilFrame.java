@@ -11,7 +11,10 @@ import iuran.Seragam;
 import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -28,6 +31,7 @@ import org.openide.util.Exceptions;
 import pelajar.Biodata;
 import pelajar.Level;
 import pelajar.Profil;
+import printout.PenerimaanKasir;
 import sak.KasirException;
 
 /**
@@ -40,22 +44,38 @@ public class InputProfilFrame extends javax.swing.JFrame {
     private Profil profil;
     private ArrayList<Profil> profilList;
     private TableModel profilsTableModel = new DefaultTableModel();
+    private Ini ppdbIni;
     /**
      * Creates new form UpdateProfilFrame
      */
     public InputProfilFrame() {
+        try {
+            ppdbIni = new Ini(new File("lib/ini/ppdb.ini"));
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
         initComponents();
     }
     
     public InputProfilFrame(Clerk clerk){
         this.clerk = clerk;
         this.profil = null;
+        try {
+            ppdbIni = new Ini(new File("lib/ini/ppdb.ini"));
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
         initComponents();
     }
     
     public InputProfilFrame(Clerk clerk, Profil profil){
         this.clerk = clerk;
         this.profil = profil;
+        try {
+            ppdbIni = new Ini(new File("lib/ini/ppdb.ini"));
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
         initComponents();
     }
     /**
@@ -304,6 +324,12 @@ public class InputProfilFrame extends javax.swing.JFrame {
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jComboBoxTingkatSekolah, org.jdesktop.beansbinding.ELProperty.create("${selectedItem}"), jComboBoxTingkatSekolah1, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
+
+        jComboBoxTingkatSekolah1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jComboBoxTingkatSekolah1PropertyChange(evt);
+            }
+        });
 
         jTingkatKelas1.setText("Tingkat Kelas");
 
@@ -573,6 +599,8 @@ public class InputProfilFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Input Siswa");
 
+        if(ppdbIni.get("program", "name", String.class).equals("ppdb"))
+        jNomorIndukTextField.setEnabled(false);
         jNomorIndukTextField.setName("Nomor Induk"); // NOI18N
         jNomorIndukTextField.setText(profil!= null ? profil.noInduk:"");
         jNomorIndukTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -770,6 +798,11 @@ public class InputProfilFrame extends javax.swing.JFrame {
             jComboBoxTingkatSekolahActionPerformed(evt);
         }
     });
+    jComboBoxTingkatSekolah.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        public void propertyChange(java.beans.PropertyChangeEvent evt) {
+            jComboBoxTingkatSekolahPropertyChange(evt);
+        }
+    });
 
     jComboBoxTingkatKelas.setModel(level2ComboBoxModel);
     jComboBoxTingkatKelas.setSelectedItem(profil!=null?profil.currentLevel.level2:Level.Level2.TUJUH);
@@ -783,6 +816,7 @@ public class InputProfilFrame extends javax.swing.JFrame {
     jTitleLabel.setText("Input Siswa");
 
     jCheckBoxInsertProfils.setText("Multiple Insert");
+    jCheckBoxInsertProfils.setEnabled(false);
     jCheckBoxInsertProfils.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jCheckBoxInsertProfilsActionPerformed(evt);
@@ -983,18 +1017,18 @@ public class InputProfilFrame extends javax.swing.JFrame {
 
     setContentPane(panelPrivate);
     panelPrivate.setInnerComponent(jPanel2);
-    Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
-        StringValidators.REQUIRE_NON_EMPTY_STRING,
-        StringValidators.NO_WHITESPACE));
-panelPrivate.getValidationGroup().add(jNomorIndukTextField, d);
-d = StringValidators.trimString(ValidatorUtils.merge(
+    //Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
+        //            StringValidators.REQUIRE_NON_EMPTY_STRING,
+        //            StringValidators.NO_WHITESPACE));
+//panelPrivate.getValidationGroup().add(jNomorIndukTextField, d);
+Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
     StringValidators.REQUIRE_NON_EMPTY_STRING));
     panelPrivate.getValidationGroup().add(jNamaTextField, d);
-    panelPrivate.getValidationGroup().add(jTempatLahirTextField, d);
-    panelPrivate.getValidationGroup().add(jAlamatTextArea, d);
-
-    d = StringValidators.trimString(ValidatorUtils.merge(StringValidators.validNumber(Locale.US)));
-    panelPrivate.getValidationGroup().add(jTelepon1TextField, d);
+    //panelPrivate.getValidationGroup().add(jTempatLahirTextField, d);
+    //panelPrivate.getValidationGroup().add(jAlamatTextArea, d);
+    //
+    //d = StringValidators.trimString(ValidatorUtils.merge(StringValidators.validNumber(Locale.US)));
+    //panelPrivate.getValidationGroup().add(jTelepon1TextField, d);
     jButtonSave.setEnabled(validatePanel());
 
     bindingGroup.bind();
@@ -1107,6 +1141,7 @@ d = StringValidators.trimString(ValidatorUtils.merge(
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jNamaAyahTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNamaAyahTextFieldActionPerformed
@@ -1224,6 +1259,16 @@ d = StringValidators.trimString(ValidatorUtils.merge(
         
     }//GEN-LAST:event_jAlamatTextAreaKeyPressed
 
+    private void jComboBoxTingkatSekolah1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBoxTingkatSekolah1PropertyChange
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jComboBoxTingkatSekolah1PropertyChange
+
+    private void jComboBoxTingkatSekolahPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBoxTingkatSekolahPropertyChange
+        // TODO add your handling code here:
+        jComboBoxTingkatKelas.setSelectedItem(Level.Level2.TUJUH);
+    }//GEN-LAST:event_jComboBoxTingkatSekolahPropertyChange
+
     /**
      * @param args the command line arguments
      */
@@ -1269,8 +1314,55 @@ d = StringValidators.trimString(ValidatorUtils.merge(
     private void continueToConfirmationDialog(){
         this.setVisible(false);
         jDialogInputSiswa.setVisible(true);
+        
+        try {
+            jNomorIndukTextField1.setText(getNomorInduk((Level.Level1)jComboBoxTingkatSekolah1.getSelectedItem()));
+        } catch (SQLException ex) {
+            jNomorIndukTextField1.setText("ERROR");
+            Exceptions.printStackTrace(ex);
+        }
         dateChooserComboTanggalLahir1.setLocked(true);
         dateChooserComboTanggalMasuk1.setLocked(true);
+    }
+    
+    private String getNomorInduk(Level.Level1 l) throws SQLException{
+        String retVal ="";
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        stmt = connection.createStatement();
+        String sql;
+        String sLevel1 = l.toString();
+        switch(sLevel1){
+            case "SMA":
+                sql = "SELECT NomorInduk FROM Profil WHERE NomorInduk LIKE '%A%' ORDER BY NomorInduk DESC LIMIT 1";
+                break;
+            case "SMP":
+                sql = "SELECT NomorInduk FROM Profil WHERE NomorInduk LIKE '%P%' ORDER BY NomorInduk DESC LIMIT 1";
+                break;
+            case "SMK":
+                sql = "SELECT NomorInduk FROM Profil WHERE NomorInduk LIKE '%K%' ORDER BY NomorInduk DESC LIMIT 1";
+                break;
+            default:
+                sql = null;
+            break;
+        }
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           retVal  = rs.getString("NomorInduk");
+        }
+        if(!retVal.isEmpty()){
+        String awalan = retVal.substring(0,1);
+        
+        retVal = awalan.concat(String.format("%03d",(Integer.parseInt(retVal.substring(1))+1)));
+        }else{
+            retVal = l.toString().substring(2).concat("001");
+        }
+        return retVal;
     }
     
     private boolean validatePanel(){
@@ -1394,7 +1486,7 @@ d = StringValidators.trimString(ValidatorUtils.merge(
             ArrayList<Entry> entryOSIS = new ArrayList<>();
             ArrayList<Entry> entryPVT = new ArrayList<>();
             
-            Ini ppdbIni = new Ini(new File("lib/ini/ppdb.ini"));
+            ppdbIni = new Ini(new File("lib/ini/ppdb.ini"));
             
             switch(profilData.currentLevel.level1){
                 case SMA:
@@ -1601,7 +1693,11 @@ d = StringValidators.trimString(ValidatorUtils.merge(
    }
     
     private void autoUpdateLevel2Level3(){
-        
+        if(jComboBoxTingkatSekolah.getSelectedIndex()==0){
+            jComboBoxTingkatKelas.setSelectedIndex(0);
+        }else{
+            jComboBoxTingkatKelas.setSelectedIndex(3);
+        }
     }
 
     private void checkNomorPendaftaran() {

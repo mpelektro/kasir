@@ -9,7 +9,11 @@ import iuran.*;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.*;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -3021,6 +3025,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             Exceptions.printStackTrace(ex);
         } catch (KasirException ex) {
             Exceptions.printStackTrace(ex);
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
         }
     }//GEN-LAST:event_jButtonSubmitActionPerformed
 
@@ -4997,9 +5003,35 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             this.transactionSummary.totalAmount = totalAmount;
             Control.updateTSummary(transactionSummary);
         }
+//SMS GATEWAY PART
+/*        
+        String pesanDetail = "%20Detail%20(x1000):%20";
+        for(int i=0; i<transactionList.size();i++){
+            pesanDetail = pesanDetail.concat("%20").concat(transactionList.get(i).iuranTipe.toString()).concat("%20").concat(String.format("%1$,.0f", transactionList.get(i).amount/1000));       
+        }
+
+        try {
+            
+            URL myURL = new URL("http://smsfortunata.com/api?user=mpelektro@yahoo.com&pass=spyderco123&"
+                    + "pesan=Total%20Transaksi%20Rp.%20"+String.format("%1$,.0f", transactionSummary.totalAmount)
+                    + pesanDetail.concat("%20No.%20Transaksi%20"+String.valueOf(transactionSummary.id))
+                    + "%20-YDS%20Kosgoro-"
+                    +"&senderid=modem2&nomor="
+                    +profil.biodata.telpon1);
+            URLConnection myURLConnection = myURL.openConnection();
+            myURLConnection.connect();
+            myURLConnection.getInputStream();
+        } 
+        catch (MalformedURLException e) { 
+            System.err.println(e);
+        } 
+        catch (IOException e){   
+            System.err.println(e);
+        }
+*/
     }
 
-    private void prepareSubmitObjects() throws SQLException, KasirException {
+    private void prepareSubmitObjects() throws SQLException, KasirException, IOException {
         transactionList = new ArrayList<Transaction>();
         
         tSumUUID = UUID.randomUUID();
@@ -5039,7 +5071,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         }
         
         //PASB Part (automatic PASB)
-        if(DBSR.dbURL.equals("jdbc:mysql://ark3.dayarka.com/rusly_ppdbdb")){
+        if(appFrame.isPPDB){
             PASB pasb = Control.selectIuran(Iuran.Tipe.PASB, PASB.noIndukColName,false, profil.noInduk);
             this.pasb = pasb;
             if(pasb != null){
@@ -5323,7 +5355,6 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         this.transactionSummary = transactionSummary;
         jTextFieldTransactionSummaryNote1.setText(jTextFieldTransactionSummaryNote.getText());
         jTextFieldTSumTotalAmount.setText(String.valueOf(totalAmount));
-        
     }
     
     private TableModel buildSeragamTableModel(Profil profil) throws SQLException, KasirException{
@@ -7415,7 +7446,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         jasperParameter.put("Param_Profil_ID", profil.noInduk);
         jasperParameter.put("SUBREPORT_DIR", "C://printout//");
         jasperParameter.put("Param_TotalAmountTerbilang", totalATString);
-        
+        jasperParameter.put("Param_Is_PPDB", appFrame.isPPDB);
         
         // Tunggakan IPP
 //        jasperParameter.put("Param_Tunggakan_IPP", tunggakanIPP);

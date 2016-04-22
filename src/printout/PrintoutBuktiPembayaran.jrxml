@@ -47,6 +47,9 @@
 	<parameter name="Param_Tunggakan" class="java.lang.String"/>
 	<parameter name="Param_Tunggakan_Amount" class="java.lang.String"/>
 	<parameter name="Param_Tunggakan_Total_Amount" class="java.lang.String"/>
+	<parameter name="Param_Is_PPDB" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[false]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      TransactionSummary.`NomorInduk` AS TransactionSummary_NomorInduk,
@@ -157,13 +160,6 @@ WHERE
 				</textElement>
 				<text><![CDATA[Orang Tua / Wali]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="286" y="30" width="41" height="12" uuid="f474bc01-2515-4ed9-af45-2bb1d6c1dfa0"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[Kelas]]></text>
-			</staticText>
 			<textField pattern="">
 				<reportElement x="79" y="18" width="207" height="12" uuid="1befa59d-d770-4b86-b473-cfc6fa6c04b7"/>
 				<textElement>
@@ -176,15 +172,8 @@ WHERE
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[": ".concat($F{Profil_CurrentLevel}.split("-")[1].concat(" - ").concat($F{Profil_CurrentLevel}.split("-")[2]))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{Param_Is_PPDB}? " ":": ".concat($F{Profil_CurrentLevel}.split("-")[1].concat(" - ").concat($F{Profil_CurrentLevel}.split("-")[2]))]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="0" y="18" width="73" height="12" uuid="31b8b465-7aef-4d61-9324-b2fa08242514"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[Dari Peserta Didik]]></text>
-			</staticText>
 			<textField>
 				<reportElement x="113" y="0" width="142" height="18" uuid="3838b615-0879-4d1c-80b1-899d8d1b6e40"/>
 				<textElement textAlignment="Center">
@@ -192,13 +181,6 @@ WHERE
 				</textElement>
 				<textFieldExpression><![CDATA["BUKTI PENERIMAAN KASIR"]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="286" y="18" width="41" height="12" uuid="d77186a1-c784-47fd-9d96-3e9af07d60e3"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[No. Induk ]]></text>
-			</staticText>
 			<textField>
 				<reportElement x="327" y="18" width="50" height="12" uuid="0a87621c-cedd-4f1b-93ba-413cc7a82cd6"/>
 				<textElement>
@@ -275,6 +257,27 @@ WHERE
 					<font size="10" isUnderline="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new String("NO: ").concat(($F{TransactionSummary_ID}).toString())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="286" y="30" width="41" height="12" uuid="3cfe391a-8709-439b-b30d-5baa46c8ba4d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Param_Is_PPDB}? "":"Kelas"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="286" y="18" width="41" height="12" uuid="7d1065a6-4890-4ae7-b0cd-d832d3912650"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Param_Is_PPDB}? "No. Daftar":"No. Induk"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="18" width="73" height="12" uuid="ed1308cd-cd7c-4b2e-8ecb-98cb71f7eb52"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Param_Is_PPDB}? "Calon Peserta Didik":"Dari Peserta Didik"]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
@@ -461,7 +464,7 @@ WHERE
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_Almamater.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-                <band height="12" splitType="Prevent">
+		<band height="12" splitType="Prevent">
 			<subreport>
 				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="80967a56-3bcf-4cd7-8e62-0855833fe96d"/>
 				<subreportParameter name="Param_Beasiswa_TransactionSummary_ID">
@@ -471,7 +474,7 @@ WHERE
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_Beasiswa.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-                <band height="12" splitType="Prevent">
+		<band height="12" splitType="Prevent">
 			<subreport>
 				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="80967a56-3bcf-4cd7-8e62-0855833fe96d"/>
 				<subreportParameter name="Param_BeasiswaCost_TransactionSummary_ID">

@@ -3,6 +3,8 @@
  * and open the template in the editor.
  */
 package printout;
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 import kasir.DBSR;
@@ -15,6 +17,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
+import org.ini4j.Ini;
 import org.openide.util.Exceptions;
 
 /**
@@ -29,7 +32,18 @@ public class PenerimaanKasir {
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            String oracleURL = DBSR.dbURL;
+            String oracleURL="";
+            try{
+                Ini ppdbIni = new Ini(new File("lib/ini/ppdb.ini"));
+                if(ppdbIni.get("program", "name", String.class).equals("ppdb")){
+                     oracleURL = DBSR.dbURLppdb;
+                }else{
+                     oracleURL = DBSR.dbURL;
+                }
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+                    oracleURL = null;
+            }
             connection = DriverManager.getConnection(oracleURL,"marbun","marbun123456");
             connection.setAutoCommit(false);
         }
