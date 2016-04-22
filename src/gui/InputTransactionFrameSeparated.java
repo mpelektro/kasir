@@ -5018,29 +5018,30 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             Control.updateTSummary(transactionSummary);
         }
 //SMS GATEWAY PART
-        
-        String pesanDetail = "%20Detail%20(x1000):%20";
-        for(int i=0; i<transactionList.size();i++){
-            pesanDetail = pesanDetail.concat("%20").concat(transactionList.get(i).iuranTipe.toString()).concat("%20").concat(String.format("%1$,.0f", transactionList.get(i).amount/1000));       
-        }
+        if(appFrame.ppdbIni.get("program","sms",Boolean.class)){
+            String pesanDetail = "%20Detail%20(x1000):%20";
+            for(int i=0; i<transactionList.size();i++){
+                pesanDetail = pesanDetail.concat("%20").concat(transactionList.get(i).iuranTipe.toString()).concat("%20").concat(String.format("%1$,.0f", transactionList.get(i).amount/1000));       
+            }
 
-        try {
-            
-            URL myURL = new URL("http://smsfortunata.com/api?user=mpelektro@yahoo.com&pass=spyderco123&"
-                    + "pesan=Total%20Rp.%20"+String.format("%1$,.0f", transactionSummary.totalAmount)
-                    + pesanDetail.concat("%20No.%20"+String.valueOf(transactionSummary.id))
-                    + "%20-YDS%20Kosgoro-"
-                    +"&senderid=modem2&nomor="
-                    +profil.biodata.telpon1);
-            URLConnection myURLConnection = myURL.openConnection();
-            myURLConnection.connect();
-            myURLConnection.getInputStream();
-        } 
-        catch (MalformedURLException e) { 
-            System.err.println(e);
-        } 
-        catch (IOException e){   
-            System.err.println(e);
+            try {
+
+                URL myURL = new URL("http://smsfortunata.com/api?user=mpelektro@yahoo.com&pass=spyderco123&"
+                        + "pesan=Total%20Rp.%20"+String.format("%1$,.0f", transactionSummary.totalAmount)
+                        + pesanDetail.concat("%20No.%20"+String.valueOf(transactionSummary.id))
+                        + "%20-YDS%20Kosgoro-"
+                        +"&senderid=modem2&nomor="
+                        +profil.biodata.telpon1);
+                URLConnection myURLConnection = myURL.openConnection();
+                myURLConnection.connect();
+                myURLConnection.getInputStream();
+            } 
+            catch (MalformedURLException e) { 
+                System.err.println(e);
+            } 
+            catch (IOException e){   
+                System.err.println(e);
+            }
         }
 
     }

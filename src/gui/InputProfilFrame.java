@@ -1359,6 +1359,7 @@ Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
         jNamaTextField1.setBackground(jComboBoxTingkatSekolah.getBackground());
         jNamaTextField1.setForeground(jComboBoxTingkatSekolah.getForeground());
         try {
+            if(profil == null)
             jNomorIndukTextField1.setText(getNomorInduk((Level.Level1)jComboBoxTingkatSekolah1.getSelectedItem()));
         } catch (SQLException ex) {
             jNomorIndukTextField1.setText("ERROR");

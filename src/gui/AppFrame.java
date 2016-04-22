@@ -88,6 +88,7 @@ public class AppFrame extends javax.swing.JFrame {
     /**
      * Creates new form AppFrame
      */
+    public Ini ppdbIni;
     public AppFrame() {
         this.clerk = new Clerk();
         try {
@@ -102,7 +103,7 @@ public class AppFrame extends javax.swing.JFrame {
     
     public AppFrame(Clerk clerk){
         try{
-            Ini ppdbIni = new Ini(new File("lib/ini/ppdb.ini"));
+            ppdbIni = new Ini(new File("lib/ini/ppdb.ini"));
             if(ppdbIni.get("program", "name", String.class).equals("ppdb")){
                  isPPDB = true;
             }else{
