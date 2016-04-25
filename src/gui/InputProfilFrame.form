@@ -9,9 +9,6 @@
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[630, 800]"/>
         </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[610, 600]"/>
-        </Property>
       </Properties>
 
       <Layout>
@@ -731,11 +728,9 @@
                                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jComboBoxTingkatSekolah" pref="215" max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jNamaTextField" max="32767" attributes="0"/>
-                                          <Component id="jJenisKelaminComboBox" alignment="0" pref="215" max="32767" attributes="0"/>
-                                          <Component id="jAgamaComboBox" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="jNamaTextField" max="32767" attributes="0"/>
+                                      <Component id="jJenisKelaminComboBox" alignment="0" pref="215" max="32767" attributes="0"/>
+                                      <Component id="jAgamaComboBox" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jNomorIndukLabel" min="-2" max="-2" attributes="0"/>

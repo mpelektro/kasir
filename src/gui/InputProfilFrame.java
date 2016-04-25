@@ -1529,11 +1529,12 @@ Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
             ArrayList<Entry> entryIPP = new ArrayList<>();
             ArrayList<Entry> entryOSIS = new ArrayList<>();
             ArrayList<Entry> entryPVT = new ArrayList<>();
-            
+            IPSB ipsb = new IPSB(profilData.noInduk, profilData.currentLevel,0f,"MOS Peserta Didik Baru");
             switch(profilData.currentLevel.level1){
                 case SMA:
                     ipsp.amount = ppdbIni.get("sma", "ipsp", float.class);
                     pasb.amount = ppdbIni.get("sma", "pasb", float.class);
+                    ipsb.amount = ppdbIni.get("sma", "ipsb", float.class);
                     attribute.amount = ppdbIni.get("sma", "attribute", float.class);
                     seragam.amount = ppdbIni.get("sma", "seragam", float.class);
                     entryIKS.add(new Entry(0, ppdbIni.get("sma", "iks", float.class)));
@@ -1545,6 +1546,7 @@ Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
                 case SMP:
                     ipsp.amount = ppdbIni.get("smp", "ipsp", float.class);
                     pasb.amount = ppdbIni.get("smp", "pasb", float.class);
+                    ipsb.amount = ppdbIni.get("smp", "ipsb", float.class);
                     attribute.amount = ppdbIni.get("smp", "attribute", float.class);
                     seragam.amount = ppdbIni.get("smp", "seragam", float.class);
                     entryIKS.add(new Entry(0, ppdbIni.get("smp", "iks", float.class)));
@@ -1557,6 +1559,7 @@ Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
                 case SMK:
                     ipsp.amount = ppdbIni.get("smk", "ipsp", float.class);
                     pasb.amount = ppdbIni.get("smk", "pasb", float.class);
+                    ipsb.amount = ppdbIni.get("smk", "ipsb", float.class);
                     attribute.amount = ppdbIni.get("smk", "attribute", float.class);
                     seragam.amount = ppdbIni.get("smk", "seragam", float.class);
                     entryIKS.add(new Entry(0, ppdbIni.get("smk", "iks", float.class)));
@@ -1582,6 +1585,7 @@ Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
             iks.entries.get(0).debt = iks.entries.get(0).amount;
             ipsp.debt = ipsp.amount;
             pasb.debt = pasb.amount;
+            ipsb.debt =  ipsb.amount;
             attribute.debt = attribute.amount;
             seragam.debt = seragam.amount;
             almamater.debt = almamater.amount;
@@ -1595,6 +1599,7 @@ Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
             Control.insertIuran(Iuran.Tipe.IPP, ipp);
             Control.insertIuran(Iuran.Tipe.OSIS, osis);
             Control.insertIuran(Iuran.Tipe.Almamater, almamater);
+            Control.insertIuran(Iuran.Tipe.IPSB,ipsb);
         }
         //end autotarget iuran
     }
