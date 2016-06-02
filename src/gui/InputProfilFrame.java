@@ -1522,7 +1522,7 @@ Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
         if(clerk.jabatan.equals("pendaftaran") || ppdbIni.get("program", "name", String.class).equals("ppdb")){
             IPSP ipsp = new IPSP(profilData.noInduk, profilData.currentLevel, 0f, "IPSP");
             PASB pasb = new PASB(profilData.noInduk, profilData.currentLevel, "Administrasi PASB", 0f, "PASB");
-            Attribute attribute = new Attribute(profilData.noInduk, profilData.currentLevel, "MOPDB, Pas Photo, Kartu Pelajar, Sampul Laporan Pendidikan", 0f, "");
+            Attribute attribute = new Attribute(profilData.noInduk, profilData.currentLevel, "Pas Photo, Kartu Pelajar, Sampul Raport", 0f, "");
             Seragam seragam = new Seragam(profilData.noInduk, profilData.currentLevel, "SERAGAM", 0f, "SERAGAM");
             Almamater almamater = new Almamater(profilData.noInduk, profilData.currentLevel, "ALMAMATER", 0f, "ALMAMATER");
             ArrayList<Entry> entryIKS = new ArrayList<>();

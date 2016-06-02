@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintoutBuktiPembayaran_IPP" pageWidth="378" pageHeight="410" columnWidth="378" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="82dd9f8c-8229-4774-af0e-436a8ecbecbf">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="24"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
