@@ -47,6 +47,7 @@ import pelajar.Level;
 import pelajar.Profil;
 import printout.BuktiPembayaran;
 import printout.PenerimaanKasir;
+import printout.StatusPendaftaran;
 import sak.Kalender;
 import sak.KasirException;
 
@@ -158,6 +159,7 @@ public class AppFrame extends javax.swing.JFrame {
         jButtonSettlement = new javax.swing.JButton();
         jButtonRekapPenerimaan = new javax.swing.JButton();
         jButtonRekapPenerimaanPerKasir = new javax.swing.JButton();
+        jButtonLapStatusPendaftaran = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableInitialSearch = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -370,6 +372,18 @@ public class AppFrame extends javax.swing.JFrame {
         });
         jToolBar1.add(jButtonRekapPenerimaanPerKasir);
 
+        jButtonLapStatusPendaftaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/credit_card_16.png"))); // NOI18N
+        jButtonLapStatusPendaftaran.setText(org.openide.util.NbBundle.getMessage(AppFrame.class, "AppFrame.jButtonLapStatusPendaftaran.text")); // NOI18N
+        jButtonLapStatusPendaftaran.setFocusable(false);
+        jButtonLapStatusPendaftaran.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonLapStatusPendaftaran.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonLapStatusPendaftaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLapStatusPendaftaranActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonLapStatusPendaftaran);
+
         jTableInitialSearch.setAutoCreateRowSorter(true);
         jTableInitialSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTableInitialSearch.setModel(tableModelInitialSearch);
@@ -496,7 +510,6 @@ public class AppFrame extends javax.swing.JFrame {
 
         jToolBar2.setRollover(true);
 
-        dateChooserComboTSumS.setFormat(1);
         dateChooserComboTSumS.setWeekStyle(datechooser.view.WeekDaysStyle.FULL);
         jToolBar2.add(dateChooserComboTSumS);
 
@@ -906,6 +919,15 @@ public class AppFrame extends javax.swing.JFrame {
             Exceptions.printStackTrace(e);
         }
     }//GEN-LAST:event_jButtonRekapPenerimaanPerKasirActionPerformed
+
+    private void jButtonLapStatusPendaftaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLapStatusPendaftaranActionPerformed
+        // TODO add your handling code here:
+         try{
+            printStatusPendaftaran(this.clerk);
+        } catch (JRException | PrinterException | SQLException e){
+            Exceptions.printStackTrace(e);
+        }
+    }//GEN-LAST:event_jButtonLapStatusPendaftaranActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1453,6 +1475,49 @@ public class AppFrame extends javax.swing.JFrame {
             }
        };
        
+       // part update status DAFTAR, PROSES, LUNAS
+       
+        if(ppdbIni.get("program", "name", String.class).equals("ppdb")){
+            switch(profil.currentLevel.level1.toString()){
+                case "SMP":
+                    profil.currentLevel.level2 = profil.currentLevel.level2.TUJUH;
+                    if(totalDebt == 0){
+                        profil.statusPendaftaran = Profil.StatusPendaftaran.LUNAS;
+                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?2910000:3410000) && totalDebt > 0){
+                        profil.statusPendaftaran = Profil.StatusPendaftaran.PROSES;
+                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?2910000:3410000)){
+                        profil.statusPendaftaran = Profil.StatusPendaftaran.DAFTAR;
+                    }
+                 break;
+                case "SMA":
+                    profil.currentLevel.level2 = profil.currentLevel.level2.SEPULUH;
+                    if(totalDebt == 0){
+                        profil.statusPendaftaran = Profil.StatusPendaftaran.LUNAS;
+                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?5965000:6715000) && totalDebt > 0){
+                        profil.statusPendaftaran = Profil.StatusPendaftaran.PROSES;
+                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?5965000:6715000)){
+                        profil.statusPendaftaran = Profil.StatusPendaftaran.DAFTAR;
+                    }
+                    break;
+                case "SMK":
+                    profil.currentLevel.level2 = profil.currentLevel.level2.SEPULUH;
+                    if(totalDebt == 0){
+                        profil.statusPendaftaran = Profil.StatusPendaftaran.LUNAS;
+                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?4355000:4355000) && totalDebt > 0){
+                        profil.statusPendaftaran = Profil.StatusPendaftaran.PROSES;
+                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?4355000:4355000)){
+                        profil.statusPendaftaran = Profil.StatusPendaftaran.DAFTAR;
+                    }
+                    break;               
+            }
+       
+            if(profil.statusPendaftaran!= Profil.StatusPendaftaran.DAFTAR){
+                profil.update();
+            }
+        }
+       
+       
+       
        return tm;
        
    }
@@ -1607,6 +1672,7 @@ public class AppFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonClear;
     private javax.swing.JButton jButtonEditDeleteProfil;
     private javax.swing.JButton jButtonInsertKasir;
+    private javax.swing.JButton jButtonLapStatusPendaftaran;
     private javax.swing.JButton jButtonPrintReportKasir;
     private javax.swing.JButton jButtonRekapPenerimaan;
     private javax.swing.JButton jButtonRekapPenerimaanPerKasir;
@@ -2282,6 +2348,162 @@ public class AppFrame extends javax.swing.JFrame {
         exporter.exportReport();
                 
     }
+    
+    private void printStatusPendaftaran(Clerk cl) throws JRException, PrinterException, SQLException {
+                  
+        
+        // connection is the data source we used to fetch the data from
+        printout.StatusPendaftaran pb = new StatusPendaftaran();
+        Connection connection = pb.establishConnection(); 
+        int smpdaftar=0, smpproses=0, smplunas=0, smpbatal=0, smadaftar=0, smaproses=0, smalunas=0, smabatal=0, smkdaftar=0, smkproses=0, smklunas=0, smkbatal=0;
+        Statement stmt = null;
+        //STEP 4: Execute a query
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT COUNT(\"\") AS LADEK FROM rusly_ppdbdb.Profil WHERE CurrentLevel LIKE '%SMP%' AND StatusPendaftaran LIKE '%DAFTAR%'";
+        ResultSet rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           smpdaftar  = rs.getInt("LADEK");
+        }
+        sql = "SELECT COUNT(\"\") AS LADEK FROM rusly_ppdbdb.Profil WHERE CurrentLevel LIKE '%SMP%' AND StatusPendaftaran LIKE '%PROSES%'";
+        rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           smpproses  = rs.getInt("LADEK");
+        }                
+        sql = "SELECT COUNT(\"\") AS LADEK FROM rusly_ppdbdb.Profil WHERE CurrentLevel LIKE '%SMP%' AND StatusPendaftaran LIKE '%LUNAS%'";
+        rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           smplunas  = rs.getInt("LADEK");
+        }
+        sql = "SELECT COUNT(\"\") AS LADEK FROM rusly_ppdbdb.Profil WHERE CurrentLevel LIKE '%SMP%' AND StatusPendaftaran LIKE '%BATAL%'";
+        rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           smpbatal = rs.getInt("LADEK");
+        }  
+        //SMA
+        sql = "SELECT COUNT(\"\") AS LADEK FROM rusly_ppdbdb.Profil WHERE CurrentLevel LIKE '%SMA%' AND StatusPendaftaran LIKE '%DAFTAR%'";
+        rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           smadaftar  = rs.getInt("LADEK");
+        }
+        sql = "SELECT COUNT(\"\") AS LADEK FROM rusly_ppdbdb.Profil WHERE CurrentLevel LIKE '%SMA%' AND StatusPendaftaran LIKE '%PROSES%'";
+        rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           smaproses  = rs.getInt("LADEK");
+        }                
+        sql = "SELECT COUNT(\"\") AS LADEK FROM rusly_ppdbdb.Profil WHERE CurrentLevel LIKE '%SMA%' AND StatusPendaftaran LIKE '%LUNAS%'";
+        rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           smalunas  = rs.getInt("LADEK");
+        }
+        sql = "SELECT COUNT(\"\") AS LADEK FROM rusly_ppdbdb.Profil WHERE CurrentLevel LIKE '%SMA%' AND StatusPendaftaran LIKE '%BATAL%'";
+        rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           smabatal = rs.getInt("LADEK");
+        }
+        //SMK
+        sql = "SELECT COUNT(\"\") AS LADEK FROM rusly_ppdbdb.Profil WHERE CurrentLevel LIKE '%SMK%' AND StatusPendaftaran LIKE '%DAFTAR%'";
+        rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           smkdaftar  = rs.getInt("LADEK");
+        }
+        sql = "SELECT COUNT(\"\") AS LADEK FROM rusly_ppdbdb.Profil WHERE CurrentLevel LIKE '%SMK%' AND StatusPendaftaran LIKE '%PROSES%'";
+        rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           smkproses  = rs.getInt("LADEK");
+        }                
+        sql = "SELECT COUNT(\"\") AS LADEK FROM rusly_ppdbdb.Profil WHERE CurrentLevel LIKE '%SMK%' AND StatusPendaftaran LIKE '%LUNAS%'";
+        rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           smklunas  = rs.getInt("LADEK");
+        }
+        sql = "SELECT COUNT(\"\") AS LADEK FROM rusly_ppdbdb.Profil WHERE CurrentLevel LIKE '%SMK%' AND StatusPendaftaran LIKE '%BATAL%'";
+        rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           smkbatal = rs.getInt("LADEK");
+        }  
+        
+        
+        
+        // jasperParameter is a Hashmap contains the parameters
+        // passed from application to the jrxml layout
+        HashMap jasperParameter = new HashMap();
+        jasperParameter.put("PARAM_CLERK_ID", Long.valueOf(cl.id));
+        if(jComboBoxLevel1.getSelectedItem() != null)
+        jasperParameter.put("Param_Level", "%".concat(jComboBoxLevel1.getSelectedItem().toString()).concat("%"));
+        
+        jasperParameter.put("PARAM_SMPDAFTAR", smpdaftar);
+        jasperParameter.put("PARAM_SMPPROSES", smpproses);
+        jasperParameter.put("PARAM_SMPLUNAS", smplunas);
+        jasperParameter.put("PARAM_SMPBATAL", smpbatal);
+        jasperParameter.put("PARAM_SMADAFTAR", smadaftar);
+        jasperParameter.put("PARAM_SMAPROSES", smaproses);
+        jasperParameter.put("PARAM_SMALUNAS", smalunas);
+        jasperParameter.put("PARAM_SMABATAL", smabatal);
+        jasperParameter.put("PARAM_SMKDAFTAR", smkdaftar);
+        jasperParameter.put("PARAM_SMKPROSES", smkproses);
+        jasperParameter.put("PARAM_SMKLUNAS", smklunas);
+        jasperParameter.put("PARAM_SMKBATAL", smkbatal);
+         String fileName = "C://printout//PrintOutStatusPendaftaran.jrxml";
+            String filetoPrint = "C://printout//PrintOutStatusPendaftaran.jrprint";
+            String filetoFill = "C://printout//PrintOutStatusPendaftaran.jasper";
+            //String filePdf = "C://printout//PrintOutReportPerKasir.pdf";
+            String filePdf = "C://printout//PrintOutStatusPendaftaran.pdf";
+       JasperCompileManager.compileReportToFile(fileName);
+            
+            
+            JasperFillManager.fillReportToFile(filetoFill, jasperParameter , connection);
+            JasperPrint jp = JasperFillManager.fillReport(filetoFill, jasperParameter, connection);
+            JasperViewer.viewReport(jp, false);
+            JasperExportManager.exportReportToPdfFile(jp, filePdf);
+            JasperPrintManager.printReport(filetoPrint, true);
+            
+            
+            jasperReport = JasperCompileManager.compileReport
+        ("C://printout//PrintOutStatusPendaftaran.jrxml");
+
+        // filling report with data from data source
+
+        jasperPrint = JasperFillManager.fillReport(jasperReport,jasperParameter, connection); 
+        // exporting process
+        // 1- export to PDF
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "C://printout//PrintOutStatusPendaftaran.pdf");
+
+        // 2- export to HTML
+        JasperExportManager.exportReportToHtmlFile(jasperPrint, "C://printout//PrintOutStatusPendaftaran.html" ); 
+
+        // 3- export to Excel sheet
+        JRXlsExporter exporter = new JRXlsExporter();
+        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "C://printout//PrintOutStatusPendaftaran.xls" );
+
+        exporter.exportReport();
+    }
+    
     
     private ArrayList<Float> farmIPP(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<Float> retVal = new ArrayList();

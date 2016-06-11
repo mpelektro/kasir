@@ -506,10 +506,13 @@ public class InputTransactionIKS extends javax.swing.JFrame {
                 iksFromDB.entries.add(entry.getValue().entries.get(j));
                 //canEdit[j] = (entry.getValue().entries.get(j).transactDetailIDs.size() > 0);
                 
-                for(Long id : entry.getValue().entries.get(j).transactDetailIDs){
-                    canEdit[j] = Control.selectTDetail(TransactionDetail.Tipe.IKSTransaction, id).settled;
-                }
+//                for(Long id : entry.getValue().entries.get(j).transactDetailIDs){
+//                    canEdit[j] = Control.selectTDetail(TransactionDetail.Tipe.IKSTransaction, id).settled;
+//                }
                 
+                for(int k=0;k<1;k++){
+                    canEdit[k] = (entry.getValue().entries.get(k).debt > 0?true:false);
+                }
                 
             }
             iksFromDB.id = entry.getValue().id;
@@ -530,7 +533,7 @@ public class InputTransactionIKS extends javax.swing.JFrame {
                             return column == 2;
                         //return false;
                         }
-                        return !canEdit[row];
+                        return canEdit[row];
                     }
                     if((column == 0 && column ==1)|| column == 2){
                             //return column == 2;
