@@ -76,7 +76,11 @@ public class AppFrame extends javax.swing.JFrame {
     private ArrayList<Sumbangan> paramSumbangans;
     private ArrayList<Attribute> paramAttributes;
     private String tunggakanTotalAmount;
+    private String tunggakanAkumulasiAmount;
+    private String cicilanAkumulasi;
     public Float totalDebt;
+    public Float totalAkumulasi;
+    public Float rekomendasiCicilanAkumulasi;
     public boolean isPPDB = false;
     /* JasperReport is the object
     that holds our compiled jrxml file */
@@ -1075,7 +1079,7 @@ public class AppFrame extends javax.swing.JFrame {
                     }
                 }
                 if(temp > 0){
-                    tunggakans.add(new Tunggakan("IPP", temp, "IPP ".concat(getTahunAjaran(entry.getValue().chargedLevel.tahun))));
+                    tunggakans.add(new Tunggakan("IPP", temp, "IPP ".concat(getTahunAjaran(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
                     tunggakanIPPs.add(entry.getValue());
                 }
             }else{
@@ -1083,7 +1087,7 @@ public class AppFrame extends javax.swing.JFrame {
                     temp += entry.getValue().entries.get(i).debt;
                 }
                 if(temp > 0){
-                    tunggakans.add(new Tunggakan("IPP", temp, "IPP ".concat(getTahunAjaran(entry.getValue().chargedLevel.tahun))));
+                    tunggakans.add(new Tunggakan("IPP", temp, "IPP ".concat(getTahunAjaran(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
                     tunggakanIPPs.add(entry.getValue());
                 }
             }
@@ -1117,7 +1121,7 @@ public class AppFrame extends javax.swing.JFrame {
                     }
                 }
                 if(temp > 0){
-                    tunggakans.add(new Tunggakan("IUAP", temp, "IUAP ".concat(getTahunAjaran(entry.getValue().chargedLevel.tahun))));
+                    tunggakans.add(new Tunggakan("IUAP", temp, "IUAP ".concat(getTahunAjaran(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
                     tunggakanIUAPs.add(entry.getValue());
                 }
             }else{
@@ -1125,7 +1129,7 @@ public class AppFrame extends javax.swing.JFrame {
                     temp += entry.getValue().entries.get(i).debt;
                 }
                 if(temp > 0){
-                    tunggakans.add(new Tunggakan("IUAP", temp, "IUAP ".concat(getTahunAjaran(entry.getValue().chargedLevel.tahun))));
+                    tunggakans.add(new Tunggakan("IUAP", temp, "IUAP ".concat(getTahunAjaran(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
                     tunggakanIUAPs.add(entry.getValue());
                 }
             }
@@ -1146,7 +1150,7 @@ public class AppFrame extends javax.swing.JFrame {
        if(srmIPSP.size() > 0){
         for(Map.Entry<Long, IPSP> entry: srmIPSP.entrySet()){
             if(entry.getValue().debt > 0){
-                tunggakans.add(new Tunggakan("IPSP", entry.getValue().debt, "IPSP ".concat(String.valueOf(entry.getValue().chargedLevel.tahun))));
+                tunggakans.add(new Tunggakan("IPSP", entry.getValue().debt, "IPSP ".concat(String.valueOf(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
                 paramIPSP = entry.getValue();
             }else{
                 paramIPSP = null;
@@ -1165,7 +1169,7 @@ public class AppFrame extends javax.swing.JFrame {
        if(srmPASB.size() > 0){
         for(Map.Entry<Long, PASB> entry: srmPASB.entrySet()){
             if(entry.getValue().debt > 0){
-                tunggakans.add(new Tunggakan("PASB", entry.getValue().debt, "PASB ".concat(String.valueOf(entry.getValue().chargedLevel.tahun))));
+                tunggakans.add(new Tunggakan("PASB", entry.getValue().debt, "PASB ".concat(String.valueOf(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
                 paramPASB = entry.getValue();
             }else{
                 paramPASB = null;
@@ -1184,7 +1188,7 @@ public class AppFrame extends javax.swing.JFrame {
        if(srmIPSB.size() > 0){
         for(Map.Entry<Long, IPSB> entry: srmIPSB.entrySet()){
             if(entry.getValue().debt > 0){
-                tunggakans.add(new Tunggakan("IPSB", entry.getValue().debt, "IPSB ".concat(String.valueOf(entry.getValue().chargedLevel.tahun))));
+                tunggakans.add(new Tunggakan("IPSB", entry.getValue().debt, "IPSB ".concat(String.valueOf(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
                 paramIPSB = entry.getValue();
             }else{
                 paramIPSB = null;
@@ -1203,7 +1207,7 @@ public class AppFrame extends javax.swing.JFrame {
        if(srmIUA.size() > 0){
         for(Map.Entry<Long, IUA> entry: srmIUA.entrySet()){
             if(entry.getValue().debt > 0){
-                tunggakans.add(new Tunggakan("IUA", entry.getValue().debt, "IUA ".concat(String.valueOf(entry.getValue().chargedLevel.tahun))));
+                tunggakans.add(new Tunggakan("IUA", entry.getValue().debt, "IUA ".concat(String.valueOf(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
                 paramIUA = entry.getValue();
             }else{
                 paramIUA = null;
@@ -1222,7 +1226,7 @@ public class AppFrame extends javax.swing.JFrame {
        if(srmIKS.size() > 0){
         for(Map.Entry<Long, IKS> entry: srmIKS.entrySet()){
             if(entry.getValue().entries.get(0).debt > 0){
-                tunggakans.add(new Tunggakan("IKS", entry.getValue().entries.get(0).debt, "IKS ".concat(String.valueOf(entry.getValue().chargedLevel.tahun))));
+                tunggakans.add(new Tunggakan("IKS", entry.getValue().entries.get(0).debt, "IKS ".concat(String.valueOf(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
                 tunggakanIKSs.add(entry.getValue());
             }
            
@@ -1240,7 +1244,7 @@ public class AppFrame extends javax.swing.JFrame {
        if(srmOSIS.size() > 0){
         for(Map.Entry<Long, OSIS> entry: srmOSIS.entrySet()){
             if(entry.getValue().entries.get(0).debt > 0){
-                tunggakans.add(new Tunggakan("OSIS", entry.getValue().entries.get(0).debt, "OSIS ".concat(String.valueOf(entry.getValue().chargedLevel.tahun))));
+                tunggakans.add(new Tunggakan("OSIS", entry.getValue().entries.get(0).debt, "OSIS ".concat(String.valueOf(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
                 tunggakanOSISs.add(entry.getValue());
             }
             
@@ -1259,7 +1263,7 @@ public class AppFrame extends javax.swing.JFrame {
         for(Map.Entry<Long, IUS> entry: srmIUS.entrySet()){
             for(int i = 0; i < 12/IUS.periodInMonth; i++){
                 if(entry.getValue().entries.get(i).debt > 0){
-                    tunggakans.add(new Tunggakan("IUS", entry.getValue().entries.get(i).debt, "IUS ".concat(String.valueOf(entry.getValue().chargedLevel.tahun))));
+                    tunggakans.add(new Tunggakan("IUS", entry.getValue().entries.get(i).debt, "IUS ".concat(String.valueOf(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
                     tunggakanIUSs.add(entry.getValue());
                 }
             }
@@ -1279,7 +1283,7 @@ public class AppFrame extends javax.swing.JFrame {
         for(Map.Entry<Long, PVT> entry: srmPVT.entrySet()){
             for(int i = 0; i < 12/PVT.periodInMonth; i++){
                 if(entry.getValue().entries.get(i).debt > 0){
-                    tunggakans.add(new Tunggakan("PVT", entry.getValue().entries.get(i).debt, "PVT ".concat(String.valueOf(entry.getValue().chargedLevel.tahun))));
+                    tunggakans.add(new Tunggakan("PVT", entry.getValue().entries.get(i).debt, "PVT ".concat(String.valueOf(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
                     tunggakanPVTs.add(entry.getValue());
                 }
             }
@@ -1299,7 +1303,7 @@ public class AppFrame extends javax.swing.JFrame {
        if(srmSeragam.size() > 0){
         for(Map.Entry<Long, Seragam> entry: srmSeragam.entrySet()){
             if(entry.getValue().debt > 0){
-                tunggakans.add(new Tunggakan("Seragam", entry.getValue().debt, entry.getValue().transactName));
+                tunggakans.add(new Tunggakan("Seragam", entry.getValue().debt, entry.getValue().transactName, entry.getValue().chargedLevel.tahun));
                 paramSeragams.add(entry.getValue());
             }
             j++;
@@ -1316,7 +1320,7 @@ public class AppFrame extends javax.swing.JFrame {
        if(srmAlmamater.size() > 0){
         for(Map.Entry<Long, Almamater> entry: srmAlmamater.entrySet()){
             if(entry.getValue().debt > 0){
-                tunggakans.add(new Tunggakan("Almamater", entry.getValue().debt, entry.getValue().transactName));
+                tunggakans.add(new Tunggakan("Almamater", entry.getValue().debt, entry.getValue().transactName, entry.getValue().chargedLevel.tahun));
                 paramAlmamaters.add(entry.getValue());
             }
             j++;
@@ -1333,7 +1337,7 @@ public class AppFrame extends javax.swing.JFrame {
        if(srmAttribute.size() > 0){
         for(Map.Entry<Long, Attribute> entry: srmAttribute.entrySet()){
             if(entry.getValue().debt > 0){
-                tunggakans.add(new Tunggakan("Attribute", entry.getValue().debt, entry.getValue().transactName));
+                tunggakans.add(new Tunggakan("Attribute", entry.getValue().debt, entry.getValue().transactName, entry.getValue().chargedLevel.tahun));
                 paramAttributes.add(entry.getValue());
             }
             j++;
@@ -1350,7 +1354,7 @@ public class AppFrame extends javax.swing.JFrame {
        if(srmBuku.size() > 0){
         for(Map.Entry<Long, Buku> entry: srmBuku.entrySet()){
             if(entry.getValue().debt > 0){
-                tunggakans.add(new Tunggakan("Buku", entry.getValue().debt, entry.getValue().transactName));
+                tunggakans.add(new Tunggakan("Buku", entry.getValue().debt, entry.getValue().transactName, entry.getValue().chargedLevel.tahun));
                 paramBukus.add(entry.getValue());
             }
             j++;
@@ -1367,7 +1371,7 @@ public class AppFrame extends javax.swing.JFrame {
        if(srmILL.size() > 0){
         for(Map.Entry<Long, ILL> entry: srmILL.entrySet()){
             if(entry.getValue().debt > 0){
-                tunggakans.add(new Tunggakan("ILL", entry.getValue().debt, entry.getValue().transactName));
+                tunggakans.add(new Tunggakan("ILL", entry.getValue().debt, entry.getValue().transactName, entry.getValue().chargedLevel.tahun));
                 paramILLs.add(entry.getValue());
             }
             j++;
@@ -1384,7 +1388,7 @@ public class AppFrame extends javax.swing.JFrame {
        if(srmTabungan.size() > 0){
         for(Map.Entry<Long, Tabungan> entry: srmTabungan.entrySet()){
             if(entry.getValue().debt > 0){
-                tunggakans.add(new Tunggakan("Tabungan", entry.getValue().debt, entry.getValue().transactName));
+                tunggakans.add(new Tunggakan("Tabungan", entry.getValue().debt, entry.getValue().transactName, entry.getValue().chargedLevel.tahun));
                 paramTabungans.add(entry.getValue());
             }
             j++;
@@ -1401,7 +1405,7 @@ public class AppFrame extends javax.swing.JFrame {
        if(srmSumbangan.size() > 0){
         for(Map.Entry<Long, Sumbangan> entry: srmSumbangan.entrySet()){
             if(entry.getValue().debt > 0){
-                tunggakans.add(new Tunggakan("Sumbangan", entry.getValue().debt, entry.getValue().transactName));
+                tunggakans.add(new Tunggakan("Sumbangan", entry.getValue().debt, entry.getValue().transactName, entry.getValue().chargedLevel.tahun));
                 paramSumbangans.add(entry.getValue());
             }
             j++;
@@ -1432,7 +1436,7 @@ public class AppFrame extends javax.swing.JFrame {
                 }
                 if(temp > 0){
                     //tunggakans.add(new Tunggakan("CicilanHutang", temp, "CicilanHutang ".concat(getTahunAjaran(entry.getValue().chargedLevel.tahun))));
-                    tunggakans.set(0,new Tunggakan(tunggakans.get(0).tipeIuran, tunggakans.get(0).debt + temp, tunggakans.get(0).note));
+                    tunggakans.set(0,new Tunggakan(tunggakans.get(0).tipeIuran, tunggakans.get(0).debt + temp, tunggakans.get(0).note, tunggakans.get(0).tahun));
                     tunggakanCicilanHutangs.add(entry.getValue());
                 }
             }else{
@@ -1441,7 +1445,7 @@ public class AppFrame extends javax.swing.JFrame {
                 }
                 if(temp > 0){
                     //tunggakans.add(new Tunggakan("CicilanHutang", temp, "CicilanHutang ".concat(getTahunAjaran(entry.getValue().chargedLevel.tahun))));
-                    tunggakans.set(0,new Tunggakan(tunggakans.get(0).tipeIuran, tunggakans.get(0).debt + temp, tunggakans.get(0).note));
+                    tunggakans.set(0,new Tunggakan(tunggakans.get(0).tipeIuran, tunggakans.get(0).debt + temp, tunggakans.get(0).note, tunggakans.get(0).tahun));
                     tunggakanCicilanHutangs.add(entry.getValue());
                 }
             }
@@ -1458,15 +1462,21 @@ public class AppFrame extends javax.swing.JFrame {
        
        Object[][] data = new Object[tunggakans.size()][3];
        totalDebt= 0f;
+       totalAkumulasi = 0f;
        for(int i = 0 ; i < tunggakans.size(); i++){
            data[i][0] = getModifiedNameTipeIuran(tunggakans.get(i).tipeIuran);
            debtFTF.setValue(tunggakans.get(i).debt);
            data[i][1] = debtFTF.getText();
            data[i][2] = tunggakans.get(i).note;
            totalDebt += tunggakans.get(i).debt;
+           if(tunggakans.get(i).tahun < profil.currentLevel.tahun)
+               totalAkumulasi += tunggakans.get(i).debt;
        }
        tunggakanTotalAmount = NumberFormat.getInstance().format(totalDebt);
-       selectedProfilTotalDebt.setText("Jumlah Tunggakan \t: Rp ".concat(tunggakanTotalAmount));
+       tunggakanAkumulasiAmount = NumberFormat.getInstance().format(totalAkumulasi);
+       rekomendasiCicilanAkumulasi = totalAkumulasi / 10;
+       cicilanAkumulasi = NumberFormat.getInstance().format(rekomendasiCicilanAkumulasi);
+       selectedProfilTotalDebt.setText("Jumlah Tunggakan \t: Rp ".concat(tunggakanTotalAmount).concat("\r\n Total Akumulasi \t: Rp ").concat(tunggakanAkumulasiAmount).concat(" Rekomendasi Cicilan : Rp ").concat(cicilanAkumulasi));
        TableModel tm = new DefaultTableModel(data, columnNames){
            @Override
             public boolean isCellEditable(int row, int column) {
@@ -5229,9 +5239,11 @@ class Tunggakan{
     String tipeIuran;
     Float debt;
     String note;
-    public Tunggakan(String ti, Float d, String n){
+    int tahun;
+    public Tunggakan(String ti, Float d, String n, int t){
         tipeIuran = ti;
         debt = d;
         note = n;
+        tahun = t;
     }
 }

@@ -511,8 +511,11 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
 
         jLabelNote5.setText(org.openide.util.NbBundle.getMessage(InputBeasiswaFrame.class, "InputBeasiswaFrame.jLabelNote5.text")); // NOI18N
 
+        jTextAreaBeasiswaCostNote.setEditable(false);
         jTextAreaBeasiswaCostNote.setColumns(20);
         jTextAreaBeasiswaCostNote.setRows(5);
+        jTextAreaBeasiswaCostNote.setText(org.openide.util.NbBundle.getMessage(InputBeasiswaFrame.class, "InputBeasiswaFrame.jTextAreaBeasiswaCostNote.text")); // NOI18N
+        jTextAreaBeasiswaCostNote.setToolTipText(org.openide.util.NbBundle.getMessage(InputBeasiswaFrame.class, "InputBeasiswaFrame.jTextAreaBeasiswaCostNote.toolTipText")); // NOI18N
         jScrollPane11.setViewportView(jTextAreaBeasiswaCostNote);
 
         jLabelAmount10.setText(org.openide.util.NbBundle.getMessage(InputBeasiswaFrame.class, "InputBeasiswaFrame.jLabelAmount10.text")); // NOI18N
@@ -936,7 +939,8 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
             BeasiswaCost beasiswaCost = new BeasiswaCost(profil.noInduk, profil.currentLevel, jTextFieldBeasiswaCostTransactionName.getText(), Float.valueOf(jTextFieldBeasiswaCostAmount.getText()), jTextAreaBeasiswaCostNote.getText());
             checkBeasiswaCostRecordsThenInsertOrUpdate(beasiswaCost);
             totalAmount += Float.valueOf(jTextFieldBeasiswaCostAmount.getText());
-            tSumNote = tSumNote.concat(" "+jTextAreaBeasiswaCostNote.getText());    
+            tSumNote = jTextAreaBeasiswaCostNote.getText();
+//            tSumNote = tSumNote.concat(" "+jTextAreaBeasiswaCostNote.getText());    
             beasiswaCostTDetail = new BeasiswaCostTransactionDetail(tSumUUID, beasiswaCost.id, this.clerk.id, 0L, profil.noInduk, profil.currentLevel.level1
                         , Float.valueOf(jTextFieldBeasiswaCostAmount.getText()), TransactionDetail.PaymentMethod.CASH, jTextAreaBeasiswaCostNote.getText());
         }

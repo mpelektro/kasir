@@ -79,7 +79,7 @@ AND BeasiswaCostTransaction.`Amount` > 0]]>
 				<textElement>
 					<font size="8" isBold="false"/>
 				</textElement>
-				<text><![CDATA[BeasiswaCost]]></text>
+				<text><![CDATA[Bea YDS]]></text>
 			</staticText>
 		</band>
 	</detail>
