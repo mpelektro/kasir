@@ -1514,7 +1514,12 @@ Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
                 , (pelajar.Level.Level2)jComboBoxTingkatKelas1.getSelectedItem()
                 , (pelajar.Level.Level3)jComboBoxTingkatSubKelas1.getSelectedItem()
                 , dateChooserComboTanggalMasuk1.getSelectedDate().get(Calendar.YEAR));
+        
         Profil profilData = new Profil(jNomorIndukTextField1.getText(), level, biodata, new sak.Kalender(dateChooserComboTanggalMasuk1.getSelectedDate().getTime()), null, new sak.Kalender(Calendar.getInstance().getTime()));
+        sak.Kalender gel2 = new sak.Kalender();
+        gel2.set(2016, 5, 22, 0, 0, 0);
+        if(dateChooserComboTanggalMasuk1.getSelectedDate().after(gel2))
+            profilData.gelombang = pelajar.Profil.Gelombang.GELOMBANG_2;
         Control.insertProfil(profilData);
         
         
@@ -1533,6 +1538,8 @@ Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
             switch(profilData.currentLevel.level1){
                 case SMA:
                     ipsp.amount = ppdbIni.get("sma", "ipsp", float.class);
+                    if(profilData.gelombang == pelajar.Profil.Gelombang.GELOMBANG_2)
+                        ipsp.amount += 750000f;
                     pasb.amount = ppdbIni.get("sma", "pasb", float.class);
                     ipsb.amount = ppdbIni.get("sma", "ipsb", float.class);
                     attribute.amount = ppdbIni.get("sma", "attribute", float.class);
@@ -1545,6 +1552,8 @@ Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
                     break;
                 case SMP:
                     ipsp.amount = ppdbIni.get("smp", "ipsp", float.class);
+                    if(profilData.gelombang == pelajar.Profil.Gelombang.GELOMBANG_2)
+                        ipsp.amount += 500000f;
                     pasb.amount = ppdbIni.get("smp", "pasb", float.class);
                     ipsb.amount = ppdbIni.get("smp", "ipsb", float.class);
                     attribute.amount = ppdbIni.get("smp", "attribute", float.class);
