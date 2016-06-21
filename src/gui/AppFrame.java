@@ -2360,14 +2360,25 @@ public class AppFrame extends javax.swing.JFrame {
     }
     
     private void printStatusPendaftaran(Clerk cl) throws JRException, PrinterException, SQLException {
-                  
-        
+        ArrayList<Profil> smpProfils = new ArrayList();
+        ArrayList<Profil> smaProfils = new ArrayList();     
+        ArrayList<Profil> smkProfils = new ArrayList();     
+        try {
+            smpProfils = Profil.selectS("SMP-7-1-2016");
+            smaProfils = Profil.selectS("SMA-10-1-2016");
+            smkProfils = Profil.selectS("SMK-10-1-2016");
+        } catch (KasirException ex) {
+            Exceptions.printStackTrace(ex);
+        }
         // connection is the data source we used to fetch the data from
         printout.StatusPendaftaran pb = new StatusPendaftaran();
         Connection connection = pb.establishConnection(); 
         int smpdaftar=0, smpproses=0, smplunas=0, smpbatal=0, smadaftar=0, smaproses=0, smalunas=0, smabatal=0, smkdaftar=0, smkproses=0, smklunas=0, smkbatal=0;
+        int smpdaftar1=0, smpproses1=0, smplunas1=0, smpbatal1=0, smadaftar1=0, smaproses1=0, smalunas1=0, smabatal1=0, smkdaftar1=0, smkproses1=0, smklunas1=0, smkbatal1=0;
+        int smpdaftar2=0, smpproses2=0, smplunas2=0, smpbatal2=0, smadaftar2=0, smaproses2=0, smalunas2=0, smabatal2=0, smkdaftar2=0, smkproses2=0, smklunas2=0, smkbatal2=0;
         Statement stmt = null;
         //STEP 4: Execute a query
+        /*
         stmt = connection.createStatement();
         String sql;
         sql = "SELECT COUNT(\"\") AS LADEK FROM rusly_ppdbdb.Profil WHERE CurrentLevel LIKE '%SMP%' AND StatusPendaftaran LIKE '%DAFTAR%'";
@@ -2457,8 +2468,93 @@ public class AppFrame extends javax.swing.JFrame {
            smkbatal = rs.getInt("LADEK");
         }  
         
+        */
+        
+        //Using Marbun's Legacy
+        for(int i = 0 ; i < smpProfils.size() ; i++){
+            if(smpProfils.get(i).gelombang == Profil.Gelombang.GELOMBANG_1){
+                if(smpProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.DAFTAR){
+                    smpdaftar1++;
+                }else if(smpProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.PROSES){
+                    smpproses1++;
+                }else if(smpProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.LUNAS){
+                    smplunas1++;
+                }else if(smpProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.BATAL){
+                    smpbatal1++;
+                }
+            }else if (smpProfils.get(i).gelombang == Profil.Gelombang.GELOMBANG_2){
+                if(smpProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.DAFTAR){
+                    smpdaftar2++;
+                }else if(smpProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.PROSES){
+                    smpproses2++;
+                }else if(smpProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.LUNAS){
+                    smplunas2++;
+                }else if(smpProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.BATAL){
+                    smpbatal2++;
+                }
+            }
+        }
+        smpdaftar = smpdaftar1 + smpdaftar2;
+        smpproses = smpproses1 + smpproses2;
+        smplunas = smplunas1 + smplunas2;
+        smpbatal = smpbatal1 + smpbatal2;
+        
+        for(int i = 0 ; i < smaProfils.size() ; i++){
+            if(smaProfils.get(i).gelombang == Profil.Gelombang.GELOMBANG_1){
+                if(smaProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.DAFTAR){
+                    smadaftar1++;
+                }else if(smaProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.PROSES){
+                    smaproses1++;
+                }else if(smaProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.LUNAS){
+                    smalunas1++;
+                }else if(smaProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.BATAL){
+                    smabatal1++;
+                }
+            }else if (smaProfils.get(i).gelombang == Profil.Gelombang.GELOMBANG_2){
+                if(smaProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.DAFTAR){
+                    smadaftar2++;
+                }else if(smaProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.PROSES){
+                    smaproses2++;
+                }else if(smaProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.LUNAS){
+                    smalunas2++;
+                }else if(smaProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.BATAL){
+                    smabatal2++;
+                }
+            }
+        }
+        smadaftar = smadaftar1 + smadaftar2;
+        smaproses = smaproses1 + smaproses2;
+        smalunas = smalunas1 + smalunas2;
+        smabatal = smabatal1 + smabatal2;
         
         
+        for(int i = 0 ; i < smkProfils.size() ; i++){
+            if(smkProfils.get(i).gelombang == Profil.Gelombang.GELOMBANG_1){
+                if(smkProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.DAFTAR){
+                    smkdaftar1++;
+                }else if(smkProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.PROSES){
+                    smkproses1++;
+                }else if(smkProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.LUNAS){
+                    smklunas1++;
+                }else if(smkProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.BATAL){
+                    smkbatal1++;
+                }
+            }else if (smkProfils.get(i).gelombang == Profil.Gelombang.GELOMBANG_2){
+                if(smkProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.DAFTAR){
+                    smkdaftar2++;
+                }else if(smkProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.PROSES){
+                    smkproses2++;
+                }else if(smkProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.LUNAS){
+                    smklunas2++;
+                }else if(smkProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.BATAL){
+                    smkbatal2++;
+                }
+            }
+        }
+        smkdaftar = smkdaftar1 + smkdaftar2;
+        smkproses = smkproses1 + smkproses2;
+        smklunas = smklunas1 + smklunas2;
+        smkbatal = smkbatal1 + smkbatal2;
         // jasperParameter is a Hashmap contains the parameters
         // passed from application to the jrxml layout
         HashMap jasperParameter = new HashMap();
@@ -2478,6 +2574,33 @@ public class AppFrame extends javax.swing.JFrame {
         jasperParameter.put("PARAM_SMKPROSES", smkproses);
         jasperParameter.put("PARAM_SMKLUNAS", smklunas);
         jasperParameter.put("PARAM_SMKBATAL", smkbatal);
+        
+        jasperParameter.put("PARAM_SMPDAFTAR_1", smpdaftar1);
+        jasperParameter.put("PARAM_SMPPROSES_1", smpproses1);
+        jasperParameter.put("PARAM_SMPLUNAS_1", smplunas1);
+        jasperParameter.put("PARAM_SMPBATAL_1", smpbatal1);
+        jasperParameter.put("PARAM_SMADAFTAR_1", smadaftar1);
+        jasperParameter.put("PARAM_SMAPROSES_1", smaproses1);
+        jasperParameter.put("PARAM_SMALUNAS_1", smalunas1);
+        jasperParameter.put("PARAM_SMABATAL_1", smabatal1);
+        jasperParameter.put("PARAM_SMKDAFTAR_1", smkdaftar1);
+        jasperParameter.put("PARAM_SMKPROSES_1", smkproses1);
+        jasperParameter.put("PARAM_SMKLUNAS_1", smklunas1);
+        jasperParameter.put("PARAM_SMKBATAL_1", smkbatal1);
+        
+        jasperParameter.put("PARAM_SMPDAFTAR_2", smpdaftar2);
+        jasperParameter.put("PARAM_SMPPROSES_2", smpproses2);
+        jasperParameter.put("PARAM_SMPLUNAS_2", smplunas2);
+        jasperParameter.put("PARAM_SMPBATAL_2", smpbatal2);
+        jasperParameter.put("PARAM_SMADAFTAR_2", smadaftar2);
+        jasperParameter.put("PARAM_SMAPROSES_2", smaproses2);
+        jasperParameter.put("PARAM_SMALUNAS_2", smalunas2);
+        jasperParameter.put("PARAM_SMABATAL_2", smabatal2);
+        jasperParameter.put("PARAM_SMKDAFTAR_2", smkdaftar2);
+        jasperParameter.put("PARAM_SMKPROSES_2", smkproses2);
+        jasperParameter.put("PARAM_SMKLUNAS_2", smklunas2);
+        jasperParameter.put("PARAM_SMKBATAL_2", smkbatal2);
+        
          String fileName = "C://printout//PrintOutStatusPendaftaran.jrxml";
             String filetoPrint = "C://printout//PrintOutStatusPendaftaran.jrprint";
             String filetoFill = "C://printout//PrintOutStatusPendaftaran.jasper";

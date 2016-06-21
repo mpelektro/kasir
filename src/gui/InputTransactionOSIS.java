@@ -506,10 +506,12 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
                 osisFromDB.entries.add(entry.getValue().entries.get(j));
                 //canEdit[j] = (entry.getValue().entries.get(j).transactDetailIDs.size() > 0);
                 
-                for(Long id : entry.getValue().entries.get(j).transactDetailIDs){
-                    canEdit[j] = Control.selectTDetail(TransactionDetail.Tipe.OSISTransaction, id).settled;
+//                for(Long id : entry.getValue().entries.get(j).transactDetailIDs){
+//                    canEdit[j] = Control.selectTDetail(TransactionDetail.Tipe.OSISTransaction, id).settled;
+//                }
+                for(int k=0;k<1;k++){
+                    canEdit[k] = (entry.getValue().entries.get(k).debt > 0?true:false);
                 }
-                
                 
             }
             osisFromDB.id = entry.getValue().id;
@@ -530,7 +532,7 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
                             return column == 2;
                         //return false;
                         }
-                        return !canEdit[row];
+                        return canEdit[row];
                     }
                     if((column == 0 && column ==1)|| column == 2){
                             //return column == 2;
