@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutDetailStatusPendaftaran" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4b3b8c3e-04f9-4af7-aa5f-7fa2df8ad442">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="New Dataset 1" uuid="eca91c84-67f5-4ef2-add7-ea267aedfeb4">
+		<parameter name="Param_StatusPendaftaran1" class="java.lang.String">
+			<defaultValueExpression><![CDATA["LUNAS"]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     Profil.`NomorInduk` AS profil_NomorInduk,
+     Profil.`Nama` AS profil_Nama,
+     Profil.`AsalSekolah` AS profil_AsalSekolah,
+     Profil.`TanggalLahir` AS profil_TanggalLahir,
+     Profil.`TempatLahir` AS profil_TempatLahir,
+     Profil.`Alamat` AS profil_Alamat,
+     Profil.`NamaAyah` AS profil_NamaAyah,
+     Profil.`NamaIbu` AS profil_NamaIbu,
+     Profil.`Telpon1` AS profil_Telpon1,
+     Profil.`CurrentLevel` AS profil_CurrentLevel,
+     Profil.`TanggalMasuk` AS profil_TanggalMasuk,
+     Profil.`Gelombang` AS profil_Gelombang,
+     Profil.`StatusPendaftaran` AS profil_StatusPendaftaran,
+     Profil.`JenisKelamin` AS profil_JenisKelamin,
+     Profil.`Agama` AS profil_Agama
+FROM
+     `profil` Profil
+WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
+]]>
+		</queryString>
+		<field name="profil_NomorInduk" class="java.lang.String"/>
+		<field name="profil_Nama" class="java.lang.String"/>
+		<field name="profil_AsalSekolah" class="java.lang.String"/>
+		<field name="profil_TanggalLahir" class="java.sql.Date"/>
+		<field name="profil_TempatLahir" class="java.lang.String"/>
+		<field name="profil_Alamat" class="java.lang.String"/>
+		<field name="profil_NamaAyah" class="java.lang.String"/>
+		<field name="profil_NamaIbu" class="java.lang.String"/>
+		<field name="profil_Telpon1" class="java.lang.String"/>
+		<field name="profil_CurrentLevel" class="java.lang.String"/>
+		<field name="profil_TanggalMasuk" class="java.sql.Date"/>
+		<field name="profil_Gelombang" class="java.lang.String"/>
+		<field name="profil_StatusPendaftaran" class="java.lang.String"/>
+		<field name="profil_JenisKelamin" class="java.lang.String"/>
+		<field name="profil_Agama" class="java.lang.String"/>
+		<group name="profil_CurrentLevel" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+			<groupExpression><![CDATA[$F{profil_CurrentLevel}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="Param_StatusPendaftaran0" class="java.lang.String">
+		<defaultValueExpression><![CDATA["LUNAS"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select 1 from dual]]>
+	</queryString>
+	<field name="1" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<detail>
+		<band height="233" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="0" y="0" width="802" height="233" uuid="389d77c4-7a95-4160-9bcc-fea78099ca98"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="New Dataset 1" uuid="396ca5a6-7442-4053-a7fe-db96959a659e">
+						<datasetParameter name="Param_StatusPendaftaran1">
+							<datasetParameterExpression><![CDATA[$P{Param_StatusPendaftaran0}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="36" uuid="1af95cd8-cda5-4477-a378-fec98f58fc27">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:groupFooter groupName="profil_CurrentLevel">
+							<jr:cell height="30" rowSpan="1"/>
+						</jr:groupFooter>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="36" height="30" uuid="d446e9d2-5fd7-4867-b16b-5bd5d116f8ef"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[No]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="3" width="36" height="20" uuid="d5f7d620-a2d3-4f3e-b968-3f42f938d751"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{profil_NomorInduk}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="085765dc-8916-4726-8c79-4ce2c2d2c90c">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:groupFooter groupName="profil_CurrentLevel">
+							<jr:cell height="30" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="90" height="30" uuid="f43cbea1-3f18-43d7-986a-08d72ee5b00d"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="14"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Jumlah ".concat($F{profil_CurrentLevel}.substring(0,3))]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="ea1b2ebf-271e-44eb-b6e5-d7a8da3c4211"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Nama]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="3" width="90" height="20" uuid="e06eca51-2e11-43d6-a833-13bc86f0ae9f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{profil_Nama}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="6e16f6c8-11d5-4458-ab93-f990aee0b3ed">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:groupFooter groupName="profil_CurrentLevel">
+							<jr:cell height="30" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="90" height="30" uuid="6b18bfcb-5cb1-42a9-9169-0f70339e8581"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="14"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{profil_CurrentLevel_COUNT}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="3e6d4563-f4f5-4ff4-a50e-c5212cb520df"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Asal Sekolah]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="3" width="90" height="20" uuid="9addbf7a-57f8-41d8-91ca-8c1b2d23361e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{profil_AsalSekolah}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="48" uuid="92a17ee7-5b40-43dc-a6fa-ce1b07de5bb2">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="48" height="30" uuid="59b6496a-048d-4b5e-9ce8-1b7148dca769"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Tanggal Lahir]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
+							<textField pattern="d/M/yyyy">
+								<reportElement x="0" y="3" width="48" height="20" uuid="1fe6decc-bca5-4611-b9c6-d7ac5d9396ee"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{profil_TanggalLahir}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="44b28ac6-49d8-406e-bf15-954a6d0ee297">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="04f67cbf-5f7e-4a48-97fd-1612f112206a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Alamat]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement stretchType="RelativeToBandHeight" x="0" y="3" width="90" height="20" isPrintWhenDetailOverflows="true" uuid="98fc55a5-8c0e-415e-b935-79aca00ccb5b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{profil_Alamat}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="d711f27c-0591-4250-b0fe-4214b7391045">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="564dd949-2a19-4a8e-b5b8-e12e0b957f4c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Nama Ayah]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="3" width="90" height="20" uuid="1d13b822-ce39-41cd-9096-0a81d851277c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{profil_NamaAyah}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="6bbbbb10-0069-4713-bb6b-37439296b9eb">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="d06e69ca-b7c5-47ba-8cf7-c31a9eb43050"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Nama Ibu]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="3" width="90" height="20" uuid="b0d40243-2cb9-4cc1-b54f-d4d3b075ea85"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{profil_NamaIbu}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="f857d51f-0697-4459-ab61-1c80cbb5e47b">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="f96645ef-121a-4d95-8c96-49b5ae51c31f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Telepon]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="3" width="90" height="20" uuid="d6197c62-6548-4384-9423-fb587ef98c88"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{profil_Telpon1}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="48" uuid="46d53dd8-51da-4a96-af8e-0829b1879de3">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="48" height="30" uuid="33bdb710-b8a8-4b09-ac5f-f2d29b51d415"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Tanggal Masuk]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
+							<textField pattern="d/M/yyyy">
+								<reportElement x="0" y="3" width="48" height="20" uuid="8f6e035c-63b2-44f1-b420-dd0f4288c9be"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{profil_TanggalMasuk}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="36" uuid="8034ab93-8a3e-426d-9b84-b20959196ff9">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="36" height="30" uuid="1fd98404-88c1-4088-b6c3-e2d66ed1ab13"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Gel]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="3" width="36" height="20" uuid="92d7b1cb-17c9-4ac9-b3c5-eacbdca66874"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{profil_Gelombang}.substring(10)]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="62" uuid="a258300b-45c8-4d5f-88a0-59bc9a3fc065">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="62" height="30" uuid="6ba5a2b4-9028-4bf4-8ae7-79e8017a916d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Status Pendaftaran]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="3" width="62" height="20" uuid="7fc9eb17-ffff-4ba9-9493-88efd96e3446"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{profil_StatusPendaftaran}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

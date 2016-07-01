@@ -1241,7 +1241,7 @@ Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
 
     private void jComboBoxTingkatSekolahPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBoxTingkatSekolahPropertyChange
         // TODO add your handling code here:
-        jComboBoxTingkatKelas.setSelectedItem(Level.Level2.TUJUH);
+       // jComboBoxTingkatKelas.setSelectedItem(Level.Level2.TUJUH);
         
     }//GEN-LAST:event_jComboBoxTingkatSekolahPropertyChange
 
