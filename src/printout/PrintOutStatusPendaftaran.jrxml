@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutStatusPendaftaran" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9db5e482-264e-45d2-ad9a-1d50079e39cc">
 	<property name="ireport.zoom" value="1.1000000000000034"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="334"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -695,12 +695,17 @@ WHERE Clerk.`ID` = $P{PARAM_CLERK_ID}]]>
 				<text><![CDATA[Diprint oleh: ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="66" y="5" width="277" height="20" uuid="7fdd37d2-dd6e-4df0-bd9b-14301bc0e098"/>
+				<reportElement x="66" y="5" width="188" height="20" uuid="7fdd37d2-dd6e-4df0-bd9b-14301bc0e098"/>
 				<textFieldExpression><![CDATA[$F{Clerk_Nama}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="3" width="555" height="1" uuid="cba15189-f2f8-44b9-b28a-60a793d8dd35"/>
 			</line>
+			<textField pattern="dd/MMM/yyyy HH:mm:ss">
+				<reportElement x="392" y="5" width="163" height="20" uuid="36be2b7f-7af7-4bdc-b585-1b1ae70e5665"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

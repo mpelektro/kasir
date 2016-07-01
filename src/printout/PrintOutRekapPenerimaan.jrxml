@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutRekapPenerimaan" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="794" leftMargin="20" rightMargin="28" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="a2535970-65f6-460b-8218-d34f0b2d6b5f">
 	<property name="ireport.zoom" value="1.331000000000002"/>
-	<property name="ireport.x" value="174"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="255"/>
+	<property name="ireport.y" value="254"/>
 	<parameter name="PARAM_IPPSMP7" class="java.lang.Float" isForPrompting="false"/>
 	<parameter name="PARAM_IPPSMP8" class="java.lang.Float" isForPrompting="false"/>
 	<parameter name="PARAM_IPPSMP9" class="java.lang.Float" isForPrompting="false"/>
@@ -818,7 +818,7 @@ WHERE
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[Cicilan Hut]]></text>
+				<text><![CDATA[IDD]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="380" width="84" height="20" uuid="c82e35f4-73fa-498f-bfd3-3214fab22568"/>
@@ -830,9 +830,9 @@ WHERE
 			<staticText>
 				<reportElement x="0" y="400" width="84" height="20" uuid="d3296673-684f-464e-8ee3-13dc0c31725e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10"/>
+					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[IDD]]></text>
+				<text><![CDATA[Jumlah]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="419" width="795" height="1" uuid="e39af0c8-814f-4791-ab56-f8477498307f"/>
@@ -2990,126 +2990,6 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_TabunganSMKPASCA}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="84" y="360" width="48" height="20" uuid="2ee3e12a-a58c-4937-ae88-06ff1d05380d"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-					<paragraph rightIndent="1"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMP7}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="131" y="360" width="48" height="20" uuid="ae597471-36a9-4312-963f-5002b5916852"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-					<paragraph rightIndent="1"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMP8}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="179" y="360" width="48" height="20" uuid="558541e3-bf10-41c2-9b00-b1eae09ed63d"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-					<paragraph rightIndent="1"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMP9}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="227" y="360" width="48" height="20" uuid="9f50e5a5-cf12-4fb4-b888-1f5b0495a423"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-					<paragraph rightIndent="1"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMPTOTAL}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="275" y="360" width="48" height="20" uuid="f1dd971b-2b66-4118-bf26-0fd64dde05b8"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-					<paragraph rightIndent="1"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMPPASCA}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="323" y="360" width="48" height="20" uuid="dad08889-057b-4b0f-b9a5-988402cb8b43"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-					<paragraph rightIndent="1"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMA10}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="371" y="360" width="48" height="20" uuid="611689fb-005f-48c9-8beb-26cc42144a54"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-					<paragraph rightIndent="1"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMA11}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="419" y="360" width="48" height="20" uuid="c2b20ec4-eeb5-4c15-a5f7-4277863bd815"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-					<paragraph rightIndent="1"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMA12}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="467" y="360" width="48" height="20" uuid="99743af8-3f69-4d15-81bd-a165b98362a8"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-					<paragraph rightIndent="1"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMATOTAL}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="515" y="360" width="48" height="20" uuid="5abfda1e-a38a-4c19-bda1-b74e1630349d"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-					<paragraph rightIndent="1"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMAPASCA}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="563" y="360" width="48" height="20" uuid="360c44d8-d3ed-42dd-9c73-76373fad1576"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-					<paragraph rightIndent="1"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMK10}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="611" y="360" width="48" height="20" uuid="3b29b967-d6d3-45bb-aa14-eef8fdafd01b"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-					<paragraph rightIndent="1"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMK11}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="659" y="360" width="48" height="20" uuid="b49c78cb-ab96-4094-be57-567cc613c24c"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-					<paragraph rightIndent="1"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMK12}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="707" y="360" width="48" height="20" uuid="d1c175c8-8e39-456e-9e41-f249d5f55987"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-					<paragraph rightIndent="1"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMKTOTAL}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="755" y="360" width="40" height="20" uuid="941939fd-1bf2-421b-a576-3e43f1661a3a"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-					<paragraph rightIndent="1"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMKPASCA}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="84" y="380" width="48" height="20" uuid="2ee3e12a-a58c-4937-ae88-06ff1d05380d"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
@@ -3230,7 +3110,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_IPSSMKPASCA}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="84" y="400" width="48" height="20" uuid="2ee3e12a-a58c-4937-ae88-06ff1d05380d"/>
+				<reportElement x="84" y="360" width="48" height="20" uuid="2ee3e12a-a58c-4937-ae88-06ff1d05380d"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3238,7 +3118,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_IDDSMP7}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="131" y="400" width="48" height="20" uuid="ae597471-36a9-4312-963f-5002b5916852"/>
+				<reportElement x="131" y="360" width="48" height="20" uuid="ae597471-36a9-4312-963f-5002b5916852"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3246,7 +3126,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_IDDSMP8}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="179" y="400" width="48" height="20" uuid="558541e3-bf10-41c2-9b00-b1eae09ed63d"/>
+				<reportElement x="179" y="360" width="48" height="20" uuid="558541e3-bf10-41c2-9b00-b1eae09ed63d"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3254,7 +3134,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_IDDSMP9}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="227" y="400" width="48" height="20" uuid="9f50e5a5-cf12-4fb4-b888-1f5b0495a423"/>
+				<reportElement x="227" y="360" width="48" height="20" uuid="9f50e5a5-cf12-4fb4-b888-1f5b0495a423"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3262,7 +3142,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_IDDSMPTOTAL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="275" y="400" width="48" height="20" uuid="f1dd971b-2b66-4118-bf26-0fd64dde05b8"/>
+				<reportElement x="275" y="360" width="48" height="20" uuid="f1dd971b-2b66-4118-bf26-0fd64dde05b8"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3270,7 +3150,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_IDDSMPPASCA}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="323" y="400" width="48" height="20" uuid="dad08889-057b-4b0f-b9a5-988402cb8b43"/>
+				<reportElement x="323" y="360" width="48" height="20" uuid="dad08889-057b-4b0f-b9a5-988402cb8b43"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3278,7 +3158,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_IDDSMA10}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="371" y="400" width="48" height="20" uuid="611689fb-005f-48c9-8beb-26cc42144a54"/>
+				<reportElement x="371" y="360" width="48" height="20" uuid="611689fb-005f-48c9-8beb-26cc42144a54"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3286,7 +3166,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_IDDSMA11}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="419" y="400" width="48" height="20" uuid="c2b20ec4-eeb5-4c15-a5f7-4277863bd815"/>
+				<reportElement x="419" y="360" width="48" height="20" uuid="c2b20ec4-eeb5-4c15-a5f7-4277863bd815"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3294,7 +3174,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_IDDSMA12}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="467" y="400" width="48" height="20" uuid="99743af8-3f69-4d15-81bd-a165b98362a8"/>
+				<reportElement x="467" y="360" width="48" height="20" uuid="99743af8-3f69-4d15-81bd-a165b98362a8"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3302,7 +3182,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_IDDSMATOTAL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="515" y="400" width="48" height="20" uuid="5abfda1e-a38a-4c19-bda1-b74e1630349d"/>
+				<reportElement x="515" y="360" width="48" height="20" uuid="5abfda1e-a38a-4c19-bda1-b74e1630349d"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3310,7 +3190,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_IDDSMAPASCA}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="563" y="400" width="48" height="20" uuid="360c44d8-d3ed-42dd-9c73-76373fad1576"/>
+				<reportElement x="563" y="360" width="48" height="20" uuid="360c44d8-d3ed-42dd-9c73-76373fad1576"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3318,7 +3198,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_IDDSMK10}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="611" y="400" width="48" height="20" uuid="3b29b967-d6d3-45bb-aa14-eef8fdafd01b"/>
+				<reportElement x="611" y="360" width="48" height="20" uuid="3b29b967-d6d3-45bb-aa14-eef8fdafd01b"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3326,7 +3206,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_IDDSMK11}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="659" y="400" width="48" height="20" uuid="b49c78cb-ab96-4094-be57-567cc613c24c"/>
+				<reportElement x="659" y="360" width="48" height="20" uuid="b49c78cb-ab96-4094-be57-567cc613c24c"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3334,7 +3214,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_IDDSMK12}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="707" y="400" width="48" height="20" uuid="d1c175c8-8e39-456e-9e41-f249d5f55987"/>
+				<reportElement x="707" y="360" width="48" height="20" uuid="d1c175c8-8e39-456e-9e41-f249d5f55987"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3342,13 +3222,139 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_IDDSMKTOTAL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="755" y="400" width="40" height="20" uuid="941939fd-1bf2-421b-a576-3e43f1661a3a"/>
+				<reportElement x="755" y="360" width="40" height="20" uuid="941939fd-1bf2-421b-a576-3e43f1661a3a"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph rightIndent="1"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PARAM_IDDSMKPASCA}]]></textFieldExpression>
 			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="84" y="400" width="48" height="20" uuid="2ee3e12a-a58c-4937-ae88-06ff1d05380d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMP7}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="131" y="400" width="48" height="20" uuid="ae597471-36a9-4312-963f-5002b5916852"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMP8}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="179" y="400" width="48" height="20" uuid="558541e3-bf10-41c2-9b00-b1eae09ed63d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMP9}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="227" y="400" width="48" height="20" uuid="9f50e5a5-cf12-4fb4-b888-1f5b0495a423"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMPTOTAL}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="275" y="400" width="48" height="20" uuid="f1dd971b-2b66-4118-bf26-0fd64dde05b8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMPPASCA}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="323" y="400" width="48" height="20" uuid="dad08889-057b-4b0f-b9a5-988402cb8b43"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMA10}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="371" y="400" width="48" height="20" uuid="611689fb-005f-48c9-8beb-26cc42144a54"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMA11}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="419" y="400" width="48" height="20" uuid="c2b20ec4-eeb5-4c15-a5f7-4277863bd815"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMA12}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="467" y="400" width="48" height="20" uuid="99743af8-3f69-4d15-81bd-a165b98362a8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMATOTAL}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="515" y="400" width="48" height="20" uuid="5abfda1e-a38a-4c19-bda1-b74e1630349d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMAPASCA}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="563" y="400" width="48" height="20" uuid="400c44d8-d3ed-42dd-9c73-76373fad1576"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMK10}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="611" y="400" width="48" height="20" uuid="3b29b967-d6d3-45bb-aa14-eef8fdafd01b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMK11}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="659" y="400" width="48" height="20" uuid="b49c78cb-ab96-4094-be57-567cc613c24c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMK12}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="707" y="400" width="48" height="20" uuid="d1c175c8-8e39-456e-9e41-f249d5f55987"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMKTOTAL}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="755" y="400" width="40" height="20" uuid="941939fd-1bf2-421b-a576-3e43f1661a3a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_CicilanHutangSMKPASCA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="399" width="796" height="1" uuid="c8cee37f-39e3-4640-b286-65fad0b89641"/>
+				<graphicElement>
+					<pen lineWidth="1.5" lineStyle="Double"/>
+				</graphicElement>
+			</line>
 		</band>
 	</detail>
 	<summary>

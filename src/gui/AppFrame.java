@@ -1961,6 +1961,13 @@ public class AppFrame extends javax.swing.JFrame {
         List<Float> paramSumbangan = farmSumbangan(startDate,endDate,clerk);
         List<Float> paramTabungan = farmTabungan(startDate,endDate,clerk);
         
+        //paramCicilanHutang jadi Jumlah
+        for(int i = 0 ; i < 14; i++){
+            paramCicilanHutang.set(i, paramIPP.get(i)+paramAlmamater.get(i)+paramAttribute.get(i)+paramBeasiswa.get(i)+paramBeasiswaCost.get(i)+paramBuku.get(i)
+            +paramIDD.get(i)+paramIKS.get(i)+paramILL.get(i)+paramIPS.get(i)+paramIPSB.get(i)+paramIPSP.get(i)+paramIUA.get(i)+paramIUAP.get(i)+paramIUS.get(i)
+            +paramOSIS.get(i)+paramPASB.get(i)+paramPVT.get(i)+paramSeragam.get(i)+paramSumbangan.get(i)+paramTabungan.get(i));
+        }
+        
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection();
         // jasperParameter is a Hashmap contains the parameters
