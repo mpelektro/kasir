@@ -11,6 +11,7 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -1938,34 +1939,34 @@ public class AppFrame extends javax.swing.JFrame {
         endDate.set(Kalender.HOUR_OF_DAY, 23);
         endDate.set(Kalender.MINUTE, 59);
         endDate.set(Kalender.SECOND, 59);
-        List<Float> paramIPP = farmIPP(startDate,endDate,clerk);
-        List<Float> paramAlmamater = farmAlmamater(startDate,endDate,clerk);
-        List<Float> paramAttribute = farmAttribute(startDate,endDate,clerk);
-        List<Float> paramBeasiswa = farmBeasiswa(startDate,endDate,clerk);
-        List<Float> paramBeasiswaCost = farmBeasiswaCost(startDate,endDate,clerk);
-        List<Float> paramBuku = farmBuku(startDate,endDate,clerk);
-        List<Float> paramCicilanHutang = farmCicilanHutang(startDate,endDate,clerk);
-        List<Float> paramIDD = farmIDD(startDate,endDate,clerk);
-        List<Float> paramIKS = farmIKS(startDate,endDate,clerk);
-        List<Float> paramILL = farmILL(startDate,endDate,clerk);
-        List<Float> paramIPS = farmIPS(startDate,endDate,clerk);
-        List<Float> paramIPSB = farmIPSB(startDate,endDate,clerk);
-        List<Float> paramIPSP = farmIPSP(startDate,endDate,clerk);
-        List<Float> paramIUA = farmIUA(startDate,endDate,clerk);
-        List<Float> paramIUAP = farmIUAP(startDate,endDate,clerk);
-        List<Float> paramIUS = farmIUS(startDate,endDate,clerk);
-        List<Float> paramOSIS = farmOSIS(startDate,endDate,clerk);
-        List<Float> paramPASB = farmPASB(startDate,endDate,clerk);
-        List<Float> paramPVT = farmPVT(startDate,endDate,clerk);
-        List<Float> paramSeragam = farmSeragam(startDate,endDate,clerk);
-        List<Float> paramSumbangan = farmSumbangan(startDate,endDate,clerk);
-        List<Float> paramTabungan = farmTabungan(startDate,endDate,clerk);
+        List<BigDecimal> paramIPP = farmIPP(startDate,endDate,clerk);
+        List<BigDecimal> paramAlmamater = farmAlmamater(startDate,endDate,clerk);
+        List<BigDecimal> paramAttribute = farmAttribute(startDate,endDate,clerk);
+        List<BigDecimal> paramBeasiswa = farmBeasiswa(startDate,endDate,clerk);
+        List<BigDecimal> paramBeasiswaCost = farmBeasiswaCost(startDate,endDate,clerk);
+        List<BigDecimal> paramBuku = farmBuku(startDate,endDate,clerk);
+        List<BigDecimal> paramCicilanHutang = farmCicilanHutang(startDate,endDate,clerk);
+        List<BigDecimal> paramIDD = farmIDD(startDate,endDate,clerk);
+        List<BigDecimal> paramIKS = farmIKS(startDate,endDate,clerk);
+        List<BigDecimal> paramILL = farmILL(startDate,endDate,clerk);
+        List<BigDecimal> paramIPS = farmIPS(startDate,endDate,clerk);
+        List<BigDecimal> paramIPSB = farmIPSB(startDate,endDate,clerk);
+        List<BigDecimal> paramIPSP = farmIPSP(startDate,endDate,clerk);
+        List<BigDecimal> paramIUA = farmIUA(startDate,endDate,clerk);
+        List<BigDecimal> paramIUAP = farmIUAP(startDate,endDate,clerk);
+        List<BigDecimal> paramIUS = farmIUS(startDate,endDate,clerk);
+        List<BigDecimal> paramOSIS = farmOSIS(startDate,endDate,clerk);
+        List<BigDecimal> paramPASB = farmPASB(startDate,endDate,clerk);
+        List<BigDecimal> paramPVT = farmPVT(startDate,endDate,clerk);
+        List<BigDecimal> paramSeragam = farmSeragam(startDate,endDate,clerk);
+        List<BigDecimal> paramSumbangan = farmSumbangan(startDate,endDate,clerk);
+        List<BigDecimal> paramTabungan = farmTabungan(startDate,endDate,clerk);
         
         //paramCicilanHutang jadi Jumlah
         for(int i = 0 ; i < 14; i++){
-            paramCicilanHutang.set(i, paramIPP.get(i)+paramAlmamater.get(i)+paramAttribute.get(i)+paramBeasiswa.get(i)+paramBeasiswaCost.get(i)+paramBuku.get(i)
-            +paramIDD.get(i)+paramIKS.get(i)+paramILL.get(i)+paramIPS.get(i)+paramIPSB.get(i)+paramIPSP.get(i)+paramIUA.get(i)+paramIUAP.get(i)+paramIUS.get(i)
-            +paramOSIS.get(i)+paramPASB.get(i)+paramPVT.get(i)+paramSeragam.get(i)+paramSumbangan.get(i)+paramTabungan.get(i));
+            paramCicilanHutang.set(i, paramIPP.get(i).add(paramAlmamater.get(i)).add(paramAttribute.get(i)).add(paramBeasiswa.get(i)).add(paramBeasiswaCost.get(i)).add(paramBuku.get(i)
+            ).add(paramIDD.get(i)).add(paramIKS.get(i)).add(paramILL.get(i)).add(paramIPS.get(i)).add(paramIPSB.get(i)).add(paramIPSP.get(i)).add(paramIUA.get(i)).add(paramIUAP.get(i)).add(paramIUS.get(i)
+            ).add(paramOSIS.get(i)).add(paramPASB.get(i)).add(paramPVT.get(i)).add(paramSeragam.get(i)).add(paramSumbangan.get(i)).add(paramTabungan.get(i)));
         }
         
         printout.PenerimaanKasir pb = new PenerimaanKasir();
@@ -2645,22 +2646,22 @@ public class AppFrame extends javax.swing.JFrame {
     }
     
     
-    private ArrayList<Float> farmIPP(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmIPP(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
        
         List<TransactionDetail> ippTransactionDetails = new ArrayList<>();
         Statement stmt = null;
@@ -2687,13 +2688,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += ippTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(ippTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += ippTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(ippTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += ippTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(ippTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -2702,13 +2703,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += ippTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(ippTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += ippTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(ippTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += ippTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(ippTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -2717,13 +2718,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += ippTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(ippTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += ippTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(ippTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += ippTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(ippTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -2735,13 +2736,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  ippTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(ippTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  ippTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(ippTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  ippTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(ippTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -2754,37 +2755,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
     }
     
-    private ArrayList<Float> farmAlmamater(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmAlmamater(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
         List<TransactionDetail> almamaterTransactionDetails = new ArrayList<>();
         
         Statement stmt = null;
@@ -2810,13 +2811,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += almamaterTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(almamaterTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += almamaterTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(almamaterTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += almamaterTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(almamaterTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -2825,13 +2826,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += almamaterTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(almamaterTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += almamaterTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(almamaterTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += almamaterTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(almamaterTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -2840,13 +2841,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += almamaterTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(almamaterTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += almamaterTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(almamaterTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += almamaterTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(almamaterTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -2858,13 +2859,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  almamaterTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(almamaterTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  almamaterTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(almamaterTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  almamaterTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(almamaterTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -2877,37 +2878,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
       }
     
-    private ArrayList<Float> farmAttribute(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmAttribute(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
         List<TransactionDetail> attributeTransactionDetails = new ArrayList<>();
         
         Statement stmt = null;
@@ -2933,13 +2934,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += attributeTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(attributeTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += attributeTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(attributeTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += attributeTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(attributeTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -2948,13 +2949,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += attributeTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(attributeTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += attributeTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(attributeTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += attributeTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(attributeTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -2963,13 +2964,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += attributeTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(attributeTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += attributeTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(attributeTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += attributeTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(attributeTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -2981,13 +2982,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  attributeTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(attributeTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  attributeTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(attributeTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  attributeTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(attributeTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -3000,37 +3001,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
       }
     
-    private ArrayList<Float> farmBeasiswa(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmBeasiswa(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
         List<TransactionDetail> beasiswaTransactionDetails = new ArrayList<>();
         
         Statement stmt = null;
@@ -3056,13 +3057,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += beasiswaTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(beasiswaTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += beasiswaTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(beasiswaTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += beasiswaTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(beasiswaTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3071,13 +3072,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += beasiswaTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(beasiswaTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += beasiswaTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(beasiswaTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += beasiswaTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(beasiswaTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3086,13 +3087,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += beasiswaTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(beasiswaTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += beasiswaTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(beasiswaTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += beasiswaTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(beasiswaTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3104,13 +3105,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  beasiswaTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(beasiswaTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  beasiswaTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(beasiswaTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  beasiswaTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(beasiswaTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -3123,37 +3124,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
       }
     
-    private ArrayList<Float> farmBeasiswaCost(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmBeasiswaCost(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
         List<TransactionDetail> beasiswacostTransactionDetails = new ArrayList<>();
         
         Statement stmt = null;
@@ -3179,13 +3180,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += beasiswacostTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(beasiswacostTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += beasiswacostTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(beasiswacostTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += beasiswacostTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(beasiswacostTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3194,13 +3195,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += beasiswacostTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(beasiswacostTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += beasiswacostTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(beasiswacostTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += beasiswacostTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(beasiswacostTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3209,13 +3210,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += beasiswacostTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(beasiswacostTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += beasiswacostTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(beasiswacostTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += beasiswacostTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(beasiswacostTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3227,13 +3228,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  beasiswacostTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(beasiswacostTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  beasiswacostTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(beasiswacostTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  beasiswacostTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(beasiswacostTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -3246,37 +3247,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
       }
     
-    private ArrayList<Float> farmBuku(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmBuku(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
         List<TransactionDetail> bukuTransactionDetails = new ArrayList<>();
         
         Statement stmt = null;
@@ -3302,13 +3303,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += bukuTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(bukuTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += bukuTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(bukuTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += bukuTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(bukuTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3317,13 +3318,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += bukuTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(bukuTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += bukuTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(bukuTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += bukuTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(bukuTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3332,13 +3333,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += bukuTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(bukuTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += bukuTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(bukuTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += bukuTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(bukuTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3350,13 +3351,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  bukuTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(bukuTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  bukuTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(bukuTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  bukuTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(bukuTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -3369,37 +3370,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
       }
     
-    private ArrayList<Float> farmCicilanHutang(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmCicilanHutang(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
         List<TransactionDetail> cicilanhutangTransactionDetails = new ArrayList<>();
         
         Statement stmt = null;
@@ -3425,13 +3426,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += cicilanhutangTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += cicilanhutangTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += cicilanhutangTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3440,13 +3441,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += cicilanhutangTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += cicilanhutangTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += cicilanhutangTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3455,13 +3456,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += cicilanhutangTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += cicilanhutangTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += cicilanhutangTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3473,13 +3474,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  cicilanhutangTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  cicilanhutangTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  cicilanhutangTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -3492,37 +3493,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
       }
     
-    private ArrayList<Float> farmIDD(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmIDD(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
        
         List<TransactionDetail> iddTransactionDetails = new ArrayList<>();
         Statement stmt = null;
@@ -3549,13 +3550,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += iddTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(iddTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += iddTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(iddTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += iddTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(iddTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3564,13 +3565,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += iddTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(iddTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += iddTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(iddTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += iddTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(iddTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3579,13 +3580,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += iddTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(iddTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += iddTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(iddTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += iddTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(iddTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3597,13 +3598,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  iddTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(iddTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  iddTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(iddTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  iddTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(iddTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -3616,37 +3617,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
     }
 
-    private ArrayList<Float> farmIKS(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmIKS(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
        
         List<TransactionDetail> iksTransactionDetails = new ArrayList<>();
         Statement stmt = null;
@@ -3673,13 +3674,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += iksTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(iksTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += iksTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(iksTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += iksTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(iksTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3688,13 +3689,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += iksTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(iksTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += iksTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(iksTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += iksTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(iksTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3703,13 +3704,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += iksTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(iksTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += iksTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(iksTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += iksTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(iksTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3721,13 +3722,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  iksTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(iksTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  iksTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(iksTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  iksTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(iksTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -3740,37 +3741,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
     }
 
-    private ArrayList<Float> farmILL(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmILL(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
        
         List<TransactionDetail> illTransactionDetails = new ArrayList<>();
         Statement stmt = null;
@@ -3797,13 +3798,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += illTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(illTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += illTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(illTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += illTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(illTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3812,13 +3813,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += illTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(illTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += illTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(illTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += illTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(illTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3827,13 +3828,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += illTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(illTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += illTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(illTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += illTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(illTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3845,13 +3846,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  illTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(illTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  illTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(illTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  illTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(illTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -3864,37 +3865,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
     }
 
-    private ArrayList<Float> farmIPS(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmIPS(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
        
         List<TransactionDetail> ipsTransactionDetails = new ArrayList<>();
         Statement stmt = null;
@@ -3921,13 +3922,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += ipsTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(ipsTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += ipsTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(ipsTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += ipsTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(ipsTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3936,13 +3937,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += ipsTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(ipsTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += ipsTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(ipsTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += ipsTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(ipsTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3951,13 +3952,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += ipsTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(ipsTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += ipsTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(ipsTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += ipsTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(ipsTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -3969,13 +3970,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  ipsTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(ipsTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  ipsTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(ipsTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  ipsTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(ipsTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -3988,37 +3989,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
     }
 
-    private ArrayList<Float> farmIPSB(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmIPSB(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
        
         List<TransactionDetail> ipsbTransactionDetails = new ArrayList<>();
         Statement stmt = null;
@@ -4045,13 +4046,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += ipsbTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(ipsbTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += ipsbTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(ipsbTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += ipsbTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(ipsbTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4060,13 +4061,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += ipsbTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(ipsbTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += ipsbTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(ipsbTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += ipsbTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(ipsbTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4075,13 +4076,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += ipsbTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(ipsbTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += ipsbTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(ipsbTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += ipsbTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(ipsbTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4093,13 +4094,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  ipsbTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(ipsbTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  ipsbTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(ipsbTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  ipsbTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(ipsbTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -4112,37 +4113,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
     }
 
-    private ArrayList<Float> farmIPSP(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmIPSP(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
        
         List<TransactionDetail> ipspTransactionDetails = new ArrayList<>();
         Statement stmt = null;
@@ -4169,13 +4170,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += ipspTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(ipspTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += ipspTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(ipspTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += ipspTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(ipspTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4184,13 +4185,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += ipspTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(ipspTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += ipspTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(ipspTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += ipspTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(ipspTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4199,13 +4200,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += ipspTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(ipspTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += ipspTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(ipspTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += ipspTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(ipspTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4217,13 +4218,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  ipspTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(ipspTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  ipspTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(ipspTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  ipspTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(ipspTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -4236,37 +4237,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
     }
     
-    private ArrayList<Float> farmIUA(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmIUA(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
        
         List<TransactionDetail> iuaTransactionDetails = new ArrayList<>();
         Statement stmt = null;
@@ -4293,13 +4294,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += iuaTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(iuaTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += iuaTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(iuaTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += iuaTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(iuaTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4308,13 +4309,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += iuaTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(iuaTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += iuaTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(iuaTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += iuaTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(iuaTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4323,13 +4324,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += iuaTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(iuaTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += iuaTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(iuaTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += iuaTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(iuaTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4341,13 +4342,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  iuaTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(iuaTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  iuaTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(iuaTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  iuaTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(iuaTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -4360,37 +4361,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
     }
 
-    private ArrayList<Float> farmIUAP(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmIUAP(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
        
         List<TransactionDetail> iuapTransactionDetails = new ArrayList<>();
         Statement stmt = null;
@@ -4417,13 +4418,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += iuapTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(iuapTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += iuapTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(iuapTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += iuapTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(iuapTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4432,13 +4433,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += iuapTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(iuapTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += iuapTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(iuapTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += iuapTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(iuapTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4447,13 +4448,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += iuapTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(iuapTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += iuapTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(iuapTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += iuapTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(iuapTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4465,13 +4466,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  iuapTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(iuapTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  iuapTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(iuapTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  iuapTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(iuapTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -4484,37 +4485,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
     }
 
-    private ArrayList<Float> farmIUS(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmIUS(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
        
         List<TransactionDetail> iusTransactionDetails = new ArrayList<>();
         Statement stmt = null;
@@ -4541,13 +4542,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += iusTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(iusTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += iusTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(iusTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += iusTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(iusTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4556,13 +4557,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += iusTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(iusTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += iusTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(iusTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += iusTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(iusTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4571,13 +4572,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += iusTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(iusTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += iusTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(iusTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += iusTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(iusTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4589,13 +4590,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  iusTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(iusTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  iusTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(iusTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  iusTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(iusTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -4608,37 +4609,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
     }
     
-    private ArrayList<Float> farmOSIS(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmOSIS(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
        
         List<TransactionDetail> osisTransactionDetails = new ArrayList<>();
         Statement stmt = null;
@@ -4665,13 +4666,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += osisTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(osisTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += osisTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(osisTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += osisTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(osisTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4680,13 +4681,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += osisTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(osisTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += osisTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(osisTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += osisTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(osisTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4695,13 +4696,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += osisTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(osisTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += osisTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(osisTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += osisTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(osisTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4713,13 +4714,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  osisTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(osisTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  osisTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(osisTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  osisTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(osisTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -4732,37 +4733,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
     }
     
-    private ArrayList<Float> farmPASB(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmPASB(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
        
         List<TransactionDetail> pasbTransactionDetails = new ArrayList<>();
         Statement stmt = null;
@@ -4789,13 +4790,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += pasbTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(pasbTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += pasbTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(pasbTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += pasbTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(pasbTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4804,13 +4805,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += pasbTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(pasbTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += pasbTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(pasbTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += pasbTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(pasbTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4819,13 +4820,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += pasbTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(pasbTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += pasbTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(pasbTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += pasbTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(pasbTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4837,13 +4838,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  pasbTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(pasbTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  pasbTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(pasbTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  pasbTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(pasbTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -4856,37 +4857,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
     }
 
-    private ArrayList<Float> farmPVT(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmPVT(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
        
         List<TransactionDetail> pvtTransactionDetails = new ArrayList<>();
         Statement stmt = null;
@@ -4913,13 +4914,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += pvtTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(pvtTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += pvtTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(pvtTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += pvtTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(pvtTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4928,13 +4929,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += pvtTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(pvtTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += pvtTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(pvtTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += pvtTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(pvtTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4943,13 +4944,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += pvtTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(pvtTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += pvtTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(pvtTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += pvtTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(pvtTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4961,13 +4962,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  pvtTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(pvtTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  pvtTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(pvtTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  pvtTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(pvtTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -4980,37 +4981,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
     }
 
-    private ArrayList<Float> farmSeragam(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmSeragam(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
         List<TransactionDetail> seragamTransactionDetails = new ArrayList<>();
         
         Statement stmt = null;
@@ -5036,13 +5037,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += seragamTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(seragamTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += seragamTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(seragamTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += seragamTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(seragamTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -5051,13 +5052,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += seragamTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(seragamTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += seragamTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(seragamTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += seragamTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(seragamTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -5066,13 +5067,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += seragamTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(seragamTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += seragamTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(seragamTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += seragamTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(seragamTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -5084,13 +5085,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  seragamTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(seragamTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  seragamTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(seragamTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  seragamTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(seragamTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -5103,37 +5104,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
       }
 
-    private ArrayList<Float> farmSumbangan(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmSumbangan(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
         List<TransactionDetail> sumbanganTransactionDetails = new ArrayList<>();
         
         Statement stmt = null;
@@ -5159,13 +5160,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += sumbanganTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(sumbanganTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += sumbanganTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(sumbanganTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += sumbanganTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(sumbanganTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -5174,13 +5175,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += sumbanganTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(sumbanganTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += sumbanganTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(sumbanganTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += sumbanganTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(sumbanganTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -5189,13 +5190,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += sumbanganTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(sumbanganTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += sumbanganTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(sumbanganTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += sumbanganTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(sumbanganTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -5207,13 +5208,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  sumbanganTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(sumbanganTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  sumbanganTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(sumbanganTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  sumbanganTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(sumbanganTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -5226,37 +5227,37 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
       }
 
-    private ArrayList<Float> farmTabungan(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
-        ArrayList<Float> retVal = new ArrayList();
+    private ArrayList<BigDecimal> farmTabungan(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+        ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
-        Float amountSMA10=0f;
-        Float amountSMA11=0f;
-        Float amountSMA12=0f;
-        Float amountSMK10=0f;
-        Float amountSMK11=0f;
-        Float amountSMK12=0f;
-        Float amountSMP7=0f;
-        Float amountSMP8=0f;
-        Float amountSMP9=0f;
-        Float amountSMAPasca=0f;
-        Float amountSMKPasca=0f;
-        Float amountSMPPasca=0f;
+        BigDecimal amountSMA10=BigDecimal.ZERO;
+        BigDecimal amountSMA11=BigDecimal.ZERO;
+        BigDecimal amountSMA12=BigDecimal.ZERO;
+        BigDecimal amountSMK10=BigDecimal.ZERO;
+        BigDecimal amountSMK11=BigDecimal.ZERO;
+        BigDecimal amountSMK12=BigDecimal.ZERO;
+        BigDecimal amountSMP7=BigDecimal.ZERO;
+        BigDecimal amountSMP8=BigDecimal.ZERO;
+        BigDecimal amountSMP9=BigDecimal.ZERO;
+        BigDecimal amountSMAPasca=BigDecimal.ZERO;
+        BigDecimal amountSMKPasca=BigDecimal.ZERO;
+        BigDecimal amountSMPPasca=BigDecimal.ZERO;
         List<TransactionDetail> tabunganTransactionDetails = new ArrayList<>();
         
         Statement stmt = null;
@@ -5282,13 +5283,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 += tabunganTransactionDetails.get(i).amount;
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(tabunganTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 += tabunganTransactionDetails.get(i).amount;
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(tabunganTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12 += tabunganTransactionDetails.get(i).amount;
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(tabunganTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -5297,13 +5298,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 += tabunganTransactionDetails.get(i).amount;
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(tabunganTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 += tabunganTransactionDetails.get(i).amount;
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(tabunganTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 += tabunganTransactionDetails.get(i).amount;
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(tabunganTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -5312,13 +5313,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 += tabunganTransactionDetails.get(i).amount;
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(tabunganTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 += tabunganTransactionDetails.get(i).amount;
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(tabunganTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 += tabunganTransactionDetails.get(i).amount;
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(tabunganTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -5330,13 +5331,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca +=  tabunganTransactionDetails.get(i).amount;
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(tabunganTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca +=  tabunganTransactionDetails.get(i).amount;
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(tabunganTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca +=  tabunganTransactionDetails.get(i).amount;
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(tabunganTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;
@@ -5349,17 +5350,17 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMP7);
           retVal.add(amountSMP8);
           retVal.add(amountSMP9);
-          retVal.add(amountSMP7+amountSMP8+amountSMP9);
+          retVal.add(amountSMP7.add(amountSMP8.add(amountSMP9)));
           retVal.add(amountSMPPasca);
           retVal.add(amountSMA10);
           retVal.add(amountSMA11);
           retVal.add(amountSMA12);
-          retVal.add(amountSMA10+amountSMA11+amountSMA12);
+          retVal.add(amountSMA10.add(amountSMA11.add(amountSMA12)));
           retVal.add(amountSMAPasca);
           retVal.add(amountSMK10);
           retVal.add(amountSMK11);
           retVal.add(amountSMK12);
-          retVal.add(amountSMK10+amountSMK11+amountSMK12);
+          retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
           return retVal;
       }
