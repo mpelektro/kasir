@@ -856,10 +856,17 @@ public class AppFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             profil = Control.selectProfil(jTableInitialSearch.getValueAt(jTableInitialSearch.getSelectedRow(),0).toString());
+            tableModelTunggakanProfil = buildTunggakanProfilTableModel(profil);
+            jTableTunggakanProfil.setModel(tableModelTunggakanProfil);
+            selectedProfileName.setText(profil.biodata.nama);
+            tableModelTSum = buildTSumTableModel(profil);
+            jTableTSum.setModel(tableModelTSum);
         } catch (SQLException ex) {
             Exceptions.printStackTrace(ex);
+            JOptionPane.showMessageDialog(rootPane, "Connection to database error!\r\n".concat(ex.toString()));
         } catch (KasirException ex) {
             Exceptions.printStackTrace(ex);
+            JOptionPane.showMessageDialog(rootPane, "Login Invalid!\r\n".concat(ex.toString()));
         }
     }//GEN-LAST:event_jTableInitialSearchKeyReleased
 
@@ -1089,6 +1096,14 @@ public class AppFrame extends javax.swing.JFrame {
    }
    
    public TableModel buildTunggakanProfilTableModel(Profil profil) throws SQLException, KasirException{
+       if(profil.statusPendaftaran.equals(profil.statusPendaftaran.BATAL)){
+           jButtonTransaksi.setEnabled(false);
+           jButtonBatal.setEnabled(false);
+       }else{
+           jButtonTransaksi.setEnabled(true);
+           jButtonBatal.setEnabled(true);
+       }
+       
        String columnNames[] = {"Nama Iuran", "Jumlah Tunggakan", "Catatan"};
        Set<Profil> setProfil = new HashSet<>();
        setProfil.add(profil);
@@ -2686,9 +2701,9 @@ public class AppFrame extends javax.swing.JFrame {
         jasperParameter.put("PARAM_SMPISI", smpisi);
         jasperParameter.put("PARAM_SMAISI", smaisi);
         jasperParameter.put("PARAM_SMKISI", smkisi);
-        jasperParameter.put("PARAM_KURSISMP", (smprombel*smpisi)-smpproses-smplunas+smpbatal);
-        jasperParameter.put("PARAM_KURSISMA", (smarombel*smaisi)-smaproses-smalunas+smabatal);
-        jasperParameter.put("PARAM_KURSISMK", (smkrombel*smkisi)-smkproses-smklunas+smkbatal);
+        jasperParameter.put("PARAM_KURSISMP", (smprombel*smpisi)-smpproses-smplunas);
+        jasperParameter.put("PARAM_KURSISMA", (smarombel*smaisi)-smaproses-smalunas);
+        jasperParameter.put("PARAM_KURSISMK", (smkrombel*smkisi)-smkproses-smklunas);
         
          String fileName = "C://printout//PrintOutStatusPendaftaran.jrxml";
             String filetoPrint = "C://printout//PrintOutStatusPendaftaran.jrprint";

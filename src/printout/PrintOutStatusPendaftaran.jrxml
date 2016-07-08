@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutStatusPendaftaran" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9db5e482-264e-45d2-ad9a-1d50079e39cc">
 	<property name="ireport.zoom" value="1.3310000000000062"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="506"/>
+	<property name="ireport.y" value="26"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -428,20 +428,6 @@ WHERE Clerk.`ID` = $P{PARAM_CLERK_ID}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{ProsesLunasSMP}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="4" y="150" width="96" height="18" uuid="bb9b75bc-654e-4deb-8659-97d5ef372382"/>
-				<textElement>
-					<font size="13"/>
-				</textElement>
-				<text><![CDATA[Batal]]></text>
-			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement x="101" y="150" width="148" height="18" forecolor="#0000FF" uuid="d93581f6-3a16-463a-beb5-ed91324d2bda"/>
-				<textElement textAlignment="Right">
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_SMPBATAL}]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="307" y="114" width="36" height="18" forecolor="#666666" uuid="40768e45-8aa1-4427-b955-7d1351518312"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -476,13 +462,6 @@ WHERE Clerk.`ID` = $P{PARAM_CLERK_ID}]]>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{KapasitasSMA}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="254" y="150" width="148" height="18" forecolor="#666666" uuid="7f63bdc4-c5c1-4a0d-970b-fe72bfc5de54"/>
-				<textElement textAlignment="Right">
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_SMABATAL}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="290" y="114" width="17" height="18" forecolor="#666666" uuid="dea2d876-bd83-4178-9b15-f4dbaeb0d4f7"/>
@@ -532,13 +511,6 @@ WHERE Clerk.`ID` = $P{PARAM_CLERK_ID}]]>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{KapasitasSMK}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="406" y="150" width="147" height="18" forecolor="#000000" uuid="231b7101-af13-4b3e-aa16-b4fcd69f59db"/>
-				<textElement textAlignment="Right">
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{PARAM_SMKBATAL}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="442" y="114" width="17" height="18" forecolor="#000000" uuid="95bc21d8-1c57-4d30-9af8-4f5b5100412a"/>
