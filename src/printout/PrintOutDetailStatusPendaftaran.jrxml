@@ -66,8 +66,7 @@
      Profil.`Agama` AS profil_Agama
 FROM
      `profil` Profil
-WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
-]]>
+WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}]]>
 		</queryString>
 		<field name="profil_NomorInduk" class="java.lang.String"/>
 		<field name="profil_Nama" class="java.lang.String"/>
@@ -91,6 +90,7 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 	<parameter name="Param_StatusPendaftaran0" class="java.lang.String">
 		<defaultValueExpression><![CDATA["LUNAS"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="Param_ClerkName" class="java.lang.String" isForPrompting="false"/>
 	<queryString>
 		<![CDATA[select 1 from dual]]>
 	</queryString>
@@ -99,12 +99,20 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="56" uuid="739f4d27-419d-4600-8c50-000dae89adb6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="36"/>
+				</textElement>
+				<text><![CDATA[Detail Status Pendaftaran]]></text>
+			</staticText>
+		</band>
 	</title>
 	<detail>
-		<band height="233" splitType="Stretch">
+		<band height="91" splitType="Stretch">
 			<componentElement>
-				<reportElement key="table 1" style="table 1" x="0" y="0" width="802" height="233" uuid="389d77c4-7a95-4160-9bcc-fea78099ca98"/>
+				<reportElement key="table 1" style="table 1" x="0" y="0" width="802" height="90" uuid="389d77c4-7a95-4160-9bcc-fea78099ca98"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="New Dataset 1" uuid="396ca5a6-7442-4053-a7fe-db96959a659e">
 						<datasetParameter name="Param_StatusPendaftaran1">
@@ -113,8 +121,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
 					<jr:column width="36" uuid="1af95cd8-cda5-4477-a378-fec98f58fc27">
-						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
-						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
 						<jr:groupFooter groupName="profil_CurrentLevel">
 							<jr:cell height="30" rowSpan="1"/>
 						</jr:groupFooter>
@@ -125,7 +131,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 								<text><![CDATA[No]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="3" width="36" height="20" uuid="d5f7d620-a2d3-4f3e-b968-3f42f938d751"/>
@@ -135,8 +140,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90" uuid="085765dc-8916-4726-8c79-4ce2c2d2c90c">
-						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
-						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
 						<jr:groupFooter groupName="profil_CurrentLevel">
 							<jr:cell height="30" rowSpan="1">
 								<textField>
@@ -155,7 +158,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 								<text><![CDATA[Nama]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="3" width="90" height="20" uuid="e06eca51-2e11-43d6-a833-13bc86f0ae9f"/>
@@ -165,8 +167,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90" uuid="6e16f6c8-11d5-4458-ab93-f990aee0b3ed">
-						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
-						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
 						<jr:groupFooter groupName="profil_CurrentLevel">
 							<jr:cell height="30" rowSpan="1">
 								<textField>
@@ -185,7 +185,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 								<text><![CDATA[Asal Sekolah]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="3" width="90" height="20" uuid="9addbf7a-57f8-41d8-91ca-8c1b2d23361e"/>
@@ -195,8 +194,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="48" uuid="92a17ee7-5b40-43dc-a6fa-ce1b07de5bb2">
-						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
-						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="48" height="30" uuid="59b6496a-048d-4b5e-9ce8-1b7148dca769"/>
@@ -204,7 +201,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 								<text><![CDATA[Tanggal Lahir]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
 							<textField pattern="d/M/yyyy">
 								<reportElement x="0" y="3" width="48" height="20" uuid="1fe6decc-bca5-4611-b9c6-d7ac5d9396ee"/>
@@ -214,8 +210,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90" uuid="44b28ac6-49d8-406e-bf15-954a6d0ee297">
-						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
-						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="90" height="30" uuid="04f67cbf-5f7e-4a48-97fd-1612f112206a"/>
@@ -223,7 +217,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 								<text><![CDATA[Alamat]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
 							<textField isStretchWithOverflow="true">
 								<reportElement stretchType="RelativeToBandHeight" x="0" y="3" width="90" height="20" isPrintWhenDetailOverflows="true" uuid="98fc55a5-8c0e-415e-b935-79aca00ccb5b"/>
@@ -233,8 +226,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90" uuid="d711f27c-0591-4250-b0fe-4214b7391045">
-						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
-						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="90" height="30" uuid="564dd949-2a19-4a8e-b5b8-e12e0b957f4c"/>
@@ -242,7 +233,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 								<text><![CDATA[Nama Ayah]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="3" width="90" height="20" uuid="1d13b822-ce39-41cd-9096-0a81d851277c"/>
@@ -252,8 +242,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90" uuid="6bbbbb10-0069-4713-bb6b-37439296b9eb">
-						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
-						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="90" height="30" uuid="d06e69ca-b7c5-47ba-8cf7-c31a9eb43050"/>
@@ -261,7 +249,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 								<text><![CDATA[Nama Ibu]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="3" width="90" height="20" uuid="b0d40243-2cb9-4cc1-b54f-d4d3b075ea85"/>
@@ -271,8 +258,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90" uuid="f857d51f-0697-4459-ab61-1c80cbb5e47b">
-						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
-						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="90" height="30" uuid="f96645ef-121a-4d95-8c96-49b5ae51c31f"/>
@@ -280,7 +265,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 								<text><![CDATA[Telepon]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="3" width="90" height="20" uuid="d6197c62-6548-4384-9423-fb587ef98c88"/>
@@ -290,8 +274,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="48" uuid="46d53dd8-51da-4a96-af8e-0829b1879de3">
-						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
-						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="48" height="30" uuid="33bdb710-b8a8-4b09-ac5f-f2d29b51d415"/>
@@ -299,7 +281,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 								<text><![CDATA[Tanggal Masuk]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
 							<textField pattern="d/M/yyyy">
 								<reportElement x="0" y="3" width="48" height="20" uuid="8f6e035c-63b2-44f1-b420-dd0f4288c9be"/>
@@ -309,8 +290,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="36" uuid="8034ab93-8a3e-426d-9b84-b20959196ff9">
-						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
-						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="36" height="30" uuid="1fd98404-88c1-4088-b6c3-e2d66ed1ab13"/>
@@ -318,7 +297,6 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 								<text><![CDATA[Gel]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="3" width="36" height="20" uuid="92d7b1cb-17c9-4ac9-b3c5-eacbdca66874"/>
@@ -327,20 +305,17 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="62" uuid="a258300b-45c8-4d5f-88a0-59bc9a3fc065">
-						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
-						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+					<jr:column width="93" uuid="a258300b-45c8-4d5f-88a0-59bc9a3fc065">
 						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="62" height="30" uuid="6ba5a2b4-9028-4bf4-8ae7-79e8017a916d"/>
+								<reportElement x="0" y="0" width="93" height="30" uuid="6ba5a2b4-9028-4bf4-8ae7-79e8017a916d"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Status Pendaftaran]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="3" width="62" height="20" uuid="7fc9eb17-ffff-4ba9-9493-88efd96e3446"/>
+								<reportElement x="0" y="3" width="93" height="20" uuid="7fc9eb17-ffff-4ba9-9493-88efd96e3446"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{profil_StatusPendaftaran}]]></textFieldExpression>
 							</textField>
@@ -350,13 +325,23 @@ WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}
 			</componentElement>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="64" height="20" uuid="13ca273c-e3eb-4d43-a6c3-1d1852b90bcd"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Diprint oleh: ]]></text>
+			</staticText>
+			<textField pattern="dd/MMM/yyyy HH:mm:ss">
+				<reportElement x="639" y="0" width="163" height="20" uuid="737d7938-c00b-417b-9de9-4963fe7639ca"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="0" width="173" height="20" uuid="9181bd12-37d4-49e8-9aeb-56ddbd036a5d"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Param_ClerkName}]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutStatusPendaftaran" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9db5e482-264e-45d2-ad9a-1d50079e39cc">
-	<property name="ireport.zoom" value="1.1000000000000034"/>
+	<property name="ireport.zoom" value="1.3310000000000062"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="334"/>
+	<property name="ireport.y" value="506"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -62,6 +62,15 @@
 	<parameter name="PARAM_SMKPROSES_2" class="java.lang.Integer" isForPrompting="false"/>
 	<parameter name="PARAM_SMKLUNAS_2" class="java.lang.Integer" isForPrompting="false"/>
 	<parameter name="PARAM_SMKBATAL_2" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="PARAM_SMPROMBEL" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="PARAM_SMAROMBEL" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="PARAM_SMKROMBEL" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="PARAM_SMPISI" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="PARAM_SMAISI" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="PARAM_SMKISI" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="PARAM_KURSISMP" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="PARAM_KURSISMA" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="PARAM_KURSISMK" class="java.lang.Integer" isForPrompting="false"/>
 	<queryString>
 		<![CDATA[SELECT
      Clerk.`ID` AS Clerk_ID,
@@ -80,6 +89,24 @@ WHERE Clerk.`ID` = $P{PARAM_CLERK_ID}]]>
 	<field name="Clerk_Jabatan" class="java.lang.String"/>
 	<field name="Clerk_Username" class="java.lang.String"/>
 	<field name="Clerk_Password" class="java.lang.String"/>
+	<variable name="KapasitasSMP" class="java.lang.Integer">
+		<variableExpression><![CDATA[$P{PARAM_SMPROMBEL}*$P{PARAM_SMPISI}]]></variableExpression>
+	</variable>
+	<variable name="ProsesLunasSMP" class="java.lang.Integer">
+		<variableExpression><![CDATA[$P{PARAM_SMPPROSES}+$P{PARAM_SMPLUNAS}]]></variableExpression>
+	</variable>
+	<variable name="KapasitasSMA" class="java.lang.Integer">
+		<variableExpression><![CDATA[$P{PARAM_SMAROMBEL}*$P{PARAM_SMAISI}]]></variableExpression>
+	</variable>
+	<variable name="KapasitasSMK" class="java.lang.Integer">
+		<variableExpression><![CDATA[$P{PARAM_SMKROMBEL}*$P{PARAM_SMKISI}]]></variableExpression>
+	</variable>
+	<variable name="ProsesLunasSMA" class="java.lang.Integer">
+		<variableExpression><![CDATA[$P{PARAM_SMAPROSES}+$P{PARAM_SMALUNAS}]]></variableExpression>
+	</variable>
+	<variable name="ProsesLunasSMK" class="java.lang.Integer">
+		<variableExpression><![CDATA[$P{PARAM_SMKPROSES}+$P{PARAM_SMKLUNAS}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -102,30 +129,30 @@ WHERE Clerk.`ID` = $P{PARAM_CLERK_ID}]]>
 		</band>
 	</title>
 	<columnHeader>
-		<band height="36" splitType="Stretch">
+		<band height="18" splitType="Stretch">
 			<staticText>
-				<reportElement x="153" y="-1" width="56" height="36" forecolor="#0000FF" uuid="23be0ba2-af0b-4429-bdd7-67921f8e17bd"/>
-				<textElement>
-					<font size="24"/>
+				<reportElement x="153" y="-1" width="56" height="18" forecolor="#0000FF" uuid="23be0ba2-af0b-4429-bdd7-67921f8e17bd"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
 				</textElement>
 				<text><![CDATA[SMP]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="301" y="0" width="56" height="36" forecolor="#666666" uuid="b9416a33-d070-4614-97f8-55ec8dd92684"/>
-				<textElement>
-					<font size="24"/>
+				<reportElement x="301" y="0" width="56" height="18" forecolor="#666666" uuid="b9416a33-d070-4614-97f8-55ec8dd92684"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
 				</textElement>
 				<text><![CDATA[SMA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="449" y="0" width="56" height="36" uuid="20ce564e-df70-45fb-8930-5593c8083e24"/>
-				<textElement>
-					<font size="24"/>
+				<reportElement x="449" y="0" width="56" height="18" uuid="20ce564e-df70-45fb-8930-5593c8083e24"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
 				</textElement>
 				<text><![CDATA[SMK]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="35" width="555" height="1" uuid="e4b1df79-05f5-474a-816f-12118d8e8631"/>
+				<reportElement x="0" y="17" width="555" height="1" uuid="e4b1df79-05f5-474a-816f-12118d8e8631"/>
 				<graphicElement>
 					<pen lineWidth="1.75" lineStyle="Double"/>
 				</graphicElement>
@@ -134,193 +161,401 @@ WHERE Clerk.`ID` = $P{PARAM_CLERK_ID}]]>
 				<reportElement x="0" y="0" width="555" height="1" uuid="ad91fcc9-9e4e-4eb1-9fc8-9e48044b07e5"/>
 			</line>
 			<line>
-				<reportElement x="0" y="0" width="1" height="35" uuid="0ae5ad6b-8b45-4f09-9596-f8ea42608c9d"/>
+				<reportElement x="0" y="0" width="1" height="18" uuid="0ae5ad6b-8b45-4f09-9596-f8ea42608c9d"/>
 			</line>
 			<line>
-				<reportElement x="555" y="0" width="1" height="35" uuid="a5c70209-a749-4de7-9742-714c1d22b764"/>
+				<reportElement x="555" y="0" width="1" height="18" uuid="a5c70209-a749-4de7-9742-714c1d22b764"/>
 			</line>
 			<line>
-				<reportElement x="406" y="0" width="1" height="35" uuid="6588407f-4ba1-443d-8020-8fefa97b4c86"/>
+				<reportElement x="406" y="0" width="1" height="18" uuid="6588407f-4ba1-443d-8020-8fefa97b4c86"/>
 			</line>
 			<line>
-				<reportElement x="253" y="0" width="1" height="35" uuid="c628a70e-824b-42fb-bffe-f054800be4ad"/>
+				<reportElement x="253" y="0" width="1" height="18" uuid="c628a70e-824b-42fb-bffe-f054800be4ad"/>
 			</line>
 			<line>
-				<reportElement x="100" y="0" width="1" height="35" uuid="c71a91d5-db82-4618-a50a-cca2a5c96b78"/>
+				<reportElement x="100" y="0" width="1" height="18" uuid="c71a91d5-db82-4618-a50a-cca2a5c96b78"/>
 			</line>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="192" splitType="Stretch">
+			<rectangle>
+				<reportElement x="407" y="114" width="148" height="60" forecolor="#333333" uuid="df776703-c3dd-4c0c-94c9-83a3879f8119"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="254" y="114" width="151" height="60" forecolor="#666666" uuid="50cbe466-f061-4baa-bbcc-6cb3f099abe0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="100" y="114" width="152" height="60" forecolor="#0000FF" uuid="1d4301b6-e61a-417f-afe4-9572a7721aeb"/>
+			</rectangle>
 			<staticText>
-				<reportElement x="4" y="0" width="96" height="36" uuid="e6712a62-0bf2-49aa-bff3-b053b5fbbf8d"/>
+				<reportElement x="4" y="0" width="96" height="18" uuid="e6712a62-0bf2-49aa-bff3-b053b5fbbf8d"/>
 				<textElement>
-					<font size="24"/>
+					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Daftar]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4" y="36" width="96" height="36" uuid="6ce3d00d-4b02-44ac-affd-155516bd9023"/>
+				<reportElement x="4" y="18" width="96" height="18" uuid="6ce3d00d-4b02-44ac-affd-155516bd9023"/>
 				<textElement>
-					<font size="24"/>
+					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Proses]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4" y="72" width="96" height="36" uuid="b6a2855b-5cbc-4448-8b40-07baad3fe954"/>
+				<reportElement x="4" y="36" width="96" height="18" uuid="b6a2855b-5cbc-4448-8b40-07baad3fe954"/>
 				<textElement>
-					<font size="24"/>
+					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Lunas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4" y="108" width="96" height="36" uuid="ae9c5a88-4f2c-459b-8805-a42c1bce5ec8"/>
+				<reportElement x="4" y="54" width="96" height="18" uuid="ae9c5a88-4f2c-459b-8805-a42c1bce5ec8"/>
 				<textElement>
-					<font size="24"/>
+					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Batal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4" y="144" width="96" height="36" forecolor="#000000" uuid="39130777-50be-4d53-8f65-d12463835cbe"/>
+				<reportElement x="4" y="72" width="96" height="18" forecolor="#000000" uuid="39130777-50be-4d53-8f65-d12463835cbe"/>
 				<textElement>
-					<font size="24" isBold="true"/>
+					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="100" y="0" width="150" height="36" forecolor="#0000FF" uuid="bfd99575-d6e3-47f4-ac0e-456afa4aad9b"/>
+				<reportElement x="100" y="0" width="150" height="18" forecolor="#0000FF" uuid="bfd99575-d6e3-47f4-ac0e-456afa4aad9b"/>
 				<textElement textAlignment="Right">
-					<font size="24"/>
+					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PARAM_SMPDAFTAR}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="253" y="0" width="150" height="36" forecolor="#666666" uuid="d20919e6-39ea-4409-b2b1-2cb9e34961a7"/>
+				<reportElement x="253" y="0" width="150" height="18" forecolor="#666666" uuid="d20919e6-39ea-4409-b2b1-2cb9e34961a7"/>
 				<textElement textAlignment="Right">
-					<font size="24"/>
+					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PARAM_SMADAFTAR}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="406" y="36" width="146" height="36" uuid="8ba2c93a-694d-41da-979f-8f62b17ff767"/>
+				<reportElement x="406" y="18" width="146" height="18" uuid="8ba2c93a-694d-41da-979f-8f62b17ff767"/>
 				<textElement textAlignment="Right">
-					<font size="24"/>
+					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PARAM_SMKPROSES}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="253" y="36" width="150" height="36" forecolor="#666666" uuid="50978068-d75f-41eb-8f89-6ba55d71c6a3"/>
+				<reportElement x="253" y="18" width="150" height="18" forecolor="#666666" uuid="50978068-d75f-41eb-8f89-6ba55d71c6a3"/>
 				<textElement textAlignment="Right">
-					<font size="24"/>
+					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PARAM_SMAPROSES}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="100" y="36" width="150" height="36" forecolor="#0000FF" uuid="28bcaa1f-6880-4a92-816f-f06bad9a13d4"/>
+				<reportElement x="100" y="18" width="150" height="18" forecolor="#0000FF" uuid="28bcaa1f-6880-4a92-816f-f06bad9a13d4"/>
 				<textElement textAlignment="Right">
-					<font size="24"/>
+					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PARAM_SMPPROSES}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="406" y="72" width="146" height="36" uuid="87e47350-3e88-4bfa-929e-e183ea1c7d6c"/>
+				<reportElement x="406" y="36" width="146" height="18" uuid="87e47350-3e88-4bfa-929e-e183ea1c7d6c"/>
 				<textElement textAlignment="Right">
-					<font size="24"/>
+					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PARAM_SMKLUNAS}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="253" y="72" width="150" height="36" forecolor="#666666" uuid="2b3cad12-510f-4be5-b80f-8228d940452a"/>
+				<reportElement x="253" y="36" width="150" height="18" forecolor="#666666" uuid="2b3cad12-510f-4be5-b80f-8228d940452a"/>
 				<textElement textAlignment="Right">
-					<font size="24"/>
+					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PARAM_SMALUNAS}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="100" y="72" width="150" height="36" forecolor="#0000FF" uuid="5d18deb0-dc05-4f7e-9b63-9dd381f430ba"/>
+				<reportElement x="100" y="36" width="150" height="18" forecolor="#0000FF" uuid="5d18deb0-dc05-4f7e-9b63-9dd381f430ba"/>
 				<textElement textAlignment="Right">
-					<font size="24"/>
+					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PARAM_SMPLUNAS}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="406" y="108" width="146" height="36" uuid="41dc685b-2e27-4291-b0f6-a27ce5a78433"/>
+				<reportElement x="406" y="54" width="146" height="18" uuid="41dc685b-2e27-4291-b0f6-a27ce5a78433"/>
 				<textElement textAlignment="Right">
-					<font size="24"/>
+					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PARAM_SMKBATAL}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="253" y="108" width="150" height="36" forecolor="#666666" uuid="dd0a1dcd-6639-4216-b479-09e333ab6e16"/>
+				<reportElement x="253" y="54" width="150" height="18" forecolor="#666666" uuid="dd0a1dcd-6639-4216-b479-09e333ab6e16"/>
 				<textElement textAlignment="Right">
-					<font size="24"/>
+					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PARAM_SMABATAL}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="100" y="108" width="150" height="36" forecolor="#0000FF" uuid="50186f74-14e2-470a-baf8-96fca87c074d"/>
+				<reportElement x="100" y="54" width="150" height="18" forecolor="#0000FF" uuid="50186f74-14e2-470a-baf8-96fca87c074d"/>
 				<textElement textAlignment="Right">
-					<font size="24"/>
+					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PARAM_SMPBATAL}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="406" y="144" width="146" height="36" forecolor="#000000" uuid="3acde791-794d-49aa-95b2-eec60dde9eef"/>
+				<reportElement x="406" y="72" width="146" height="18" forecolor="#000000" uuid="3acde791-794d-49aa-95b2-eec60dde9eef"/>
 				<textElement textAlignment="Right">
-					<font size="24" isBold="true"/>
+					<font size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PARAM_SMKDAFTAR}+$P{PARAM_SMKPROSES}+$P{PARAM_SMKLUNAS}+$P{PARAM_SMKBATAL}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="253" y="144" width="150" height="36" forecolor="#000000" uuid="4f42fb76-50ef-43fc-b109-3191f8293927"/>
+				<reportElement x="253" y="72" width="150" height="18" forecolor="#000000" uuid="4f42fb76-50ef-43fc-b109-3191f8293927"/>
 				<textElement textAlignment="Right">
-					<font size="24" isBold="true"/>
+					<font size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PARAM_SMADAFTAR}+$P{PARAM_SMAPROSES}+$P{PARAM_SMALUNAS}+$P{PARAM_SMABATAL}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="100" y="144" width="150" height="36" forecolor="#000000" uuid="363df3a9-52e9-4e43-a866-3dde85219c64"/>
+				<reportElement x="100" y="72" width="150" height="18" forecolor="#000000" uuid="363df3a9-52e9-4e43-a866-3dde85219c64"/>
 				<textElement textAlignment="Right">
-					<font size="24" isBold="true"/>
+					<font size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PARAM_SMPDAFTAR}+$P{PARAM_SMPPROSES}+$P{PARAM_SMPLUNAS}+$P{PARAM_SMPBATAL}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="36" width="555" height="1" uuid="ebae14d3-5452-4829-8860-359ea71ad8e5"/>
+				<reportElement x="0" y="18" width="555" height="1" uuid="ebae14d3-5452-4829-8860-359ea71ad8e5"/>
 			</line>
 			<line>
-				<reportElement x="0" y="72" width="555" height="1" uuid="66d3bd2a-bdda-4e0a-9a03-3a842d5533b1"/>
+				<reportElement x="0" y="36" width="555" height="1" uuid="66d3bd2a-bdda-4e0a-9a03-3a842d5533b1"/>
 			</line>
 			<line>
-				<reportElement x="0" y="108" width="555" height="1" uuid="38e2c5de-7b96-4c77-a542-44f2606d18bc"/>
+				<reportElement x="0" y="54" width="555" height="1" uuid="38e2c5de-7b96-4c77-a542-44f2606d18bc"/>
 			</line>
 			<line>
-				<reportElement x="0" y="144" width="555" height="1" uuid="3021daef-b926-4399-a23b-076687650ac3"/>
+				<reportElement x="0" y="72" width="555" height="1" uuid="3021daef-b926-4399-a23b-076687650ac3"/>
 			</line>
 			<textField isBlankWhenNull="true">
-				<reportElement x="406" y="1" width="146" height="36" uuid="ed77bddf-7951-47fd-a9e0-9d6640e24260"/>
+				<reportElement x="406" y="1" width="146" height="18" uuid="ed77bddf-7951-47fd-a9e0-9d6640e24260"/>
 				<textElement textAlignment="Right">
-					<font size="24"/>
+					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PARAM_SMKDAFTAR}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="0" width="1" height="180" uuid="a58657a8-372b-42f1-b8d9-3e60a15fd3bf"/>
+				<reportElement x="0" y="0" width="1" height="90" uuid="a58657a8-372b-42f1-b8d9-3e60a15fd3bf"/>
 			</line>
 			<line>
-				<reportElement x="100" y="0" width="1" height="180" uuid="55fc04ad-38a1-40be-9663-a54d7cd8ff37"/>
+				<reportElement x="100" y="0" width="1" height="90" uuid="55fc04ad-38a1-40be-9663-a54d7cd8ff37"/>
 			</line>
 			<line>
-				<reportElement x="253" y="0" width="1" height="180" uuid="8b801105-7ad5-4c0f-806b-bc72a0cc9cd8"/>
+				<reportElement x="253" y="0" width="1" height="90" uuid="8b801105-7ad5-4c0f-806b-bc72a0cc9cd8"/>
 			</line>
 			<line>
-				<reportElement x="406" y="0" width="1" height="180" uuid="127d15a6-0cec-4622-8d7d-82a2ef972ac4"/>
+				<reportElement x="406" y="0" width="1" height="90" uuid="127d15a6-0cec-4622-8d7d-82a2ef972ac4"/>
 			</line>
 			<line>
-				<reportElement x="555" y="0" width="1" height="180" uuid="7742f0da-3a04-4996-a372-98f3e871b2fa"/>
+				<reportElement x="555" y="0" width="1" height="90" uuid="7742f0da-3a04-4996-a372-98f3e871b2fa"/>
 			</line>
 			<line>
-				<reportElement x="0" y="179" width="555" height="1" uuid="d3fe396f-621d-4ea3-aa5c-a5f2666bc6a7"/>
+				<reportElement x="0" y="90" width="555" height="1" uuid="d3fe396f-621d-4ea3-aa5c-a5f2666bc6a7"/>
+			</line>
+			<staticText>
+				<reportElement x="4" y="114" width="96" height="18" forecolor="#000000" uuid="bb0bda7f-0918-478f-906a-d4559349eba1"/>
+				<textElement>
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Kapasitas]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="101" y="114" width="36" height="18" forecolor="#0000FF" uuid="53d2011c-4e8d-472a-9d09-d62f6d3531fb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_SMPROMBEL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="137" y="114" width="17" height="18" forecolor="#0000FF" uuid="86d3bb7d-d4fb-411c-a2f5-08e344a9995e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="154" y="114" width="36" height="18" forecolor="#0000FF" uuid="c4177da9-9435-409a-8fd7-1d03a9b42a89"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_SMPISI}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="189" y="114" width="17" height="18" forecolor="#0000FF" uuid="13d567ad-1a33-4715-8528-ab45dd784738"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="206" y="114" width="43" height="18" forecolor="#0000FF" uuid="db769155-02b6-463f-bdfb-fa5eb90241d2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{KapasitasSMP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="174" width="97" height="18" forecolor="#000000" uuid="f8167a62-8d9a-4df5-b48d-8db246473201"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Kursi Kurang (Lebih)]]></text>
+			</staticText>
+			<textField pattern="###0;(###0)">
+				<reportElement x="101" y="174" width="148" height="18" forecolor="#0000FF" uuid="f78cd1a4-d3b4-4cd0-9524-b99f78e617d4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_KURSISMP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="132" width="96" height="18" uuid="f3d441e7-f3cd-4ed9-9540-35c7f02d0568"/>
+				<textElement>
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Proses + Lunas]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="101" y="132" width="148" height="18" forecolor="#0000FF" uuid="5084ae38-0d98-43d4-8396-03797877d678"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ProsesLunasSMP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="150" width="96" height="18" uuid="bb9b75bc-654e-4deb-8659-97d5ef372382"/>
+				<textElement>
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Batal]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="101" y="150" width="148" height="18" forecolor="#0000FF" uuid="d93581f6-3a16-463a-beb5-ed91324d2bda"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_SMPBATAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="307" y="114" width="36" height="18" forecolor="#666666" uuid="40768e45-8aa1-4427-b955-7d1351518312"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_SMAISI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="254" y="132" width="148" height="18" forecolor="#666666" uuid="80751958-f351-41cd-946f-04437a8262fe"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ProsesLunasSMA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0;(###0)">
+				<reportElement x="254" y="174" width="148" height="18" forecolor="#666666" uuid="5f50ec97-058a-44a0-976a-faa39c4190db"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_KURSISMA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="342" y="114" width="17" height="18" forecolor="#666666" uuid="1f8339d4-4479-4875-ba4f-c79757299713"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="359" y="114" width="43" height="18" forecolor="#666666" uuid="76e1828c-ae98-4bef-b1e7-d67cd69ea4ad"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{KapasitasSMA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="254" y="150" width="148" height="18" forecolor="#666666" uuid="7f63bdc4-c5c1-4a0d-970b-fe72bfc5de54"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_SMABATAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="114" width="17" height="18" forecolor="#666666" uuid="dea2d876-bd83-4178-9b15-f4dbaeb0d4f7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="254" y="114" width="36" height="18" forecolor="#666666" uuid="1a44dd1c-0e71-4bb8-a879-e7eb26fc2fa6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_SMAROMBEL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="459" y="114" width="36" height="18" forecolor="#000000" uuid="8f751840-7b90-4220-ad05-59da0adae256"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_SMKISI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="406" y="132" width="147" height="18" forecolor="#000000" uuid="9299ab19-1c19-4f6d-b88a-5a3ee460be17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ProsesLunasSMK}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0;(###0)">
+				<reportElement x="406" y="174" width="147" height="18" forecolor="#000000" uuid="9f1b55e8-b514-4143-8b8e-6fce87a82fb4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_KURSISMK}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="494" y="114" width="17" height="18" forecolor="#000000" uuid="5dff5a2f-d00c-4816-934f-f2600c6e376d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="511" y="114" width="42" height="18" forecolor="#000000" uuid="e4a55fdf-3e6e-47af-aad7-120a0a61eb66"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{KapasitasSMK}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="406" y="150" width="147" height="18" forecolor="#000000" uuid="231b7101-af13-4b3e-aa16-b4fcd69f59db"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_SMKBATAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="442" y="114" width="17" height="18" forecolor="#000000" uuid="95bc21d8-1c57-4d30-9af8-4f5b5100412a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="406" y="114" width="36" height="18" forecolor="#000000" uuid="86a7395b-1ac7-44ae-a998-a6a78bbadc5e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAM_SMKROMBEL}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="101" y="174" width="451" height="1" uuid="b38e76c2-640e-4608-8f4f-1ac1bd524e0e"/>
 			</line>
 		</band>
 		<band height="225" splitType="Stretch">

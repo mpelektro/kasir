@@ -25,6 +25,7 @@ import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.*;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -177,6 +178,7 @@ public class AppFrame extends javax.swing.JFrame {
         jButtonTransaksi = new javax.swing.JButton();
         jButtonClear = new javax.swing.JButton();
         jButtonRips = new javax.swing.JButton();
+        jButtonBatal = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableTunggakanProfil = new javax.swing.JTable();
@@ -504,6 +506,16 @@ public class AppFrame extends javax.swing.JFrame {
             }
         });
         jToolBar3.add(jButtonRips);
+
+        jButtonBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Warning.png"))); // NOI18N
+        jButtonBatal.setText(org.openide.util.NbBundle.getMessage(AppFrame.class, "AppFrame.jButtonBatal.text")); // NOI18N
+        jButtonBatal.setFocusable(false);
+        jButtonBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBatalActionPerformed(evt);
+            }
+        });
+        jToolBar3.add(jButtonBatal);
 
         jTableTunggakanProfil.setModel(tableModelTunggakanProfil);
         jScrollPane3.setViewportView(jTableTunggakanProfil);
@@ -928,11 +940,48 @@ public class AppFrame extends javax.swing.JFrame {
     private void jButtonLapStatusPendaftaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLapStatusPendaftaranActionPerformed
         // TODO add your handling code here:
          try{
-            printStatusPendaftaran(this.clerk);
-        } catch (JRException | PrinterException | SQLException e){
-            Exceptions.printStackTrace(e);
+           //printStatusPendaftaran(this.clerk);
+           JFrame frame = new JFrame("Status Pendaftaran");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        //Create and set up the content pane.
+        DialogStatusPendaftaran newContentPane = new DialogStatusPendaftaran(this);
+        newContentPane.setOpaque(true); //content panes must be opaque
+        frame.setContentPane(newContentPane);
+
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
+        } catch (Exception e){
+           Exceptions.printStackTrace(e);
         }
     }//GEN-LAST:event_jButtonLapStatusPendaftaranActionPerformed
+    
+    private void jButtonBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBatalActionPerformed
+        // TODO add your handling code here:
+       // new InputTransactionFrameSeparated(this, this.clerk, this.profil,paramIPPs, paramIPSP, paramSeragams, paramBukus, paramIKSs, paramILLs, paramIPSB, paramIUA, paramIUSs, paramOSISs, paramAttributes, paramPVTs, paramTabungans, paramSumbangans, paramPASB, paramCicilanHutangs, paramAlmamaters, paramIUAPs).setVisible(true);
+       int n = JOptionPane.showConfirmDialog(
+                            this, "Yakin ingin mengubah status "+this.profil.biodata.nama+" menjadi BATAL?",
+                            "KONFIRMASI",
+                            JOptionPane.YES_NO_OPTION);
+                    if (n == JOptionPane.YES_OPTION) {
+                        try {
+                            this.profil.statusPendaftaran = profil.statusPendaftaran.BATAL;
+                            this.profil.update();
+                            JOptionPane.showMessageDialog(this, "Pembatalan "+this.profil.biodata.nama+" telah berhasil", "Pembatalan Berhasil", JOptionPane.WARNING_MESSAGE);
+                        } catch (SQLException ex) {
+                            Exceptions.printStackTrace(ex);
+                        } catch (KasirException ex) {
+                            Exceptions.printStackTrace(ex);
+                        }
+                        
+                    } else if (n == JOptionPane.NO_OPTION) {
+                        return;
+                    } else {
+                        return;
+                    }
+
+    }//GEN-LAST:event_jButtonBatalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1680,6 +1729,7 @@ public class AppFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbLastUpdateDate;
     private datechooser.beans.DateChooserCombo dateChooserComboTSumE;
     private datechooser.beans.DateChooserCombo dateChooserComboTSumS;
+    private javax.swing.JButton jButtonBatal;
     private javax.swing.JButton jButtonClear;
     private javax.swing.JButton jButtonEditDeleteProfil;
     private javax.swing.JButton jButtonInsertKasir;
@@ -2367,7 +2417,7 @@ public class AppFrame extends javax.swing.JFrame {
                 
     }
     
-    private void printStatusPendaftaran(Clerk cl) throws JRException, PrinterException, SQLException {
+    public void printStatusPendaftaran(Clerk cl) throws JRException, PrinterException, SQLException {
         ArrayList<Profil> smpProfils = new ArrayList();
         ArrayList<Profil> smaProfils = new ArrayList();     
         ArrayList<Profil> smkProfils = new ArrayList();     
@@ -2384,7 +2434,27 @@ public class AppFrame extends javax.swing.JFrame {
         int smpdaftar=0, smpproses=0, smplunas=0, smpbatal=0, smadaftar=0, smaproses=0, smalunas=0, smabatal=0, smkdaftar=0, smkproses=0, smklunas=0, smkbatal=0;
         int smpdaftar1=0, smpproses1=0, smplunas1=0, smpbatal1=0, smadaftar1=0, smaproses1=0, smalunas1=0, smabatal1=0, smkdaftar1=0, smkproses1=0, smklunas1=0, smkbatal1=0;
         int smpdaftar2=0, smpproses2=0, smplunas2=0, smpbatal2=0, smadaftar2=0, smaproses2=0, smalunas2=0, smabatal2=0, smkdaftar2=0, smkproses2=0, smklunas2=0, smkbatal2=0;
+        int smprombel=0, smpisi=0, smarombel=0, smaisi=0, smkrombel=0, smkisi=0;
         Statement stmt = null;
+        
+        stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM rusly_ppdbdb.Rombel";
+        ResultSet rs = stmt.executeQuery(sql);
+        //STEP 5: Extract data from result set
+        while(rs.next()){
+           //Retrieve by column name
+           if(rs.getString("Sekolah").equals("SMP")){
+               smprombel = rs.getInt("Rombel");
+               smpisi = rs.getInt("Isi");
+           }else if(rs.getString("Sekolah").equals("SMA")){
+               smarombel = rs.getInt("Rombel");
+               smaisi = rs.getInt("Isi");
+           }else if(rs.getString("Sekolah").equals("SMK")){
+               smkrombel = rs.getInt("Rombel");
+               smkisi = rs.getInt("Isi");
+           }
+        }
         //STEP 4: Execute a query
         /*
         stmt = connection.createStatement();
@@ -2609,6 +2679,16 @@ public class AppFrame extends javax.swing.JFrame {
         jasperParameter.put("PARAM_SMKLUNAS_2", smklunas2);
         jasperParameter.put("PARAM_SMKBATAL_2", smkbatal2);
         
+        jasperParameter.put("PARAM_SMPROMBEL", smprombel);
+        jasperParameter.put("PARAM_SMAROMBEL", smarombel);
+        jasperParameter.put("PARAM_SMKROMBEL", smkrombel);
+        jasperParameter.put("PARAM_SMPISI", smpisi);
+        jasperParameter.put("PARAM_SMAISI", smaisi);
+        jasperParameter.put("PARAM_SMKISI", smkisi);
+        jasperParameter.put("PARAM_KURSISMP", (smprombel*smpisi)-smpproses-smplunas+smpbatal);
+        jasperParameter.put("PARAM_KURSISMA", (smarombel*smaisi)-smaproses-smalunas+smabatal);
+        jasperParameter.put("PARAM_KURSISMK", (smkrombel*smkisi)-smkproses-smklunas+smkbatal);
+        
          String fileName = "C://printout//PrintOutStatusPendaftaran.jrxml";
             String filetoPrint = "C://printout//PrintOutStatusPendaftaran.jrprint";
             String filetoFill = "C://printout//PrintOutStatusPendaftaran.jasper";
@@ -2645,6 +2725,53 @@ public class AppFrame extends javax.swing.JFrame {
         exporter.exportReport();
     }
     
+    public void printDetailStatusPendaftaran(Clerk cl, String statusPendaftaran) throws JRException, PrinterException, SQLException {
+        
+        HashMap jasperParameter = new HashMap();
+        //jasperParameter.put("PARAM_CLERK_ID", Long.valueOf(cl.id));
+         printout.StatusPendaftaran pb = new StatusPendaftaran();
+        Connection connection = pb.establishConnection(); 
+        //jasperParameter.put("Param_Level", "%".concat(jComboBoxLevel1.getSelectedItem().toString()).concat("%"));
+        
+        jasperParameter.put("Param_StatusPendaftaran0", statusPendaftaran);
+        jasperParameter.put("Param_StatusPendaftaran1", statusPendaftaran);
+        jasperParameter.put("Param_ClerkName", cl.nama);
+        
+         String fileName = "C://printout//PrintOutDetailStatusPendaftaran.jrxml";
+            String filetoPrint = "C://printout//PrintOutDetailStatusPendaftaran.jrprint";
+            String filetoFill = "C://printout//PrintOutDetailStatusPendaftaran.jasper";
+            //String filePdf = "C://printout//PrintOutReportPerKasir.pdf";
+            String filePdf = "C://printout//PrintOutDetailStatusPendaftaran.pdf";
+       JasperCompileManager.compileReportToFile(fileName);
+            
+            
+            JasperFillManager.fillReportToFile(filetoFill, jasperParameter , connection);
+            JasperPrint jp = JasperFillManager.fillReport(filetoFill, jasperParameter, connection);
+            JasperViewer.viewReport(jp, false);
+            JasperExportManager.exportReportToPdfFile(jp, filePdf);
+            JasperPrintManager.printReport(filetoPrint, true);
+            
+            
+            jasperReport = JasperCompileManager.compileReport
+        ("C://printout//PrintOutDetailStatusPendaftaran.jrxml");
+
+        // filling report with data from data source
+
+        jasperPrint = JasperFillManager.fillReport(jasperReport,jasperParameter, connection); 
+        // exporting process
+        // 1- export to PDF
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "C://printout//PrintOutDetailStatusPendaftaran.pdf");
+
+        // 2- export to HTML
+        JasperExportManager.exportReportToHtmlFile(jasperPrint, "C://printout//PrintOutDetailStatusPendaftaran.html" ); 
+
+        // 3- export to Excel sheet
+        JRXlsExporter exporter = new JRXlsExporter();
+        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "C://printout//PrintOutDetailStatusPendaftaran.xls" );
+
+        exporter.exportReport();
+    }
     
     private ArrayList<BigDecimal> farmIPP(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<BigDecimal> retVal = new ArrayList();
