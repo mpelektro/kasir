@@ -967,6 +967,7 @@ public class AppFrame extends javax.swing.JFrame {
                     if (n == JOptionPane.YES_OPTION) {
                         try {
                             this.profil.statusPendaftaran = profil.statusPendaftaran.BATAL;
+                            this.profil.lastUpdateDate = new Kalender();
                             this.profil.update();
                             JOptionPane.showMessageDialog(this, "Pembatalan "+this.profil.biodata.nama+" telah berhasil", "Pembatalan Berhasil", JOptionPane.WARNING_MESSAGE);
                         } catch (SQLException ex) {
