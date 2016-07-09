@@ -650,7 +650,7 @@ public class InputTransactionIPP extends javax.swing.JFrame {
                             return column == 2;
                         //return false;
                         }
-                        return !canEdit[row];
+                        return canEdit[row];
                     }
                     if((column == 0 && column ==1)|| column == 2){
                             //return column == 2;

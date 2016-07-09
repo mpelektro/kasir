@@ -540,14 +540,16 @@ public class Control {
                         gltrsS.add(gltrs);
                         ++type_no;
                     }
-                }
+                
                     
                     //for piutang
-//                    gltrs = GLTransRecordSet.create(type_no, TransactionDetail.Tipe.PiutangTransaction, lv1, TransactionDetail.PaymentMethod.CASH, piutangTDetails, mapAccGLs);
-//                    if(gltrs != null){
-//                        gltrsS.add(gltrs);
-//                        ++type_no;
-//                    }
+                    gltrs = GLTransRecordSet.create(type_no, tipe, lv1, pm, piutangTDetails, mapAccGLs);
+                    //gltrs = GLTransRecordSet.create(type_no, TransactionDetail.Tipe.CicilanHutangTransaction, lv1, TransactionDetail.PaymentMethod.CASH, piutangTDetails, mapAccGLs);
+                    if(gltrs != null){
+                        gltrsS.add(gltrs);
+                        ++type_no;
+                    }
+                }
             }
             
             Control.updateTDetails(tipe, tDetails);

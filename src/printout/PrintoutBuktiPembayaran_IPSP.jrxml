@@ -16,11 +16,13 @@
      IPSPTransaction.`PaymentMethod` AS IPSPTransaction_PaymentMethod,
      IPSPTransaction.`CreateDate` AS IPSPTransaction_CreateDate,
      IPSPTransaction.`LastUpdateDate` AS IPSPTransaction_LastUpdateDate,
-     IPSPTransaction.`Note` AS IPSPTransaction_Note
+     IPSPTransaction.`Note` AS IPSPTransaction_Note,
+     IPSPTransaction.`Piutang` AS IPSPTransaction_Piutang
 FROM
      `IPSPTransaction` IPSPTransaction
 WHERE
-     IPSPTransaction.`IDTransactionSummary` = $P{Param_IPSP_TransactionSummary_ID}]]>
+     IPSPTransaction.`IDTransactionSummary` = $P{Param_IPSP_TransactionSummary_ID}
+ AND IPSPTransaction.`Piutang` = false]]>
 	</queryString>
 	<field name="IPSPTransaction_ID" class="java.math.BigInteger"/>
 	<field name="IPSPTransaction_UUID" class="java.lang.String"/>
@@ -33,6 +35,7 @@ WHERE
 	<field name="IPSPTransaction_CreateDate" class="java.sql.Timestamp"/>
 	<field name="IPSPTransaction_LastUpdateDate" class="java.sql.Timestamp"/>
 	<field name="IPSPTransaction_Note" class="java.lang.String"/>
+	<field name="IPSPTransaction_Piutang" class="java.lang.Boolean"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>

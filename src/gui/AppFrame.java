@@ -396,14 +396,14 @@ public class AppFrame extends javax.swing.JFrame {
         jTableInitialSearch.setModel(tableModelInitialSearch);
         jTableInitialSearch.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTableInitialSearch.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableInitialSearchMouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTableInitialSearchMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jTableInitialSearchMouseReleased(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableInitialSearchMouseClicked(evt);
             }
         });
         jTableInitialSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1552,7 +1552,7 @@ public class AppFrame extends javax.swing.JFrame {
        };
        
        // part update status DAFTAR, PROSES, LUNAS
-       
+       if(profil.statusPendaftaran != Profil.StatusPendaftaran.BATAL){
         if(ppdbIni.get("program", "name", String.class).equals("ppdb")){
             switch(profil.currentLevel.level1.toString()){
                 case "SMP":
@@ -1591,6 +1591,7 @@ public class AppFrame extends javax.swing.JFrame {
                 profil.update();
             }
         }
+       }
        
        
        

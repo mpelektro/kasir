@@ -4152,7 +4152,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                         profil.currentLevel.level1,
                                         inputTransactionIPSP.ipspTunaiAmount,
                                         TransactionDetail.PaymentMethod.CASH,
-                                        ipsp.note, false);
+                                        ipsp.note, (ipsp.chargedLevel.tahun < profil.currentLevel.tahun));
                 iPSPTransactionDetails.add(temp);
             }
             if(inputTransactionIPSP.ipspBeasiswaAmount > 0f){
@@ -4164,7 +4164,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                         profil.currentLevel.level1,
                                         inputTransactionIPSP.ipspBeasiswaAmount,
                                         TransactionDetail.PaymentMethod.BEASISWA,
-                                        ipsp.note, false);
+                                        ipsp.note, (ipsp.chargedLevel.tahun < profil.currentLevel.tahun));
                 iPSPTransactionDetails.add(temp);
             }
             if(inputTransactionIPSP.ipspBeasiswaCostAmount > 0f){
@@ -4176,7 +4176,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                         profil.currentLevel.level1,
                                         inputTransactionIPSP.ipspBeasiswaCostAmount,
                                         TransactionDetail.PaymentMethod.BEASISWA_COST,
-                                        ipsp.note, false);
+                                        ipsp.note, (ipsp.chargedLevel.tahun < profil.currentLevel.tahun));
                 iPSPTransactionDetails.add(temp);
                 BeasiswaCost.transactOut(profil, transactionSummary.id, inputTransactionIPSP.ipspBeasiswaCostAmount);
             }
@@ -4191,7 +4191,9 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                         ipspFromDB.transactDetailIDs.add(iPSPTransactionDetails.get(j).id);
                         ipspFromDB.totalInstallment = ipspFromDB.totalInstallment + iPSPTransactionDetails.get(j).amount;
                         ipspFromDB.debt -= iPSPTransactionDetails.get(j).amount;
-                
+                        /*----- BAGIAN CICILAN HUTANG -------*/
+                        if(iPSPTransactionDetails.get(j).piutang)
+                            Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, iPSPTransactionDetails.get(j));
                     }
             
             ipspStoreToDB.id = ipspFromDB.id;
@@ -4209,7 +4211,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                 Control.updateTSummary(transactionSummary);
 
             }
-                
+            
+            
 //            Control.insertTDetail(TransactionDetail.Tipe.IPSPTransaction, this.iPSPTransactionDetail);
 //            Set<IPSPTransactionDetail> filterIPSP = new HashSet<>();
 //            filterIPSP.add(this.iPSPTransactionDetail);
@@ -4268,7 +4271,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                 if((Float)jTableSeragam.getModel().getValueAt(i,5)>0f){
                     seragam = seragamSToDB.get(i);
                     seragamTDetailUUID = UUID.randomUUID();
-                    this.seragamTransactionDetail = new SeragamTransactionDetail(seragamTDetailUUID,seragam.id, clerk.id, transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (Float)jTableSeragam.getModel().getValueAt(i,5), TransactionDetail.PaymentMethod.CASH, new Kalender(), new Kalender(), seragam.note, false, false);
+                    this.seragamTransactionDetail = new SeragamTransactionDetail(seragamTDetailUUID,seragam.id, clerk.id, transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (Float)jTableSeragam.getModel().getValueAt(i,5), TransactionDetail.PaymentMethod.CASH, new Kalender(), new Kalender(), seragam.note, false, seragam.chargedLevel.tahun < profil.currentLevel.tahun);
                     Control.insertTDetail(TransactionDetail.Tipe.SeragamTransaction, this.seragamTransactionDetail);
                     this.seragamTransactionDetail = Control.selectTDetail(TransactionDetail.Tipe.SeragamTransaction, TransactionDetail.uuidColName, false, seragamTDetailUUID.toString());
                     seragam.transactDetailIDs.add(this.seragamTransactionDetail.id);
@@ -4280,6 +4283,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     this.transactionSummary = Control.selectTSummary(this.transactionSummary.id);
                     //this.transactionSummary.totalAmount = (Float)jTableSeragam.getModel().getValueAt(i,3);
                     Control.updateTSummary(this.transactionSummary);
+                    if(this.seragamTransactionDetail.piutang)
+                        Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, this.seragamTransactionDetail);
                 }else{
                     System.out.println("Seragam transaction : nothing");
                 }
@@ -4292,7 +4297,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                 if((Float)jTableAlmamater.getModel().getValueAt(i,5)>0f){
                     almamater = almamaterSToDB.get(i);
                     almamaterTDetailUUID = UUID.randomUUID();
-                    this.almamaterTransactionDetail = new AlmamaterTransactionDetail(almamaterTDetailUUID,almamater.id, clerk.id, transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (Float)jTableAlmamater.getModel().getValueAt(i,5), TransactionDetail.PaymentMethod.CASH, new Kalender(), new Kalender(), almamater.note, false, false);
+                    this.almamaterTransactionDetail = new AlmamaterTransactionDetail(almamaterTDetailUUID,almamater.id, clerk.id, transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (Float)jTableAlmamater.getModel().getValueAt(i,5), TransactionDetail.PaymentMethod.CASH, new Kalender(), new Kalender(), almamater.note, false, almamater.chargedLevel.tahun < profil.currentLevel.tahun);
                     Control.insertTDetail(TransactionDetail.Tipe.AlmamaterTransaction, this.almamaterTransactionDetail);
                     this.almamaterTransactionDetail = Control.selectTDetail(TransactionDetail.Tipe.AlmamaterTransaction, TransactionDetail.uuidColName, false, almamaterTDetailUUID.toString());
                     almamater.transactDetailIDs.add(this.almamaterTransactionDetail.id);
@@ -4304,6 +4309,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     this.transactionSummary = Control.selectTSummary(this.transactionSummary.id);
                     //this.transactionSummary.totalAmount = (Float)jTableAlmamater.getModel().getValueAt(i,3);
                     Control.updateTSummary(this.transactionSummary);
+                    if(this.almamaterTransactionDetail.piutang)
+                        Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, this.almamaterTransactionDetail);
                 }else{
                     System.out.println("Almamater transaction : nothing");
                 }
@@ -4317,7 +4324,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                 if((Float)inputTransactionAttribute.jTableAttribute.getModel().getValueAt(i,5)>0f){
                     attribute = attributeSToDB.get(i);
                     attributeTDetailUUID = UUID.randomUUID();
-                    this.attributeTransactionDetail = new AttributeTransactionDetail(attributeTDetailUUID,attribute.id, clerk.id, transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (Float)inputTransactionAttribute.jTableAttribute.getModel().getValueAt(i,5), TransactionDetail.PaymentMethod.CASH, new Kalender(), new Kalender(), attribute.note, false, false);
+                    this.attributeTransactionDetail = new AttributeTransactionDetail(attributeTDetailUUID,attribute.id, clerk.id, transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (Float)inputTransactionAttribute.jTableAttribute.getModel().getValueAt(i,5), TransactionDetail.PaymentMethod.CASH, new Kalender(), new Kalender(), attribute.note, false, attribute.chargedLevel.tahun < profil.currentLevel.tahun);
                     Control.insertTDetail(TransactionDetail.Tipe.AttributeTransaction, this.attributeTransactionDetail);
                     this.attributeTransactionDetail = Control.selectTDetail(TransactionDetail.Tipe.AttributeTransaction, TransactionDetail.uuidColName, false, attributeTDetailUUID.toString());
                     attribute.transactDetailIDs.add(this.attributeTransactionDetail.id);
@@ -4329,6 +4336,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     this.transactionSummary = Control.selectTSummary(this.transactionSummary.id);
                     //this.transactionSummary.totalAmount = (Float)jTableAttribute.getModel().getValueAt(i,3);
                     Control.updateTSummary(this.transactionSummary);
+                    if(this.attributeTransactionDetail.piutang)
+                        Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, this.attributeTransactionDetail);
                 }else{
                     System.out.println("Attribute transaction : nothing");
                 }
@@ -4341,7 +4350,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                 if((Float)jTableBuku.getModel().getValueAt(i,5)>0f){
                     buku = bukuSToDB.get(i);
                     bukuTDetailUUID = UUID.randomUUID();
-                    this.bukuTransactionDetail = new BukuTransactionDetail(bukuTDetailUUID,buku.id, clerk.id, transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (Float)jTableBuku.getModel().getValueAt(i,5), TransactionDetail.PaymentMethod.CASH, new Kalender(), new Kalender(), buku.note, false, false);
+                    this.bukuTransactionDetail = new BukuTransactionDetail(bukuTDetailUUID,buku.id, clerk.id, transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (Float)jTableBuku.getModel().getValueAt(i,5), TransactionDetail.PaymentMethod.CASH, new Kalender(), new Kalender(), buku.note, false, buku.chargedLevel.tahun < profil.currentLevel.tahun);
                     Control.insertTDetail(TransactionDetail.Tipe.BukuTransaction, this.bukuTransactionDetail);
                     this.bukuTransactionDetail = Control.selectTDetail(TransactionDetail.Tipe.BukuTransaction, TransactionDetail.uuidColName, false, bukuTDetailUUID.toString());
                     buku.transactDetailIDs.add(this.bukuTransactionDetail.id);
@@ -4353,6 +4362,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     this.transactionSummary = Control.selectTSummary(this.transactionSummary.id);
                     //this.transactionSummary.totalAmount = (Float)jTableBuku.getModel().getValueAt(i,3);
                     Control.updateTSummary(this.transactionSummary);
+                    if(this.bukuTransactionDetail.piutang)
+                        Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, this.bukuTransactionDetail);
                 }else{
                     System.out.println("Buku transaction : nothing");
                 }
@@ -4366,7 +4377,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                 if((Float)inputTransactionILL.jTableILL.getModel().getValueAt(i,5)>0f){
                     ill = illSToDB.get(i);
                     illTDetailUUID = UUID.randomUUID();
-                    this.illTransactionDetail = new ILLTransactionDetail(illTDetailUUID,ill.id, clerk.id, transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (Float)inputTransactionILL.jTableILL.getModel().getValueAt(i,5), TransactionDetail.PaymentMethod.CASH, new Kalender(), new Kalender(), ill.note, false, false);
+                    this.illTransactionDetail = new ILLTransactionDetail(illTDetailUUID,ill.id, clerk.id, transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (Float)inputTransactionILL.jTableILL.getModel().getValueAt(i,5), TransactionDetail.PaymentMethod.CASH, new Kalender(), new Kalender(), ill.note, false, ill.chargedLevel.tahun < profil.currentLevel.tahun);
                     Control.insertTDetail(TransactionDetail.Tipe.ILLTransaction, this.illTransactionDetail);
                     this.illTransactionDetail = Control.selectTDetail(TransactionDetail.Tipe.ILLTransaction, TransactionDetail.uuidColName, false, illTDetailUUID.toString());
                     ill.transactDetailIDs.add(this.illTransactionDetail.id);
@@ -4378,6 +4389,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     this.transactionSummary = Control.selectTSummary(this.transactionSummary.id);
                     //this.transactionSummary.totalAmount = (Float)jTableILL.getModel().getValueAt(i,3);
                     Control.updateTSummary(this.transactionSummary);
+                    if(this.illTransactionDetail.piutang)
+                        Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, this.illTransactionDetail);
                 }else{
                     System.out.println("ILL transaction : nothing");
                 }
@@ -4391,7 +4404,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                 if((Float)inputTransactionTabungan.jTableTabungan.getModel().getValueAt(i,5)>0f){
                     tabungan = tabunganSToDB.get(i);
                     tabunganTDetailUUID = UUID.randomUUID();
-                    this.tabunganTransactionDetail = new TabunganTransactionDetail(tabunganTDetailUUID,tabungan.id, clerk.id, transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (Float)inputTransactionTabungan.jTableTabungan.getModel().getValueAt(i,5), TransactionDetail.PaymentMethod.CASH, new Kalender(), new Kalender(), tabungan.note, false, false);
+                    this.tabunganTransactionDetail = new TabunganTransactionDetail(tabunganTDetailUUID,tabungan.id, clerk.id, transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (Float)inputTransactionTabungan.jTableTabungan.getModel().getValueAt(i,5), TransactionDetail.PaymentMethod.CASH, new Kalender(), new Kalender(), tabungan.note, false, tabungan.chargedLevel.tahun < profil.currentLevel.tahun);
                     Control.insertTDetail(TransactionDetail.Tipe.TabunganTransaction, this.tabunganTransactionDetail);
                     this.tabunganTransactionDetail = Control.selectTDetail(TransactionDetail.Tipe.TabunganTransaction, TransactionDetail.uuidColName, false, tabunganTDetailUUID.toString());
                     tabungan.transactDetailIDs.add(this.tabunganTransactionDetail.id);
@@ -4403,6 +4416,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     this.transactionSummary = Control.selectTSummary(this.transactionSummary.id);
                     //this.transactionSummary.totalAmount = (Float)jTableTabungan.getModel().getValueAt(i,3);
                     Control.updateTSummary(this.transactionSummary);
+                    if(this.tabunganTransactionDetail.piutang)
+                        Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, this.tabunganTransactionDetail);
                 }else{
                     System.out.println("Tabungan transaction : nothing");
                 }
@@ -4416,7 +4431,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                 if((Float)inputTransactionSumbangan.jTableSumbangan.getModel().getValueAt(i,5)>0f){
                     sumbangan = sumbanganSToDB.get(i);
                     sumbanganTDetailUUID = UUID.randomUUID();
-                    this.sumbanganTransactionDetail = new SumbanganTransactionDetail(sumbanganTDetailUUID,sumbangan.id, clerk.id, transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (Float)inputTransactionSumbangan.jTableSumbangan.getModel().getValueAt(i,5), TransactionDetail.PaymentMethod.CASH, new Kalender(), new Kalender(), sumbangan.note, false, false);
+                    this.sumbanganTransactionDetail = new SumbanganTransactionDetail(sumbanganTDetailUUID,sumbangan.id, clerk.id, transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (Float)inputTransactionSumbangan.jTableSumbangan.getModel().getValueAt(i,5), TransactionDetail.PaymentMethod.CASH, new Kalender(), new Kalender(), sumbangan.note, false, sumbangan.chargedLevel.tahun < profil.currentLevel.tahun);
                     Control.insertTDetail(TransactionDetail.Tipe.SumbanganTransaction, this.sumbanganTransactionDetail);
                     this.sumbanganTransactionDetail = Control.selectTDetail(TransactionDetail.Tipe.SumbanganTransaction, TransactionDetail.uuidColName, false, sumbanganTDetailUUID.toString());
                     sumbangan.transactDetailIDs.add(this.sumbanganTransactionDetail.id);
@@ -4428,6 +4443,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     this.transactionSummary = Control.selectTSummary(this.transactionSummary.id);
                     //this.transactionSummary.totalAmount = (Float)jTableSumbangan.getModel().getValueAt(i,3);
                     Control.updateTSummary(this.transactionSummary);
+                    if(this.sumbanganTransactionDetail.piutang)
+                        Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, this.sumbanganTransactionDetail);
                 }else{
                     System.out.println("Sumbangan transaction : nothing");
                 }
@@ -4529,6 +4546,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         if(this.iUATransactionDetail!=null){
             this.iUATransactionDetail.transactSummaryID= transactionSummary.id;
             this.iUATransactionDetail.lastUpdateDate = theCreatedDate;
+            this.iUATransactionDetail.piutang = this.iua.chargedLevel.tahun < profil.currentLevel.tahun;
             Control.insertTDetail(TransactionDetail.Tipe.IUATransaction, this.iUATransactionDetail);
             Set<IUATransactionDetail> filterIUA = new HashSet<>();
             filterIUA.add(this.iUATransactionDetail);
@@ -4541,6 +4559,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             Control.updateIuran(Iuran.Tipe.IUA, iua);
             //this.transactionSummary.totalAmount = totalAmount;
             Control.updateTSummary(transactionSummary);
+            if(this.iUATransactionDetail.piutang)
+                        Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, this.iUATransactionDetail);
         }
         
         //PART IUAP
@@ -4556,9 +4576,11 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                                 iuapFromDB.id, 
                                                                                                 clerk.id, 
                                                                                                 transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (inputTransactionIUAP.iUAPAmounts.get(i)), TransactionDetail.PaymentMethod.CASH,
-                                                                                                jTableIUAP.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                                jTableIUAP.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),this.iuapFromDB.chargedLevel.tahun < profil.currentLevel.tahun);
 
                             iuapTransactionDetails.add(iuapTransactionDetail);
+                            if(iuapTransactionDetail.piutang)
+                                 Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, iuapTransactionDetail);
                         }
                         if(iDDAmounts.get(i) > 0f){
                             IUAPTransactionDetail iuapTransactionDetail = new IUAPTransactionDetail(iuapTDetailUUID, 
@@ -4605,6 +4627,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         //                iuapStoreToDB.entries.get(i).transactDetailIDs.add(iuapTransactionDetail.id);
 
                         }
+                       
                     }
                 }
                 iuapStoreToDB.id = iuapFromDB.id;
@@ -4718,9 +4741,11 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                             iusFromDB.id, 
                                                                                             clerk.id, 
                                                                                             transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (inputTransactionIUS.iUSAmounts.get(i)), TransactionDetail.PaymentMethod.CASH,
-                                                                                            inputTransactionIUS.jTableIUS.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                            inputTransactionIUS.jTableIUS.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),this.iusFromDB.chargedLevel.tahun < profil.currentLevel.tahun);
 
                         iusTransactionDetails.add(iusTransactionDetail);
+                        if(iusTransactionDetail.piutang)
+                                 Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, iusTransactionDetail);
                     }
                     if(inputTransactionIUS.iDDAmounts.get(i) > 0f){
                         IUSTransactionDetail iusTransactionDetail = new IUSTransactionDetail(iusTDetailUUID, 
@@ -4800,9 +4825,11 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                             iksFromDB.id, 
                                                                                             clerk.id, 
                                                                                             transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (inputTransactionIKS.iKSAmounts.get(i)), TransactionDetail.PaymentMethod.CASH,
-                                                                                            inputTransactionIKS.jTableIKS.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                            inputTransactionIKS.jTableIKS.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),this.iksFromDB.chargedLevel.tahun < profil.currentLevel.tahun);
 
                         iksTransactionDetails.add(iksTransactionDetail);
+                        if(iksTransactionDetail.piutang)
+                                 Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, iksTransactionDetail);
                     }
                     if(inputTransactionIKS.iDDAmounts.get(i) > 0f){
                         IKSTransactionDetail iksTransactionDetail = new IKSTransactionDetail(iksTDetailUUID, 
@@ -4882,9 +4909,11 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                                 pvtFromDB.id, 
                                                                                                 clerk.id, 
                                                                                                 transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (inputTransactionPVT.pVTAmounts.get(i)), TransactionDetail.PaymentMethod.CASH,
-                                                                                                "Praktikum".concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                                "Praktikum".concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),this.pvtFromDB.chargedLevel.tahun < profil.currentLevel.tahun);
 
                             pvtTransactionDetails.add(pvtTransactionDetail);
+                            if(pvtTransactionDetail.piutang)
+                                 Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, pvtTransactionDetail);
                         }
                         if(inputTransactionPVT.iDDAmounts.get(i) > 0f){
                             PVTTransactionDetail pvtTransactionDetail = new PVTTransactionDetail(pvtTDetailUUID, 
@@ -4956,9 +4985,11 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                                 osisFromDB.id, 
                                                                                                 clerk.id, 
                                                                                                 transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (inputTransactionOSIS.oSISAmounts.get(i)), TransactionDetail.PaymentMethod.CASH,
-                                                                                                inputTransactionOSIS.jTableOSIS.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                                inputTransactionOSIS.jTableOSIS.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),this.osisFromDB.chargedLevel.tahun < profil.currentLevel.tahun);
 
                             osisTransactionDetails.add(osisTransactionDetail);
+                            if(osisTransactionDetail.piutang)
+                                 Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, osisTransactionDetail);
                         }
                         if(inputTransactionOSIS.iDDAmounts.get(i) > 0f){
                             OSISTransactionDetail osisTransactionDetail = new OSISTransactionDetail(osisTDetailUUID, 
