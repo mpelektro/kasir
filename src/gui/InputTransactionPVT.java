@@ -42,6 +42,7 @@ public class InputTransactionPVT extends javax.swing.JFrame {
     private ComboBoxModel tahunComboBoxModel;
     private String tunggakanPVTString = new String("");
     private String tunggakanPVTEachAmountString = new String("");
+    private float pvtDebt;
     /**
      * Creates new form InputTransactionPVT
      */
@@ -79,6 +80,7 @@ public class InputTransactionPVT extends javax.swing.JFrame {
         jButtonBayarIUS = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jFormattedTextFieldIDDSaldo = new javax.swing.JFormattedTextField();
+        jTextFieldPvtDebt = new javax.swing.JFormattedTextField();
 
         setTitle(org.openide.util.NbBundle.getMessage(InputTransactionPVT.class, "InputTransactionPVT.title")); // NOI18N
 
@@ -142,6 +144,10 @@ public class InputTransactionPVT extends javax.swing.JFrame {
         jFormattedTextFieldIDDSaldo.setText(org.openide.util.NbBundle.getMessage(InputTransactionPVT.class, "InputTransactionPVT.jFormattedTextFieldIDDSaldo.text")); // NOI18N
         jFormattedTextFieldIDDSaldo.setEnabled(false);
 
+        jTextFieldPvtDebt.setEditable(false);
+        jTextFieldPvtDebt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
+        jTextFieldPvtDebt.setText(org.openide.util.NbBundle.getMessage(InputTransactionPVT.class, "InputTransactionPVT.jTextFieldPvtDebt.text")); // NOI18N
+
         javax.swing.GroupLayout jPanelIPPLayout = new javax.swing.GroupLayout(jPanelIPP);
         jPanelIPP.setLayout(jPanelIPPLayout);
         jPanelIPPLayout.setHorizontalGroup(
@@ -150,7 +156,7 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                 .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelIPPLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane5))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE))
                     .addGroup(jPanelIPPLayout.createSequentialGroup()
                         .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelIPPLayout.createSequentialGroup()
@@ -162,8 +168,10 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                                 .addGap(29, 29, 29)
                                 .addComponent(jLabelTahun)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxTahun, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldPvtDebt)
+                                    .addComponent(jComboBoxTahun, 0, 101, Short.MAX_VALUE))
+                                .addGap(12, 12, 12)
                                 .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel2))
@@ -171,7 +179,7 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                                 .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jUnpaidPVT, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jFormattedTextFieldIDDSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 33, Short.MAX_VALUE)))
+                        .addGap(0, 31, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelIPPLayout.setVerticalGroup(
@@ -187,7 +195,8 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jFormattedTextFieldIDDSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldIDDSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPvtDebt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -214,6 +223,7 @@ public class InputTransactionPVT extends javax.swing.JFrame {
         try {
             this.tableModelPVT = (DefaultTableModel) buildPVTTableModel(this.profil, this.tahunPVT.get(jComboBoxTahun.getSelectedIndex()));
             jTablePVT.setModel(this.tableModelPVT);
+            jTextFieldPvtDebt.setValue(pvtDebt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (KasirException ex) {
@@ -227,6 +237,7 @@ public class InputTransactionPVT extends javax.swing.JFrame {
             if (this.jComboBoxTahun.getSelectedItem() != null) {
                 this.tableModelPVT = (DefaultTableModel) buildPVTTableModel(this.profil, this.tahunPVT.get(jComboBoxTahun.getSelectedIndex()));
                 jTablePVT.setModel(this.tableModelPVT);
+                jTextFieldPvtDebt.setValue(pvtDebt);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -388,6 +399,7 @@ public class InputTransactionPVT extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelIPP;
     private javax.swing.JScrollPane jScrollPane5;
     public javax.swing.JTable jTablePVT;
+    private javax.swing.JFormattedTextField jTextFieldPvtDebt;
     private javax.swing.JTextField jUnpaidPVT;
     // End of variables declaration//GEN-END:variables
 
@@ -404,14 +416,14 @@ public class InputTransactionPVT extends javax.swing.JFrame {
        pvtFromDB = new PVT();
        float amountPVTinTable;
        float amountPVTinTDetail;
-       
+       pvtDebt = 0f;
        if(searchResultMap.size() > 0){
         for(Map.Entry<Long, PVT> entry: searchResultMap.entrySet()){
             for(int j =0 ; j< entry.getValue().entries.size(); j++){
                 data[j][0]= namaBulan[j];//entry.getValue().entries.get(j).period;
                 data[j][1]= entry.getValue().entries.get(j).amount - calculatePaidPVT(entry.getValue().entries.get(j).transactDetailIDs); // ANEH NIH MASA BEGINI, DI KALI DUA SIH?
                 amountPVTinTable = entry.getValue().entries.get(j).amount;
-                
+                pvtDebt += entry.getValue().entries.get(j).debt;
                 //if(jTable2 != null){data[j][2]= jTable2.getModel().getValueAt(j,2);}else{data[j][2]= new Boolean(false);}
                 //if(entry.getValue().entries.get(j).transactDetailIDs.size() > 0){
                 if(isPVTEnough(entry.getValue().entries.get(j).transactDetailIDs, amountPVTinTable)){        
@@ -626,8 +638,8 @@ private ComboBoxModel buildPVTtahunComboBoxModel(Profil profil) throws SQLExcept
        int i = 0;
        if(searchResultMap.size() > 0){
         for(Map.Entry<Long, PVT> entry: searchResultMap.entrySet()){
-            data[i][0]= entry.getValue().entries.get(i);
-            data[i][1]= entry.getValue().entries.get(i).amount;
+            data[i][0]= entry.getValue().entries.get(0);
+            data[i][1]= entry.getValue().entries.get(0).amount;
             this.tahunPVT.add(entry.getValue().chargedLevel.tahun);
             tahunAjaran.add(String.valueOf(entry.getValue().chargedLevel.tahun).concat(" - ").concat(String.valueOf(entry.getValue().chargedLevel.tahun+1)));
             i++;

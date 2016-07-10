@@ -407,7 +407,7 @@ public class InputTransactionIKS extends javax.swing.JFrame {
        Set<IKS> iksFilters = new HashSet<>();
        ArrayList<Entry> entries = new ArrayList<>();
        iksFilters.clear();
-       iksFilters.add(new IKS(profil.noInduk, new Level(null,null,null,0), entries));
+       iksFilters.add(new IKS(profil.noInduk, new Level(null,null,null,tahun), entries));
        Map<Long, IKS> searchResultMap = Control.exactFilterSelectIurans(Iuran.Tipe.IKS, iksFilters);
        Object[][] data = new Object[1][7];
        int i = 0;
@@ -416,13 +416,21 @@ public class InputTransactionIKS extends javax.swing.JFrame {
        float amountIKSinTable;
        float amountIKSinTDetail;
        iksDebt = 0f;
+       Calendar calendarRunning = Calendar.getInstance();
+       int targetMonth = calendarRunning.get(Calendar.MONTH);
+       int targetYear = calendarRunning.get(Calendar.YEAR);
+       
        if(searchResultMap.size() > 0){
         for(Map.Entry<Long, IKS> entry: searchResultMap.entrySet()){
             for(int j =0 ; j< entry.getValue().entries.size(); j++){
                 data[j][0]= namaBulan[j];//entry.getValue().entries.get(j).period;
                 data[j][1]= entry.getValue().entries.get(j).amount - calculatePaidIKS(entry.getValue().entries.get(j).transactDetailIDs); // ANEH NIH MASA BEGINI, DI KALI DUA SIH?
                 amountIKSinTable = entry.getValue().entries.get(j).amount;
-                iksDebt += entry.getValue().entries.get(j).debt;
+                if(entry.getValue().chargedLevel.tahun < targetYear){
+                     iksDebt += entry.getValue().entries.get(j).debt;
+                }else if(entry.getValue().chargedLevel.tahun == targetYear && j < targetMonth){
+                     iksDebt += entry.getValue().entries.get(j).debt;
+                }
                 //if(jTable2 != null){data[j][2]= jTable2.getModel().getValueAt(j,2);}else{data[j][2]= new Boolean(false);}
                 //if(entry.getValue().entries.get(j).transactDetailIDs.size() > 0){
                 if(isIKSEnough(entry.getValue().entries.get(j).transactDetailIDs, amountIKSinTable)){        

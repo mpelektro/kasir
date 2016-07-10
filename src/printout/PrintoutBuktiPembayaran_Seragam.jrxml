@@ -20,7 +20,7 @@
 FROM
      `SeragamTransaction` SeragamTransaction
 WHERE
-     SeragamTransaction.`IDTransactionSummary` = $P{Param_Seragam_TransactionSummary_ID}]]>
+     SeragamTransaction.`IDTransactionSummary` = $P{Param_Seragam_TransactionSummary_ID} AND SeragamTransaction.`Piutang` = false]]>
 	</queryString>
 	<field name="SeragamTransaction_ID" class="java.math.BigInteger"/>
 	<field name="SeragamTransaction_UUID" class="java.lang.String"/>

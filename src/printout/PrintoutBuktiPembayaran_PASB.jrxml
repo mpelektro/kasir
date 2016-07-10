@@ -20,7 +20,7 @@
 FROM
      `PASBTransaction` PASBTransaction
 WHERE
-     PASBTransaction.`IDTransactionSummary` = $P{Param_PASB_TransactionSummary_ID}]]>
+     PASBTransaction.`IDTransactionSummary` = $P{Param_PASB_TransactionSummary_ID} AND PASBTransaction.`Piutang` = false]]>
 	</queryString>
 	<field name="PASBTransaction_ID" class="java.math.BigInteger"/>
 	<field name="PASBTransaction_UUID" class="java.lang.String"/>

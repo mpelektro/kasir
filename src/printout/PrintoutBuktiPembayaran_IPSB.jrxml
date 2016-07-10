@@ -20,7 +20,7 @@
 FROM
      `IPSBTransaction` IPSBTransaction
 WHERE
-     IPSBTransaction.`IDTransactionSummary` = $P{Param_IPSB_TransactionSummary_ID}]]>
+     IPSBTransaction.`IDTransactionSummary` = $P{Param_IPSB_TransactionSummary_ID} AND IPSBTransaction.`Piutang` = false]]>
 	</queryString>
 	<field name="IPSBTransaction_ID" class="java.math.BigInteger"/>
 	<field name="IPSBTransaction_UUID" class="java.lang.String"/>

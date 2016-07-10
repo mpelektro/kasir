@@ -20,7 +20,7 @@
 FROM
      `IKSTransaction` IKSTransaction
 WHERE
-	IKSTransaction.`IDTransactionSummary` = $P{Param_IKS_TransactionSummary_ID}]]>
+	IKSTransaction.`IDTransactionSummary` = $P{Param_IKS_TransactionSummary_ID} AND IKSTransaction.`Piutang` = false]]>
 	</queryString>
 	<field name="IKSTransaction_ID" class="java.math.BigInteger"/>
 	<field name="IKSTransaction_UUID" class="java.lang.String"/>

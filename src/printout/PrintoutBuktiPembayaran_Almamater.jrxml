@@ -20,7 +20,7 @@
 FROM
      `AlmamaterTransaction` AlmamaterTransaction
 WHERE
-     AlmamaterTransaction.`IDTransactionSummary` = $P{Param_Almamater_TransactionSummary_ID}]]>
+     AlmamaterTransaction.`IDTransactionSummary` = $P{Param_Almamater_TransactionSummary_ID} AND AlmamaterTransaction.`Piutang` = false]]>
 	</queryString>
 	<field name="AlmamaterTransaction_ID" class="java.math.BigInteger"/>
 	<field name="AlmamaterTransaction_UUID" class="java.lang.String"/>

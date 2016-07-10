@@ -20,7 +20,7 @@
 FROM
      `PVTTransaction` PVTTransaction
 WHERE
-	PVTTransaction.`IDTransactionSummary` = $P{Param_PVT_TransactionSummary_ID}]]>
+	PVTTransaction.`IDTransactionSummary` = $P{Param_PVT_TransactionSummary_ID} AND PVTTransaction.`Piutang` = false]]>
 	</queryString>
 	<field name="PVTTransaction_ID" class="java.math.BigInteger"/>
 	<field name="PVTTransaction_UUID" class="java.lang.String"/>

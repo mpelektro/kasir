@@ -20,7 +20,7 @@
 FROM
      `IUATransaction` IUATransaction
 WHERE
-     IUATransaction.`IDTransactionSummary` = $P{Param_IUA_TransactionSummary_ID}]]>
+     IUATransaction.`IDTransactionSummary` = $P{Param_IUA_TransactionSummary_ID} AND IUATransaction.`Piutang` = false]]>
 	</queryString>
 	<field name="IUATransaction_ID" class="java.math.BigInteger"/>
 	<field name="IUATransaction_UUID" class="java.lang.String"/>

@@ -20,7 +20,7 @@
 FROM
      `AttributeTransaction` AttributeTransaction
 WHERE
-     AttributeTransaction.`IDTransactionSummary` = $P{Param_Attribute_TransactionSummary_ID}]]>
+     AttributeTransaction.`IDTransactionSummary` = $P{Param_Attribute_TransactionSummary_ID} AND AttributeTransaction.`Piutang` = false]]>
 	</queryString>
 	<field name="AttributeTransaction_ID" class="java.math.BigInteger"/>
 	<field name="AttributeTransaction_UUID" class="java.lang.String"/>

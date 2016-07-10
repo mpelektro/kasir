@@ -20,7 +20,7 @@
 FROM
      `OSISTransaction` OSISTransaction
 WHERE
-     OSISTransaction.`IDTransactionSummary` = $P{Param_OSIS_TransactionSummary_ID}]]>
+     OSISTransaction.`IDTransactionSummary` = $P{Param_OSIS_TransactionSummary_ID} AND OSISTransaction.`Piutang` = false]]>
 	</queryString>
 	<field name="OSISTransaction_ID" class="java.math.BigInteger"/>
 	<field name="OSISTransaction_UUID" class="java.lang.String"/>
