@@ -628,6 +628,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBatalActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jButtonBatal.setEnabled(isPPDB);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

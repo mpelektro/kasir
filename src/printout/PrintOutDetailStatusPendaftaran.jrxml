@@ -49,23 +49,23 @@
 		</parameter>
 		<queryString>
 			<![CDATA[SELECT
-     Profil.`NomorInduk` AS profil_NomorInduk,
-     Profil.`Nama` AS profil_Nama,
-     Profil.`AsalSekolah` AS profil_AsalSekolah,
-     Profil.`TanggalLahir` AS profil_TanggalLahir,
-     Profil.`TempatLahir` AS profil_TempatLahir,
-     Profil.`Alamat` AS profil_Alamat,
-     Profil.`NamaAyah` AS profil_NamaAyah,
-     Profil.`NamaIbu` AS profil_NamaIbu,
-     Profil.`Telpon1` AS profil_Telpon1,
-     Profil.`CurrentLevel` AS profil_CurrentLevel,
-     Profil.`TanggalMasuk` AS profil_TanggalMasuk,
-     Profil.`Gelombang` AS profil_Gelombang,
-     Profil.`StatusPendaftaran` AS profil_StatusPendaftaran,
-     Profil.`JenisKelamin` AS profil_JenisKelamin,
-     Profil.`Agama` AS profil_Agama
+     Profil.`NomorInduk` AS Profil_NomorInduk,
+     Profil.`Nama` AS Profil_Nama,
+     Profil.`AsalSekolah` AS Profil_AsalSekolah,
+     Profil.`TanggalLahir` AS Profil_TanggalLahir,
+     Profil.`TempatLahir` AS Profil_TempatLahir,
+     Profil.`Alamat` AS Profil_Alamat,
+     Profil.`NamaAyah` AS Profil_NamaAyah,
+     Profil.`NamaIbu` AS Profil_NamaIbu,
+     Profil.`Telpon1` AS Profil_Telpon1,
+     Profil.`CurrentLevel` AS Profil_CurrentLevel,
+     Profil.`TanggalMasuk` AS Profil_TanggalMasuk,
+     Profil.`Gelombang` AS Profil_Gelombang,
+     Profil.`StatusPendaftaran` AS Profil_StatusPendaftaran,
+     Profil.`JenisKelamin` AS Profil_JenisKelamin,
+     Profil.`Agama` AS Profil_Agama
 FROM
-     `profil` Profil
+     `Profil` Profil
 WHERE Profil.`StatusPendaftaran` = $P{Param_StatusPendaftaran1}]]>
 		</queryString>
 		<field name="profil_NomorInduk" class="java.lang.String"/>

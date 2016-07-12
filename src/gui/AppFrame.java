@@ -507,6 +507,7 @@ public class AppFrame extends javax.swing.JFrame {
         });
         jToolBar3.add(jButtonRips);
 
+        jButtonBatal.setEnabled(isPPDB);
         jButtonBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Warning.png"))); // NOI18N
         jButtonBatal.setText(org.openide.util.NbBundle.getMessage(AppFrame.class, "AppFrame.jButtonBatal.text")); // NOI18N
         jButtonBatal.setFocusable(false);
@@ -1101,7 +1102,7 @@ public class AppFrame extends javax.swing.JFrame {
            jButtonBatal.setEnabled(false);
        }else{
            jButtonTransaksi.setEnabled(true);
-           jButtonBatal.setEnabled(true);
+           jButtonBatal.setEnabled(isPPDB);
        }
        
        String columnNames[] = {"Nama Iuran", "Jumlah Tunggakan", "Catatan"};
