@@ -151,13 +151,13 @@ WHERE Profil.`StatusPendaftaran` LIKE $P{Param_StatusPendaftaran0}]]>
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="802" height="56" uuid="739f4d27-419d-4600-8c50-000dae89adb6"/>
+			<textField>
+				<reportElement x="0" y="0" width="802" height="79" uuid="366ea294-d330-4808-9dea-84e87cc8e870"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="36"/>
+					<font size="24"/>
 				</textElement>
-				<text><![CDATA[Berita Acara Status Pendaftaran]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["Berita Acara Status Pendaftaran ".concat($P{Param_StatusPendaftaran0})]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<columnHeader>
