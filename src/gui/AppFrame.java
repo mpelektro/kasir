@@ -2791,6 +2791,53 @@ public class AppFrame extends javax.swing.JFrame {
         exporter.exportReport();
     }
     
+    public void printDetailBeritaAcara(Clerk cl, String statusPendaftaran) throws JRException, PrinterException, SQLException {
+        
+        HashMap jasperParameter = new HashMap();
+        //jasperParameter.put("PARAM_CLERK_ID", Long.valueOf(cl.id));
+         printout.StatusPendaftaran pb = new StatusPendaftaran();
+        Connection connection = pb.establishConnection(); 
+        //jasperParameter.put("Param_Level", "%".concat(jComboBoxLevel1.getSelectedItem().toString()).concat("%"));
+        
+        jasperParameter.put("Param_StatusPendaftaran0", statusPendaftaran);
+        jasperParameter.put("Param_ClerkName", cl.nama);
+        
+         String fileName = "C://printout//PrintOutBeritaAcaralStatusPendaftaran.jrxml";
+            String filetoPrint = "C://printout//PrintOutBeritaAcaralStatusPendaftaran.jrprint";
+            String filetoFill = "C://printout//PrintOutBeritaAcaralStatusPendaftaran.jasper";
+            //String filePdf = "C://printout//PrintOutReportPerKasir.pdf";
+            String filePdf = "C://printout//PrintOutBeritaAcaralStatusPendaftaran.pdf";
+       JasperCompileManager.compileReportToFile(fileName);
+            
+            
+            JasperFillManager.fillReportToFile(filetoFill, jasperParameter , connection);
+            JasperPrint jp = JasperFillManager.fillReport(filetoFill, jasperParameter, connection);
+            JasperViewer.viewReport(jp, false);
+            JasperExportManager.exportReportToPdfFile(jp, filePdf);
+            JasperPrintManager.printReport(filetoPrint, true);
+            
+            
+            jasperReport = JasperCompileManager.compileReport
+        ("C://printout//PrintOutBeritaAcaralStatusPendaftaran.jrxml");
+
+        // filling report with data from data source
+
+        jasperPrint = JasperFillManager.fillReport(jasperReport,jasperParameter, connection); 
+        // exporting process
+        // 1- export to PDF
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "C://printout//PrintOutBeritaAcaralStatusPendaftaran.pdf");
+
+        // 2- export to HTML
+        JasperExportManager.exportReportToHtmlFile(jasperPrint, "C://printout//PrintOutBeritaAcaralStatusPendaftaran.html" ); 
+
+        // 3- export to Excel sheet
+        JRXlsExporter exporter = new JRXlsExporter();
+        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "C://printout//PrintOutBeritaAcaralStatusPendaftaran.xls" );
+
+        exporter.exportReport();
+    }
+    
     private ArrayList<BigDecimal> farmIPP(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();

@@ -63,9 +63,9 @@ public class DialogStatusPendaftaran extends JPanel {
     JLabel label;
     ImageIcon icon = createImageIcon("images/middle.gif");
     AppFrame appFrame;
-    String simpleDialogDesc = "Pilih Print Out";
+    String simpleDialogDesc = "Pilih Print Out Status Pendaftaran";
     String iconDesc = "A JOptionPane has its choice of icons";
-    String moreDialogDesc = "Some more dialogs";
+    String moreDialogDesc = "Pilih Print Out Berita Acara";
     CustomDialog customDialog;
     
     /** Creates the GUI shown inside the frame's content pane. */
@@ -93,9 +93,9 @@ public class DialogStatusPendaftaran extends JPanel {
         tabbedPane.addTab("Status Pendaftaran", null,
                           frequentPanel,
                           simpleDialogDesc); //tooltip text
-//        tabbedPane.addTab("More Dialogs", null,
-//                          featurePanel,
-//                          moreDialogDesc); //tooltip text
+        tabbedPane.addTab("Berita Acara", null,
+                          featurePanel,
+                          moreDialogDesc); //tooltip text
 //        tabbedPane.addTab("Dialog Icons", null,
 //                          iconPanel,
 //                          iconDesc); //tooltip text
@@ -386,7 +386,7 @@ public class DialogStatusPendaftaran extends JPanel {
 
     /** Creates the panel shown by the second tab. */
     private JPanel createFeatureDialogBox() {
-        final int numButtons = 5;
+        final int numButtons = 4;
         JRadioButton[] radioButtons = new JRadioButton[numButtons];
         final ButtonGroup group = new ButtonGroup();
 
@@ -398,141 +398,91 @@ public class DialogStatusPendaftaran extends JPanel {
         final String customOptionCommand = "customoption";
         final String nonModalCommand = "nonmodal";
 
-        radioButtons[0] = new JRadioButton("Pick one of several choices");
+        radioButtons[0] = new JRadioButton("Daftar");
         radioButtons[0].setActionCommand(pickOneCommand);
 
-        radioButtons[1] = new JRadioButton("Enter some text");
+        radioButtons[1] = new JRadioButton("Proses");
         radioButtons[1].setActionCommand(textEnteredCommand);
 
-        radioButtons[2] = new JRadioButton("Non-auto-closing dialog");
+        radioButtons[2] = new JRadioButton("Lunas");
         radioButtons[2].setActionCommand(nonAutoCommand);
 
-        radioButtons[3] = new JRadioButton("Input-validating dialog "
-                                           + "(with custom message area)");
+        radioButtons[3] = new JRadioButton("Batal");
         radioButtons[3].setActionCommand(customOptionCommand);
 
-        radioButtons[4] = new JRadioButton("Non-modal dialog");
-        radioButtons[4].setActionCommand(nonModalCommand);
+//        radioButtons[4] = new JRadioButton("Non-modal dialog");
+//        radioButtons[4].setActionCommand(nonModalCommand);
 
         for (int i = 0; i < numButtons; i++) {
             group.add(radioButtons[i]);
         }
         radioButtons[0].setSelected(true);
 
-        showItButton = new JButton("Show it!");
+        showItButton = new JButton("Print");
         showItButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String command = group.getSelection().getActionCommand();
 
                 //pick one of many
                 if (command == pickOneCommand) {
-                    Object[] possibilities = {"ham", "spam", "yam"};
-                    String s = (String)JOptionPane.showInputDialog(appFrame,
-                                        "Complete the sentence:\n"
-                                        + "\"Green eggs and...\"",
-                                        "Customized Dialog",
-                                        JOptionPane.PLAIN_MESSAGE,
-                                        icon,
-                                        possibilities,
-                                        "ham");
-
-                    //If a string was returned, say so.
-                    if ((s != null) && (s.length() > 0)) {
-                        setLabel("Green eggs and... " + s + "!");
-                        return;
+                    try {
+                        //                    JOptionPane.showMessageDialog(appFrame,
+//                                "Eggs aren't supposed to be green.");
+                        appFrame.printDetailBeritaAcara(Clerk.current, "DAFTAR");
+//yes/no dialog
+                    } catch (JRException ex) {
+                        Exceptions.printStackTrace(ex);
+                    } catch (PrinterException ex) {
+                        Exceptions.printStackTrace(ex);
+                    } catch (SQLException ex) {
+                        Exceptions.printStackTrace(ex);
                     }
-
-                    //If you're here, the return value was null/empty.
-                    setLabel("Come on, finish the sentence!");
 
                 //text input
                 } else if (command == textEnteredCommand) {
-                    String s = (String)JOptionPane.showInputDialog(appFrame,
-                                        "Complete the sentence:\n"
-                                        + "\"Green eggs and...\"",
-                                        "Customized Dialog",
-                                        JOptionPane.PLAIN_MESSAGE,
-                                        icon,
-                                        null,
-                                        "ham");
-
-                    //If a string was returned, say so.
-                    if ((s != null) && (s.length() > 0)) {
-                        setLabel("Green eggs and... " + s + "!");
-                        return;
+                    try {
+                        //                    JOptionPane.showMessageDialog(appFrame,
+//                                "Eggs aren't supposed to be green.");
+                        appFrame.printDetailBeritaAcara(Clerk.current, "PROSES");
+//yes/no dialog
+                    } catch (JRException ex) {
+                        Exceptions.printStackTrace(ex);
+                    } catch (PrinterException ex) {
+                        Exceptions.printStackTrace(ex);
+                    } catch (SQLException ex) {
+                        Exceptions.printStackTrace(ex);
                     }
-
-                    //If you're here, the return value was null/empty.
-                    setLabel("Come on, finish the sentence!");
 
                 //non-auto-closing dialog
                 } else if (command == nonAutoCommand) {
-                    final JOptionPane optionPane = new JOptionPane(
-                                    "The only way to close this dialog is by\n"
-                                    + "pressing one of the following buttons.\n"
-                                    + "Do you understand?",
-                                    JOptionPane.QUESTION_MESSAGE,
-                                    JOptionPane.YES_NO_OPTION);
-
-                    //You can't use pane.createDialog() because that
-                    //method sets up the JDialog with a property change
-                    //listener that automatically closes the window
-                    //when a button is clicked.
-                    final JDialog dialog = new JDialog(appFrame,
-                                                 "Click a button",
-                                                 true);
-                    dialog.setContentPane(optionPane);
-                    dialog.setDefaultCloseOperation(
-                        JDialog.DO_NOTHING_ON_CLOSE);
-                    dialog.addWindowListener(new WindowAdapter() {
-                        public void windowClosing(WindowEvent we) {
-                            setLabel("Thwarted user attempt to close window.");
-                        }
-                    });
-                    optionPane.addPropertyChangeListener(
-                        new PropertyChangeListener() {
-                            public void propertyChange(PropertyChangeEvent e) {
-                                String prop = e.getPropertyName();
-
-                                if (dialog.isVisible()
-                                 && (e.getSource() == optionPane)
-                                 && (JOptionPane.VALUE_PROPERTY.equals(prop))) {
-                                    //If you were going to check something
-                                    //before closing the window, you'd do
-                                    //it here.
-                                    dialog.setVisible(false);
-                                }
-                            }
-                        });
-                    dialog.pack();
-                    dialog.setLocationRelativeTo(appFrame);
-                    dialog.setVisible(true);
-
-                    int value = ((Integer)optionPane.getValue()).intValue();
-                    if (value == JOptionPane.YES_OPTION) {
-                        setLabel("Good.");
-                    } else if (value == JOptionPane.NO_OPTION) {
-                        setLabel("Try using the window decorations "
-                                 + "to close the non-auto-closing dialog. "
-                                 + "You can't!");
-                    } else {
-                        setLabel("Window unavoidably closed (ESC?).");
+                    try {
+                        //                    JOptionPane.showMessageDialog(appFrame,
+//                                "Eggs aren't supposed to be green.");
+                        appFrame.printDetailBeritaAcara(Clerk.current, "LUNAS");
+//yes/no dialog
+                    } catch (JRException ex) {
+                        Exceptions.printStackTrace(ex);
+                    } catch (PrinterException ex) {
+                        Exceptions.printStackTrace(ex);
+                    } catch (SQLException ex) {
+                        Exceptions.printStackTrace(ex);
                     }
 
                 //non-auto-closing dialog with custom message area
                 //NOTE: if you don't intend to check the input,
                 //then just use showInputDialog instead.
                 } else if (command == customOptionCommand) {
-                    customDialog.setLocationRelativeTo(appFrame);
-                    customDialog.setVisible(true);
-
-                    String s = customDialog.getValidatedText();
-                    if (s != null) {
-                        //The text is valid.
-                        setLabel("Congratulations!  "
-                                 + "You entered \""
-                                 + s
-                                 + "\".");
+                    try {
+                        //                    JOptionPane.showMessageDialog(appFrame,
+//                                "Eggs aren't supposed to be green.");
+                        appFrame.printDetailBeritaAcara(Clerk.current, "BATAL");
+//yes/no dialog
+                    } catch (JRException ex) {
+                        Exceptions.printStackTrace(ex);
+                    } catch (PrinterException ex) {
+                        Exceptions.printStackTrace(ex);
+                    } catch (SQLException ex) {
+                        Exceptions.printStackTrace(ex);
                     }
 
                 //non-modal dialog
