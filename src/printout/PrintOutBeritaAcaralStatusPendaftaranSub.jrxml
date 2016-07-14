@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutBeritaAcaralStatusPendaftaranSub" pageWidth="802" pageHeight="22" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="79c6a0ae-f916-4b98-a520-bbea9d5ba0a0">
-	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.zoom" value="1.4641000000000013"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="Param_NomorInduk" class="java.lang.String"/>
@@ -71,19 +71,19 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="38" y="0" width="188" height="20" uuid="8a6aa65a-7c84-49aa-9893-7e6bceadcfc8"/>
+				<reportElement x="38" y="0" width="178" height="20" uuid="8a6aa65a-7c84-49aa-9893-7e6bceadcfc8"/>
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{profil_Nama}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="37" height="20" uuid="361fd078-1884-4e7f-a6b3-7f6e6c558a1e"/>
+				<reportElement x="1" y="0" width="36" height="20" uuid="361fd078-1884-4e7f-a6b3-7f6e6c558a1e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{profil_NomorInduk}]]></textFieldExpression>
 			</textField>
 			<subreport>
-				<reportElement x="226" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="7719a88b-9479-4b75-b81e-b0b90eda0c54"/>
+				<reportElement x="217" y="0" width="49" height="20" isPrintWhenDetailOverflows="true" uuid="7719a88b-9479-4b75-b81e-b0b90eda0c54"/>
 				<subreportParameter name="ParamNomorInduk">
 					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -91,7 +91,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranIPP.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="276" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="2f09f728-abe9-429f-8a80-305ee97ea877"/>
+				<reportElement x="267" y="0" width="62" height="20" isPrintWhenDetailOverflows="true" uuid="2f09f728-abe9-429f-8a80-305ee97ea877"/>
 				<subreportParameter name="ParamNomorInduk">
 					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -99,7 +99,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranIPSP.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="326" y="0" width="50" height="20" uuid="a4dab8a6-6cd7-4513-8da5-6732f8da21d8"/>
+				<reportElement x="330" y="0" width="49" height="20" uuid="a4dab8a6-6cd7-4513-8da5-6732f8da21d8"/>
 				<subreportParameter name="ParamNomorInduk">
 					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -107,7 +107,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranIKS.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="376" y="0" width="50" height="20" uuid="f92aed39-9f9b-4a4d-87e1-5bc5f7e5291b"/>
+				<reportElement x="380" y="0" width="49" height="20" uuid="f92aed39-9f9b-4a4d-87e1-5bc5f7e5291b"/>
 				<subreportParameter name="ParamNomorInduk">
 					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -115,7 +115,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranPASB.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="426" y="0" width="50" height="20" uuid="2d5b7a95-3f0d-4d0f-8910-0b8d743c6ad2"/>
+				<reportElement x="430" y="0" width="49" height="20" uuid="2d5b7a95-3f0d-4d0f-8910-0b8d743c6ad2"/>
 				<subreportParameter name="ParamNomorInduk">
 					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -123,7 +123,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranOSIS.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="476" y="0" width="50" height="20" uuid="85a676fd-ff7a-40e3-92c7-89c04d48c034"/>
+				<reportElement x="480" y="0" width="49" height="20" uuid="85a676fd-ff7a-40e3-92c7-89c04d48c034"/>
 				<subreportParameter name="ParamNomorInduk">
 					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -131,7 +131,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranAttribute.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="526" y="0" width="50" height="20" uuid="8d86df59-3986-4ad8-bbeb-bc386e4b71c0"/>
+				<reportElement x="530" y="0" width="49" height="20" uuid="8d86df59-3986-4ad8-bbeb-bc386e4b71c0"/>
 				<subreportParameter name="ParamNomorInduk">
 					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -139,7 +139,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranSeragam.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="576" y="0" width="50" height="20" uuid="419c3105-f65a-41d1-af8a-dbfc2c7d824b"/>
+				<reportElement x="580" y="0" width="49" height="20" uuid="419c3105-f65a-41d1-af8a-dbfc2c7d824b"/>
 				<subreportParameter name="ParamNomorInduk">
 					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -147,28 +147,12 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranAlmamater.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="626" y="0" width="50" height="20" uuid="ed45b740-be17-4edc-8319-b2e4fa5cf153"/>
+				<reportElement x="630" y="1" width="49" height="19" uuid="ed45b740-be17-4edc-8319-b2e4fa5cf153"/>
 				<subreportParameter name="ParamNomorInduk">
 					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranPVT.jasper"]]></subreportExpression>
-			</subreport>
-			<subreport>
-				<reportElement x="726" y="0" width="76" height="20" uuid="e25de7de-e859-44f7-8e0e-df96161a9647"/>
-				<subreportParameter name="ParamNomorInduk">
-					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
-				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranTSum.jasper"]]></subreportExpression>
-			</subreport>
-			<subreport>
-				<reportElement x="676" y="0" width="50" height="20" uuid="9eb956c6-6bef-40e2-b69d-d713091b0ab9"/>
-				<subreportParameter name="ParamNomorInduk">
-					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
-				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranIPSB.jasper"]]></subreportExpression>
 			</subreport>
 			<line>
 				<reportElement x="0" y="0" width="1" height="20" uuid="a9312bdf-c154-4eb4-bd6c-8027d11ed7b0"/>
@@ -177,41 +161,57 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 				<reportElement x="37" y="0" width="1" height="20" uuid="880f1916-a1e9-49fb-99f1-87eb011b6b23"/>
 			</line>
 			<line>
-				<reportElement x="226" y="0" width="1" height="20" uuid="0fe9dc43-2336-4203-a05e-1b26793a2aa8"/>
+				<reportElement x="216" y="0" width="1" height="20" uuid="0fe9dc43-2336-4203-a05e-1b26793a2aa8"/>
 			</line>
 			<line>
-				<reportElement x="276" y="0" width="1" height="20" uuid="fb24755f-9191-4ad3-80a9-104f4324025a"/>
+				<reportElement x="266" y="0" width="1" height="20" uuid="fb24755f-9191-4ad3-80a9-104f4324025a"/>
 			</line>
 			<line>
-				<reportElement x="326" y="0" width="1" height="20" uuid="93a57ebc-4028-42fd-b1ec-e6a5f16c4eaa"/>
+				<reportElement x="329" y="0" width="1" height="20" uuid="93a57ebc-4028-42fd-b1ec-e6a5f16c4eaa"/>
 			</line>
 			<line>
-				<reportElement x="376" y="0" width="1" height="20" uuid="4e5984da-5eaf-4ce4-9261-68a799f0e717"/>
+				<reportElement x="379" y="0" width="1" height="20" uuid="4e5984da-5eaf-4ce4-9261-68a799f0e717"/>
 			</line>
 			<line>
-				<reportElement x="426" y="0" width="1" height="20" uuid="362960c0-5cc9-4df3-a1ca-336c503ab79e"/>
+				<reportElement x="429" y="0" width="1" height="20" uuid="362960c0-5cc9-4df3-a1ca-336c503ab79e"/>
 			</line>
 			<line>
-				<reportElement x="476" y="0" width="1" height="20" uuid="e3eb4153-f304-4660-9809-c19147633b28"/>
+				<reportElement x="479" y="0" width="1" height="20" uuid="e3eb4153-f304-4660-9809-c19147633b28"/>
 			</line>
 			<line>
-				<reportElement x="526" y="0" width="1" height="20" uuid="41bb859c-cc07-49a3-8723-b30c03348f8a"/>
+				<reportElement x="529" y="0" width="1" height="20" uuid="41bb859c-cc07-49a3-8723-b30c03348f8a"/>
 			</line>
 			<line>
-				<reportElement x="576" y="0" width="1" height="20" uuid="04ab62c9-b835-484e-8dcc-78487c4fbcac"/>
+				<reportElement x="579" y="0" width="1" height="20" uuid="04ab62c9-b835-484e-8dcc-78487c4fbcac"/>
 			</line>
 			<line>
-				<reportElement x="626" y="0" width="1" height="20" uuid="c5a434fb-a63b-466a-86f3-8eff1b444877"/>
+				<reportElement x="629" y="0" width="1" height="20" uuid="c5a434fb-a63b-466a-86f3-8eff1b444877"/>
 			</line>
 			<line>
-				<reportElement x="676" y="0" width="1" height="20" uuid="d971d298-6971-4943-926e-978182fb32c5"/>
+				<reportElement x="679" y="0" width="1" height="20" uuid="d971d298-6971-4943-926e-978182fb32c5"/>
 			</line>
 			<line>
-				<reportElement x="726" y="0" width="1" height="20" uuid="626e35da-40b4-4327-862b-1f00e2690b4a"/>
+				<reportElement x="729" y="0" width="1" height="20" uuid="626e35da-40b4-4327-862b-1f00e2690b4a"/>
 			</line>
 			<line>
 				<reportElement x="800" y="0" width="1" height="20" uuid="e831b8f7-4d5a-43db-bf54-d6474896a45a"/>
 			</line>
+			<subreport>
+				<reportElement x="730" y="0" width="70" height="20" uuid="e25de7de-e859-44f7-8e0e-df96161a9647"/>
+				<subreportParameter name="ParamNomorInduk">
+					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranTSum.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="680" y="0" width="49" height="20" uuid="9eb956c6-6bef-40e2-b69d-d713091b0ab9"/>
+				<subreportParameter name="ParamNomorInduk">
+					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranIPSB.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</detail>
 	<pageFooter>
