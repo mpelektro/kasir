@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutBeritaAcaraStatusPendaftaran" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4b3b8c3e-04f9-4af7-aa5f-7fa2df8ad442">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="Param_StatusPendaftaran0" class="java.lang.String">
+		<defaultValueExpression><![CDATA["LUNAS"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Param_ClerkName" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Nada\\Documents\\NetBeansProjects\\kasir\\src\\printout\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     Profil.`NomorInduk` AS Profil_NomorInduk,
+     Profil.`Nama` AS Profil_Nama,
+     Profil.`AsalSekolah` AS Profil_AsalSekolah,
+     Profil.`TanggalLahir` AS Profil_TanggalLahir,
+     Profil.`TempatLahir` AS Profil_TempatLahir,
+     Profil.`Alamat` AS Profil_Alamat,
+     Profil.`NamaAyah` AS Profil_NamaAyah,
+     Profil.`NamaIbu` AS Profil_NamaIbu,
+     Profil.`Telpon1` AS Profil_Telpon1,
+     Profil.`CurrentLevel` AS Profil_CurrentLevel,
+     Profil.`TanggalMasuk` AS Profil_TanggalMasuk,
+     Profil.`Gelombang` AS Profil_Gelombang,
+     Profil.`StatusPendaftaran` AS Profil_StatusPendaftaran,
+     Profil.`JenisKelamin` AS Profil_JenisKelamin,
+     Profil.`Agama` AS Profil_Agama
+FROM
+     `Profil` Profil
+WHERE Profil.`StatusPendaftaran` LIKE $P{Param_StatusPendaftaran0}]]>
+	</queryString>
+	<field name="Profil_NomorInduk" class="java.lang.String"/>
+	<field name="Profil_Nama" class="java.lang.String"/>
+	<field name="Profil_AsalSekolah" class="java.lang.String"/>
+	<field name="Profil_TanggalLahir" class="java.sql.Date"/>
+	<field name="Profil_TempatLahir" class="java.lang.String"/>
+	<field name="Profil_Alamat" class="java.lang.String"/>
+	<field name="Profil_NamaAyah" class="java.lang.String"/>
+	<field name="Profil_NamaIbu" class="java.lang.String"/>
+	<field name="Profil_Telpon1" class="java.lang.String"/>
+	<field name="Profil_CurrentLevel" class="java.lang.String"/>
+	<field name="Profil_TanggalMasuk" class="java.sql.Date"/>
+	<field name="Profil_Gelombang" class="java.lang.String"/>
+	<field name="Profil_StatusPendaftaran" class="java.lang.String"/>
+	<field name="Profil_JenisKelamin" class="java.lang.String"/>
+	<field name="Profil_Agama" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="56" uuid="739f4d27-419d-4600-8c50-000dae89adb6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="36"/>
+				</textElement>
+				<text><![CDATA[Berita Acara Status Pendaftaran]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="20" backcolor="#CCCCCC" uuid="95f26a17-fbd3-4403-a069-6692af6b48d3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="37" height="20" backcolor="#FFFFFF" uuid="baa03723-8cbe-4737-a606-f1b273effd9a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="0" width="189" height="20" backcolor="#CCCCCC" uuid="012caa38-70eb-44d0-bddd-303d7b11cddd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="0" width="50" height="20" backcolor="#CCCCCC" uuid="f390a184-0ba2-49e8-aec7-cdf9e5fb1956"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[IPP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="0" width="50" height="20" backcolor="#CCCCCC" uuid="402ec672-7759-4f6f-9bf2-f0bff2682ffd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[IPSP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="0" width="50" height="20" backcolor="#CCCCCC" uuid="b7a94965-d845-47d6-8322-8d8c5efa1eb6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[IKS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="0" width="50" height="20" backcolor="#CCCCCC" uuid="93abe572-20ac-4d6e-b670-9ec7ea5a3b9f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Daftar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="426" y="0" width="50" height="20" backcolor="#CCCCCC" uuid="7eb0ab3e-e5fb-4c17-a54a-9c40517d5d55"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[OSIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="0" width="50" height="20" backcolor="#CCCCCC" uuid="344b59bc-9718-4e07-bc64-19db44e57e9e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Attribute]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="526" y="0" width="50" height="20" backcolor="#CCCCCC" uuid="b5b743fd-35c9-46cb-98db-49f2e90cbf99"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Seragam]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="576" y="0" width="50" height="20" backcolor="#CCCCCC" uuid="35262f13-8dfc-44d9-b847-be235e504c4a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Almamater]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="626" y="0" width="50" height="20" backcolor="#CCCCCC" uuid="74d0950c-367b-4a2f-92ec-765732b86cc9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[PVT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="676" y="0" width="50" height="20" backcolor="#CCCCCC" uuid="ab7281ca-a6dc-4a8b-bb46-b078f4c9593a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[MOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="726" y="0" width="76" height="20" backcolor="#CCCCCC" uuid="040321bf-7a4a-433e-8f1f-36bb63600c11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[JUMLAH]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="21" isPrintWhenDetailOverflows="true" uuid="f5c9260c-1ef1-47c0-ae40-75359e7239c9"/>
+				<subreportParameter name="Param_NomorInduk">
+					<subreportParameterExpression><![CDATA[$F{Profil_NomorInduk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranSub.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="64" height="20" uuid="13ca273c-e3eb-4d43-a6c3-1d1852b90bcd"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Diprint oleh: ]]></text>
+			</staticText>
+			<textField pattern="dd/MMM/yyyy HH:mm:ss">
+				<reportElement x="639" y="0" width="163" height="20" uuid="737d7938-c00b-417b-9de9-4963fe7639ca"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="0" width="173" height="20" uuid="9181bd12-37d4-49e8-9aeb-56ddbd036a5d"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Param_ClerkName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutBeritaAcaralStatusPendaftaranIPSP" language="groovy" pageWidth="50" pageHeight="20" columnWidth="50" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3d61dfcd-a1ca-4fc7-b6ff-0f3a4de93a1e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ParamNomorInduk" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     IPSPTransaction.`ID` AS IPSPTransaction_ID,
+     IPSPTransaction.`UUID` AS IPSPTransaction_UUID,
+     IPSPTransaction.`IDIuran` AS IPSPTransaction_IDIuran,
+     IPSPTransaction.`IDClerk` AS IPSPTransaction_IDClerk,
+     IPSPTransaction.`IDTransactionSummary` AS IPSPTransaction_IDTransactionSummary,
+     IPSPTransaction.`NomorInduk` AS IPSPTransaction_NomorInduk,
+     IPSPTransaction.`Level1` AS IPSPTransaction_Level1,
+     IPSPTransaction.`Amount` AS IPSPTransaction_Amount,
+     IPSPTransaction.`PaymentMethod` AS IPSPTransaction_PaymentMethod,
+     IPSPTransaction.`CreateDate` AS IPSPTransaction_CreateDate,
+     IPSPTransaction.`LastUpdateDate` AS IPSPTransaction_LastUpdateDate,
+     IPSPTransaction.`Note` AS IPSPTransaction_Note,
+     IPSPTransaction.`Settled` AS IPSPTransaction_Settled,
+     IPSPTransaction.`Piutang` AS IPSPTransaction_Piutang
+FROM
+     `IPSPTransaction` IPSPTransaction
+WHERE
+     IPSPTransaction.`NomorInduk` LIKE $P{ParamNomorInduk}]]>
+	</queryString>
+	<field name="IPSPTransaction_ID" class="java.math.BigInteger"/>
+	<field name="IPSPTransaction_UUID" class="java.lang.String"/>
+	<field name="IPSPTransaction_IDIuran" class="java.math.BigInteger"/>
+	<field name="IPSPTransaction_IDClerk" class="java.lang.Long"/>
+	<field name="IPSPTransaction_IDTransactionSummary" class="java.math.BigInteger"/>
+	<field name="IPSPTransaction_NomorInduk" class="java.lang.String"/>
+	<field name="IPSPTransaction_Level1" class="java.lang.String"/>
+	<field name="IPSPTransaction_Amount" class="java.lang.Float"/>
+	<field name="IPSPTransaction_PaymentMethod" class="java.lang.String"/>
+	<field name="IPSPTransaction_CreateDate" class="java.sql.Timestamp"/>
+	<field name="IPSPTransaction_LastUpdateDate" class="java.sql.Timestamp"/>
+	<field name="IPSPTransaction_Note" class="java.lang.String"/>
+	<field name="IPSPTransaction_Settled" class="java.lang.Boolean"/>
+	<field name="IPSPTransaction_Piutang" class="java.lang.Boolean"/>
+	<variable name="IPSPTransaction" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{IPSPTransaction_Amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="20">
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="50" height="20" uuid="a6538b1a-6854-4bef-bacd-1ddaf322684f"/>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="50" height="20" uuid="e9d46aac-4e27-40ba-8bd5-f6e7cea5a77c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{IPSPTransaction}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

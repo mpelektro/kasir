@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutBeritaAcaralStatusPendaftaranAttribute" language="groovy" pageWidth="50" pageHeight="20" columnWidth="50" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3d61dfcd-a1ca-4fc7-b6ff-0f3a4de93a1e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ParamNomorInduk" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     AttributeTransaction.`ID` AS AttributeTransaction_ID,
+     AttributeTransaction.`UUID` AS AttributeTransaction_UUID,
+     AttributeTransaction.`IDIuran` AS AttributeTransaction_IDIuran,
+     AttributeTransaction.`IDClerk` AS AttributeTransaction_IDClerk,
+     AttributeTransaction.`IDTransactionSummary` AS AttributeTransaction_IDTransactionSummary,
+     AttributeTransaction.`NomorInduk` AS AttributeTransaction_NomorInduk,
+     AttributeTransaction.`Level1` AS AttributeTransaction_Level1,
+     AttributeTransaction.`Amount` AS AttributeTransaction_Amount,
+     AttributeTransaction.`PaymentMethod` AS AttributeTransaction_PaymentMethod,
+     AttributeTransaction.`CreateDate` AS AttributeTransaction_CreateDate,
+     AttributeTransaction.`LastUpdateDate` AS AttributeTransaction_LastUpdateDate,
+     AttributeTransaction.`Note` AS AttributeTransaction_Note,
+     AttributeTransaction.`Settled` AS AttributeTransaction_Settled,
+     AttributeTransaction.`Piutang` AS AttributeTransaction_Piutang
+FROM
+     `AttributeTransaction` AttributeTransaction
+WHERE AttributeTransaction.`NomorInduk` LIKE $P{ParamNomorInduk}]]>
+	</queryString>
+	<field name="AttributeTransaction_ID" class="java.math.BigInteger"/>
+	<field name="AttributeTransaction_UUID" class="java.lang.String"/>
+	<field name="AttributeTransaction_IDIuran" class="java.math.BigInteger"/>
+	<field name="AttributeTransaction_IDClerk" class="java.lang.Long"/>
+	<field name="AttributeTransaction_IDTransactionSummary" class="java.math.BigInteger"/>
+	<field name="AttributeTransaction_NomorInduk" class="java.lang.String"/>
+	<field name="AttributeTransaction_Level1" class="java.lang.String"/>
+	<field name="AttributeTransaction_Amount" class="java.lang.Float"/>
+	<field name="AttributeTransaction_PaymentMethod" class="java.lang.String"/>
+	<field name="AttributeTransaction_CreateDate" class="java.sql.Timestamp"/>
+	<field name="AttributeTransaction_LastUpdateDate" class="java.sql.Timestamp"/>
+	<field name="AttributeTransaction_Note" class="java.lang.String"/>
+	<field name="AttributeTransaction_Settled" class="java.lang.Boolean"/>
+	<field name="AttributeTransaction_Piutang" class="java.lang.Boolean"/>
+	<variable name="AttributeTransaction_Amount" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{AttributeTransaction_Amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="20">
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="50" height="20" uuid="e8bb064f-c60b-46c5-a027-8d603bc8107f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{AttributeTransaction_Amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

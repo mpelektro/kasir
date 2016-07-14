@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutBeritaAcaralStatusPendaftaranAlmamater" language="groovy" pageWidth="50" pageHeight="20" columnWidth="50" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3d61dfcd-a1ca-4fc7-b6ff-0f3a4de93a1e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ParamNomorInduk" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     AlmamaterTransaction.`ID` AS AlmamaterTransaction_ID,
+     AlmamaterTransaction.`UUID` AS AlmamaterTransaction_UUID,
+     AlmamaterTransaction.`IDIuran` AS AlmamaterTransaction_IDIuran,
+     AlmamaterTransaction.`IDClerk` AS AlmamaterTransaction_IDClerk,
+     AlmamaterTransaction.`IDTransactionSummary` AS AlmamaterTransaction_IDTransactionSummary,
+     AlmamaterTransaction.`NomorInduk` AS AlmamaterTransaction_NomorInduk,
+     AlmamaterTransaction.`Level1` AS AlmamaterTransaction_Level1,
+     AlmamaterTransaction.`Amount` AS AlmamaterTransaction_Amount,
+     AlmamaterTransaction.`PaymentMethod` AS AlmamaterTransaction_PaymentMethod,
+     AlmamaterTransaction.`CreateDate` AS AlmamaterTransaction_CreateDate,
+     AlmamaterTransaction.`LastUpdateDate` AS AlmamaterTransaction_LastUpdateDate,
+     AlmamaterTransaction.`Note` AS AlmamaterTransaction_Note,
+     AlmamaterTransaction.`Settled` AS AlmamaterTransaction_Settled,
+     AlmamaterTransaction.`Piutang` AS AlmamaterTransaction_Piutang
+FROM
+     `AlmamaterTransaction` AlmamaterTransaction
+WHERE AlmamaterTransaction.`NomorInduk` LIKE $P{ParamNomorInduk}]]>
+	</queryString>
+	<field name="AlmamaterTransaction_ID" class="java.math.BigInteger"/>
+	<field name="AlmamaterTransaction_UUID" class="java.lang.String"/>
+	<field name="AlmamaterTransaction_IDIuran" class="java.math.BigInteger"/>
+	<field name="AlmamaterTransaction_IDClerk" class="java.lang.Long"/>
+	<field name="AlmamaterTransaction_IDTransactionSummary" class="java.math.BigInteger"/>
+	<field name="AlmamaterTransaction_NomorInduk" class="java.lang.String"/>
+	<field name="AlmamaterTransaction_Level1" class="java.lang.String"/>
+	<field name="AlmamaterTransaction_Amount" class="java.lang.Float"/>
+	<field name="AlmamaterTransaction_PaymentMethod" class="java.lang.String"/>
+	<field name="AlmamaterTransaction_CreateDate" class="java.sql.Timestamp"/>
+	<field name="AlmamaterTransaction_LastUpdateDate" class="java.sql.Timestamp"/>
+	<field name="AlmamaterTransaction_Note" class="java.lang.String"/>
+	<field name="AlmamaterTransaction_Settled" class="java.lang.Boolean"/>
+	<field name="AlmamaterTransaction_Piutang" class="java.lang.Boolean"/>
+	<variable name="AlmamaterTransaction_Amount" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{AlmamaterTransaction_Amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="20">
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="50" height="20" uuid="e8bb064f-c60b-46c5-a027-8d603bc8107f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isUnderline="false"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{AlmamaterTransaction_Amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

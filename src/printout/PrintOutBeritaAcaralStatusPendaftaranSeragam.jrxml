@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutBeritaAcaralStatusPendaftaranSeragam" language="groovy" pageWidth="50" pageHeight="20" columnWidth="50" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3d61dfcd-a1ca-4fc7-b6ff-0f3a4de93a1e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ParamNomorInduk" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     SeragamTransaction.`ID` AS SeragamTransaction_ID,
+     SeragamTransaction.`UUID` AS SeragamTransaction_UUID,
+     SeragamTransaction.`IDIuran` AS SeragamTransaction_IDIuran,
+     SeragamTransaction.`IDClerk` AS SeragamTransaction_IDClerk,
+     SeragamTransaction.`IDTransactionSummary` AS SeragamTransaction_IDTransactionSummary,
+     SeragamTransaction.`NomorInduk` AS SeragamTransaction_NomorInduk,
+     SeragamTransaction.`Level1` AS SeragamTransaction_Level1,
+     SeragamTransaction.`Amount` AS SeragamTransaction_Amount,
+     SeragamTransaction.`PaymentMethod` AS SeragamTransaction_PaymentMethod,
+     SeragamTransaction.`CreateDate` AS SeragamTransaction_CreateDate,
+     SeragamTransaction.`LastUpdateDate` AS SeragamTransaction_LastUpdateDate,
+     SeragamTransaction.`Note` AS SeragamTransaction_Note,
+     SeragamTransaction.`Settled` AS SeragamTransaction_Settled,
+     SeragamTransaction.`Piutang` AS SeragamTransaction_Piutang
+FROM
+     `SeragamTransaction` SeragamTransaction
+WHERE SeragamTransaction.`NomorInduk` LIKE $P{ParamNomorInduk}]]>
+	</queryString>
+	<field name="SeragamTransaction_ID" class="java.math.BigInteger"/>
+	<field name="SeragamTransaction_UUID" class="java.lang.String"/>
+	<field name="SeragamTransaction_IDIuran" class="java.math.BigInteger"/>
+	<field name="SeragamTransaction_IDClerk" class="java.lang.Long"/>
+	<field name="SeragamTransaction_IDTransactionSummary" class="java.math.BigInteger"/>
+	<field name="SeragamTransaction_NomorInduk" class="java.lang.String"/>
+	<field name="SeragamTransaction_Level1" class="java.lang.String"/>
+	<field name="SeragamTransaction_Amount" class="java.lang.Float"/>
+	<field name="SeragamTransaction_PaymentMethod" class="java.lang.String"/>
+	<field name="SeragamTransaction_CreateDate" class="java.sql.Timestamp"/>
+	<field name="SeragamTransaction_LastUpdateDate" class="java.sql.Timestamp"/>
+	<field name="SeragamTransaction_Note" class="java.lang.String"/>
+	<field name="SeragamTransaction_Settled" class="java.lang.Boolean"/>
+	<field name="SeragamTransaction_Piutang" class="java.lang.Boolean"/>
+	<variable name="SeragamTransaction_Amount" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{SeragamTransaction_Amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="20">
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="50" height="20" uuid="e8bb064f-c60b-46c5-a027-8d603bc8107f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SeragamTransaction_Amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

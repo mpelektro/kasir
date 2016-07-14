@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutBeritaAcaralStatusPendaftaranTSum" language="groovy" pageWidth="60" pageHeight="20" columnWidth="60" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3d61dfcd-a1ca-4fc7-b6ff-0f3a4de93a1e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ParamNomorInduk" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     TransactionSummary.`ID` AS TransactionSummary_ID,
+     TransactionSummary.`UUID` AS TransactionSummary_UUID,
+     TransactionSummary.`IDClerk` AS TransactionSummary_IDClerk,
+     TransactionSummary.`NomorInduk` AS TransactionSummary_NomorInduk,
+     TransactionSummary.`CreateDate` AS TransactionSummary_CreateDate,
+     TransactionSummary.`LastUpdateDate` AS TransactionSummary_LastUpdateDate,
+     TransactionSummary.`Note` AS TransactionSummary_Note,
+     TransactionSummary.`TotalAmount` AS TransactionSummary_TotalAmount
+FROM
+     `TransactionSummary` TransactionSummary
+WHERE
+     TransactionSummary.`NomorInduk` LIKE $P{ParamNomorInduk}]]>
+	</queryString>
+	<field name="TransactionSummary_ID" class="java.math.BigInteger"/>
+	<field name="TransactionSummary_UUID" class="java.lang.String"/>
+	<field name="TransactionSummary_IDClerk" class="java.lang.Integer"/>
+	<field name="TransactionSummary_NomorInduk" class="java.lang.String"/>
+	<field name="TransactionSummary_CreateDate" class="java.sql.Timestamp"/>
+	<field name="TransactionSummary_LastUpdateDate" class="java.sql.Timestamp"/>
+	<field name="TransactionSummary_Note" class="java.lang.String"/>
+	<field name="TransactionSummary_TotalAmount" class="java.lang.Float"/>
+	<variable name="TransactionSummary_Amount" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{TransactionSummary_TotalAmount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="20">
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="60" height="20" uuid="e8bb064f-c60b-46c5-a027-8d603bc8107f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TransactionSummary_Amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

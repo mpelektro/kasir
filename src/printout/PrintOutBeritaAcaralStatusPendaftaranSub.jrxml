@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutBeritaAcaralStatusPendaftaranSub" language="groovy" pageWidth="802" pageHeight="22" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="79c6a0ae-f916-4b98-a520-bbea9d5ba0a0">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Param_NomorInduk" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Nada\\Documents\\NetBeansProjects\\kasir\\src\\printout\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     profil.`NomorInduk` AS profil_NomorInduk,
+     profil.`Nama` AS profil_Nama,
+     profil.`JenisKelamin` AS profil_JenisKelamin,
+     profil.`Agama` AS profil_Agama,
+     profil.`AsalSekolah` AS profil_AsalSekolah,
+     profil.`TanggalLahir` AS profil_TanggalLahir,
+     profil.`TempatLahir` AS profil_TempatLahir,
+     profil.`Alamat` AS profil_Alamat,
+     profil.`NamaAyah` AS profil_NamaAyah,
+     profil.`NamaIbu` AS profil_NamaIbu,
+     profil.`Telpon1` AS profil_Telpon1,
+     profil.`Telpon2` AS profil_Telpon2,
+     profil.`CurrentLevel` AS profil_CurrentLevel,
+     profil.`TanggalMasuk` AS profil_TanggalMasuk,
+     profil.`TanggalLulus` AS profil_TanggalLulus,
+     profil.`Gelombang` AS profil_Gelombang,
+     profil.`TotalIuran` AS profil_TotalIuran,
+     profil.`StatusPendaftaran` AS profil_StatusPendaftaran,
+     profil.`LastUpdateDate` AS profil_LastUpdateDate
+FROM
+     `profil` profil
+WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
+	</queryString>
+	<field name="profil_NomorInduk" class="java.lang.String"/>
+	<field name="profil_Nama" class="java.lang.String"/>
+	<field name="profil_JenisKelamin" class="java.lang.String"/>
+	<field name="profil_Agama" class="java.lang.String"/>
+	<field name="profil_AsalSekolah" class="java.lang.String"/>
+	<field name="profil_TanggalLahir" class="java.sql.Date"/>
+	<field name="profil_TempatLahir" class="java.lang.String"/>
+	<field name="profil_Alamat" class="java.lang.String"/>
+	<field name="profil_NamaAyah" class="java.lang.String"/>
+	<field name="profil_NamaIbu" class="java.lang.String"/>
+	<field name="profil_Telpon1" class="java.lang.String"/>
+	<field name="profil_Telpon2" class="java.lang.String"/>
+	<field name="profil_CurrentLevel" class="java.lang.String"/>
+	<field name="profil_TanggalMasuk" class="java.sql.Date"/>
+	<field name="profil_TanggalLulus" class="java.sql.Date"/>
+	<field name="profil_Gelombang" class="java.lang.String"/>
+	<field name="profil_TotalIuran" class="java.lang.Float"/>
+	<field name="profil_StatusPendaftaran" class="java.lang.String"/>
+	<field name="profil_LastUpdateDate" class="java.sql.Date"/>
+	<variable name="profil_CurrentLevel_1" class="java.lang.Integer" resetType="Group" resetGroup="GroupCurrentLevel" calculation="Count">
+		<variableExpression><![CDATA[$F{profil_CurrentLevel}]]></variableExpression>
+	</variable>
+	<variable name="ipp" class="java.math.BigDecimal"/>
+	<group name="GroupCurrentLevel">
+		<groupExpression><![CDATA[$F{profil_CurrentLevel}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="1">
+			<line>
+				<reportElement x="0" y="0" width="800" height="1" uuid="72f3961e-3cca-47d7-9250-ccecfe6b22b6"/>
+			</line>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="38" y="0" width="188" height="20" uuid="8a6aa65a-7c84-49aa-9893-7e6bceadcfc8"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{profil_Nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="37" height="20" uuid="361fd078-1884-4e7f-a6b3-7f6e6c558a1e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{profil_NomorInduk}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="226" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="7719a88b-9479-4b75-b81e-b0b90eda0c54"/>
+				<subreportParameter name="ParamNomorInduk">
+					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranIPP.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="276" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="2f09f728-abe9-429f-8a80-305ee97ea877"/>
+				<subreportParameter name="ParamNomorInduk">
+					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranIPSP.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="326" y="0" width="50" height="20" uuid="a4dab8a6-6cd7-4513-8da5-6732f8da21d8"/>
+				<subreportParameter name="ParamNomorInduk">
+					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranIKS.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="376" y="0" width="50" height="20" uuid="f92aed39-9f9b-4a4d-87e1-5bc5f7e5291b"/>
+				<subreportParameter name="ParamNomorInduk">
+					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranPASB.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="426" y="0" width="50" height="20" uuid="2d5b7a95-3f0d-4d0f-8910-0b8d743c6ad2"/>
+				<subreportParameter name="ParamNomorInduk">
+					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranOSIS.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="476" y="0" width="50" height="20" uuid="85a676fd-ff7a-40e3-92c7-89c04d48c034"/>
+				<subreportParameter name="ParamNomorInduk">
+					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranAttribute.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="526" y="0" width="50" height="20" uuid="8d86df59-3986-4ad8-bbeb-bc386e4b71c0"/>
+				<subreportParameter name="ParamNomorInduk">
+					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranSeragam.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="576" y="0" width="50" height="20" uuid="419c3105-f65a-41d1-af8a-dbfc2c7d824b"/>
+				<subreportParameter name="ParamNomorInduk">
+					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranAlmamater.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="626" y="0" width="50" height="20" uuid="ed45b740-be17-4edc-8319-b2e4fa5cf153"/>
+				<subreportParameter name="ParamNomorInduk">
+					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranPVT.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="726" y="0" width="76" height="20" uuid="e25de7de-e859-44f7-8e0e-df96161a9647"/>
+				<subreportParameter name="ParamNomorInduk">
+					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranTSum.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="676" y="0" width="50" height="20" uuid="9eb956c6-6bef-40e2-b69d-d713091b0ab9"/>
+				<subreportParameter name="ParamNomorInduk">
+					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranIPSB.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="0" y="0" width="1" height="20" uuid="a9312bdf-c154-4eb4-bd6c-8027d11ed7b0"/>
+			</line>
+			<line>
+				<reportElement x="37" y="0" width="1" height="20" uuid="880f1916-a1e9-49fb-99f1-87eb011b6b23"/>
+			</line>
+			<line>
+				<reportElement x="226" y="0" width="1" height="20" uuid="0fe9dc43-2336-4203-a05e-1b26793a2aa8"/>
+			</line>
+			<line>
+				<reportElement x="276" y="0" width="1" height="20" uuid="fb24755f-9191-4ad3-80a9-104f4324025a"/>
+			</line>
+			<line>
+				<reportElement x="326" y="0" width="1" height="20" uuid="93a57ebc-4028-42fd-b1ec-e6a5f16c4eaa"/>
+			</line>
+			<line>
+				<reportElement x="376" y="0" width="1" height="20" uuid="4e5984da-5eaf-4ce4-9261-68a799f0e717"/>
+			</line>
+			<line>
+				<reportElement x="426" y="0" width="1" height="20" uuid="362960c0-5cc9-4df3-a1ca-336c503ab79e"/>
+			</line>
+			<line>
+				<reportElement x="476" y="0" width="1" height="20" uuid="e3eb4153-f304-4660-9809-c19147633b28"/>
+			</line>
+			<line>
+				<reportElement x="526" y="0" width="1" height="20" uuid="41bb859c-cc07-49a3-8723-b30c03348f8a"/>
+			</line>
+			<line>
+				<reportElement x="576" y="0" width="1" height="20" uuid="04ab62c9-b835-484e-8dcc-78487c4fbcac"/>
+			</line>
+			<line>
+				<reportElement x="626" y="0" width="1" height="20" uuid="c5a434fb-a63b-466a-86f3-8eff1b444877"/>
+			</line>
+			<line>
+				<reportElement x="676" y="0" width="1" height="20" uuid="d971d298-6971-4943-926e-978182fb32c5"/>
+			</line>
+			<line>
+				<reportElement x="726" y="0" width="1" height="20" uuid="626e35da-40b4-4327-862b-1f00e2690b4a"/>
+			</line>
+			<line>
+				<reportElement x="800" y="0" width="1" height="20" uuid="e831b8f7-4d5a-43db-bf54-d6474896a45a"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="1">
+			<line>
+				<reportElement x="0" y="0" width="800" height="1" uuid="836ace8a-89db-4d60-a42d-952164ceb22b"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>
