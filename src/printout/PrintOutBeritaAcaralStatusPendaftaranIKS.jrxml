@@ -47,10 +47,10 @@ WHERE
 	</background>
 	<summary>
 		<band height="20">
-			<textField pattern="#,##0" isBlankWhenNull="true">
+			<textField pattern="###0" isBlankWhenNull="true">
 				<reportElement x="0" y="0" width="50" height="20" uuid="a6538b1a-6854-4bef-bacd-1ddaf322684f"/>
 			</textField>
-			<textField pattern="#,##0" isBlankWhenNull="true">
+			<textField pattern="###0" isBlankWhenNull="true">
 				<reportElement x="0" y="0" width="49" height="20" uuid="e9d46aac-4e27-40ba-8bd5-f6e7cea5a77c"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<paragraph rightIndent="5"/>

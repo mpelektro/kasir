@@ -53,6 +53,7 @@ import java.sql.SQLException;
 import kasir.Clerk;
 import net.sf.jasperreports.engine.JRException;
 import org.openide.util.Exceptions;
+import sak.KasirException;
 
 /*
  * DialogDemo.java requires these files:
@@ -386,7 +387,7 @@ public class DialogStatusPendaftaran extends JPanel {
 
     /** Creates the panel shown by the second tab. */
     private JPanel createFeatureDialogBox() {
-        final int numButtons = 4;
+        final int numButtons = 5;
         JRadioButton[] radioButtons = new JRadioButton[numButtons];
         final ButtonGroup group = new ButtonGroup();
 
@@ -410,8 +411,8 @@ public class DialogStatusPendaftaran extends JPanel {
         radioButtons[3] = new JRadioButton("Batal");
         radioButtons[3].setActionCommand(customOptionCommand);
 
-//        radioButtons[4] = new JRadioButton("Non-modal dialog");
-//        radioButtons[4].setActionCommand(nonModalCommand);
+        radioButtons[4] = new JRadioButton("Rekap");
+        radioButtons[4].setActionCommand(nonModalCommand);
 
         for (int i = 0; i < numButtons; i++) {
             group.add(radioButtons[i]);
@@ -488,46 +489,20 @@ public class DialogStatusPendaftaran extends JPanel {
                 //non-modal dialog
                 } else if (command == nonModalCommand) {
                     //Create the dialog.
-                    final JDialog dialog = new JDialog(appFrame,
-                                                       "A Non-Modal Dialog");
-
-                    //Add contents to it. It must have a close button,
-                    //since some L&Fs (notably Java/Metal) don't provide one
-                    //in the window decorations for dialogs.
-                    JLabel label = new JLabel("<html><p align=center>"
-                        + "This is a non-modal dialog.<br>"
-                        + "You can have one or more of these up<br>"
-                        + "and still use the main window.");
-                    label.setHorizontalAlignment(JLabel.CENTER);
-                    Font font = label.getFont();
-                    label.setFont(label.getFont().deriveFont(font.PLAIN,
-                                                             14.0f));
-
-                    JButton closeButton = new JButton("Close");
-                    closeButton.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            dialog.setVisible(false);
-                            dialog.dispose();
-                        }
-                    });
-                    JPanel closePanel = new JPanel();
-                    closePanel.setLayout(new BoxLayout(closePanel,
-                                                       BoxLayout.LINE_AXIS));
-                    closePanel.add(Box.createHorizontalGlue());
-                    closePanel.add(closeButton);
-                    closePanel.setBorder(BorderFactory.
-                        createEmptyBorder(0,0,5,5));
-
-                    JPanel contentPane = new JPanel(new BorderLayout());
-                    contentPane.add(label, BorderLayout.CENTER);
-                    contentPane.add(closePanel, BorderLayout.PAGE_END);
-                    contentPane.setOpaque(true);
-                    dialog.setContentPane(contentPane);
-
-                    //Show it.
-                    dialog.setSize(new Dimension(300, 150));
-                    dialog.setLocationRelativeTo(appFrame);
-                    dialog.setVisible(true);
+                    try {
+                        //                    JOptionPane.showMessageDialog(appFrame,
+//                                "Eggs aren't supposed to be green.");
+                        appFrame.printRekapBeritaAcara(Clerk.current);
+//yes/no dialog
+                    } catch (JRException ex) {
+                        Exceptions.printStackTrace(ex);
+                    } catch (PrinterException ex) {
+                        Exceptions.printStackTrace(ex);
+                    } catch (SQLException ex) {
+                        Exceptions.printStackTrace(ex);
+                    } catch (KasirException ex) {
+                        Exceptions.printStackTrace(ex);
+                    }
                 }
             }
         });

@@ -108,7 +108,7 @@
 	</parameter>
 	<parameter name="Param_ClerkName" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Users\\Nada\\Documents\\NetBeansProjects\\kasir\\src\\printout\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:\\printout\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT

@@ -46,7 +46,7 @@ WHERE OSISTransaction.`NomorInduk` LIKE $P{ParamNomorInduk}]]>
 	</background>
 	<summary>
 		<band height="20">
-			<textField pattern="#,##0" isBlankWhenNull="true">
+			<textField pattern="###0" isBlankWhenNull="true">
 				<reportElement x="0" y="0" width="49" height="20" uuid="e8bb064f-c60b-46c5-a027-8d603bc8107f"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<paragraph rightIndent="5"/>

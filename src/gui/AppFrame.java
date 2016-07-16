@@ -2838,6 +2838,1133 @@ public class AppFrame extends javax.swing.JFrame {
         exporter.exportReport();
     }
     
+    public void printRekapBeritaAcara(Clerk cl) throws JRException, PrinterException, SQLException, KasirException {
+        ArrayList<Profil> smpProfils = new ArrayList();
+        ArrayList<Profil> smaProfils = new ArrayList();     
+        ArrayList<Profil> smkProfils = new ArrayList();
+        BigDecimal smaIppDaftar=BigDecimal.ZERO, smaIpspDaftar=BigDecimal.ZERO, smaIksDaftar=BigDecimal.ZERO, smaPasbDaftar=BigDecimal.ZERO, smaIpsbDaftar=BigDecimal.ZERO, smaSeragamDaftar=BigDecimal.ZERO, smaOsisDaftar=BigDecimal.ZERO, smaAttributeDaftar = BigDecimal.ZERO;
+        BigDecimal smaIppProses=BigDecimal.ZERO, smaIpspProses=BigDecimal.ZERO, smaIksProses=BigDecimal.ZERO, smaPasbProses=BigDecimal.ZERO, smaIpsbProses=BigDecimal.ZERO, smaSeragamProses=BigDecimal.ZERO, smaOsisProses=BigDecimal.ZERO, smaAttributeProses = BigDecimal.ZERO;
+        BigDecimal smaIppLunas=BigDecimal.ZERO, smaIpspLunas=BigDecimal.ZERO, smaIksLunas=BigDecimal.ZERO, smaPasbLunas=BigDecimal.ZERO, smaIpsbLunas=BigDecimal.ZERO, smaSeragamLunas=BigDecimal.ZERO, smaOsisLunas=BigDecimal.ZERO, smaAttributeLunas = BigDecimal.ZERO;
+        BigDecimal smaIppBatal=BigDecimal.ZERO, smaIpspBatal=BigDecimal.ZERO, smaIksBatal=BigDecimal.ZERO, smaPasbBatal=BigDecimal.ZERO, smaIpsbBatal=BigDecimal.ZERO, smaSeragamBatal=BigDecimal.ZERO, smaOsisBatal=BigDecimal.ZERO, smaAttributeBatal = BigDecimal.ZERO;
+        BigDecimal smpIppDaftar=BigDecimal.ZERO, smpIpspDaftar=BigDecimal.ZERO, smpIksDaftar=BigDecimal.ZERO, smpPasbDaftar=BigDecimal.ZERO, smpIpsbDaftar=BigDecimal.ZERO, smpSeragamDaftar=BigDecimal.ZERO, smpOsisDaftar=BigDecimal.ZERO, smpAttributeDaftar = BigDecimal.ZERO;
+        BigDecimal smpIppProses=BigDecimal.ZERO, smpIpspProses=BigDecimal.ZERO, smpIksProses=BigDecimal.ZERO, smpPasbProses=BigDecimal.ZERO, smpIpsbProses=BigDecimal.ZERO, smpSeragamProses=BigDecimal.ZERO, smpOsisProses=BigDecimal.ZERO, smpAttributeProses = BigDecimal.ZERO;
+        BigDecimal smpIppLunas=BigDecimal.ZERO, smpIpspLunas=BigDecimal.ZERO, smpIksLunas=BigDecimal.ZERO, smpPasbLunas=BigDecimal.ZERO, smpIpsbLunas=BigDecimal.ZERO, smpSeragamLunas=BigDecimal.ZERO, smpOsisLunas=BigDecimal.ZERO, smpAttributeLunas = BigDecimal.ZERO;
+        BigDecimal smpIppBatal=BigDecimal.ZERO, smpIpspBatal=BigDecimal.ZERO, smpIksBatal=BigDecimal.ZERO, smpPasbBatal=BigDecimal.ZERO, smpIpsbBatal=BigDecimal.ZERO, smpSeragamBatal=BigDecimal.ZERO, smpOsisBatal=BigDecimal.ZERO, smpAttributeBatal = BigDecimal.ZERO;
+        BigDecimal smkIppDaftar=BigDecimal.ZERO, smkIpspDaftar=BigDecimal.ZERO, smkIksDaftar=BigDecimal.ZERO, smkPasbDaftar=BigDecimal.ZERO, smkIpsbDaftar=BigDecimal.ZERO, smkSeragamDaftar=BigDecimal.ZERO, smkOsisDaftar=BigDecimal.ZERO, smkAttributeDaftar=BigDecimal.ZERO, smkAlmamaterDaftar=BigDecimal.ZERO, smkPvtDaftar = BigDecimal.ZERO;
+        BigDecimal smkIppProses=BigDecimal.ZERO, smkIpspProses=BigDecimal.ZERO, smkIksProses=BigDecimal.ZERO, smkPasbProses=BigDecimal.ZERO, smkIpsbProses=BigDecimal.ZERO, smkSeragamProses=BigDecimal.ZERO, smkOsisProses=BigDecimal.ZERO, smkAttributeProses=BigDecimal.ZERO, smkAlmamaterProses=BigDecimal.ZERO, smkPvtProses = BigDecimal.ZERO;
+        BigDecimal smkIppLunas=BigDecimal.ZERO, smkIpspLunas=BigDecimal.ZERO, smkIksLunas=BigDecimal.ZERO, smkPasbLunas=BigDecimal.ZERO, smkIpsbLunas=BigDecimal.ZERO, smkSeragamLunas=BigDecimal.ZERO, smkOsisLunas=BigDecimal.ZERO, smkAttributeLunas=BigDecimal.ZERO, smkAlmamaterLunas=BigDecimal.ZERO, smkPvtLunas = BigDecimal.ZERO;
+        BigDecimal smkIppBatal=BigDecimal.ZERO, smkIpspBatal=BigDecimal.ZERO, smkIksBatal=BigDecimal.ZERO, smkPasbBatal=BigDecimal.ZERO, smkIpsbBatal=BigDecimal.ZERO, smkSeragamBatal=BigDecimal.ZERO, smkOsisBatal=BigDecimal.ZERO, smkAttributeBatal=BigDecimal.ZERO, smkAlmamaterBatal=BigDecimal.ZERO, smkPvtBatal = BigDecimal.ZERO;
+        
+        BigDecimal smaIppDaftar1=BigDecimal.ZERO, smaIpspDaftar1=BigDecimal.ZERO, smaIksDaftar1=BigDecimal.ZERO, smaPasbDaftar1=BigDecimal.ZERO, smaIpsbDaftar1=BigDecimal.ZERO, smaSeragamDaftar1=BigDecimal.ZERO, smaOsisDaftar1=BigDecimal.ZERO, smaAttributeDaftar1= BigDecimal.ZERO;
+        BigDecimal smaIppProses1=BigDecimal.ZERO, smaIpspProses1=BigDecimal.ZERO, smaIksProses1=BigDecimal.ZERO, smaPasbProses1=BigDecimal.ZERO, smaIpsbProses1=BigDecimal.ZERO, smaSeragamProses1=BigDecimal.ZERO, smaOsisProses1=BigDecimal.ZERO, smaAttributeProses1= BigDecimal.ZERO;
+        BigDecimal smaIppLunas1=BigDecimal.ZERO, smaIpspLunas1=BigDecimal.ZERO, smaIksLunas1=BigDecimal.ZERO, smaPasbLunas1=BigDecimal.ZERO, smaIpsbLunas1=BigDecimal.ZERO, smaSeragamLunas1=BigDecimal.ZERO, smaOsisLunas1=BigDecimal.ZERO, smaAttributeLunas1= BigDecimal.ZERO;
+        BigDecimal smaIppBatal1=BigDecimal.ZERO, smaIpspBatal1=BigDecimal.ZERO, smaIksBatal1=BigDecimal.ZERO, smaPasbBatal1=BigDecimal.ZERO, smaIpsbBatal1=BigDecimal.ZERO, smaSeragamBatal1=BigDecimal.ZERO, smaOsisBatal1=BigDecimal.ZERO, smaAttributeBatal1= BigDecimal.ZERO;
+        BigDecimal smpIppDaftar1=BigDecimal.ZERO, smpIpspDaftar1=BigDecimal.ZERO, smpIksDaftar1=BigDecimal.ZERO, smpPasbDaftar1=BigDecimal.ZERO, smpIpsbDaftar1=BigDecimal.ZERO, smpSeragamDaftar1=BigDecimal.ZERO, smpOsisDaftar1=BigDecimal.ZERO, smpAttributeDaftar1= BigDecimal.ZERO;
+        BigDecimal smpIppProses1=BigDecimal.ZERO, smpIpspProses1=BigDecimal.ZERO, smpIksProses1=BigDecimal.ZERO, smpPasbProses1=BigDecimal.ZERO, smpIpsbProses1=BigDecimal.ZERO, smpSeragamProses1=BigDecimal.ZERO, smpOsisProses1=BigDecimal.ZERO, smpAttributeProses1= BigDecimal.ZERO;
+        BigDecimal smpIppLunas1=BigDecimal.ZERO, smpIpspLunas1=BigDecimal.ZERO, smpIksLunas1=BigDecimal.ZERO, smpPasbLunas1=BigDecimal.ZERO, smpIpsbLunas1=BigDecimal.ZERO, smpSeragamLunas1=BigDecimal.ZERO, smpOsisLunas1=BigDecimal.ZERO, smpAttributeLunas1= BigDecimal.ZERO;
+        BigDecimal smpIppBatal1=BigDecimal.ZERO, smpIpspBatal1=BigDecimal.ZERO, smpIksBatal1=BigDecimal.ZERO, smpPasbBatal1=BigDecimal.ZERO, smpIpsbBatal1=BigDecimal.ZERO, smpSeragamBatal1=BigDecimal.ZERO, smpOsisBatal1=BigDecimal.ZERO, smpAttributeBatal1= BigDecimal.ZERO;
+        BigDecimal smkIppDaftar1=BigDecimal.ZERO, smkIpspDaftar1=BigDecimal.ZERO, smkIksDaftar1=BigDecimal.ZERO, smkPasbDaftar1=BigDecimal.ZERO, smkIpsbDaftar1=BigDecimal.ZERO, smkSeragamDaftar1=BigDecimal.ZERO, smkOsisDaftar1=BigDecimal.ZERO, smkAttributeDaftar1=BigDecimal.ZERO, smkAlmamaterDaftar1=BigDecimal.ZERO, smkPvtDaftar1= BigDecimal.ZERO;
+        BigDecimal smkIppProses1=BigDecimal.ZERO, smkIpspProses1=BigDecimal.ZERO, smkIksProses1=BigDecimal.ZERO, smkPasbProses1=BigDecimal.ZERO, smkIpsbProses1=BigDecimal.ZERO, smkSeragamProses1=BigDecimal.ZERO, smkOsisProses1=BigDecimal.ZERO, smkAttributeProses1=BigDecimal.ZERO, smkAlmamaterProses1=BigDecimal.ZERO, smkPvtProses1= BigDecimal.ZERO;
+        BigDecimal smkIppLunas1=BigDecimal.ZERO, smkIpspLunas1=BigDecimal.ZERO, smkIksLunas1=BigDecimal.ZERO, smkPasbLunas1=BigDecimal.ZERO, smkIpsbLunas1=BigDecimal.ZERO, smkSeragamLunas1=BigDecimal.ZERO, smkOsisLunas1=BigDecimal.ZERO, smkAttributeLunas1=BigDecimal.ZERO, smkAlmamaterLunas1=BigDecimal.ZERO, smkPvtLunas1= BigDecimal.ZERO;
+        BigDecimal smkIppBatal1=BigDecimal.ZERO, smkIpspBatal1=BigDecimal.ZERO, smkIksBatal1=BigDecimal.ZERO, smkPasbBatal1=BigDecimal.ZERO, smkIpsbBatal1=BigDecimal.ZERO, smkSeragamBatal1=BigDecimal.ZERO, smkOsisBatal1=BigDecimal.ZERO, smkAttributeBatal1=BigDecimal.ZERO, smkAlmamaterBatal1=BigDecimal.ZERO, smkPvtBatal1= BigDecimal.ZERO;
+        
+        BigDecimal smaIppDaftar2=BigDecimal.ZERO, smaIpspDaftar2=BigDecimal.ZERO, smaIksDaftar2=BigDecimal.ZERO, smaPasbDaftar2=BigDecimal.ZERO, smaIpsbDaftar2=BigDecimal.ZERO, smaSeragamDaftar2=BigDecimal.ZERO, smaOsisDaftar2=BigDecimal.ZERO, smaAttributeDaftar2= BigDecimal.ZERO;
+        BigDecimal smaIppProses2=BigDecimal.ZERO, smaIpspProses2=BigDecimal.ZERO, smaIksProses2=BigDecimal.ZERO, smaPasbProses2=BigDecimal.ZERO, smaIpsbProses2=BigDecimal.ZERO, smaSeragamProses2=BigDecimal.ZERO, smaOsisProses2=BigDecimal.ZERO, smaAttributeProses2= BigDecimal.ZERO;
+        BigDecimal smaIppLunas2=BigDecimal.ZERO, smaIpspLunas2=BigDecimal.ZERO, smaIksLunas2=BigDecimal.ZERO, smaPasbLunas2=BigDecimal.ZERO, smaIpsbLunas2=BigDecimal.ZERO, smaSeragamLunas2=BigDecimal.ZERO, smaOsisLunas2=BigDecimal.ZERO, smaAttributeLunas2= BigDecimal.ZERO;
+        BigDecimal smaIppBatal2=BigDecimal.ZERO, smaIpspBatal2=BigDecimal.ZERO, smaIksBatal2=BigDecimal.ZERO, smaPasbBatal2=BigDecimal.ZERO, smaIpsbBatal2=BigDecimal.ZERO, smaSeragamBatal2=BigDecimal.ZERO, smaOsisBatal2=BigDecimal.ZERO, smaAttributeBatal2= BigDecimal.ZERO;
+        BigDecimal smpIppDaftar2=BigDecimal.ZERO, smpIpspDaftar2=BigDecimal.ZERO, smpIksDaftar2=BigDecimal.ZERO, smpPasbDaftar2=BigDecimal.ZERO, smpIpsbDaftar2=BigDecimal.ZERO, smpSeragamDaftar2=BigDecimal.ZERO, smpOsisDaftar2=BigDecimal.ZERO, smpAttributeDaftar2= BigDecimal.ZERO;
+        BigDecimal smpIppProses2=BigDecimal.ZERO, smpIpspProses2=BigDecimal.ZERO, smpIksProses2=BigDecimal.ZERO, smpPasbProses2=BigDecimal.ZERO, smpIpsbProses2=BigDecimal.ZERO, smpSeragamProses2=BigDecimal.ZERO, smpOsisProses2=BigDecimal.ZERO, smpAttributeProses2= BigDecimal.ZERO;
+        BigDecimal smpIppLunas2=BigDecimal.ZERO, smpIpspLunas2=BigDecimal.ZERO, smpIksLunas2=BigDecimal.ZERO, smpPasbLunas2=BigDecimal.ZERO, smpIpsbLunas2=BigDecimal.ZERO, smpSeragamLunas2=BigDecimal.ZERO, smpOsisLunas2=BigDecimal.ZERO, smpAttributeLunas2= BigDecimal.ZERO;
+        BigDecimal smpIppBatal2=BigDecimal.ZERO, smpIpspBatal2=BigDecimal.ZERO, smpIksBatal2=BigDecimal.ZERO, smpPasbBatal2=BigDecimal.ZERO, smpIpsbBatal2=BigDecimal.ZERO, smpSeragamBatal2=BigDecimal.ZERO, smpOsisBatal2=BigDecimal.ZERO, smpAttributeBatal2= BigDecimal.ZERO;
+        BigDecimal smkIppDaftar2=BigDecimal.ZERO, smkIpspDaftar2=BigDecimal.ZERO, smkIksDaftar2=BigDecimal.ZERO, smkPasbDaftar2=BigDecimal.ZERO, smkIpsbDaftar2=BigDecimal.ZERO, smkSeragamDaftar2=BigDecimal.ZERO, smkOsisDaftar2=BigDecimal.ZERO, smkAttributeDaftar2=BigDecimal.ZERO, smkAlmamaterDaftar2=BigDecimal.ZERO, smkPvtDaftar2= BigDecimal.ZERO;
+        BigDecimal smkIppProses2=BigDecimal.ZERO, smkIpspProses2=BigDecimal.ZERO, smkIksProses2=BigDecimal.ZERO, smkPasbProses2=BigDecimal.ZERO, smkIpsbProses2=BigDecimal.ZERO, smkSeragamProses2=BigDecimal.ZERO, smkOsisProses2=BigDecimal.ZERO, smkAttributeProses2=BigDecimal.ZERO, smkAlmamaterProses2=BigDecimal.ZERO, smkPvtProses2= BigDecimal.ZERO;
+        BigDecimal smkIppLunas2=BigDecimal.ZERO, smkIpspLunas2=BigDecimal.ZERO, smkIksLunas2=BigDecimal.ZERO, smkPasbLunas2=BigDecimal.ZERO, smkIpsbLunas2=BigDecimal.ZERO, smkSeragamLunas2=BigDecimal.ZERO, smkOsisLunas2=BigDecimal.ZERO, smkAttributeLunas2=BigDecimal.ZERO, smkAlmamaterLunas2=BigDecimal.ZERO, smkPvtLunas2= BigDecimal.ZERO;
+        BigDecimal smkIppBatal2=BigDecimal.ZERO, smkIpspBatal2=BigDecimal.ZERO, smkIksBatal2=BigDecimal.ZERO, smkPasbBatal2=BigDecimal.ZERO, smkIpsbBatal2=BigDecimal.ZERO, smkSeragamBatal2=BigDecimal.ZERO, smkOsisBatal2=BigDecimal.ZERO, smkAttributeBatal2=BigDecimal.ZERO, smkAlmamaterBatal2=BigDecimal.ZERO, smkPvtBatal2= BigDecimal.ZERO;
+        try {
+            smpProfils = Profil.selectS("SMP-7-1-2016");
+            smaProfils = Profil.selectS("SMA-10-1-2016");
+            smkProfils = Profil.selectS("SMK-10-1-2016");
+        } catch (KasirException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        // connection is the data source we used to fetch the data from
+        printout.StatusPendaftaran pb = new StatusPendaftaran();
+        Connection connection = pb.establishConnection(); 
+        Statement stmt = null;
+        
+        stmt = connection.createStatement();
+                
+        
+        
+        //Using Marbun's Legacy
+        for(int i = 0 ; i < smpProfils.size() ; i++){
+            if(smpProfils.get(i).gelombang == Profil.Gelombang.GELOMBANG_1){
+                if(smpProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.DAFTAR){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIppDaftar1 = smpIppDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIpspDaftar1 = smpIpspDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIksDaftar1 = smpIksDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIpsbDaftar1 = smpIpsbDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpPasbDaftar1 = smpPasbDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpSeragamDaftar1 = smpSeragamDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpOsisDaftar1 = smpOsisDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpAttributeDaftar1 = smpAttributeDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smpProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.PROSES){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIppProses1 = smpIppProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIpspProses1 = smpIpspProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIksProses1 = smpIksProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIpsbProses1 = smpIpsbProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpPasbProses1 = smpPasbProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpSeragamProses1 = smpSeragamProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpOsisProses1 = smpOsisProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpAttributeProses1 = smpAttributeProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smpProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.LUNAS){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIppLunas1 = smpIppLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIpspLunas1 = smpIpspLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIksLunas1 = smpIksLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIpsbLunas1 = smpIpsbLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpPasbLunas1 = smpPasbLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpSeragamLunas1 = smpSeragamLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpOsisLunas1 = smpOsisLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpAttributeLunas1 = smpAttributeLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smpProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.BATAL){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIppBatal1 = smpIppBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIpspBatal1 = smpIpspBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIksBatal1 = smpIksBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIpsbBatal1 = smpIpsbBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpPasbBatal1 = smpPasbBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpSeragamBatal1 = smpSeragamBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpOsisBatal1 = smpOsisBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpAttributeBatal1 = smpAttributeBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                }
+            }else if (smpProfils.get(i).gelombang == Profil.Gelombang.GELOMBANG_2){
+                if(smpProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.DAFTAR){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIppDaftar2 = smpIppDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIpspDaftar2 = smpIpspDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIksDaftar2 = smpIksDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIpsbDaftar2 = smpIpsbDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpPasbDaftar2 = smpPasbDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpSeragamDaftar2 = smpSeragamDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpOsisDaftar2 = smpOsisDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpAttributeDaftar2 = smpAttributeDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smpProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.PROSES){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIppProses2 = smpIppProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIpspProses2 = smpIpspProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIksProses2 = smpIksProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIpsbProses2 = smpIpsbProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpPasbProses2 = smpPasbProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpSeragamProses2 = smpSeragamProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpOsisProses2 = smpOsisProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpAttributeProses2 = smpAttributeProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smpProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.LUNAS){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIppLunas2 = smpIppLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIpspLunas2 = smpIpspLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIksLunas2 = smpIksLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIpsbLunas2 = smpIpsbLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpPasbLunas2 = smpPasbLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpSeragamLunas2 = smpSeragamLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpOsisLunas2 = smpOsisLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpAttributeLunas2 = smpAttributeLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smpProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.BATAL){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIppBatal2 = smpIppBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIpspBatal2 = smpIpspBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIksBatal2 = smpIksBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpIpsbBatal2 = smpIpsbBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpPasbBatal2 = smpPasbBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpSeragamBatal2 = smpSeragamBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpOsisBatal2 = smpOsisBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smpProfils.get(i).noInduk)){
+                        smpAttributeBatal2 = smpAttributeBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                }
+            }
+        }
+        smpIppDaftar = smpIppDaftar1.add(smpIppDaftar2);
+        smpIpspDaftar = smpIpspDaftar1.add(smpIpspDaftar2);
+        smpIksDaftar = smpIksDaftar1.add(smpIksDaftar2);
+        smpIpsbDaftar = smpIpsbDaftar1.add(smpIpsbDaftar2);
+        smpPasbDaftar = smpPasbDaftar1.add(smpPasbDaftar2);
+        smpSeragamDaftar = smpSeragamDaftar1.add(smpSeragamDaftar2);
+        smpOsisDaftar = smpOsisDaftar1.add(smpOsisDaftar2);
+        smpAttributeDaftar = smpAttributeDaftar1.add(smpAttributeDaftar2);
+        
+        smpIppProses = smpIppProses1.add(smpIppProses2);
+        smpIpspProses = smpIpspProses1.add(smpIpspProses2);
+        smpIksProses = smpIksProses1.add(smpIksProses2);
+        smpIpsbProses = smpIpsbProses1.add(smpIpsbProses2);
+        smpPasbProses = smpPasbProses1.add(smpPasbProses2);
+        smpSeragamProses = smpSeragamProses1.add(smpSeragamProses2);
+        smpOsisProses = smpOsisProses1.add(smpOsisProses2);
+        smpAttributeProses = smpAttributeProses1.add(smpAttributeProses2);
+        
+        smpIppLunas = smpIppLunas1.add(smpIppLunas2);
+        smpIpspLunas = smpIpspLunas1.add(smpIpspLunas2);
+        smpIksLunas = smpIksLunas1.add(smpIksLunas2);
+        smpIpsbLunas = smpIpsbLunas1.add(smpIpsbLunas2);
+        smpPasbLunas = smpPasbLunas1.add(smpPasbLunas2);
+        smpSeragamLunas = smpSeragamLunas1.add(smpSeragamLunas2);
+        smpOsisLunas = smpOsisLunas1.add(smpOsisLunas2);
+        smpAttributeLunas = smpAttributeLunas1.add(smpAttributeLunas2);
+        
+        smpIppBatal = smpIppBatal1.add(smpIppBatal2);
+        smpIpspBatal = smpIpspBatal1.add(smpIpspBatal2);
+        smpIksBatal = smpIksBatal1.add(smpIksBatal2);
+        smpIpsbBatal = smpIpsbBatal1.add(smpIpsbBatal2);
+        smpPasbBatal = smpPasbBatal1.add(smpPasbBatal2);
+        smpSeragamBatal = smpSeragamBatal1.add(smpSeragamBatal2);
+        smpOsisBatal = smpOsisBatal1.add(smpOsisBatal2);
+        smpAttributeBatal = smpAttributeBatal1.add(smpAttributeBatal2);
+        
+        for(int i = 0 ; i < smaProfils.size() ; i++){
+            if(smaProfils.get(i).gelombang == Profil.Gelombang.GELOMBANG_1){
+                if(smaProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.DAFTAR){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIppDaftar1 = smaIppDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIpspDaftar1 = smaIpspDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIksDaftar1 = smaIksDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIpsbDaftar1 = smaIpsbDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaPasbDaftar1 = smaPasbDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaSeragamDaftar1 = smaSeragamDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaOsisDaftar1 = smaOsisDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaAttributeDaftar1 = smaAttributeDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smaProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.PROSES){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIppProses1 = smaIppProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIpspProses1 = smaIpspProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIksProses1 = smaIksProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIpsbProses1 = smaIpsbProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaPasbProses1 = smaPasbProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaSeragamProses1 = smaSeragamProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaOsisProses1 = smaOsisProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaAttributeProses1 = smaAttributeProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smaProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.LUNAS){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIppLunas1 = smaIppLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIpspLunas1 = smaIpspLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIksLunas1 = smaIksLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIpsbLunas1 = smaIpsbLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaPasbLunas1 = smaPasbLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaSeragamLunas1 = smaSeragamLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaOsisLunas1 = smaOsisLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaAttributeLunas1 = smaAttributeLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smaProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.BATAL){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIppBatal1 = smaIppBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIpspBatal1 = smaIpspBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIksBatal1 = smaIksBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIpsbBatal1 = smaIpsbBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaPasbBatal1 = smaPasbBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaSeragamBatal1 = smaSeragamBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaOsisBatal1 = smaOsisBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaAttributeBatal1 = smaAttributeBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                }
+            }else if (smaProfils.get(i).gelombang == Profil.Gelombang.GELOMBANG_2){
+                if(smaProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.DAFTAR){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIppDaftar2 = smaIppDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIpspDaftar2 = smaIpspDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIksDaftar2 = smaIksDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIpsbDaftar2 = smaIpsbDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaPasbDaftar2 = smaPasbDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaSeragamDaftar2 = smaSeragamDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaOsisDaftar2 = smaOsisDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaAttributeDaftar2 = smaAttributeDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smaProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.PROSES){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIppProses2 = smaIppProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIpspProses2 = smaIpspProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIksProses2 = smaIksProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIpsbProses2 = smaIpsbProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaPasbProses2 = smaPasbProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaSeragamProses2 = smaSeragamProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaOsisProses2 = smaOsisProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaAttributeProses2 = smaAttributeProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smaProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.LUNAS){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIppLunas2 = smaIppLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIpspLunas2 = smaIpspLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIksLunas2 = smaIksLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIpsbLunas2 = smaIpsbLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaPasbLunas2 = smaPasbLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaSeragamLunas2 = smaSeragamLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaOsisLunas2 = smaOsisLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaAttributeLunas2 = smaAttributeLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smaProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.BATAL){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIppBatal2 = smaIppBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIpspBatal2 = smaIpspBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIksBatal2 = smaIksBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaIpsbBatal2 = smaIpsbBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaPasbBatal2 = smaPasbBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaSeragamBatal2 = smaSeragamBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaOsisBatal2 = smaOsisBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smaProfils.get(i).noInduk)){
+                        smaAttributeBatal2 = smaAttributeBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                }
+            }
+        }
+                     
+        
+        smaIppDaftar = smaIppDaftar1.add(smaIppDaftar2);
+        smaIpspDaftar = smaIpspDaftar1.add(smaIpspDaftar2);
+        smaIksDaftar = smaIksDaftar1.add(smaIksDaftar2);
+        smaIpsbDaftar = smaIpsbDaftar1.add(smaIpsbDaftar2);
+        smaPasbDaftar = smaPasbDaftar1.add(smaPasbDaftar2);
+        smaSeragamDaftar = smaSeragamDaftar1.add(smaSeragamDaftar2);
+        smaOsisDaftar = smaOsisDaftar1.add(smaOsisDaftar2);
+        smaAttributeDaftar = smaAttributeDaftar1.add(smaAttributeDaftar2);
+        
+        smaIppProses = smaIppProses1.add(smaIppProses2);
+        smaIpspProses = smaIpspProses1.add(smaIpspProses2);
+        smaIksProses = smaIksProses1.add(smaIksProses2);
+        smaIpsbProses = smaIpsbProses1.add(smaIpsbProses2);
+        smaPasbProses = smaPasbProses1.add(smaPasbProses2);
+        smaSeragamProses = smaSeragamProses1.add(smaSeragamProses2);
+        smaOsisProses = smaOsisProses1.add(smaOsisProses2);
+        smaAttributeProses = smaAttributeProses1.add(smaAttributeProses2);
+        
+        smaIppLunas = smaIppLunas1.add(smaIppLunas2);
+        smaIpspLunas = smaIpspLunas1.add(smaIpspLunas2);
+        smaIksLunas = smaIksLunas1.add(smaIksLunas2);
+        smaIpsbLunas = smaIpsbLunas1.add(smaIpsbLunas2);
+        smaPasbLunas = smaPasbLunas1.add(smaPasbLunas2);
+        smaSeragamLunas = smaSeragamLunas1.add(smaSeragamLunas2);
+        smaOsisLunas = smaOsisLunas1.add(smaOsisLunas2);
+        smaAttributeLunas = smaAttributeLunas1.add(smaAttributeLunas2);
+        
+        smaIppBatal = smaIppBatal1.add(smaIppBatal2);
+        smaIpspBatal = smaIpspBatal1.add(smaIpspBatal2);
+        smaIksBatal = smaIksBatal1.add(smaIksBatal2);
+        smaIpsbBatal = smaIpsbBatal1.add(smaIpsbBatal2);
+        smaPasbBatal = smaPasbBatal1.add(smaPasbBatal2);
+        smaSeragamBatal = smaSeragamBatal1.add(smaSeragamBatal2);
+        smaOsisBatal = smaOsisBatal1.add(smaOsisBatal2);
+        smaAttributeBatal = smaAttributeBatal1.add(smaAttributeBatal2);
+        
+        for(int i = 0 ; i < smkProfils.size() ; i++){
+            if(smkProfils.get(i).gelombang == Profil.Gelombang.GELOMBANG_1){
+                if(smkProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.DAFTAR){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIppDaftar1 = smkIppDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIpspDaftar1 = smkIpspDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIksDaftar1 = smkIksDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIpsbDaftar1 = smkIpsbDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkPasbDaftar1 = smkPasbDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkSeragamDaftar1 = smkSeragamDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkOsisDaftar1 = smkOsisDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkAttributeDaftar1 = smkAttributeDaftar1.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smkProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.PROSES){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIppProses1 = smkIppProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIpspProses1 = smkIpspProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIksProses1 = smkIksProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIpsbProses1 = smkIpsbProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkPasbProses1 = smkPasbProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkSeragamProses1 = smkSeragamProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkOsisProses1 = smkOsisProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkAttributeProses1 = smkAttributeProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkAlmamaterProses1 = smkAlmamaterProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PVTTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkPvtProses1 = smkPvtProses1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    
+                    
+                }else if(smkProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.LUNAS){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIppLunas1 = smkIppLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIpspLunas1 = smkIpspLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIksLunas1 = smkIksLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIpsbLunas1 = smkIpsbLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkPasbLunas1 = smkPasbLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkSeragamLunas1 = smkSeragamLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkOsisLunas1 = smkOsisLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkAttributeLunas1 = smkAttributeLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkAlmamaterLunas1 = smkAlmamaterLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PVTTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkPvtLunas1 = smkPvtLunas1.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smkProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.BATAL){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIppBatal1 = smkIppBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIpspBatal1 = smkIpspBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIksBatal1 = smkIksBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIpsbBatal1 = smkIpsbBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkPasbBatal1 = smkPasbBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkSeragamBatal1 = smkSeragamBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkOsisBatal1 = smkOsisBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkAttributeBatal1 = smkAttributeBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkAlmamaterBatal1 = smkAlmamaterBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PVTTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkPvtBatal1 = smkPvtBatal1.add(BigDecimal.valueOf(j.amount));
+                    }
+                }
+            }else if (smkProfils.get(i).gelombang == Profil.Gelombang.GELOMBANG_2){
+                if(smkProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.DAFTAR){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIppDaftar2 = smkIppDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIpspDaftar2 = smkIpspDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIksDaftar2 = smkIksDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIpsbDaftar2 = smkIpsbDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkPasbDaftar2 = smkPasbDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkSeragamDaftar2 = smkSeragamDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkOsisDaftar2 = smkOsisDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkAttributeDaftar2 = smkAttributeDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkAlmamaterDaftar2 = smkAlmamaterDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PVTTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkPvtDaftar2 = smkPvtDaftar2.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smkProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.PROSES){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIppProses2 = smkIppProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIpspProses2 = smkIpspProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIksProses2 = smkIksProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIpsbProses2 = smkIpsbProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkPasbProses2 = smkPasbProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkSeragamProses2 = smkSeragamProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkOsisProses2 = smkOsisProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkAttributeProses2 = smkAttributeProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkAlmamaterProses2 = smkAlmamaterProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PVTTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkPvtProses2 = smkPvtProses2.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smkProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.LUNAS){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIppLunas2 = smkIppLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIpspLunas2 = smkIpspLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIksLunas2 = smkIksLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIpsbLunas2 = smkIpsbLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkPasbLunas2 = smkPasbLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkSeragamLunas2 = smkSeragamLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkOsisLunas2 = smkOsisLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkAttributeLunas2 = smkAttributeLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkAlmamaterLunas2 = smkAlmamaterLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PVTTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkPvtLunas2 = smkPvtLunas2.add(BigDecimal.valueOf(j.amount));
+                    }
+                }else if(smkProfils.get(i).statusPendaftaran == Profil.StatusPendaftaran.BATAL){
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIppBatal2 = smkIppBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIpspBatal2 = smkIpspBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIksBatal2 = smkIksBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkIpsbBatal2 = smkIpsbBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkPasbBatal2 = smkPasbBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkSeragamBatal2 = smkSeragamBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkOsisBatal2 = smkOsisBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkAttributeBatal2 = smkAttributeBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkAlmamaterBatal2 = smkAlmamaterBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                    for(TransactionDetail j: Control.selectTDetails(TransactionDetail.Tipe.PVTTransaction, IPPTransactionDetail.noIndukColName, false, smkProfils.get(i).noInduk)){
+                        smkPvtBatal2 = smkPvtBatal2.add(BigDecimal.valueOf(j.amount));
+                    }
+                }
+            }
+        }
+                     
+        
+        smkIppDaftar = smkIppDaftar1.add(smkIppDaftar2);
+        smkIpspDaftar = smkIpspDaftar1.add(smkIpspDaftar2);
+        smkIksDaftar = smkIksDaftar1.add(smkIksDaftar2);
+        smkIpsbDaftar = smkIpsbDaftar1.add(smkIpsbDaftar2);
+        smkPasbDaftar = smkPasbDaftar1.add(smkPasbDaftar2);
+        smkSeragamDaftar = smkSeragamDaftar1.add(smkSeragamDaftar2);
+        smkOsisDaftar = smkOsisDaftar1.add(smkOsisDaftar2);
+        smkAttributeDaftar = smkAttributeDaftar1.add(smkAttributeDaftar2);
+        smkAlmamaterDaftar = smkAlmamaterDaftar1.add(smkAlmamaterDaftar2);
+        smkPvtDaftar = smkPvtDaftar1.add(smkPvtDaftar2);
+        
+        smkIppProses = smkIppProses1.add(smkIppProses2);
+        smkIpspProses = smkIpspProses1.add(smkIpspProses2);
+        smkIksProses = smkIksProses1.add(smkIksProses2);
+        smkIpsbProses = smkIpsbProses1.add(smkIpsbProses2);
+        smkPasbProses = smkPasbProses1.add(smkPasbProses2);
+        smkSeragamProses = smkSeragamProses1.add(smkSeragamProses2);
+        smkOsisProses = smkOsisProses1.add(smkOsisProses2);
+        smkAttributeProses = smkAttributeProses1.add(smkAttributeProses2);
+        smkAlmamaterProses = smkAlmamaterProses1.add(smkAlmamaterProses2);
+        smkPvtProses = smkPvtProses1.add(smkPvtProses2);
+        
+        smkIppLunas = smkIppLunas1.add(smkIppLunas2);
+        smkIpspLunas = smkIpspLunas1.add(smkIpspLunas2);
+        smkIksLunas = smkIksLunas1.add(smkIksLunas2);
+        smkIpsbLunas = smkIpsbLunas1.add(smkIpsbLunas2);
+        smkPasbLunas = smkPasbLunas1.add(smkPasbLunas2);
+        smkSeragamLunas = smkSeragamLunas1.add(smkSeragamLunas2);
+        smkOsisLunas = smkOsisLunas1.add(smkOsisLunas2);
+        smkAttributeLunas = smkAttributeLunas1.add(smkAttributeLunas2);
+        smkAlmamaterLunas = smkAlmamaterLunas1.add(smkAlmamaterLunas2);
+        smkPvtLunas = smkPvtLunas1.add(smkPvtLunas2);
+        
+        smkIppBatal = smkIppBatal1.add(smkIppBatal2);
+        smkIpspBatal = smkIpspBatal1.add(smkIpspBatal2);
+        smkIksBatal = smkIksBatal1.add(smkIksBatal2);
+        smkIpsbBatal = smkIpsbBatal1.add(smkIpsbBatal2);
+        smkPasbBatal = smkPasbBatal1.add(smkPasbBatal2);
+        smkSeragamBatal = smkSeragamBatal1.add(smkSeragamBatal2);
+        smkOsisBatal = smkOsisBatal1.add(smkOsisBatal2);
+        smkAttributeBatal = smkAttributeBatal1.add(smkAttributeBatal2);
+        smkAlmamaterBatal = smkAlmamaterBatal1.add(smkAlmamaterBatal2);
+        smkPvtBatal = smkPvtBatal1.add(smkPvtBatal2);
+        
+        System.out.println("**********************BIG DECIMAL ******************************");
+        System.out.println(smpIppDaftar.toString());
+        System.out.println(smpIppProses.toString());
+        System.out.println(smpIppLunas.toString());
+        System.out.println(smpIppBatal.toString());
+        // jasperParameter is a Hashmap contains the parameters
+        // passed from application to the jrxml layout
+        HashMap jasperParameter = new HashMap();
+        jasperParameter.put("PARAM_CLERK_ID", Long.valueOf(cl.id));
+        if(jComboBoxLevel1.getSelectedItem() != null)
+        jasperParameter.put("Param_Level", "%".concat(jComboBoxLevel1.getSelectedItem().toString()).concat("%"));
+        
+        jasperParameter.put("smpIppDaftar", smpIppDaftar);
+        jasperParameter.put("smpIpspDaftar", smpIpspDaftar);
+        jasperParameter.put("smpIksDaftar", smpIksDaftar);
+        jasperParameter.put("smpPasbDaftar", smpPasbDaftar);
+        jasperParameter.put("smpIpsbDaftar", smpIpsbDaftar);
+        jasperParameter.put("smpOsisDaftar", smpOsisDaftar);
+        jasperParameter.put("smpAttributeDaftar", smpAttributeDaftar);
+        jasperParameter.put("smpSeragamDaftar", smpSeragamDaftar);
+        jasperParameter.put("smpIppProses", smpIppProses);
+        jasperParameter.put("smpIpspProses", smpIpspProses);
+        jasperParameter.put("smpIksProses", smpIksProses);
+        jasperParameter.put("smpPasbProses", smpPasbProses);
+        jasperParameter.put("smpIpsbProses", smpIpsbProses);
+        jasperParameter.put("smpOsisProses", smpOsisProses);
+        jasperParameter.put("smpAttributeProses", smpAttributeProses);
+        jasperParameter.put("smpSeragamProses", smpSeragamProses);
+        jasperParameter.put("smpIppLunas", smpIppLunas);
+        jasperParameter.put("smpIpspLunas", smpIpspLunas);
+        jasperParameter.put("smpIksLunas", smpIksLunas);
+        jasperParameter.put("smpPasbLunas", smpPasbLunas);
+        jasperParameter.put("smpIpsbLunas", smpIpsbLunas);
+        jasperParameter.put("smpOsisLunas", smpOsisLunas);
+        jasperParameter.put("smpAttributeLunas", smpAttributeLunas);
+        jasperParameter.put("smpSeragamLunas", smpSeragamLunas);
+        jasperParameter.put("smpIppBatal", smpIppBatal);
+        jasperParameter.put("smpIpspBatal", smpIpspBatal);
+        jasperParameter.put("smpIksBatal", smpIksBatal);
+        jasperParameter.put("smpPasbBatal", smpPasbBatal);
+        jasperParameter.put("smpIpsbBatal", smpIpsbBatal);
+        jasperParameter.put("smpOsisBatal", smpOsisBatal);
+        jasperParameter.put("smpAttributeBatal", smpAttributeBatal);
+        jasperParameter.put("smpSeragamBatal", smpSeragamBatal);
+        jasperParameter.put("smpIppDaftar1", smpIppDaftar1);
+        jasperParameter.put("smpIpspDaftar1", smpIpspDaftar1);
+        jasperParameter.put("smpIksDaftar1", smpIksDaftar1);
+        jasperParameter.put("smpPasbDaftar1", smpPasbDaftar1);
+        jasperParameter.put("smpIpsbDaftar1", smpIpsbDaftar1);
+        jasperParameter.put("smpOsisDaftar1", smpOsisDaftar1);
+        jasperParameter.put("smpAttributeDaftar1", smpAttributeDaftar1);
+        jasperParameter.put("smpSeragamDaftar1", smpSeragamDaftar1);
+        jasperParameter.put("smpIppProses1", smpIppProses1);
+        jasperParameter.put("smpIpspProses1", smpIpspProses1);
+        jasperParameter.put("smpIksProses1", smpIksProses1);
+        jasperParameter.put("smpPasbProses1", smpPasbProses1);
+        jasperParameter.put("smpIpsbProses1", smpIpsbProses1);
+        jasperParameter.put("smpOsisProses1", smpOsisProses1);
+        jasperParameter.put("smpAttributeProses1", smpAttributeProses1);
+        jasperParameter.put("smpSeragamProses1", smpSeragamProses1);
+        jasperParameter.put("smpIppLunas1", smpIppLunas1);
+        jasperParameter.put("smpIpspLunas1", smpIpspLunas1);
+        jasperParameter.put("smpIksLunas1", smpIksLunas1);
+        jasperParameter.put("smpPasbLunas1", smpPasbLunas1);
+        jasperParameter.put("smpIpsbLunas1", smpIpsbLunas1);
+        jasperParameter.put("smpOsisLunas1", smpOsisLunas1);
+        jasperParameter.put("smpAttributeLunas1", smpAttributeLunas1);
+        jasperParameter.put("smpSeragamLunas1", smpSeragamLunas1);
+        jasperParameter.put("smpIppBatal2", smpIppBatal2);
+        jasperParameter.put("smpIpspBatal2", smpIpspBatal2);
+        jasperParameter.put("smpIksBatal2", smpIksBatal2);
+        jasperParameter.put("smpPasbBatal2", smpPasbBatal2);
+        jasperParameter.put("smpIpsbBatal2", smpIpsbBatal2);
+        jasperParameter.put("smpOsisBatal2", smpOsisBatal2);
+        jasperParameter.put("smpAttributeBatal2", smpAttributeBatal2);
+        jasperParameter.put("smpSeragamBatal2", smpSeragamBatal2);
+        jasperParameter.put("smpIppDaftar2", smpIppDaftar2);
+        jasperParameter.put("smpIpspDaftar2", smpIpspDaftar2);
+        jasperParameter.put("smpIksDaftar2", smpIksDaftar2);
+        jasperParameter.put("smpPasbDaftar2", smpPasbDaftar2);
+        jasperParameter.put("smpIpsbDaftar2", smpIpsbDaftar2);
+        jasperParameter.put("smpOsisDaftar2", smpOsisDaftar2);
+        jasperParameter.put("smpAttributeDaftar2", smpAttributeDaftar2);
+        jasperParameter.put("smpSeragamDaftar2", smpSeragamDaftar2);
+        jasperParameter.put("smpIppProses2", smpIppProses2);
+        jasperParameter.put("smpIpspProses2", smpIpspProses2);
+        jasperParameter.put("smpIksProses2", smpIksProses2);
+        jasperParameter.put("smpPasbProses2", smpPasbProses2);
+        jasperParameter.put("smpIpsbProses2", smpIpsbProses2);
+        jasperParameter.put("smpOsisProses2", smpOsisProses2);
+        jasperParameter.put("smpAttributeProses2", smpAttributeProses2);
+        jasperParameter.put("smpSeragamProses2", smpSeragamProses2);
+        jasperParameter.put("smpIppLunas2", smpIppLunas2);
+        jasperParameter.put("smpIpspLunas2", smpIpspLunas2);
+        jasperParameter.put("smpIksLunas2", smpIksLunas2);
+        jasperParameter.put("smpPasbLunas2", smpPasbLunas2);
+        jasperParameter.put("smpIpsbLunas2", smpIpsbLunas2);
+        jasperParameter.put("smpOsisLunas2", smpOsisLunas2);
+        jasperParameter.put("smpAttributeLunas2", smpAttributeLunas2);
+        jasperParameter.put("smpSeragamLunas2", smpSeragamLunas2);
+        jasperParameter.put("smpIppBatal2", smpIppBatal2);
+        jasperParameter.put("smpIpspBatal2", smpIpspBatal2);
+        jasperParameter.put("smpIksBatal2", smpIksBatal2);
+        jasperParameter.put("smpPasbBatal2", smpPasbBatal2);
+        jasperParameter.put("smpIpsbBatal2", smpIpsbBatal2);
+        jasperParameter.put("smpOsisBatal2", smpOsisBatal2);
+        jasperParameter.put("smpAttributeBatal2", smpAttributeBatal2);
+        jasperParameter.put("smpSeragamBatal2", smpSeragamBatal2);
+        
+        jasperParameter.put("smaIppDaftar", smaIppDaftar);
+        jasperParameter.put("smaIpspDaftar", smaIpspDaftar);
+        jasperParameter.put("smaIksDaftar", smaIksDaftar);
+        jasperParameter.put("smaPasbDaftar", smaPasbDaftar);
+        jasperParameter.put("smaIpsbDaftar", smaIpsbDaftar);
+        jasperParameter.put("smaOsisDaftar", smaOsisDaftar);
+        jasperParameter.put("smaAttributeDaftar", smaAttributeDaftar);
+        jasperParameter.put("smaSeragamDaftar", smaSeragamDaftar);
+        jasperParameter.put("smaIppProses", smaIppProses);
+        jasperParameter.put("smaIpspProses", smaIpspProses);
+        jasperParameter.put("smaIksProses", smaIksProses);
+        jasperParameter.put("smaPasbProses", smaPasbProses);
+        jasperParameter.put("smaIpsbProses", smaIpsbProses);
+        jasperParameter.put("smaOsisProses", smaOsisProses);
+        jasperParameter.put("smaAttributeProses", smaAttributeProses);
+        jasperParameter.put("smaSeragamProses", smaSeragamProses);
+        jasperParameter.put("smaIppLunas", smaIppLunas);
+        jasperParameter.put("smaIpspLunas", smaIpspLunas);
+        jasperParameter.put("smaIksLunas", smaIksLunas);
+        jasperParameter.put("smaPasbLunas", smaPasbLunas);
+        jasperParameter.put("smaIpsbLunas", smaIpsbLunas);
+        jasperParameter.put("smaOsisLunas", smaOsisLunas);
+        jasperParameter.put("smaAttributeLunas", smaAttributeLunas);
+        jasperParameter.put("smaSeragamLunas", smaSeragamLunas);
+        jasperParameter.put("smaIppBatal", smaIppBatal);
+        jasperParameter.put("smaIpspBatal", smaIpspBatal);
+        jasperParameter.put("smaIksBatal", smaIksBatal);
+        jasperParameter.put("smaPasbBatal", smaPasbBatal);
+        jasperParameter.put("smaIpsbBatal", smaIpsbBatal);
+        jasperParameter.put("smaOsisBatal", smaOsisBatal);
+        jasperParameter.put("smaAttributeBatal", smaAttributeBatal);
+        jasperParameter.put("smaSeragamBatal", smaSeragamBatal);
+        jasperParameter.put("smaIppDaftar1", smaIppDaftar1);
+        jasperParameter.put("smaIpspDaftar1", smaIpspDaftar1);
+        jasperParameter.put("smaIksDaftar1", smaIksDaftar1);
+        jasperParameter.put("smaPasbDaftar1", smaPasbDaftar1);
+        jasperParameter.put("smaIpsbDaftar1", smaIpsbDaftar1);
+        jasperParameter.put("smaOsisDaftar1", smaOsisDaftar1);
+        jasperParameter.put("smaAttributeDaftar1", smaAttributeDaftar1);
+        jasperParameter.put("smaSeragamDaftar1", smaSeragamDaftar1);
+        jasperParameter.put("smaIppProses1", smaIppProses1);
+        jasperParameter.put("smaIpspProses1", smaIpspProses1);
+        jasperParameter.put("smaIksProses1", smaIksProses1);
+        jasperParameter.put("smaPasbProses1", smaPasbProses1);
+        jasperParameter.put("smaIpsbProses1", smaIpsbProses1);
+        jasperParameter.put("smaOsisProses1", smaOsisProses1);
+        jasperParameter.put("smaAttributeProses1", smaAttributeProses1);
+        jasperParameter.put("smaSeragamProses1", smaSeragamProses1);
+        jasperParameter.put("smaIppLunas1", smaIppLunas1);
+        jasperParameter.put("smaIpspLunas1", smaIpspLunas1);
+        jasperParameter.put("smaIksLunas1", smaIksLunas1);
+        jasperParameter.put("smaPasbLunas1", smaPasbLunas1);
+        jasperParameter.put("smaIpsbLunas1", smaIpsbLunas1);
+        jasperParameter.put("smaOsisLunas1", smaOsisLunas1);
+        jasperParameter.put("smaAttributeLunas1", smaAttributeLunas1);
+        jasperParameter.put("smaSeragamLunas1", smaSeragamLunas1);
+        jasperParameter.put("smaIppBatal2", smaIppBatal2);
+        jasperParameter.put("smaIpspBatal2", smaIpspBatal2);
+        jasperParameter.put("smaIksBatal2", smaIksBatal2);
+        jasperParameter.put("smaPasbBatal2", smaPasbBatal2);
+        jasperParameter.put("smaIpsbBatal2", smaIpsbBatal2);
+        jasperParameter.put("smaOsisBatal2", smaOsisBatal2);
+        jasperParameter.put("smaAttributeBatal2", smaAttributeBatal2);
+        jasperParameter.put("smaSeragamBatal2", smaSeragamBatal2);
+        jasperParameter.put("smaIppDaftar2", smaIppDaftar2);
+        jasperParameter.put("smaIpspDaftar2", smaIpspDaftar2);
+        jasperParameter.put("smaIksDaftar2", smaIksDaftar2);
+        jasperParameter.put("smaPasbDaftar2", smaPasbDaftar2);
+        jasperParameter.put("smaIpsbDaftar2", smaIpsbDaftar2);
+        jasperParameter.put("smaOsisDaftar2", smaOsisDaftar2);
+        jasperParameter.put("smaAttributeDaftar2", smaAttributeDaftar2);
+        jasperParameter.put("smaSeragamDaftar2", smaSeragamDaftar2);
+        jasperParameter.put("smaIppProses2", smaIppProses2);
+        jasperParameter.put("smaIpspProses2", smaIpspProses2);
+        jasperParameter.put("smaIksProses2", smaIksProses2);
+        jasperParameter.put("smaPasbProses2", smaPasbProses2);
+        jasperParameter.put("smaIpsbProses2", smaIpsbProses2);
+        jasperParameter.put("smaOsisProses2", smaOsisProses2);
+        jasperParameter.put("smaAttributeProses2", smaAttributeProses2);
+        jasperParameter.put("smaSeragamProses2", smaSeragamProses2);
+        jasperParameter.put("smaIppLunas2", smaIppLunas2);
+        jasperParameter.put("smaIpspLunas2", smaIpspLunas2);
+        jasperParameter.put("smaIksLunas2", smaIksLunas2);
+        jasperParameter.put("smaPasbLunas2", smaPasbLunas2);
+        jasperParameter.put("smaIpsbLunas2", smaIpsbLunas2);
+        jasperParameter.put("smaOsisLunas2", smaOsisLunas2);
+        jasperParameter.put("smaAttributeLunas2", smaAttributeLunas2);
+        jasperParameter.put("smaSeragamLunas2", smaSeragamLunas2);
+        jasperParameter.put("smaIppBatal2", smaIppBatal2);
+        jasperParameter.put("smaIpspBatal2", smaIpspBatal2);
+        jasperParameter.put("smaIksBatal2", smaIksBatal2);
+        jasperParameter.put("smaPasbBatal2", smaPasbBatal2);
+        jasperParameter.put("smaIpsbBatal2", smaIpsbBatal2);
+        jasperParameter.put("smaOsisBatal2", smaOsisBatal2);
+        jasperParameter.put("smaAttributeBatal2", smaAttributeBatal2);
+        jasperParameter.put("smaSeragamBatal2", smaSeragamBatal2);
+        
+        jasperParameter.put("smkIppDaftar", smkIppDaftar);
+        jasperParameter.put("smkIpspDaftar", smkIpspDaftar);
+        jasperParameter.put("smkIksDaftar", smkIksDaftar);
+        jasperParameter.put("smkPasbDaftar", smkPasbDaftar);
+        jasperParameter.put("smkIpsbDaftar", smkIpsbDaftar);
+        jasperParameter.put("smkOsisDaftar", smkOsisDaftar);
+        jasperParameter.put("smkAttributeDaftar", smkAttributeDaftar);
+        jasperParameter.put("smkSeragamDaftar", smkSeragamDaftar);
+        jasperParameter.put("smkAlmamaterDaftar", smkAlmamaterDaftar);
+        jasperParameter.put("smkPvtDaftar", smkPvtDaftar);
+        jasperParameter.put("smkIppProses", smkIppProses);
+        jasperParameter.put("smkIpspProses", smkIpspProses);
+        jasperParameter.put("smkIksProses", smkIksProses);
+        jasperParameter.put("smkPasbProses", smkPasbProses);
+        jasperParameter.put("smkIpsbProses", smkIpsbProses);
+        jasperParameter.put("smkOsisProses", smkOsisProses);
+        jasperParameter.put("smkAttributeProses", smkAttributeProses);
+        jasperParameter.put("smkSeragamProses", smkSeragamProses);
+        jasperParameter.put("smkAlmamaterProses", smkAlmamaterProses);
+        jasperParameter.put("smkPvtProses", smkPvtProses);
+        jasperParameter.put("smkIppLunas", smkIppLunas);
+        jasperParameter.put("smkIpspLunas", smkIpspLunas);
+        jasperParameter.put("smkIksLunas", smkIksLunas);
+        jasperParameter.put("smkPasbLunas", smkPasbLunas);
+        jasperParameter.put("smkIpsbLunas", smkIpsbLunas);
+        jasperParameter.put("smkOsisLunas", smkOsisLunas);
+        jasperParameter.put("smkAttributeLunas", smkAttributeLunas);
+        jasperParameter.put("smkSeragamLunas", smkSeragamLunas);
+        jasperParameter.put("smkAlmamaterLunas", smkAlmamaterLunas);
+        jasperParameter.put("smkPvtLunas", smkPvtLunas);
+        jasperParameter.put("smkIppBatal", smkIppBatal);
+        jasperParameter.put("smkIpspBatal", smkIpspBatal);
+        jasperParameter.put("smkIksBatal", smkIksBatal);
+        jasperParameter.put("smkPasbBatal", smkPasbBatal);
+        jasperParameter.put("smkIpsbBatal", smkIpsbBatal);
+        jasperParameter.put("smkOsisBatal", smkOsisBatal);
+        jasperParameter.put("smkAttributeBatal", smkAttributeBatal);
+        jasperParameter.put("smkSeragamBatal", smkSeragamBatal);
+        jasperParameter.put("smkAlmamaterBatal", smkAlmamaterBatal);
+        jasperParameter.put("smkPvtBatal", smkPvtBatal);
+        
+         String fileName = "C://printout//PrintOutRekapBeritaAcara.jrxml";
+            String filetoPrint = "C://printout//PrintOutRekapBeritaAcara.jrprint";
+            String filetoFill = "C://printout//PrintOutRekapBeritaAcara.jasper";
+            //String filePdf = "C://printout//PrintOutReportPerKasir.pdf";
+            String filePdf = "C://printout//PrintOutRekapBeritaAcara.pdf";
+       JasperCompileManager.compileReportToFile(fileName);
+            
+            
+            JasperFillManager.fillReportToFile(filetoFill, jasperParameter , connection);
+            JasperPrint jp = JasperFillManager.fillReport(filetoFill, jasperParameter, connection);
+            JasperViewer.viewReport(jp, false);
+            JasperExportManager.exportReportToPdfFile(jp, filePdf);
+            JasperPrintManager.printReport(filetoPrint, true);
+            
+            
+            jasperReport = JasperCompileManager.compileReport
+        ("C://printout//PrintOutRekapBeritaAcara.jrxml");
+
+        // filling report with data from data source
+
+        jasperPrint = JasperFillManager.fillReport(jasperReport,jasperParameter, connection); 
+        // exporting process
+        // 1- export to PDF
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "C://printout//PrintOutRekapBeritaAcara.pdf");
+
+        // 2- export to HTML
+        JasperExportManager.exportReportToHtmlFile(jasperPrint, "C://printout//PrintOutRekapBeritaAcara.html" ); 
+
+        // 3- export to Excel sheet
+        JRXlsExporter exporter = new JRXlsExporter();
+        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "C://printout//PrintOutRekapBeritaAcara.xls" );
+
+        exporter.exportReport();
+    }
+    
     private ArrayList<BigDecimal> farmIPP(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();

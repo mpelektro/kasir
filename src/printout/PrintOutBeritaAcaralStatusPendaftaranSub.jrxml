@@ -5,58 +5,58 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="Param_NomorInduk" class="java.lang.String"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Users\\Nada\\Documents\\NetBeansProjects\\kasir\\src\\printout\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:\\printout\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
-     profil.`NomorInduk` AS profil_NomorInduk,
-     profil.`Nama` AS profil_Nama,
-     profil.`JenisKelamin` AS profil_JenisKelamin,
-     profil.`Agama` AS profil_Agama,
-     profil.`AsalSekolah` AS profil_AsalSekolah,
-     profil.`TanggalLahir` AS profil_TanggalLahir,
-     profil.`TempatLahir` AS profil_TempatLahir,
-     profil.`Alamat` AS profil_Alamat,
-     profil.`NamaAyah` AS profil_NamaAyah,
-     profil.`NamaIbu` AS profil_NamaIbu,
-     profil.`Telpon1` AS profil_Telpon1,
-     profil.`Telpon2` AS profil_Telpon2,
-     profil.`CurrentLevel` AS profil_CurrentLevel,
-     profil.`TanggalMasuk` AS profil_TanggalMasuk,
-     profil.`TanggalLulus` AS profil_TanggalLulus,
-     profil.`Gelombang` AS profil_Gelombang,
-     profil.`TotalIuran` AS profil_TotalIuran,
-     profil.`StatusPendaftaran` AS profil_StatusPendaftaran,
-     profil.`LastUpdateDate` AS profil_LastUpdateDate
+     Profil.`NomorInduk` AS Profil_NomorInduk,
+     Profil.`Nama` AS Profil_Nama,
+     Profil.`JenisKelamin` AS Profil_JenisKelamin,
+     Profil.`Agama` AS Profil_Agama,
+     Profil.`AsalSekolah` AS Profil_AsalSekolah,
+     Profil.`TanggalLahir` AS Profil_TanggalLahir,
+     Profil.`TempatLahir` AS Profil_TempatLahir,
+     Profil.`Alamat` AS Profil_Alamat,
+     Profil.`NamaAyah` AS Profil_NamaAyah,
+     Profil.`NamaIbu` AS Profil_NamaIbu,
+     Profil.`Telpon1` AS Profil_Telpon1,
+     Profil.`Telpon2` AS Profil_Telpon2,
+     Profil.`CurrentLevel` AS Profil_CurrentLevel,
+     Profil.`TanggalMasuk` AS Profil_TanggalMasuk,
+     Profil.`TanggalLulus` AS Profil_TanggalLulus,
+     Profil.`Gelombang` AS Profil_Gelombang,
+     Profil.`TotalIuran` AS Profil_TotalIuran,
+     Profil.`StatusPendaftaran` AS Profil_StatusPendaftaran,
+     Profil.`LastUpdateDate` AS Profil_LastUpdateDate
 FROM
-     `profil` profil
-WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
+     `Profil` Profil
+WHERE Profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 	</queryString>
-	<field name="profil_NomorInduk" class="java.lang.String"/>
-	<field name="profil_Nama" class="java.lang.String"/>
-	<field name="profil_JenisKelamin" class="java.lang.String"/>
-	<field name="profil_Agama" class="java.lang.String"/>
-	<field name="profil_AsalSekolah" class="java.lang.String"/>
-	<field name="profil_TanggalLahir" class="java.sql.Date"/>
-	<field name="profil_TempatLahir" class="java.lang.String"/>
-	<field name="profil_Alamat" class="java.lang.String"/>
-	<field name="profil_NamaAyah" class="java.lang.String"/>
-	<field name="profil_NamaIbu" class="java.lang.String"/>
-	<field name="profil_Telpon1" class="java.lang.String"/>
-	<field name="profil_Telpon2" class="java.lang.String"/>
-	<field name="profil_CurrentLevel" class="java.lang.String"/>
-	<field name="profil_TanggalMasuk" class="java.sql.Date"/>
-	<field name="profil_TanggalLulus" class="java.sql.Date"/>
-	<field name="profil_Gelombang" class="java.lang.String"/>
-	<field name="profil_TotalIuran" class="java.lang.Float"/>
-	<field name="profil_StatusPendaftaran" class="java.lang.String"/>
-	<field name="profil_LastUpdateDate" class="java.sql.Date"/>
-	<variable name="profil_CurrentLevel_1" class="java.lang.Integer" resetType="Group" resetGroup="GroupCurrentLevel" calculation="Count">
-		<variableExpression><![CDATA[$F{profil_CurrentLevel}]]></variableExpression>
+	<field name="Profil_NomorInduk" class="java.lang.String"/>
+	<field name="Profil_Nama" class="java.lang.String"/>
+	<field name="Profil_JenisKelamin" class="java.lang.String"/>
+	<field name="Profil_Agama" class="java.lang.String"/>
+	<field name="Profil_AsalSekolah" class="java.lang.String"/>
+	<field name="Profil_TanggalLahir" class="java.sql.Date"/>
+	<field name="Profil_TempatLahir" class="java.lang.String"/>
+	<field name="Profil_Alamat" class="java.lang.String"/>
+	<field name="Profil_NamaAyah" class="java.lang.String"/>
+	<field name="Profil_NamaIbu" class="java.lang.String"/>
+	<field name="Profil_Telpon1" class="java.lang.String"/>
+	<field name="Profil_Telpon2" class="java.lang.String"/>
+	<field name="Profil_CurrentLevel" class="java.lang.String"/>
+	<field name="Profil_TanggalMasuk" class="java.sql.Date"/>
+	<field name="Profil_TanggalLulus" class="java.sql.Date"/>
+	<field name="Profil_Gelombang" class="java.lang.String"/>
+	<field name="Profil_TotalIuran" class="java.lang.Float"/>
+	<field name="Profil_StatusPendaftaran" class="java.lang.String"/>
+	<field name="Profil_LastUpdateDate" class="java.sql.Date"/>
+	<variable name="Profil_CurrentLevel_1" class="java.lang.Integer" resetType="Group" resetGroup="GroupCurrentLevel" calculation="Count">
+		<variableExpression><![CDATA[$F{Profil_CurrentLevel}]]></variableExpression>
 	</variable>
 	<variable name="ipp" class="java.math.BigDecimal"/>
 	<group name="GroupCurrentLevel">
-		<groupExpression><![CDATA[$F{profil_CurrentLevel}]]></groupExpression>
+		<groupExpression><![CDATA[$F{Profil_CurrentLevel}]]></groupExpression>
 	</group>
 	<background>
 		<band splitType="Stretch"/>
@@ -75,17 +75,17 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{profil_Nama}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Profil_Nama}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="1" y="0" width="36" height="20" uuid="361fd078-1884-4e7f-a6b3-7f6e6c558a1e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{profil_NomorInduk}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Profil_NomorInduk}]]></textFieldExpression>
 			</textField>
 			<subreport>
 				<reportElement x="217" y="0" width="49" height="20" isPrintWhenDetailOverflows="true" uuid="7719a88b-9479-4b75-b81e-b0b90eda0c54"/>
 				<subreportParameter name="ParamNomorInduk">
-					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{Profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranIPP.jasper"]]></subreportExpression>
@@ -93,7 +93,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 			<subreport>
 				<reportElement x="267" y="0" width="62" height="20" isPrintWhenDetailOverflows="true" uuid="2f09f728-abe9-429f-8a80-305ee97ea877"/>
 				<subreportParameter name="ParamNomorInduk">
-					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{Profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranIPSP.jasper"]]></subreportExpression>
@@ -101,7 +101,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 			<subreport>
 				<reportElement x="330" y="0" width="49" height="20" uuid="a4dab8a6-6cd7-4513-8da5-6732f8da21d8"/>
 				<subreportParameter name="ParamNomorInduk">
-					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{Profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranIKS.jasper"]]></subreportExpression>
@@ -109,7 +109,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 			<subreport>
 				<reportElement x="380" y="0" width="49" height="20" uuid="f92aed39-9f9b-4a4d-87e1-5bc5f7e5291b"/>
 				<subreportParameter name="ParamNomorInduk">
-					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{Profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranPASB.jasper"]]></subreportExpression>
@@ -117,7 +117,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 			<subreport>
 				<reportElement x="430" y="0" width="49" height="20" uuid="2d5b7a95-3f0d-4d0f-8910-0b8d743c6ad2"/>
 				<subreportParameter name="ParamNomorInduk">
-					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{Profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranOSIS.jasper"]]></subreportExpression>
@@ -125,7 +125,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 			<subreport>
 				<reportElement x="480" y="0" width="49" height="20" uuid="85a676fd-ff7a-40e3-92c7-89c04d48c034"/>
 				<subreportParameter name="ParamNomorInduk">
-					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{Profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranAttribute.jasper"]]></subreportExpression>
@@ -133,7 +133,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 			<subreport>
 				<reportElement x="530" y="0" width="49" height="20" uuid="8d86df59-3986-4ad8-bbeb-bc386e4b71c0"/>
 				<subreportParameter name="ParamNomorInduk">
-					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{Profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranSeragam.jasper"]]></subreportExpression>
@@ -141,7 +141,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 			<subreport>
 				<reportElement x="580" y="0" width="49" height="20" uuid="419c3105-f65a-41d1-af8a-dbfc2c7d824b"/>
 				<subreportParameter name="ParamNomorInduk">
-					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{Profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranAlmamater.jasper"]]></subreportExpression>
@@ -149,7 +149,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 			<subreport>
 				<reportElement x="630" y="1" width="49" height="19" uuid="ed45b740-be17-4edc-8319-b2e4fa5cf153"/>
 				<subreportParameter name="ParamNomorInduk">
-					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{Profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranPVT.jasper"]]></subreportExpression>
@@ -199,7 +199,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 			<subreport>
 				<reportElement x="730" y="0" width="70" height="20" uuid="e25de7de-e859-44f7-8e0e-df96161a9647"/>
 				<subreportParameter name="ParamNomorInduk">
-					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{Profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranTSum.jasper"]]></subreportExpression>
@@ -207,7 +207,7 @@ WHERE profil.`NomorInduk` LIKE $P{Param_NomorInduk}]]>
 			<subreport>
 				<reportElement x="680" y="0" width="49" height="20" uuid="9eb956c6-6bef-40e2-b69d-d713091b0ab9"/>
 				<subreportParameter name="ParamNomorInduk">
-					<subreportParameterExpression><![CDATA[$F{profil_NomorInduk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{Profil_NomorInduk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutBeritaAcaralStatusPendaftaranIPSB.jasper"]]></subreportExpression>

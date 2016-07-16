@@ -820,6 +820,60 @@ public class InputEditTransactionSummaryFrame extends javax.swing.JFrame {
                     return false;
                 }
             break;
+            case "idd":                 
+                IDDTransactionDetail iddTransactionUpdated = Control.selectTDetail(TransactionDetail.Tipe.IDDTransaction, it.tDetailID);
+                if(!iddTransactionUpdated.settled){
+                    float amountOri = iddTransactionUpdated.amount;
+                    
+                    iddTransactionUpdated.amount = it.amount;
+                    iddTransactionUpdated.lastUpdateDate = lastUpdateDate;
+                    iddTransactionUpdated.idClerk = clerk.id;
+                    IDD iddIuran = Control.selectIuran(Iuran.Tipe.IDD, it.iuranID);
+                    iddIuran.amount = iddIuran.amount - (amountOri - it.amount);
+                    if(iddIuran.update(Iuran.Tipe.IDD)){
+                        if(Control.updateTDetail(TransactionDetail.Tipe.IDDTransaction, iddTransactionUpdated))
+                            return true;
+                    }
+                }else{
+                    return false;
+                }
+            break;
+            case "beasiswa":                 
+                BeasiswaTransactionDetail beasiswaTransactionUpdated = Control.selectTDetail(TransactionDetail.Tipe.BeasiswaTransaction, it.tDetailID);
+                if(!beasiswaTransactionUpdated.settled){
+                    float amountOri = beasiswaTransactionUpdated.amount;
+                    
+                    beasiswaTransactionUpdated.amount = it.amount;
+                    beasiswaTransactionUpdated.lastUpdateDate = lastUpdateDate;
+                    beasiswaTransactionUpdated.idClerk = clerk.id;
+                    Beasiswa beasiswaIuran = Control.selectIuran(Iuran.Tipe.Beasiswa, it.iuranID);
+                    beasiswaIuran.amount = beasiswaIuran.amount - (amountOri - it.amount);
+                    if(beasiswaIuran.update(Iuran.Tipe.Beasiswa)){
+                        if(Control.updateTDetail(TransactionDetail.Tipe.BeasiswaTransaction, beasiswaTransactionUpdated))
+                            return true;
+                    }
+                }else{
+                    return false;
+                }
+            break;
+            case "beasiswacost":                 
+                BeasiswaCostTransactionDetail beasiswacostTransactionUpdated = Control.selectTDetail(TransactionDetail.Tipe.BeasiswaCostTransaction, it.tDetailID);
+                if(!beasiswacostTransactionUpdated.settled){
+                    float amountOri = beasiswacostTransactionUpdated.amount;
+                    
+                    beasiswacostTransactionUpdated.amount = it.amount;
+                    beasiswacostTransactionUpdated.lastUpdateDate = lastUpdateDate;
+                    beasiswacostTransactionUpdated.idClerk = clerk.id;
+                    BeasiswaCost beasiswacostIuran = Control.selectIuran(Iuran.Tipe.BeasiswaCost, it.iuranID);
+                    beasiswacostIuran.amount = beasiswacostIuran.amount - (amountOri - it.amount);
+                    if(beasiswacostIuran.update(Iuran.Tipe.BeasiswaCost)){
+                        if(Control.updateTDetail(TransactionDetail.Tipe.BeasiswaCostTransaction, beasiswacostTransactionUpdated))
+                            return true;
+                    }
+                }else{
+                    return false;
+                }
+            break;
         }
         
         return false;
