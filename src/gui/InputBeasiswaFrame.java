@@ -72,6 +72,7 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanelMain = new javax.swing.JPanel();
         jPanelProfil1 = new javax.swing.JPanel();
         jLableProfilTitle1 = new javax.swing.JLabel();
@@ -102,6 +103,8 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
         jTextFieldIDDTransactionName = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableIDD = new javax.swing.JTable();
+        jRadioButtonTunai = new javax.swing.JRadioButton();
+        jRadioButtonBank = new javax.swing.JRadioButton();
         jPanelBeasiswa = new javax.swing.JPanel();
         jLabelIDDTitle1 = new javax.swing.JLabel();
         jLabelAmount7 = new javax.swing.JLabel();
@@ -137,6 +140,9 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
         jPanelButton = new javax.swing.JPanel();
         jButtonSaveAll = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
+
+        buttonGroup1.add(jRadioButtonTunai);
+        buttonGroup1.add(jRadioButtonBank);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("INPUT IURAN SISWA ".concat(profil.currentLevel.level1.toString()));
@@ -295,6 +301,16 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
         jTableIDD.setModel(tableModelIDD);
         jScrollPane6.setViewportView(jTableIDD);
 
+        jRadioButtonTunai.setSelected(true);
+        jRadioButtonTunai.setText(org.openide.util.NbBundle.getMessage(InputBeasiswaFrame.class, "InputBeasiswaFrame.jRadioButtonTunai.text")); // NOI18N
+
+        jRadioButtonBank.setText(org.openide.util.NbBundle.getMessage(InputBeasiswaFrame.class, "InputBeasiswaFrame.jRadioButtonBank.text")); // NOI18N
+        jRadioButtonBank.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonBankActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelIDDLayout = new javax.swing.GroupLayout(jPanelIDD);
         jPanelIDD.setLayout(jPanelIDDLayout);
         jPanelIDDLayout.setHorizontalGroup(
@@ -302,14 +318,11 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
             .addGroup(jPanelIDDLayout.createSequentialGroup()
                 .addGroup(jPanelIDDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelIDDLayout.createSequentialGroup()
-                        .addComponent(jLabelIDDTitle)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanelIDDLayout.createSequentialGroup()
                         .addGroup(jPanelIDDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelAmount3)
                             .addComponent(jLabelIDDChargedLevel)
-                            .addComponent(jLabelNote2)
-                            .addComponent(jLabelAmount4))
+                            .addComponent(jLabelAmount4)
+                            .addComponent(jLabelNote2))
                         .addGap(29, 29, 29)
                         .addGroup(jPanelIDDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldIDDTransactionName)
@@ -324,7 +337,15 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
                                 .addComponent(jComboBoxIDDLevel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanelIDDLayout.createSequentialGroup()
+                        .addGroup(jPanelIDDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelIDDTitle)
+                            .addGroup(jPanelIDDLayout.createSequentialGroup()
+                                .addComponent(jRadioButtonTunai)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonBank)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(0, 0, 0))
         );
         jPanelIDDLayout.setVerticalGroup(
@@ -347,11 +368,15 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
                     .addComponent(jComboBoxIDDLevel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxIDDLevel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelIDDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButtonTunai)
+                    .addComponent(jRadioButtonBank))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelIDDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelNote2)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNote2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -798,6 +823,10 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldBeasiswaCostTransactionNameKeyTyped
 
+    private void jRadioButtonBankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonBankActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonBankActionPerformed
+
     
 
     /**
@@ -842,6 +871,7 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonSaveAll;
     private javax.swing.JComboBox jComboBoxBeasiswaLevel2;
@@ -882,6 +912,8 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelIDD;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelProfil1;
+    private javax.swing.JRadioButton jRadioButtonBank;
+    private javax.swing.JRadioButton jRadioButtonTunai;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
@@ -921,7 +953,7 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
             totalAmount += Float.valueOf(jTextFieldIDDAmount.getText());
             tSumNote = tSumNote.concat(" "+jTextAreaIDDNote.getText());
             iddTDetail = new IDDTransactionDetail(tSumUUID, idd.id, this.clerk.id, 0L, profil.noInduk, profil.currentLevel.level1
-                        , Float.valueOf(jTextFieldIDDAmount.getText()), TransactionDetail.PaymentMethod.CASH, jTextAreaIDDNote.getText());
+                        , Float.valueOf(jTextFieldIDDAmount.getText()), jRadioButtonTunai.isSelected()?TransactionDetail.PaymentMethod.CASH:TransactionDetail.PaymentMethod.TRANSFER, jTextAreaIDDNote.getText());
         }
         
         //Beasiswa
@@ -945,7 +977,7 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
                         , Float.valueOf(jTextFieldBeasiswaCostAmount.getText()), TransactionDetail.PaymentMethod.CASH, jTextAreaBeasiswaCostNote.getText());
         }
         transactionSummary.totalAmount = totalAmount;
-        transactionSummary.note = tSumNote;
+        transactionSummary.note = jRadioButtonTunai.isSelected()?tSumNote:"TIDAK_TUNAI";
         Control.insertTSummary(transactionSummary);
         transactionSummary = Control.selectTSummary(TransactionSummary.uuidColName, false, tSumUUID.toString());
         if(iddTDetail !=null){
