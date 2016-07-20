@@ -69,7 +69,7 @@ public class InputTransactionIKS extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelIPP = new javax.swing.JPanel();
+        jPanelIKS = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabelTahun = new javax.swing.JLabel();
         jComboBoxTahun = new javax.swing.JComboBox();
@@ -77,15 +77,15 @@ public class InputTransactionIKS extends javax.swing.JFrame {
         jUnpaidIKS = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableIKS = new javax.swing.JTable();
-        jButtonBayarIUS = new javax.swing.JButton();
+        jButtonBayarIKS = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jFormattedTextFieldIDDSaldo = new javax.swing.JFormattedTextField();
         jTextFieldIKSDebt = new javax.swing.JFormattedTextField();
 
         setTitle(org.openide.util.NbBundle.getMessage(InputTransactionIKS.class, "InputTransactionIKS.title")); // NOI18N
 
-        jPanelIPP.setMinimumSize(new java.awt.Dimension(570, 380));
-        jPanelIPP.setPreferredSize(new java.awt.Dimension(680, 450));
+        jPanelIKS.setMinimumSize(new java.awt.Dimension(570, 380));
+        jPanelIKS.setPreferredSize(new java.awt.Dimension(680, 450));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText(org.openide.util.NbBundle.getMessage(InputTransactionIKS.class, "InputTransactionIKS.jLabel1.text")); // NOI18N
@@ -132,10 +132,10 @@ public class InputTransactionIKS extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(jTableIKS);
 
-        jButtonBayarIUS.setText(org.openide.util.NbBundle.getMessage(InputTransactionIKS.class, "InputTransactionIKS.jButtonBayarIUS.text")); // NOI18N
-        jButtonBayarIUS.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBayarIKS.setText(org.openide.util.NbBundle.getMessage(InputTransactionIKS.class, "InputTransactionIKS.jButtonBayarIKS.text")); // NOI18N
+        jButtonBayarIKS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBayarIUSActionPerformed(evt);
+                jButtonBayarIKSActionPerformed(evt);
             }
         });
 
@@ -147,59 +147,59 @@ public class InputTransactionIKS extends javax.swing.JFrame {
         jTextFieldIKSDebt.setEditable(false);
         jTextFieldIKSDebt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
 
-        javax.swing.GroupLayout jPanelIPPLayout = new javax.swing.GroupLayout(jPanelIPP);
-        jPanelIPP.setLayout(jPanelIPPLayout);
-        jPanelIPPLayout.setHorizontalGroup(
-            jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelIPPLayout.createSequentialGroup()
-                .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelIPPLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelIKSLayout = new javax.swing.GroupLayout(jPanelIKS);
+        jPanelIKS.setLayout(jPanelIKSLayout);
+        jPanelIKSLayout.setHorizontalGroup(
+            jPanelIKSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelIKSLayout.createSequentialGroup()
+                .addGroup(jPanelIKSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelIKSLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE))
-                    .addGroup(jPanelIPPLayout.createSequentialGroup()
-                        .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelIPPLayout.createSequentialGroup()
+                    .addGroup(jPanelIKSLayout.createSequentialGroup()
+                        .addGroup(jPanelIKSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelIKSLayout.createSequentialGroup()
                                 .addGap(248, 248, 248)
-                                .addComponent(jButtonBayarIUS))
-                            .addGroup(jPanelIPPLayout.createSequentialGroup()
+                                .addComponent(jButtonBayarIKS))
+                            .addGroup(jPanelIKSLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel1)
                                 .addGap(29, 29, 29)
                                 .addComponent(jLabelTahun)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanelIKSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jComboBoxTahun, 0, 101, Short.MAX_VALUE)
                                     .addComponent(jTextFieldIKSDebt))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanelIKSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanelIKSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jUnpaidIKS, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jFormattedTextFieldIDDSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 77, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanelIPPLayout.setVerticalGroup(
-            jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelIPPLayout.createSequentialGroup()
+        jPanelIKSLayout.setVerticalGroup(
+            jPanelIKSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelIKSLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelIKSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxTahun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelTahun)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jUnpaidIKS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelIKSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jFormattedTextFieldIDDSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldIKSDebt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonBayarIUS)
+                .addComponent(jButtonBayarIKS)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -207,11 +207,11 @@ public class InputTransactionIKS extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelIPP, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+            .addComponent(jPanelIKS, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelIPP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+            .addComponent(jPanelIKS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
         );
 
         pack();
@@ -320,7 +320,7 @@ public class InputTransactionIKS extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTableIKSPropertyChange
 
-    private void jButtonBayarIUSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBayarIUSActionPerformed
+    private void jButtonBayarIKSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBayarIKSActionPerformed
         // TODO add your handling code here:
         float iksAmountTemp = 0f;
         for (int i = 0; i < 1; i++) {
@@ -344,7 +344,7 @@ public class InputTransactionIKS extends javax.swing.JFrame {
         itfs.iksStoreToDB = iksStoreToDB;
         this.setVisible(false);
 
-    }//GEN-LAST:event_jButtonBayarIUSActionPerformed
+    }//GEN-LAST:event_jButtonBayarIKSActionPerformed
 
     /**
      * @param args the command line arguments
@@ -388,14 +388,14 @@ public class InputTransactionIKS extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonBayarIUS;
+    private javax.swing.JButton jButtonBayarIKS;
     public javax.swing.JComboBox jComboBoxTahun;
     private javax.swing.JFormattedTextField jFormattedTextFieldIDDSaldo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelTahun;
-    private javax.swing.JPanel jPanelIPP;
+    private javax.swing.JPanel jPanelIKS;
     private javax.swing.JScrollPane jScrollPane5;
     public javax.swing.JTable jTableIKS;
     private javax.swing.JFormattedTextField jTextFieldIKSDebt;

@@ -29,7 +29,7 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
     private TableModel tableModelIUAP;
     private IUAP iuapFromDB;
     private List<Integer> tahunIUAP;
-    private ArrayList<Float> iDDAmounts;
+    public ArrayList<Float> iDDAmounts;
     public ArrayList<Float> beasiswaAmounts;
     public ArrayList<Float> beasiswaCostAmounts;
     public ArrayList<Float> iUAPAmounts;

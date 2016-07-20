@@ -705,14 +705,14 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             saveInsertIuran();
-            JOptionPane.showMessageDialog(rootPane, "Input Beasiswa Berhasil");
+            JOptionPane.showMessageDialog(rootPane, "Input IDD / Beasiswa / BeasiswaCost Berhasil");
             this.dispose();
         } catch (SQLException ex) {
             Exceptions.printStackTrace(ex);
-            JOptionPane.showMessageDialog(rootPane, "Input Beasiswa Gagal!\r\n".concat(ex.toString()));
+            JOptionPane.showMessageDialog(rootPane, "Input IDD / Beasiswa / BeasiswaCost Gagal!\r\n".concat(ex.toString()));
         } catch (KasirException ex) {
             Exceptions.printStackTrace(ex);
-            JOptionPane.showMessageDialog(rootPane, "Input Beasiswa Gagal!\r\n".concat(ex.toString()));
+            JOptionPane.showMessageDialog(rootPane, "Input IDD / Beasiswa / BeasiswaCost Mungkin Berhasil!\r\n".concat(ex.toString()));
         }
     }//GEN-LAST:event_jButtonSaveAllActionPerformed
 
@@ -1225,6 +1225,7 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
                 try {
                     beasiswacost.amount = Float.valueOf(jTextFieldBeasiswaCostAmount.getText());
                     beasiswacost.note = jTextAreaBeasiswaCostNote.getText();
+                    beasiswacost.debt = 0;
                     Control.insertIuran(Iuran.Tipe.BeasiswaCost, beasiswacost);
                 } catch (KasirException ex1) {
                     Exceptions.printStackTrace(ex1);

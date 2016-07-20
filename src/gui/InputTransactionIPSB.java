@@ -20,8 +20,14 @@ import sak.KasirException;
  */
 public class InputTransactionIPSB extends javax.swing.JFrame {
     private IPSB ipsb;
+    private IPSB ipsbFromDB;
+    private IPSB ipsbStoreToDB;
+    private IPSB ipsbCurrent;
     private float minIPSB;
     private float maxIPSB;
+    public float ipsbTunaiAmount;
+    public float ipsbBeasiswaAmount;
+    public float ipsbBeasiswaCostAmount;
     private InputTransactionFrameSeparated itfs;
     private Profil profil;
     /**
@@ -32,15 +38,19 @@ public class InputTransactionIPSB extends javax.swing.JFrame {
             this.ipsb = Control.selectIuran(Iuran.Tipe.IPSB, IPSB.noIndukColName, false, profil.noInduk);
             minIPSB = 0F;
             maxIPSB = this.ipsb.amount - this.ipsb.totalInstallment;
+            ipsbFromDB = new IPSB();
+            ipsbFromDB = this.ipsb;
+            ipsbStoreToDB = this.ipsb;
+            ipsbCurrent = this.ipsb;
             this.itfs = itfs;
             this.profil = profil;
         } catch (SQLException ex) {
             Exceptions.printStackTrace(ex);
-            JOptionPane.showMessageDialog(rootPane, "IPSB Belum Di Setting!\r\n".concat(profil.biodata.nama+"\r\n").concat(ex.toString()));
+            JOptionPane.showMessageDialog(rootPane, "IPSB Belum Di Setting!\r\n".concat(ex.toString()));
             this.dispose();
         } catch (KasirException ex) {
             Exceptions.printStackTrace(ex);
-            JOptionPane.showMessageDialog(rootPane, "IPSB Belum Di Setting!\r\n".concat(profil.biodata.nama+"\r\n").concat(ex.toString()));
+            JOptionPane.showMessageDialog(rootPane, "IPSB Belum Di Setting!\r\n".concat(ex.toString()));
             this.dispose();
         }
         initComponents();
@@ -66,6 +76,12 @@ public class InputTransactionIPSB extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jTextFieldIPSBSisaAmount = new javax.swing.JTextField();
         jButtonIPSBOK = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jTextFieldIPSBTunai = new javax.swing.JTextField();
+        jTextFieldIPSBBeasiswa = new javax.swing.JTextField();
+        jTextFieldIPSBBeasiswaCost = new javax.swing.JTextField();
 
         setMinimumSize(new java.awt.Dimension(480, 500));
 
@@ -76,6 +92,8 @@ public class InputTransactionIPSB extends javax.swing.JFrame {
 
         jLabel3.setText(org.openide.util.NbBundle.getMessage(InputTransactionIPSB.class, "InputTransactionIPSB.jLabel3.text")); // NOI18N
 
+        jTextFieldIPSBIuranAmount.setEditable(false);
+        jTextFieldIPSBAmount.setEditable(false);
         jTextFieldIPSBAmount.setText(org.openide.util.NbBundle.getMessage(InputTransactionIPSB.class, "InputTransactionIPSB.jTextFieldIPSBAmount.text")); // NOI18N
         jTextFieldIPSBAmount.setName(org.openide.util.NbBundle.getMessage(InputTransactionIPSB.class, "InputTransactionIPSB.jTextFieldIPSBAmount.name")); // NOI18N
         jTextFieldIPSBAmount.addActionListener(new java.awt.event.ActionListener() {
@@ -130,18 +148,76 @@ public class InputTransactionIPSB extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText(org.openide.util.NbBundle.getMessage(InputTransactionIPSB.class, "InputTransactionIPSB.jLabel2.text")); // NOI18N
+
+        jLabel4.setText(org.openide.util.NbBundle.getMessage(InputTransactionIPSB.class, "InputTransactionIPSB.jLabel4.text_2")); // NOI18N
+
+        jLabel6.setText(org.openide.util.NbBundle.getMessage(InputTransactionIPSB.class, "InputTransactionIPSB.jLabel6.text_2")); // NOI18N
+
+        jTextFieldIPSBTunai.setText(org.openide.util.NbBundle.getMessage(InputTransactionIPSB.class, "InputTransactionIPSB.jTextFieldIPSBTunai.text")); // NOI18N
+        jTextFieldIPSBTunai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIPSBTunaiActionPerformed(evt);
+            }
+        });
+        jTextFieldIPSBTunai.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldIPSBTunaiFocusLost(evt);
+            }
+        });
+        jTextFieldIPSBTunai.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldIPSBTunaiKeyTyped(evt);
+            }
+        });
+
+        jTextFieldIPSBBeasiswa.setText(org.openide.util.NbBundle.getMessage(InputTransactionIPSB.class, "InputTransactionIPSB.jTextFieldIPSBBeasiswa.text")); // NOI18N
+        jTextFieldIPSBBeasiswa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIPSBBeasiswaActionPerformed(evt);
+            }
+        });
+        jTextFieldIPSBBeasiswa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldIPSBBeasiswaFocusLost(evt);
+            }
+        });
+        jTextFieldIPSBBeasiswa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldIPSBBeasiswaKeyTyped(evt);
+            }
+        });
+
+        jTextFieldIPSBBeasiswaCost.setText(org.openide.util.NbBundle.getMessage(InputTransactionIPSB.class, "InputTransactionIPSB.jTextFieldIPSBBeasiswaCost.text")); // NOI18N
+        jTextFieldIPSBBeasiswaCost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIPSBBeasiswaCostActionPerformed(evt);
+            }
+        });
+        jTextFieldIPSBBeasiswaCost.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldIPSBBeasiswaCostFocusLost(evt);
+            }
+        });
+        jTextFieldIPSBBeasiswaCost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldIPSBBeasiswaCostKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelIPSPLayout = new javax.swing.GroupLayout(jPanelIPSP);
         jPanelIPSP.setLayout(jPanelIPSPLayout);
         jPanelIPSPLayout.setHorizontalGroup(
             jPanelIPSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelIPSPLayout.createSequentialGroup()
                 .addGroup(jPanelIPSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(jPanelIPSPLayout.createSequentialGroup()
                         .addGroup(jPanelIPSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel13))
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
                         .addGap(11, 11, 11)
                         .addGroup(jPanelIPSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldIPSBNote, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,10 +228,22 @@ public class InputTransactionIPSB extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel17)
                                 .addGap(12, 12, 12)
-                                .addComponent(jTextFieldIPSBSisaAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))))
+                                .addComponent(jTextFieldIPSBSisaAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))))
                     .addGroup(jPanelIPSPLayout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(jButtonIPSBOK)))
+                        .addGroup(jPanelIPSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(jPanelIPSPLayout.createSequentialGroup()
+                                .addGap(163, 163, 163)
+                                .addComponent(jButtonIPSBOK))
+                            .addGroup(jPanelIPSPLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanelIPSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldIPSBBeasiswaCost, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                                    .addGroup(jPanelIPSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTextFieldIPSBBeasiswa)
+                                        .addComponent(jTextFieldIPSBTunai, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelIPSPLayout.setVerticalGroup(
@@ -172,7 +260,19 @@ public class InputTransactionIPSB extends javax.swing.JFrame {
                 .addGroup(jPanelIPSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldIPSBAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelIPSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldIPSBTunai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelIPSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextFieldIPSBBeasiswa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelIPSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextFieldIPSBBeasiswaCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelIPSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTextFieldIPSBNote, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -185,21 +285,15 @@ public class InputTransactionIPSB extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(33, Short.MAX_VALUE)
-                    .addComponent(jPanelIPSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanelIPSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 313, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanelIPSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(72, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelIPSP, javax.swing.GroupLayout.PREFERRED_SIZE, 302, Short.MAX_VALUE))
         );
 
         pack();
@@ -237,6 +331,9 @@ public class InputTransactionIPSB extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Exceptions.printStackTrace(ex);
         }
+        itfs.ipsbFromDB = this.ipsbFromDB;
+        itfs.ipsbStoreToDB = this.ipsbStoreToDB;
+        itfs.ipsbCurrent = this.ipsbCurrent;
 //        try {
 //            ipsb = Control.selectIuran(Iuran.Tipe.IPSB, IPSB.noIndukColName, false, profil.noInduk);
 //            itfs.ipsb = ipsb;
@@ -248,6 +345,60 @@ public class InputTransactionIPSB extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButtonIPSBOKActionPerformed
 
+    private void jTextFieldIPSBBeasiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIPSBBeasiswaActionPerformed
+        // TODO add your handling code here:
+        calculateIPSBAmount();
+    }//GEN-LAST:event_jTextFieldIPSBBeasiswaActionPerformed
+
+    private void jTextFieldIPSBTunaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIPSBTunaiActionPerformed
+        // TODO add your handling code here:
+        calculateIPSBAmount();
+    }//GEN-LAST:event_jTextFieldIPSBTunaiActionPerformed
+
+    private void jTextFieldIPSBTunaiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldIPSBTunaiKeyTyped
+        // TODO add your handling code here:
+        calculateIPSBAmount();
+    }//GEN-LAST:event_jTextFieldIPSBTunaiKeyTyped
+
+    private void jTextFieldIPSBTunaiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldIPSBTunaiFocusLost
+        // TODO add your handling code here:
+        calculateIPSBAmount();
+    }//GEN-LAST:event_jTextFieldIPSBTunaiFocusLost
+
+    private void jTextFieldIPSBBeasiswaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldIPSBBeasiswaKeyTyped
+        // TODO add your handling code here:
+        calculateIPSBAmount();
+    }//GEN-LAST:event_jTextFieldIPSBBeasiswaKeyTyped
+
+    private void jTextFieldIPSBBeasiswaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldIPSBBeasiswaFocusLost
+        // TODO add your handling code here:
+        calculateIPSBAmount();
+    }//GEN-LAST:event_jTextFieldIPSBBeasiswaFocusLost
+
+    private void jTextFieldIPSBBeasiswaCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIPSBBeasiswaCostActionPerformed
+        // TODO add your handling code here:
+        calculateIPSBAmount();
+    }//GEN-LAST:event_jTextFieldIPSBBeasiswaCostActionPerformed
+
+    private void jTextFieldIPSBBeasiswaCostKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldIPSBBeasiswaCostKeyTyped
+        // TODO add your handling code here:
+        calculateIPSBAmount();
+    }//GEN-LAST:event_jTextFieldIPSBBeasiswaCostKeyTyped
+
+    private void jTextFieldIPSBBeasiswaCostFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldIPSBBeasiswaCostFocusLost
+        // TODO add your handling code here:
+        calculateIPSBAmount();
+    }//GEN-LAST:event_jTextFieldIPSBBeasiswaCostFocusLost
+
+    private void calculateIPSBAmount(){
+        float tunai = Float.valueOf(jTextFieldIPSBTunai.getText());
+        float beasiswa = Float.valueOf(jTextFieldIPSBBeasiswa.getText());
+        float beasiswaCost = Float.valueOf(jTextFieldIPSBBeasiswaCost.getText());
+        ipsbTunaiAmount = tunai;
+        ipsbBeasiswaAmount = beasiswa;
+        ipsbBeasiswaCostAmount = beasiswaCost;
+        jTextFieldIPSBAmount.setText(String.valueOf(tunai+beasiswa+beasiswaCost));
+    }
     /**
      * @param args the command line arguments
      */
@@ -257,12 +408,18 @@ public class InputTransactionIPSB extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanelIPSP;
     public javax.swing.JTextField jTextFieldIPSBAmount;
+    private javax.swing.JTextField jTextFieldIPSBBeasiswa;
+    private javax.swing.JTextField jTextFieldIPSBBeasiswaCost;
     private javax.swing.JTextField jTextFieldIPSBIuranAmount;
     public javax.swing.JTextField jTextFieldIPSBNote;
     private javax.swing.JTextField jTextFieldIPSBSisaAmount;
+    private javax.swing.JTextField jTextFieldIPSBTunai;
     // End of variables declaration//GEN-END:variables
 }

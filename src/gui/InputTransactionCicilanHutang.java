@@ -29,7 +29,7 @@ public class InputTransactionCicilanHutang extends javax.swing.JFrame {
     private TableModel tableModelCicilanHutang;
     private CicilanHutang cicilanHutangFromDB;
     private List<Integer> tahunCicilanHutang;
-    private ArrayList<Float> iDDAmounts;
+    public ArrayList<Float> iDDAmounts;
     public ArrayList<Float> beasiswaAmounts;
     public ArrayList<Float> beasiswaCostAmounts;
     public ArrayList<Float> cicilanHutangAmounts;

@@ -29,7 +29,7 @@ public class InputTransactionIPP extends javax.swing.JFrame {
     private TableModel tableModelIPP;
     private IPP ippFromDB;
     private List<Integer> tahunIPP;
-    private ArrayList<Float> iDDAmounts;
+    public ArrayList<Float> iDDAmounts;
     public ArrayList<Float> beasiswaAmounts;
     public ArrayList<Float> beasiswaCostAmounts;
     public ArrayList<Float> iPPAmounts;
