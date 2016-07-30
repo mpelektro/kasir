@@ -299,7 +299,104 @@ public class Control {
         return Clerk.deleteS(clerks);
     }
     
+    //=====================================SMS
+    //===================================SMS SELECT
+    public static Sms selectSms(String colName, Number val) throws SQLException, KasirException{
+        return Sms.select(colName, val);
+    }
+    public static Sms selectSms(String colName, boolean caseSensitive, String val) throws SQLException, KasirException{
+        return Sms.select(colName, caseSensitive, val);
+    }
     
+    /* id must be > 0
+     * never ret null
+     * throws KasirException(ROW_NOT_FOUND, id) if no row matches
+     */
+    public static Sms selectSms(int id) throws SQLException, KasirException{
+        return Sms.select(id);
+    }
+    
+
+    /* username may not be null / empty
+     * never ret null
+     * throws KasirException(ROW_NOT_FOUND, username) if no row matches
+     */
+    public static Sms selectSms(Long username) throws SQLException, KasirException{
+        return Sms.select(username);
+    }
+    
+    
+    /* elts of ids < 1 are ignored
+    * ret all Sms if ids = null
+    * Map.get(ids[i]) = null if no row has ids[i]
+    * Map.size() <= ids.length, because duplicate elts of ids are treated as 1 map entry
+    * throws KasirException(BAD_RECORD, Sms.tableName)
+    * ret empty Map if (ids = null & table is empty) / (all elts of ids aren't valid (null / empty)) / ids.isEmpty = true
+    * ret Map<id,Sms>. never null
+    */
+    public static Map<Long,Sms> selectSmss(Set<Long> ids) throws SQLException, KasirException{
+        return Sms.selectS(ids);
+    }
+
+    /* filters is ArrayList<Sms>
+     * null elts of filters are ignored
+     * ret all Sms if filters == null
+     * throws KasirException(BAD_RECORD, Sms.tableName)
+     * ret empty Map if (filters = null & table is empty) / all elts of filters = null / filters.isEmpty = true
+     * ret Map<id,sms>. never null
+     */
+    public static Map<Long,Sms> filterSelectSmss(Set<? extends Filter<Sms>> filters) throws SQLException, KasirException{
+        return Sms.filterSelectS(filters);
+    }
+    
+    
+    public static boolean insertSms(Sms sms) throws SQLException, KasirException{
+        return sms.insert();
+    }
+    public static int insertSmss(ArrayList<Sms> smss) throws SQLException, KasirException{
+        return Sms.insertS(smss);
+    }
+    
+    //===================================SMS UPDATE
+    /* flush current states (including username) of sms into db
+     * oldUsername & sms may not be null. oldUsername is the previous val of sms.username
+     * throws KasirException(DB_INVALID, sms) if sms.isDBValid = false
+     * throws KasirException(ROW_NOT_FOUND, oldUsername) if usernameOld record = not in db
+     * throws KasirException(DUPLICATE_PRIMARY_KEY, sms) if sms.username has already existed in db
+     * never ret false
+     */
+    
+    public static boolean updateSms(Sms sms) throws SQLException, KasirException{
+        return sms.update();
+    }
+    public static int updateSmss(ArrayList<Sms> smss) throws SQLException, KasirException{
+        return Sms.updateS(smss);
+    }
+
+    
+    /* id may be < 0, which in this case del the first found bad record
+     * throws KasirException(ROW_NOT_FOUND, id)
+     */
+    public static boolean deleteSms(int id) throws SQLException, KasirException{
+        return Sms.delete(id);
+    }
+    public static boolean deleteSms(String username) throws SQLException, KasirException{
+        return Sms.delete(username);
+    }
+
+    /* del all rows having any elt of ids on colName, including < 0 (ie. del all bad records)
+     * del all rows if ids = null
+     */
+    public static int deleteSmss(Set<Long> ids) throws SQLException{
+        return Sms.deleteS(ids);
+    }
+
+    /* smss may not be null
+     * this is equal to deleteS(user, pass, Set) where Set contains ids of all smss, including bad id
+     */
+    public static int deleteSmss(ArrayList<Sms> smss) throws SQLException{
+        return Sms.deleteS(smss);
+    }
     
     //======================================IURAN
     public static <T extends Iuran> T selectIuran(T.Tipe tipe, String colName, Number val) throws SQLException, KasirException{

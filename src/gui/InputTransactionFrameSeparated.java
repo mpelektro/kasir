@@ -40,6 +40,7 @@ import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.*;
 import javax.swing.*;
 import kasir.DBSR;
+import kasir.Sms;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
@@ -5191,30 +5192,43 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             Control.updateTSummary(transactionSummary);
         }
 //SMS GATEWAY PART
+        
         if(appFrame.ppdbIni.get("program","sms",Boolean.class)){
             String pesanDetail = "%20Detail%20(x1000):%20";
             for(int i=0; i<transactionList.size();i++){
                 pesanDetail = pesanDetail.concat("%20").concat(transactionList.get(i).iuranTipe.toString()).concat("%20").concat(String.format("%1$,.0f", transactionList.get(i).amount/1000));       
             }
-
-            try {
-
-                URL myURL = new URL("http://smsfortunata.com/api?user=mpelektro@yahoo.com&pass=spyderco123&"
-                        + "pesan=Total%20Rp.%20"+String.format("%1$,.0f", transactionSummary.totalAmount)
-                        + pesanDetail.concat("%20No.%20"+String.valueOf(transactionSummary.id))
-                        + "%20-YDS%20Kosgoro-"
-                        +"&senderid=modem2&nomor="
-                        +profil.biodata.telpon1);
-                URLConnection myURLConnection = myURL.openConnection();
-                myURLConnection.connect();
-                myURLConnection.getInputStream();
-            } 
-            catch (MalformedURLException e) { 
+            pesanDetail = pesanDetail.replace("%20".subSequence(0, 3), " ".subSequence(0, 1));
+            String nickname = nicknameFactory(profil.biodata.nama);
+            pesanDetail = "Terima kasih "+nickname+"Total Rp. "+String.format("%1$,.0f", transactionSummary.totalAmount)+ pesanDetail.concat(" No. "+String.valueOf(transactionSummary.id))+ " -YDS Kosgoro-";
+            try{
+                String regexStr = "^[0-9]*$";
+                if(profil.biodata.telpon1 != null && !profil.biodata.telpon1.isEmpty() && profil.biodata.telpon1.substring(1).matches(regexStr))
+                    Control.insertSms(new Sms(profil.noInduk, profil.biodata.telpon1, pesanDetail));
+            }catch (KasirException e){
                 System.err.println(e);
-            } 
-            catch (IOException e){   
+            }catch (SQLException e){
                 System.err.println(e);
             }
+//            try {
+//
+//                URL myURL = new URL("http://smsfortunata.com/api?user=mpelektro@yahoo.com&pass=spyderco123&"
+//                        + "pesan=Total%20Rp.%20"+String.format("%1$,.0f", transactionSummary.totalAmount)
+//                        + pesanDetail.concat("%20No.%20"+String.valueOf(transactionSummary.id))
+//                        + "%20-YDS%20Kosgoro-"
+//                        +"&senderid=modem2&nomor="
+//                        +profil.biodata.telpon1);
+//                URLConnection myURLConnection = myURL.openConnection();
+//                myURLConnection.connect();
+//                myURLConnection.getInputStream();
+//                
+//            } 
+//            catch (MalformedURLException e) { 
+//                System.err.println(e);
+//            } 
+//            catch (IOException e){   
+//                System.err.println(e);
+//            }
         }
 
     }
@@ -7956,7 +7970,25 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
 //            jTotalTunggakanIPP.setValue(0f);
         }
 
-    }    
+    }
+
+    private String nicknameFactory(String name){
+        String[] temp = name.split(" ");
+        String retVal= "";
+        ArrayList<String> al = new ArrayList(Arrays.asList(temp));
+        if(al.size() > 2){
+            for(int i = 0 ; i< al.size() ; i++){
+                if(i>1){
+                    retVal += al.get(i).substring(0,1).toUpperCase().concat(".")+" ";
+                }else{
+                    retVal += al.get(i)+" ";
+                }
+            }
+        }else{
+            retVal = name+" ";
+        }
+        return retVal;
+    }
 }
 class Transaction{
     Iuran.Tipe iuranTipe;
