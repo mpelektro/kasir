@@ -18,7 +18,8 @@ public class Level{
         }
     }
     public enum Level3 {
-        SATU("1"), DUA("2"), TIGA("3"), EMPAT("4"), LIMA("5"), ENAM("6"), TUJUH("7"), DELAPAN("8"), SEMBILAN("9"), SEPULUH("10"), SEBELAS("11"), DUABELAS("12"), IPA1("IPA1"), IPA2("IPA2"), IPA3("IPA3"), IPA4("IPA4"), IPA5("IPA5"), IPS1("IPS1"), IPS2("IPS2"), IPS3("IPS3"), IPS4("IPS4"), IPS5("IPS5"), TKJ1("TKJ1"), TKJ2("TKJ2"), PTV1("PTV1"), PTV2("PTV2"), MM1("MM1"),UNCLASSIFIED("UNCLASSIFIED");
+        SATU("1"), DUA("2"), TIGA("3"), EMPAT("4"), LIMA("5"), ENAM("6"), TUJUH("7"), DELAPAN("8"), SEMBILAN("9"), SEPULUH("10"), SEBELAS("11"), DUABELAS("12"), IPA1("IPA1"), IPA2("IPA2"), IPA3("IPA3"), IPA4("IPA4"), IPA5("IPA5"), IPS1("IPS1"), IPS2("IPS2"), IPS3("IPS3"), IPS4("IPS4"), IPS5("IPS5"), TKJ1("TKJ1"), TKJ2("TKJ2"), PTV1("PTV1"), PTV2("PTV2"), PTV3("PTV3"), PTV4("PTV4"), MM1("MM1"), MM2("MM2")
+        ,UNCLASSIFIED("UNCLASSIFIED");
         
         public String printout;
         private Level3(String po){

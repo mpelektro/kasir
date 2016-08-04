@@ -9,7 +9,9 @@ import iuran.Iuran;
 import iuran.TransactionSummary;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -198,13 +200,15 @@ public class AppFrame extends javax.swing.JFrame {
         jLabelTitle = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(org.openide.util.NbBundle.getMessage(AppFrame.class, "AppFrame.title")); // NOI18N
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(1152, 768));
-        setPreferredSize(new java.awt.Dimension(1024, 768));
+        setPreferredSize(new java.awt.Dimension(1280, 768));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setMinimumSize(new java.awt.Dimension(1024, 768));
@@ -280,6 +284,8 @@ public class AppFrame extends javax.swing.JFrame {
         );
 
         jToolBar1.setRollover(true);
+        jToolBar1.setMaximumSize(new java.awt.Dimension(1100, 43));
+        jToolBar1.setMinimumSize(new java.awt.Dimension(1100, 43));
 
         jInputSiswa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user5_16.png"))); // NOI18N
         jInputSiswa.setText(org.openide.util.NbBundle.getMessage(AppFrame.class, "AppFrame.jInputSiswa.text")); // NOI18N
@@ -599,7 +605,7 @@ public class AppFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbLastUpdateDate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToolBar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jToolBar4, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -626,6 +632,8 @@ public class AppFrame extends javax.swing.JFrame {
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitle.setText(isPPDB?"PPDB":"KASIR");
+        jLabelTitle.setMaximumSize(new java.awt.Dimension(80, 29));
+        jLabelTitle.setMinimumSize(new java.awt.Dimension(80, 29));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -637,9 +645,9 @@ public class AppFrame extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 988, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 924, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -661,6 +669,46 @@ public class AppFrame extends javax.swing.JFrame {
         );
 
         jMenu1.setText(org.openide.util.NbBundle.getMessage(AppFrame.class, "AppFrame.jMenu1.text")); // NOI18N
+
+        jMenu4.setText(org.openide.util.NbBundle.getMessage(AppFrame.class, "AppFrame.jMenu4.text")); // NOI18N
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
+        jMenu1.add(jMenu4);
+
+        jMenu3.setText(org.openide.util.NbBundle.getMessage(AppFrame.class, "AppFrame.jMenu3.text")); // NOI18N
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
+        jMenu3.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMenu3MenuSelected(evt);
+            }
+        });
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
+        jMenu3.addMenuKeyListener(new javax.swing.event.MenuKeyListener() {
+            public void menuKeyPressed(javax.swing.event.MenuKeyEvent evt) {
+                jMenu3MenuKeyPressed(evt);
+            }
+            public void menuKeyReleased(javax.swing.event.MenuKeyEvent evt) {
+            }
+            public void menuKeyTyped(javax.swing.event.MenuKeyEvent evt) {
+            }
+        });
+        jMenu1.add(jMenu3);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText(org.openide.util.NbBundle.getMessage(AppFrame.class, "AppFrame.jMenu2.text")); // NOI18N
@@ -764,6 +812,7 @@ public class AppFrame extends javax.swing.JFrame {
     private void jButtonEditDeleteProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditDeleteProfilActionPerformed
         // TODO add your handling code here:
         new InputProfilFrame(this.clerk, this.profil).setVisible(true);
+        
     }//GEN-LAST:event_jButtonEditDeleteProfilActionPerformed
 
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
@@ -991,6 +1040,39 @@ public class AppFrame extends javax.swing.JFrame {
                     }
 
     }//GEN-LAST:event_jButtonBatalActionPerformed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jMenu3MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu3MenuSelected
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenu3MenuSelected
+
+    private void jMenu3MenuKeyPressed(javax.swing.event.MenuKeyEvent evt) {//GEN-FIRST:event_jMenu3MenuKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenu3MenuKeyPressed
+
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+        // TODO add your handling code here:
+        try{
+            updateCsv();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jMenu3MouseClicked
+
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+        // TODO add your handling code here:
+        try{
+            updatePpdb();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jMenu4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1777,6 +1859,8 @@ public class AppFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -6683,6 +6767,126 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMKPasca);
           return retVal;
       }
+    
+    private void updateCsv() throws SQLException{
+        String csvFile = "lib/ini/profil.csv";
+        String line = "";
+        String cvsSplitBy = ",";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+
+            while ((line = br.readLine()) != null) {
+
+                // use comma as separator
+                String[] p = line.split(cvsSplitBy);
+                System.out.println("No Induk "+ p[0] + " , Kelas " + p[1]);
+                try{
+                Profil temp = Control.selectProfil(p[0]);
+                temp.currentLevel = Level.create(p[1]);
+                Control.updateProfil(temp);
+                }catch(KasirException e){
+                    e.printStackTrace();
+                }
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
+    private void updatePpdb() throws SQLException{
+        String csvFile = "lib/ini/ppdb.csv"; // NoindukLama, NoIndukBaru, KelasBaru
+        String line ="";
+        String csvSplitBy = ",";
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+
+            while ((line = br.readLine()) != null) {
+
+                // use comma as separator
+                String[] p = line.split(csvSplitBy);
+                System.out.println("No Daftar "+ p[0]  + " , No Induk " + p[1] + " , Kelas " + p[2]);
+                try{
+                Profil temp = Control.selectProfil(p[0]);
+                temp.currentLevel = Level.create(p[2]);
+                Control.updateProfil(temp);
+                temp.noInduk = p[1];
+                Control.updateProfilNoInduk(p[0], temp);
+                
+                IPP ipp = Control.selectIuran(Iuran.Tipe.IPP, IPP.noIndukColName, false, p[0]);
+                ipp.noInduk = p[1];
+                ipp.chargedLevel = temp.currentLevel;
+                Control.updateIuran(Iuran.Tipe.IPP, ipp);
+                List<IPPTransactionDetail> ippTDetails = Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction,IPPTransactionDetail.noIndukColName, false, p[0]);
+                for(int i = 0 ; i < ippTDetails.size() ; i++){
+                    ippTDetails.get(i).noIndukProfil = p[1];
+                    Control.updateTDetail(TransactionDetail.Tipe.IPPTransaction, ippTDetails.get(i));
+                }
+                
+                IPSP ipsp = Control.selectIuran(Iuran.Tipe.IPSP, IPSP.noIndukColName, false, p[0]);
+                ipsp.noInduk = p[1];
+                ipsp.chargedLevel = temp.currentLevel;
+                Control.updateIuran(Iuran.Tipe.IPSP, ipsp);
+                
+                IKS iks = Control.selectIuran(Iuran.Tipe.IKS, IKS.noIndukColName, false, p[0]);
+                iks.noInduk = p[1];
+                iks.chargedLevel = temp.currentLevel;
+                Control.updateIuran(Iuran.Tipe.IKS, iks);
+                
+                PASB pasb = Control.selectIuran(Iuran.Tipe.PASB, PASB.noIndukColName, false, p[0]);
+                pasb.noInduk = p[1];
+                pasb.chargedLevel = temp.currentLevel;
+                Control.updateIuran(Iuran.Tipe.PASB, pasb);
+                
+                IPSB ipsb = Control.selectIuran(Iuran.Tipe.IPSB, IPSB.noIndukColName, false, p[0]);
+                ipsb.noInduk = p[1];
+                ipsb.chargedLevel = temp.currentLevel;
+                Control.updateIuran(Iuran.Tipe.IPSB, ipsb);
+               
+                Seragam seragam = Control.selectIuran(Iuran.Tipe.Seragam, Seragam.noIndukColName, false, p[0]);
+                seragam.noInduk = p[1];
+                seragam.chargedLevel = temp.currentLevel;
+                Control.updateIuran(Iuran.Tipe.Seragam, seragam);
+                
+                OSIS osis = Control.selectIuran(Iuran.Tipe.OSIS, OSIS.noIndukColName, false, p[0]);
+                osis.noInduk = p[1];
+                osis.chargedLevel = temp.currentLevel;
+                Control.updateIuran(Iuran.Tipe.OSIS, osis);
+                
+                Attribute attribute = Control.selectIuran(Iuran.Tipe.Attribute, Attribute.noIndukColName, false, p[0]);
+                attribute.noInduk = p[1];
+                attribute.chargedLevel = temp.currentLevel;
+                Control.updateIuran(Iuran.Tipe.Attribute, attribute);
+                
+                
+                
+                if(temp.currentLevel.level1.equals(Level.Level1.SMK)){
+                    Almamater almamater = Control.selectIuran(Iuran.Tipe.Almamater, Almamater.noIndukColName, false, p[0]);
+                    almamater.noInduk = p[1];
+                    almamater.chargedLevel = temp.currentLevel;
+                    Control.updateIuran(Iuran.Tipe.Almamater, almamater);
+
+                    PVT pvt = Control.selectIuran(Iuran.Tipe.PVT, PVT.noIndukColName, false, p[0]);
+                    pvt.noInduk = p[1];
+                    pvt.chargedLevel = temp.currentLevel;
+                    Control.updateIuran(Iuran.Tipe.PVT, pvt);
+                }
+                }catch(KasirException e){
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Export Gagal!!! " +"\r\n"+String.valueOf(e), "Export Gagal!!!", JOptionPane.WARNING_MESSAGE);
+                }
+
+            }
+            
+            
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Export Gagal!!! " +"\r\n"+String.valueOf(e), "Export Gagal!!!", JOptionPane.WARNING_MESSAGE);
+        }
+        JOptionPane.showMessageDialog(this, "Export Berhasil!!!", "Export Berhasil!!!", JOptionPane.WARNING_MESSAGE);
+    }
 }
 
 class Tunggakan{

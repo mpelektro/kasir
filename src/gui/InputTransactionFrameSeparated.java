@@ -4619,7 +4619,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                         ippTransactionDetails.add(ippTransactionDetail);
                         // transactOUT IDD , kurangin IDD amount sama insert TDetail IDD
 
-                        IDD.transactOut(profil, transactionSummary.id, iDDAmounts.get(i));
+                        IDD.transactOut(profil, transactionSummary.id, inputTransactionIPP.iDDAmounts.get(i));
                         transactionSummary.note = "TIDAK_TUNAI";
                     }
                     if(inputTransactionIPP.beasiswaAmounts.get(i) > 0f){
@@ -4734,7 +4734,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                             iuapTransactionDetails.add(iuapTransactionDetail);
                             // transactOUT IDD , kurangin IDD amount sama insert TDetail IDD
 
-                            IDD.transactOut(profil, transactionSummary.id, iDDAmounts.get(i));
+                            IDD.transactOut(profil, transactionSummary.id, inputTransactionIUAP.iDDAmounts.get(i));
                             transactionSummary.note = "TIDAK_TUNAI";
                         }
                         if(inputTransactionIUAP.beasiswaAmounts.get(i) > 0f){
