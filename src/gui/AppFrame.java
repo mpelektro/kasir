@@ -6818,11 +6818,6 @@ public class AppFrame extends javax.swing.JFrame {
                 ipp.noInduk = p[1];
                 ipp.chargedLevel = temp.currentLevel;
                 Control.updateIuran(Iuran.Tipe.IPP, ipp);
-                List<IPPTransactionDetail> ippTDetails = Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction,IPPTransactionDetail.noIndukColName, false, p[0]);
-                for(int i = 0 ; i < ippTDetails.size() ; i++){
-                    ippTDetails.get(i).noIndukProfil = p[1];
-                    Control.updateTDetail(TransactionDetail.Tipe.IPPTransaction, ippTDetails.get(i));
-                }
                 
                 IPSP ipsp = Control.selectIuran(Iuran.Tipe.IPSP, IPSP.noIndukColName, false, p[0]);
                 ipsp.noInduk = p[1];
