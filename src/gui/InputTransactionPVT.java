@@ -33,6 +33,7 @@ public class InputTransactionPVT extends javax.swing.JFrame {
     public ArrayList<Float> beasiswaAmounts;
     public ArrayList<Float> beasiswaCostAmounts;
     public ArrayList<Float> pVTAmounts;
+    public ArrayList<Float> bankPvtAmounts;
     private PVT pvtCurrent;
     private PVT pvtStoreToDB;
     private IDD idd;
@@ -83,8 +84,10 @@ public class InputTransactionPVT extends javax.swing.JFrame {
         jTextFieldPvtDebt = new javax.swing.JFormattedTextField();
 
         setTitle(org.openide.util.NbBundle.getMessage(InputTransactionPVT.class, "InputTransactionPVT.title")); // NOI18N
+        setMinimumSize(new java.awt.Dimension(650, 450));
+        setPreferredSize(new java.awt.Dimension(600, 450));
 
-        jPanelIPP.setMinimumSize(new java.awt.Dimension(570, 380));
+        jPanelIPP.setMinimumSize(new java.awt.Dimension(600, 450));
         jPanelIPP.setPreferredSize(new java.awt.Dimension(680, 450));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -156,7 +159,7 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                 .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelIPPLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE))
                     .addGroup(jPanelIPPLayout.createSequentialGroup()
                         .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelIPPLayout.createSequentialGroup()
@@ -179,7 +182,7 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                                 .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jUnpaidPVT, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jFormattedTextFieldIDDSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 31, Short.MAX_VALUE)))
+                        .addGap(0, 61, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelIPPLayout.setVerticalGroup(
@@ -201,18 +204,20 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonBayarIUS)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
+
+        jComboBoxTahun.setSelectedItem(String.valueOf(this.profil.currentLevel.tahun).concat(" - ").concat(String.valueOf(this.profil.currentLevel.tahun+1)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelIPP, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+            .addComponent(jPanelIPP, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelIPP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+            .addComponent(jPanelIPP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -259,6 +264,7 @@ public class InputTransactionPVT extends javax.swing.JFrame {
         iDDAmounts = new ArrayList();
         beasiswaAmounts = new ArrayList();
         beasiswaCostAmounts = new ArrayList();
+        bankPvtAmounts = new ArrayList();
         /////BLOOOOOOOOOOM SELESAIIIIIIIIIIIIIIIIIIII
         int i = 0;
         pvtCurrent = new PVT();
@@ -274,6 +280,7 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                     jTablePVT.setValueAt(0f, i, 4);
                     jTablePVT.setValueAt(0f, i, 5);
                     jTablePVT.setValueAt(0f, i, 6);
+                    jTablePVT.setValueAt(0f, i, 7);
                     pVTAmounts.add(0f);
                     iDDAmounts.add(0f);
                     beasiswaAmounts.add(0f);
@@ -288,9 +295,10 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                     iDDAmounts.add((Float) jTablePVT.getValueAt(i, 4));
                     beasiswaAmounts.add((Float) jTablePVT.getValueAt(i, 5));
                     beasiswaCostAmounts.add((Float) jTablePVT.getValueAt(i, 6));
+                    bankPvtAmounts.add((Float) jTablePVT.getValueAt(i,7));
                     //jTablePVT.setValueAt(pvtFromDB.entries.get(i).amount - (iDDAmounts.get(i) + beasiswaAmounts.get(i) + beasiswaCostAmounts.get(i)), i, 3);
                     //pvtStoreToDB.entries.add(new Entry(i, pvtFromDB.entries.get(i).amount));
-                    pvtStoreToDB.entries.add(new Entry(i, pVTAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)));
+                    pvtStoreToDB.entries.add(new Entry(i, pVTAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)+bankPvtAmounts.get(i)));
                 } else {
                     try {
                         if(isPVTEnough(pvtFromDB.entries.get(i).transactDetailIDs, pvtFromDB.entries.get(i).amount)){
@@ -298,13 +306,15 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                             iDDAmounts.add(0f);
                             beasiswaAmounts.add(0f);
                             beasiswaCostAmounts.add(0f);
+                            bankPvtAmounts.add(0f);
                             pvtStoreToDB.entries.add(null);
                         }else{
                             pVTAmounts.add((Float) jTablePVT.getModel().getValueAt(i,3));
                             iDDAmounts.add((Float) jTablePVT.getValueAt(i, 4));
                             beasiswaAmounts.add((Float) jTablePVT.getValueAt(i, 5));
                             beasiswaCostAmounts.add((Float) jTablePVT.getValueAt(i, 6));
-                            pvtStoreToDB.entries.add(new Entry(i, pVTAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)));
+                            bankPvtAmounts.add((Float) jTablePVT.getValueAt(i,7));
+                            pvtStoreToDB.entries.add(new Entry(i, pVTAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)+bankPvtAmounts.get(i)));
                         }
                     } catch (SQLException ex) {
                         Exceptions.printStackTrace(ex);
@@ -330,7 +340,8 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                 pvtAmountTemp = pvtAmountTemp + (Float)jTablePVT.getModel().getValueAt(i,3)
                                 +(Float)jTablePVT.getModel().getValueAt(i,4)
                                 +(Float)jTablePVT.getModel().getValueAt(i,5)
-                                +(Float)jTablePVT.getModel().getValueAt(i,6);
+                                +(Float)jTablePVT.getModel().getValueAt(i,6)
+                                +(Float)jTablePVT.getModel().getValueAt(i,7);
             }
         }
         itfs.jTextFieldPVTAmountSimple.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
@@ -404,13 +415,13 @@ public class InputTransactionPVT extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public TableModel buildPVTTableModel(Profil profil, int tahun) throws SQLException, KasirException {
-       String columnNames[] = {"Semester", "Biaya PVT", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan"};
+       String columnNames[] = {"Semester", "Biaya PVT", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan", "Bank"};
        Set<PVT> pvtFilters = new HashSet<>();
        ArrayList<Entry> entries = new ArrayList<>();
        pvtFilters.clear();
        pvtFilters.add(new PVT(profil.noInduk, new Level(null,null,null,tahun), entries));
        Map<Long, PVT> searchResultMap = Control.exactFilterSelectIurans(Iuran.Tipe.PVT, pvtFilters);
-       Object[][] data = new Object[1][7];
+       Object[][] data = new Object[1][8];
        int i = 0;
        final boolean[] canEdit = new boolean [1];
        pvtFromDB = new PVT();
@@ -433,6 +444,7 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                     Float data4 = 0f;
                     Float data5 = 0f;
                     Float data6 = 0f;
+                    Float data7 = 0f;
                     
                     for(Long setTDetailIds:entry.getValue().entries.get(j).transactDetailIDs){
                         System.out.println(setTDetailIds + " Set TDetailsID");
@@ -452,6 +464,10 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                             data6 += Control.selectTDetail(TransactionDetail.Tipe.PVTTransaction, setTDetailIds).amount;
                             data[j][6] = data6;
                         }
+                        if(Control.selectTDetail(TransactionDetail.Tipe.PVTTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.TRANSFER){
+                            data7 += Control.selectTDetail(TransactionDetail.Tipe.PVTTransaction, setTDetailIds).amount;
+                            data[j][7] = data7;
+                        }
                     }
                     if(data[j][3] == null){
                         data[j][3] = 0f;
@@ -465,7 +481,9 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                     if(data[j][6] == null){
                         data[j][6] = 0f;
                     }
-                            
+                    if(data[j][7] == null){
+                        data[j][7] = 0f;
+                    }    
                 }else{
                     data[j][2] = new Boolean(false);
                     if(entry.getValue().entries.get(j).transactDetailIDs.size() > 0){
@@ -483,6 +501,9 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                             if(Control.selectTDetail(TransactionDetail.Tipe.PVTTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.BEASISWA_COST){
                                 data[j][6] = Control.selectTDetail(TransactionDetail.Tipe.PVTTransaction, setTDetailIds).amount;
                             }
+                            if(Control.selectTDetail(TransactionDetail.Tipe.PVTTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.TRANSFER){
+                                data[j][7] = Control.selectTDetail(TransactionDetail.Tipe.PVTTransaction, setTDetailIds).amount;
+                            }
                         }
                         if(data[j][3] == null){
                         data[j][3] = 0f;
@@ -496,11 +517,15 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                         if(data[j][6] == null){
                             data[j][6] = 0f;
                         }
+                        if(data[j][7] == null){
+                            data[j][7] = 0f;
+                        }
                     }else{
                         data[j][3]=0f;
                         data[j][4]=0f;
                         data[j][5]=0f;
                         data[j][6]=0f;
+                        data[j][7]=0f;
                     }
                 }
                 
@@ -522,7 +547,7 @@ public class InputTransactionPVT extends javax.swing.JFrame {
             i++;
         }
         TableModel tm = new DefaultTableModel(data, columnNames){
-            boolean[] chooseEdit = new boolean[]{false,false,true,true,true,true,true};
+            boolean[] chooseEdit = new boolean[]{false,false,true,true,true,true,true,true};
             
            @Override
             public boolean isCellEditable(int row, int column) {
@@ -562,8 +587,8 @@ public class InputTransactionPVT extends javax.swing.JFrame {
        
     }
     public TableModel buildPVTSubmitTableModel(Profil profil, int tahun) throws SQLException, KasirException {
-       String columnNames[] = {"PVT", "Biaya PVT", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan"};
-       Object[][] data = new Object[1][7];
+       String columnNames[] = {"PVT", "Biaya PVT", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan", "Bank"};
+       Object[][] data = new Object[1][8];
        
        final boolean[] canEdit = new boolean [1];
          
@@ -580,6 +605,7 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                         data[i][4] = iDDAmounts.get(i);
                         data[i][5] = beasiswaAmounts.get(i);
                         data[i][6] = beasiswaCostAmounts.get(i);
+                        data[i][7] = bankPvtAmounts.get(i);
 //                    }
                 }else{
 //                    if(jTablePVT !=null){
@@ -591,6 +617,7 @@ public class InputTransactionPVT extends javax.swing.JFrame {
                         data[i][4] = iDDAmounts.get(i);
                         data[i][5] = beasiswaAmounts.get(i);
                         data[i][6] = beasiswaCostAmounts.get(i);
+                        data[i][7] = bankPvtAmounts.get(i);
 //                    }
                 }
        }

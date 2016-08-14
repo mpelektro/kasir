@@ -4888,6 +4888,15 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                             BeasiswaCost.transactOut(profil, transactionSummary.id, inputTransactionPVT.beasiswaCostAmounts.get(i));
                             transactionSummary.note = "TIDAK_TUNAI";
                         }
+                        if(inputTransactionPVT.bankPvtAmounts.get(i) > 0f){
+                            PVTTransactionDetail pvtTransactionDetail = new PVTTransactionDetail(pvtTDetailUUID, 
+                                                                                                pvtFromDB.id, 
+                                                                                                clerk.id, 
+                                                                                                transactionSummary.id, profil.noInduk, profil.currentLevel.level1, inputTransactionPVT.bankPvtAmounts.get(i), TransactionDetail.PaymentMethod.TRANSFER,
+                                                                                                "Praktikum".concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                            pvtTransactionDetails.add(pvtTransactionDetail);
+                            transactionSummary.note = "TIDAK_TUNAI";
+                        }
                         Control.insertTDetails(TransactionDetail.Tipe.PVTTransaction, pvtTransactionDetails);
                         pvtTransactionDetails.clear();
                         pvtTransactionDetails = new ArrayList(Control.selectTDetails(TransactionDetail.Tipe.PVTTransaction, TransactionDetail.uuidColName, false, pvtTDetailUUID.toString()));
@@ -5359,7 +5368,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             this.tableModelPVT = inputTransactionPVT.buildPVTSubmitTableModel(this.profil, this.tahunPVT.get(inputTransactionPVT.jComboBoxTahun.getSelectedIndex()));
             for(int i = 0 ; i<1; i++){
                 if(pvtStoreToDB.entries.get(i) != null){
-                    totalAmount += inputTransactionPVT.iDDAmounts.get(i)+inputTransactionPVT.pVTAmounts.get(i)+inputTransactionPVT.beasiswaAmounts.get(i)+inputTransactionPVT.beasiswaCostAmounts.get(i);
+                    totalAmount += inputTransactionPVT.iDDAmounts.get(i)+inputTransactionPVT.pVTAmounts.get(i)+inputTransactionPVT.beasiswaAmounts.get(i)+inputTransactionPVT.beasiswaCostAmounts.get(i)+inputTransactionPVT.bankPvtAmounts.get(i);
                     beasiswaRequest +=inputTransactionPVT.beasiswaAmounts.get(i);
                     beasiswaCostRequest += inputTransactionPVT.beasiswaCostAmounts.get(i);
                     iddRequest += inputTransactionPVT.iDDAmounts.get(i);
