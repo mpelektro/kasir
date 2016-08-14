@@ -33,6 +33,7 @@ public class InputTransactionIKS extends javax.swing.JFrame {
     public ArrayList<Float> beasiswaAmounts;
     public ArrayList<Float> beasiswaCostAmounts;
     public ArrayList<Float> iKSAmounts;
+    public ArrayList<Float> bankIksAmounts;
     private IKS iksCurrent;
     private IKS iksStoreToDB;
     private IDD idd;
@@ -84,7 +85,7 @@ public class InputTransactionIKS extends javax.swing.JFrame {
 
         setTitle(org.openide.util.NbBundle.getMessage(InputTransactionIKS.class, "InputTransactionIKS.title")); // NOI18N
 
-        jPanelIKS.setMinimumSize(new java.awt.Dimension(570, 380));
+        jPanelIKS.setMinimumSize(new java.awt.Dimension(630, 380));
         jPanelIKS.setPreferredSize(new java.awt.Dimension(680, 450));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -155,7 +156,7 @@ public class InputTransactionIKS extends javax.swing.JFrame {
                 .addGroup(jPanelIKSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelIKSLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE))
                     .addGroup(jPanelIKSLayout.createSequentialGroup()
                         .addGroup(jPanelIKSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelIKSLayout.createSequentialGroup()
@@ -178,7 +179,7 @@ public class InputTransactionIKS extends javax.swing.JFrame {
                                 .addGroup(jPanelIKSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jUnpaidIKS, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jFormattedTextFieldIDDSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 77, Short.MAX_VALUE)))
+                        .addGap(0, 137, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelIKSLayout.setVerticalGroup(
@@ -203,11 +204,13 @@ public class InputTransactionIKS extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        jComboBoxTahun.setSelectedItem(String.valueOf(this.profil.currentLevel.tahun).concat(" - ").concat(String.valueOf(this.profil.currentLevel.tahun+1)));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelIKS, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+            .addComponent(jPanelIKS, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,6 +261,8 @@ public class InputTransactionIKS extends javax.swing.JFrame {
         iDDAmounts = new ArrayList();
         beasiswaAmounts = new ArrayList();
         beasiswaCostAmounts = new ArrayList();
+        bankIksAmounts =new ArrayList();
+                
         /////BLOOOOOOOOOOM SELESAIIIIIIIIIIIIIIIIIIII
         int i = 0;
         iksCurrent = new IKS();
@@ -273,10 +278,12 @@ public class InputTransactionIKS extends javax.swing.JFrame {
                     jTableIKS.setValueAt(0f, i, 4);
                     jTableIKS.setValueAt(0f, i, 5);
                     jTableIKS.setValueAt(0f, i, 6);
+                    jTableIKS.setValueAt(0f, i, 7);
                     iKSAmounts.add(0f);
                     iDDAmounts.add(0f);
                     beasiswaAmounts.add(0f);
                     beasiswaCostAmounts.add(0f);
+                    bankIksAmounts.add(0f);
                     //below is when jTableIKS property changed, especially check box is Changed or Editing IDD, Beasiswa, Beasiswa Cost 
                 } else if ((iksCurrent.entries.get(i) != null) ^ (iksFromDB.entries.get(i).transactDetailIDs.size() > 0)) {
                     System.out.println("IDD dari db ");
@@ -287,9 +294,10 @@ public class InputTransactionIKS extends javax.swing.JFrame {
                     iDDAmounts.add((Float) jTableIKS.getValueAt(i, 4));
                     beasiswaAmounts.add((Float) jTableIKS.getValueAt(i, 5));
                     beasiswaCostAmounts.add((Float) jTableIKS.getValueAt(i, 6));
+                    bankIksAmounts.add((Float) jTableIKS.getValueAt(i,7));
                     //jTableIKS.setValueAt(iksFromDB.entries.get(i).amount - (iDDAmounts.get(i) + beasiswaAmounts.get(i) + beasiswaCostAmounts.get(i)), i, 3);
                     //iksStoreToDB.entries.add(new Entry(i, iksFromDB.entries.get(i).amount));
-                    iksStoreToDB.entries.add(new Entry(i, iKSAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)));
+                    iksStoreToDB.entries.add(new Entry(i, iKSAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)+bankIksAmounts.get(i)));
                 } else {
                     try {
                         if(isIKSEnough(iksFromDB.entries.get(i).transactDetailIDs, iksFromDB.entries.get(i).amount)){
@@ -297,13 +305,15 @@ public class InputTransactionIKS extends javax.swing.JFrame {
                             iDDAmounts.add(0f);
                             beasiswaAmounts.add(0f);
                             beasiswaCostAmounts.add(0f);
+                            bankIksAmounts.add(0f);
                             iksStoreToDB.entries.add(null);
                         }else{
                             iKSAmounts.add((Float) jTableIKS.getModel().getValueAt(i,3));
                             iDDAmounts.add((Float) jTableIKS.getValueAt(i, 4));
                             beasiswaAmounts.add((Float) jTableIKS.getValueAt(i, 5));
                             beasiswaCostAmounts.add((Float) jTableIKS.getValueAt(i, 6));
-                            iksStoreToDB.entries.add(new Entry(i, iKSAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)));
+                            bankIksAmounts.add((Float) jTableIKS.getValueAt(i,7));
+                            iksStoreToDB.entries.add(new Entry(i, iKSAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)+bankIksAmounts.get(i)));
                         }
                     } catch (SQLException ex) {
                         Exceptions.printStackTrace(ex);
@@ -329,7 +339,8 @@ public class InputTransactionIKS extends javax.swing.JFrame {
                 iksAmountTemp = iksAmountTemp + (Float)jTableIKS.getModel().getValueAt(i,3)
                                 +(Float)jTableIKS.getModel().getValueAt(i,4)
                                 +(Float)jTableIKS.getModel().getValueAt(i,5)
-                                +(Float)jTableIKS.getModel().getValueAt(i,6);
+                                +(Float)jTableIKS.getModel().getValueAt(i,6)
+                                +(Float)jTableIKS.getModel().getValueAt(i,7);
             }
         }
         itfs.jTextFieldIKSAmountSimple.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
@@ -403,13 +414,13 @@ public class InputTransactionIKS extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public TableModel buildIKSTableModel(Profil profil, int tahun) throws SQLException, KasirException {
-       String columnNames[] = {"Semester", "Biaya IKS", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan"};
+       String columnNames[] = {"Semester", "Biaya IKS", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan", "Bank"};
        Set<IKS> iksFilters = new HashSet<>();
        ArrayList<Entry> entries = new ArrayList<>();
        iksFilters.clear();
        iksFilters.add(new IKS(profil.noInduk, new Level(null,null,null,tahun), entries));
        Map<Long, IKS> searchResultMap = Control.exactFilterSelectIurans(Iuran.Tipe.IKS, iksFilters);
-       Object[][] data = new Object[1][7];
+       Object[][] data = new Object[1][8];
        int i = 0;
        final boolean[] canEdit = new boolean [1];
        iksFromDB = new IKS();
@@ -440,6 +451,7 @@ public class InputTransactionIKS extends javax.swing.JFrame {
                     Float data4 = 0f;
                     Float data5 = 0f;
                     Float data6 = 0f;
+                    Float data7 = 0f;
                     
                     for(Long setTDetailIds:entry.getValue().entries.get(j).transactDetailIDs){
                         System.out.println(setTDetailIds + " Set TDetailsID");
@@ -459,6 +471,10 @@ public class InputTransactionIKS extends javax.swing.JFrame {
                             data6 += Control.selectTDetail(TransactionDetail.Tipe.IKSTransaction, setTDetailIds).amount;
                             data[j][6] = data6;
                         }
+                        if(Control.selectTDetail(TransactionDetail.Tipe.IKSTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.TRANSFER){
+                            data7 += Control.selectTDetail(TransactionDetail.Tipe.IKSTransaction, setTDetailIds).amount;
+                            data[j][7] = data7;
+                        }
                     }
                     if(data[j][3] == null){
                         data[j][3] = 0f;
@@ -471,6 +487,9 @@ public class InputTransactionIKS extends javax.swing.JFrame {
                     }
                     if(data[j][6] == null){
                         data[j][6] = 0f;
+                    }
+                    if(data[j][7] == null){
+                        data[j][7] = 0f;
                     }
                             
                 }else{
@@ -490,6 +509,9 @@ public class InputTransactionIKS extends javax.swing.JFrame {
                             if(Control.selectTDetail(TransactionDetail.Tipe.IKSTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.BEASISWA_COST){
                                 data[j][6] = Control.selectTDetail(TransactionDetail.Tipe.IKSTransaction, setTDetailIds).amount;
                             }
+                            if(Control.selectTDetail(TransactionDetail.Tipe.IKSTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.TRANSFER){
+                                data[j][7] = Control.selectTDetail(TransactionDetail.Tipe.IKSTransaction, setTDetailIds).amount;
+                            }
                         }
                         if(data[j][3] == null){
                         data[j][3] = 0f;
@@ -503,11 +525,15 @@ public class InputTransactionIKS extends javax.swing.JFrame {
                         if(data[j][6] == null){
                             data[j][6] = 0f;
                         }
+                        if(data[j][7] == null){
+                            data[j][7] = 0f;
+                        }
                     }else{
                         data[j][3]=0f;
                         data[j][4]=0f;
                         data[j][5]=0f;
                         data[j][6]=0f;
+                        data[j][7]=0f;
                     }
                 }
                 
@@ -529,7 +555,7 @@ public class InputTransactionIKS extends javax.swing.JFrame {
             i++;
         }
         TableModel tm = new DefaultTableModel(data, columnNames){
-            boolean[] chooseEdit = new boolean[]{false,false,true,true,true,true,true};
+            boolean[] chooseEdit = new boolean[]{false,false,true,true,true,true,true,true};
             
            @Override
             public boolean isCellEditable(int row, int column) {
@@ -569,8 +595,8 @@ public class InputTransactionIKS extends javax.swing.JFrame {
        
     }
     public TableModel buildIKSSubmitTableModel(Profil profil, int tahun) throws SQLException, KasirException {
-       String columnNames[] = {"IKS", "Biaya IKS", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan"};
-       Object[][] data = new Object[1][7];
+       String columnNames[] = {"IKS", "Biaya IKS", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan", "Bank"};
+       Object[][] data = new Object[1][8];
        
        final boolean[] canEdit = new boolean [1];
          
@@ -587,6 +613,7 @@ public class InputTransactionIKS extends javax.swing.JFrame {
                         data[i][4] = iDDAmounts.get(i);
                         data[i][5] = beasiswaAmounts.get(i);
                         data[i][6] = beasiswaCostAmounts.get(i);
+                        data[i][7] = bankIksAmounts.get(i);
 //                    }
                 }else{
 //                    if(jTableIKS !=null){
@@ -598,6 +625,7 @@ public class InputTransactionIKS extends javax.swing.JFrame {
                         data[i][4] = iDDAmounts.get(i);
                         data[i][5] = beasiswaAmounts.get(i);
                         data[i][6] = beasiswaCostAmounts.get(i);
+                        data[i][7] = bankIksAmounts.get(i);
 //                    }
                 }
        }
@@ -652,13 +680,15 @@ private ComboBoxModel buildIKStahunComboBoxModel(Profil profil) throws SQLExcept
             i++;
         }
        }
+      // Collections.sort(tahunAjaran, Collections.reverseOrder());
        calculateUnpaidIKS(profil, tahunIKS);
        //== bikin tunggakan beans ===
        
        
        //== end bikin tunggakan beans ===
-       
+     
        tahunComboBoxModel = new DefaultComboBoxModel(tahunAjaran.toArray());
+       
        return tahunComboBoxModel;
     }
 

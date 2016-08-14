@@ -6,6 +6,7 @@ package gui;
 
 import iuran.*;
 import iuran.Iuran;
+import static iuran.TransactionDetail.Tipe.*;
 import iuran.TransactionSummary;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
@@ -6803,7 +6804,7 @@ public class AppFrame extends javax.swing.JFrame {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
             while ((line = br.readLine()) != null) {
-
+                ArrayList<TransactionSummary> tSums = new ArrayList<TransactionSummary>();
                 // use comma as separator
                 String[] p = line.split(csvSplitBy);
                 System.out.println("No Daftar "+ p[0]  + " , No Induk " + p[1] + " , Kelas " + p[2]);
@@ -6818,42 +6819,90 @@ public class AppFrame extends javax.swing.JFrame {
                 ipp.noInduk = p[1];
                 ipp.chargedLevel = temp.currentLevel;
                 Control.updateIuran(Iuran.Tipe.IPP, ipp);
+                List<IPPTransactionDetail> ippTransactions = Control.selectTDetails(TransactionDetail.Tipe.IPPTransaction,IPPTransactionDetail.idIuranColName, String.valueOf(ipp.id));
+                for(int i = 0 ; i< ippTransactions.size(); i++){
+                    ippTransactions.get(i).noIndukProfil = temp.noInduk;
+                    Control.updateTDetail(IPPTransaction, ippTransactions.get(i));
+                    tSums.add(Control.selectTSummary(ippTransactions.get(i).transactSummaryID));
+                }
+                
                 
                 IPSP ipsp = Control.selectIuran(Iuran.Tipe.IPSP, IPSP.noIndukColName, false, p[0]);
                 ipsp.noInduk = p[1];
                 ipsp.chargedLevel = temp.currentLevel;
                 Control.updateIuran(Iuran.Tipe.IPSP, ipsp);
+                List<IPSPTransactionDetail> ipspTransactions = Control.selectTDetails(TransactionDetail.Tipe.IPSPTransaction,IPSPTransactionDetail.idIuranColName, String.valueOf(ipsp.id));
+                for(int i = 0 ; i< ipspTransactions.size(); i++){
+                    ipspTransactions.get(i).noIndukProfil = temp.noInduk;
+                    Control.updateTDetail(IPSPTransaction, ipspTransactions.get(i));
+                    tSums.add(Control.selectTSummary(ipspTransactions.get(i).transactSummaryID));
+                }
                 
                 IKS iks = Control.selectIuran(Iuran.Tipe.IKS, IKS.noIndukColName, false, p[0]);
                 iks.noInduk = p[1];
                 iks.chargedLevel = temp.currentLevel;
                 Control.updateIuran(Iuran.Tipe.IKS, iks);
+                List<IKSTransactionDetail> iksTransactions = Control.selectTDetails(TransactionDetail.Tipe.IKSTransaction,IKSTransactionDetail.idIuranColName, String.valueOf(iks.id));
+                for(int i = 0 ; i< iksTransactions.size(); i++){
+                    iksTransactions.get(i).noIndukProfil = temp.noInduk;
+                    Control.updateTDetail(IKSTransaction, iksTransactions.get(i));
+                    tSums.add(Control.selectTSummary(iksTransactions.get(i).transactSummaryID));
+                }
                 
                 PASB pasb = Control.selectIuran(Iuran.Tipe.PASB, PASB.noIndukColName, false, p[0]);
                 pasb.noInduk = p[1];
                 pasb.chargedLevel = temp.currentLevel;
                 Control.updateIuran(Iuran.Tipe.PASB, pasb);
+                List<PASBTransactionDetail> pasbTransactions = Control.selectTDetails(TransactionDetail.Tipe.PASBTransaction,PASBTransactionDetail.idIuranColName, String.valueOf(pasb.id));
+                for(int i = 0 ; i< pasbTransactions.size(); i++){
+                    pasbTransactions.get(i).noIndukProfil = temp.noInduk;
+                    Control.updateTDetail(PASBTransaction, pasbTransactions.get(i));
+                    tSums.add(Control.selectTSummary(pasbTransactions.get(i).transactSummaryID));
+                }
                 
                 IPSB ipsb = Control.selectIuran(Iuran.Tipe.IPSB, IPSB.noIndukColName, false, p[0]);
                 ipsb.noInduk = p[1];
                 ipsb.chargedLevel = temp.currentLevel;
                 Control.updateIuran(Iuran.Tipe.IPSB, ipsb);
-               
+                List<IPSBTransactionDetail> ipsbTransactions = Control.selectTDetails(TransactionDetail.Tipe.IPSBTransaction,IPSBTransactionDetail.idIuranColName, String.valueOf(ipsb.id));
+                for(int i = 0 ; i< ipsbTransactions.size(); i++){
+                    ipsbTransactions.get(i).noIndukProfil = temp.noInduk;
+                    Control.updateTDetail(IPSBTransaction, ipsbTransactions.get(i));
+                    tSums.add(Control.selectTSummary(ipsbTransactions.get(i).transactSummaryID));
+                }
+                
                 Seragam seragam = Control.selectIuran(Iuran.Tipe.Seragam, Seragam.noIndukColName, false, p[0]);
                 seragam.noInduk = p[1];
                 seragam.chargedLevel = temp.currentLevel;
                 Control.updateIuran(Iuran.Tipe.Seragam, seragam);
+                List<SeragamTransactionDetail> seragamTransactions = Control.selectTDetails(TransactionDetail.Tipe.SeragamTransaction,SeragamTransactionDetail.idIuranColName, String.valueOf(seragam.id));
+                for(int i = 0 ; i< seragamTransactions.size(); i++){
+                    seragamTransactions.get(i).noIndukProfil = temp.noInduk;
+                    Control.updateTDetail(SeragamTransaction, seragamTransactions.get(i));
+                    tSums.add(Control.selectTSummary(seragamTransactions.get(i).transactSummaryID));
+                }
                 
                 OSIS osis = Control.selectIuran(Iuran.Tipe.OSIS, OSIS.noIndukColName, false, p[0]);
                 osis.noInduk = p[1];
                 osis.chargedLevel = temp.currentLevel;
                 Control.updateIuran(Iuran.Tipe.OSIS, osis);
+                 List<OSISTransactionDetail> osisTransactions = Control.selectTDetails(TransactionDetail.Tipe.OSISTransaction,OSISTransactionDetail.idIuranColName, String.valueOf(osis.id));
+                for(int i = 0 ; i< osisTransactions.size(); i++){
+                    osisTransactions.get(i).noIndukProfil = temp.noInduk;
+                    Control.updateTDetail(OSISTransaction, osisTransactions.get(i));
+                    tSums.add(Control.selectTSummary(osisTransactions.get(i).transactSummaryID));
+                }
                 
                 Attribute attribute = Control.selectIuran(Iuran.Tipe.Attribute, Attribute.noIndukColName, false, p[0]);
                 attribute.noInduk = p[1];
                 attribute.chargedLevel = temp.currentLevel;
                 Control.updateIuran(Iuran.Tipe.Attribute, attribute);
-                
+                List<AttributeTransactionDetail> attributeTransactions = Control.selectTDetails(TransactionDetail.Tipe.AttributeTransaction,AttributeTransactionDetail.idIuranColName, String.valueOf(attribute.id));
+                for(int i = 0 ; i< attributeTransactions.size(); i++){
+                    attributeTransactions.get(i).noIndukProfil = temp.noInduk;
+                    Control.updateTDetail(AttributeTransaction, attributeTransactions.get(i));
+                    tSums.add(Control.selectTSummary(attributeTransactions.get(i).transactSummaryID));
+                }
                 
                 
                 if(temp.currentLevel.level1.equals(Level.Level1.SMK)){
@@ -6861,11 +6910,26 @@ public class AppFrame extends javax.swing.JFrame {
                     almamater.noInduk = p[1];
                     almamater.chargedLevel = temp.currentLevel;
                     Control.updateIuran(Iuran.Tipe.Almamater, almamater);
-
+                    List<AlmamaterTransactionDetail> almamaterTransactions = Control.selectTDetails(TransactionDetail.Tipe.AlmamaterTransaction,AlmamaterTransactionDetail.idIuranColName, String.valueOf(almamater.id));
+                    for(int i = 0 ; i< almamaterTransactions.size(); i++){
+                        almamaterTransactions.get(i).noIndukProfil = temp.noInduk;
+                        Control.updateTDetail(AlmamaterTransaction, almamaterTransactions.get(i));
+                        tSums.add(Control.selectTSummary(almamaterTransactions.get(i).transactSummaryID));
+                    }
                     PVT pvt = Control.selectIuran(Iuran.Tipe.PVT, PVT.noIndukColName, false, p[0]);
                     pvt.noInduk = p[1];
                     pvt.chargedLevel = temp.currentLevel;
                     Control.updateIuran(Iuran.Tipe.PVT, pvt);
+                    List<PVTTransactionDetail> pvtTransactions = Control.selectTDetails(TransactionDetail.Tipe.PVTTransaction,PVTTransactionDetail.idIuranColName, String.valueOf(pvt.id));
+                        for(int i = 0 ; i< pvtTransactions.size(); i++){
+                            pvtTransactions.get(i).noIndukProfil = temp.noInduk;
+                            Control.updateTDetail(PVTTransaction, pvtTransactions.get(i));
+                            tSums.add(Control.selectTSummary(pvtTransactions.get(i).transactSummaryID));
+                        }  
+                }
+                for(int i = 0; i< tSums.size(); i++){
+                    tSums.get(i).noInduk = temp.noInduk;
+                    Control.updateTSummary(tSums.get(i));
                 }
                 }catch(KasirException e){
                     e.printStackTrace();

@@ -28,7 +28,7 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
     Profil profil;
     private TableModel tableModelIUAP;
     private IUAP iuapFromDB;
-    private List<Integer> tahunIUAP;
+    public List<Integer> tahunIUAP;
     public ArrayList<Float> iDDAmounts;
     public ArrayList<Float> beasiswaAmounts;
     public ArrayList<Float> beasiswaCostAmounts;
@@ -84,9 +84,8 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
         jTextFieldIUAPDebt = new javax.swing.JFormattedTextField();
 
         setTitle(org.openide.util.NbBundle.getMessage(InputTransactionIUAP.class, "InputTransactionIUAP.title")); // NOI18N
-        setPreferredSize(new java.awt.Dimension(630, 380));
 
-        jPanelIUAP.setMinimumSize(new java.awt.Dimension(570, 380));
+        jPanelIUAP.setMinimumSize(new java.awt.Dimension(630, 450));
         jPanelIUAP.setPreferredSize(new java.awt.Dimension(680, 450));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -202,18 +201,18 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonBayarIUAP)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelIUAP, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+            .addComponent(jPanelIUAP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelIUAP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+            .addComponent(jPanelIUAP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -276,6 +275,7 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
                     jTableIUAP.setValueAt(0f, i, 4);
                     jTableIUAP.setValueAt(0f, i, 5);
                     jTableIUAP.setValueAt(0f, i, 6);
+                    jTableIUAP.setValueAt(0f, i, 7);
                     iUAPAmounts.add(0f);
                     iDDAmounts.add(0f);
                     beasiswaAmounts.add(0f);
@@ -294,7 +294,7 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
                     bankAmounts.add((Float)jTableIUAP.getValueAt(i,7));
                     //jTableIUAP.setValueAt(iuapFromDB.entries.get(i).amount - (iDDAmounts.get(i) + beasiswaAmounts.get(i) + beasiswaCostAmounts.get(i)), i, 3);
                     //iuapStoreToDB.entries.add(new Entry(i, iuapFromDB.entries.get(i).amount));
-                    iuapStoreToDB.entries.add(new Entry(i, iUAPAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)));
+                    iuapStoreToDB.entries.add(new Entry(i, iUAPAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)+bankAmounts.get(i)));
                 } else {
                     try {
                         if(isIUAPEnough(iuapFromDB.entries.get(i).transactDetailIDs, iuapFromDB.entries.get(i).amount)){
@@ -310,7 +310,7 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
                             beasiswaAmounts.add((Float) jTableIUAP.getValueAt(i, 5));
                             beasiswaCostAmounts.add((Float) jTableIUAP.getValueAt(i, 6));
                             bankAmounts.add((Float)jTableIUAP.getValueAt(i,7));
-                            iuapStoreToDB.entries.add(new Entry(i, iUAPAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)));
+                            iuapStoreToDB.entries.add(new Entry(i, iUAPAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)+bankAmounts.get(i)));
                         }
                     } catch (SQLException ex) {
                         Exceptions.printStackTrace(ex);
@@ -397,7 +397,7 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBayarIUAP;
-    private javax.swing.JComboBox jComboBoxTahun;
+    public javax.swing.JComboBox jComboBoxTahun;
     private javax.swing.JFormattedTextField jFormattedTextFieldIDDSaldo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -405,7 +405,7 @@ public class InputTransactionIUAP extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTahun;
     private javax.swing.JPanel jPanelIUAP;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTableIUAP;
+    public javax.swing.JTable jTableIUAP;
     private javax.swing.JFormattedTextField jTextFieldIUAPDebt;
     private javax.swing.JTextField jUnpaidIUAP;
     // End of variables declaration//GEN-END:variables

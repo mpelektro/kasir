@@ -33,6 +33,7 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
     public ArrayList<Float> beasiswaAmounts;
     public ArrayList<Float> beasiswaCostAmounts;
     public ArrayList<Float> oSISAmounts;
+    public ArrayList<Float> bankOsisAmounts;
     private OSIS osisCurrent;
     private OSIS osisStoreToDB;
     private IDD idd;
@@ -84,7 +85,7 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
 
         setTitle(org.openide.util.NbBundle.getMessage(InputTransactionOSIS.class, "InputTransactionOSIS.title_1")); // NOI18N
 
-        jPanelIPP.setMinimumSize(new java.awt.Dimension(570, 380));
+        jPanelIPP.setMinimumSize(new java.awt.Dimension(630, 380));
         jPanelIPP.setPreferredSize(new java.awt.Dimension(680, 450));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -110,6 +111,7 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
                 jComboBoxTahunPropertyChange(evt);
             }
         });
+        jComboBoxTahun.setSelectedItem(String.valueOf(this.profil.currentLevel.tahun).concat(" - ").concat(String.valueOf(this.profil.currentLevel.tahun+1)));
 
         jLabel2.setText(org.openide.util.NbBundle.getMessage(InputTransactionOSIS.class, "InputTransactionOSIS.jLabel2.text_1")); // NOI18N
 
@@ -155,7 +157,7 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
                 .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelIPPLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE))
                     .addGroup(jPanelIPPLayout.createSequentialGroup()
                         .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelIPPLayout.createSequentialGroup()
@@ -178,7 +180,7 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
                                 .addGroup(jPanelIPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jUnpaidOSIS, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jFormattedTextFieldIDDSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 61, Short.MAX_VALUE)))
+                        .addGap(0, 121, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelIPPLayout.setVerticalGroup(
@@ -207,7 +209,7 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelIPP, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+            .addComponent(jPanelIPP, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,6 +260,7 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
         iDDAmounts = new ArrayList();
         beasiswaAmounts = new ArrayList();
         beasiswaCostAmounts = new ArrayList();
+        bankOsisAmounts = new ArrayList();
         /////BLOOOOOOOOOOM SELESAIIIIIIIIIIIIIIIIIIII
         int i = 0;
         osisCurrent = new OSIS();
@@ -273,10 +276,12 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
                     jTableOSIS.setValueAt(0f, i, 4);
                     jTableOSIS.setValueAt(0f, i, 5);
                     jTableOSIS.setValueAt(0f, i, 6);
+                    jTableOSIS.setValueAt(0f, i, 7);
                     oSISAmounts.add(0f);
                     iDDAmounts.add(0f);
                     beasiswaAmounts.add(0f);
                     beasiswaCostAmounts.add(0f);
+                    bankOsisAmounts.add(0f);
                     //below is when jTableOSIS property changed, especially check box is Changed or Editing IDD, Beasiswa, Beasiswa Cost 
                 } else if ((osisCurrent.entries.get(i) != null) ^ (osisFromDB.entries.get(i).transactDetailIDs.size() > 0)) {
                     System.out.println("IDD dari db ");
@@ -287,9 +292,10 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
                     iDDAmounts.add((Float) jTableOSIS.getValueAt(i, 4));
                     beasiswaAmounts.add((Float) jTableOSIS.getValueAt(i, 5));
                     beasiswaCostAmounts.add((Float) jTableOSIS.getValueAt(i, 6));
+                    bankOsisAmounts.add((Float) jTableOSIS.getValueAt(i,7));
                     //jTableOSIS.setValueAt(osisFromDB.entries.get(i).amount - (iDDAmounts.get(i) + beasiswaAmounts.get(i) + beasiswaCostAmounts.get(i)), i, 3);
                     //osisStoreToDB.entries.add(new Entry(i, osisFromDB.entries.get(i).amount));
-                    osisStoreToDB.entries.add(new Entry(i, oSISAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)));
+                    osisStoreToDB.entries.add(new Entry(i, oSISAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)+bankOsisAmounts.get(i)));
                 } else {
                     try {
                         if(isOSISEnough(osisFromDB.entries.get(i).transactDetailIDs, osisFromDB.entries.get(i).amount)){
@@ -297,13 +303,15 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
                             iDDAmounts.add(0f);
                             beasiswaAmounts.add(0f);
                             beasiswaCostAmounts.add(0f);
+                            bankOsisAmounts.add(0f);
                             osisStoreToDB.entries.add(null);
                         }else{
                             oSISAmounts.add((Float) jTableOSIS.getModel().getValueAt(i,3));
                             iDDAmounts.add((Float) jTableOSIS.getValueAt(i, 4));
                             beasiswaAmounts.add((Float) jTableOSIS.getValueAt(i, 5));
                             beasiswaCostAmounts.add((Float) jTableOSIS.getValueAt(i, 6));
-                            osisStoreToDB.entries.add(new Entry(i, oSISAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)));
+                            bankOsisAmounts.add((Float) jTableOSIS.getValueAt(i,7));
+                            osisStoreToDB.entries.add(new Entry(i, oSISAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)+bankOsisAmounts.get(i)));
                         }
                     } catch (SQLException ex) {
                         Exceptions.printStackTrace(ex);
@@ -329,7 +337,8 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
                 osisAmountTemp = osisAmountTemp + (Float)jTableOSIS.getModel().getValueAt(i,3)
                                 +(Float)jTableOSIS.getModel().getValueAt(i,4)
                                 +(Float)jTableOSIS.getModel().getValueAt(i,5)
-                                +(Float)jTableOSIS.getModel().getValueAt(i,6);
+                                +(Float)jTableOSIS.getModel().getValueAt(i,6)
+                                +(Float)jTableOSIS.getModel().getValueAt(i,7);
             }
         }
         itfs.jTextFieldOSISAmountSimple.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
@@ -403,26 +412,34 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public TableModel buildOSISTableModel(Profil profil, int tahun) throws SQLException, KasirException {
-       String columnNames[] = {"Semester", "Biaya OSIS", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan"};
+       String columnNames[] = {"Semester", "Biaya OSIS", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan", "Bank"};
        Set<OSIS> osisFilters = new HashSet<>();
        ArrayList<Entry> entries = new ArrayList<>();
        osisFilters.clear();
        osisFilters.add(new OSIS(profil.noInduk, new Level(null,null,null,tahun), entries));
        Map<Long, OSIS> searchResultMap = Control.exactFilterSelectIurans(Iuran.Tipe.OSIS, osisFilters);
-       Object[][] data = new Object[1][7];
+       Object[][] data = new Object[1][8];
        int i = 0;
        final boolean[] canEdit = new boolean [1];
        osisFromDB = new OSIS();
        float amountOSISinTable;
        float amountOSISinTDetail;
        osisDebt = 0f;
+       Calendar calendarRunning = Calendar.getInstance();
+       int targetMonth = calendarRunning.get(Calendar.MONTH);
+       int targetYear = calendarRunning.get(Calendar.YEAR);
+       
        if(searchResultMap.size() > 0){
         for(Map.Entry<Long, OSIS> entry: searchResultMap.entrySet()){
             for(int j =0 ; j< entry.getValue().entries.size(); j++){
                 data[j][0]= namaBulan[j];//entry.getValue().entries.get(j).period;
                 data[j][1]= entry.getValue().entries.get(j).amount - calculatePaidOSIS(entry.getValue().entries.get(j).transactDetailIDs); // ANEH NIH MASA BEGINI, DI KALI DUA SIH?
                 amountOSISinTable = entry.getValue().entries.get(j).amount;
-                osisDebt += entry.getValue().entries.get(j).debt;
+                if(entry.getValue().chargedLevel.tahun < targetYear){
+                     osisDebt += entry.getValue().entries.get(j).debt;
+                }else if(entry.getValue().chargedLevel.tahun == targetYear && j < targetMonth){
+                     osisDebt += entry.getValue().entries.get(j).debt;
+                }
                 //if(jTable2 != null){data[j][2]= jTable2.getModel().getValueAt(j,2);}else{data[j][2]= new Boolean(false);}
                 //if(entry.getValue().entries.get(j).transactDetailIDs.size() > 0){
                 if(isOSISEnough(entry.getValue().entries.get(j).transactDetailIDs, amountOSISinTable)){        
@@ -432,6 +449,7 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
                     Float data4 = 0f;
                     Float data5 = 0f;
                     Float data6 = 0f;
+                    Float data7 = 0f;
                     
                     for(Long setTDetailIds:entry.getValue().entries.get(j).transactDetailIDs){
                         System.out.println(setTDetailIds + " Set TDetailsID");
@@ -451,6 +469,10 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
                             data6 += Control.selectTDetail(TransactionDetail.Tipe.OSISTransaction, setTDetailIds).amount;
                             data[j][6] = data6;
                         }
+                        if(Control.selectTDetail(TransactionDetail.Tipe.OSISTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.TRANSFER){
+                            data7 += Control.selectTDetail(TransactionDetail.Tipe.OSISTransaction, setTDetailIds).amount;
+                            data[j][7] = data7;
+                        }
                     }
                     if(data[j][3] == null){
                         data[j][3] = 0f;
@@ -463,6 +485,9 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
                     }
                     if(data[j][6] == null){
                         data[j][6] = 0f;
+                    }
+                    if(data[j][7] == null){
+                        data[j][7] = 0f;
                     }
                             
                 }else{
@@ -482,6 +507,9 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
                             if(Control.selectTDetail(TransactionDetail.Tipe.OSISTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.BEASISWA_COST){
                                 data[j][6] = Control.selectTDetail(TransactionDetail.Tipe.OSISTransaction, setTDetailIds).amount;
                             }
+                            if(Control.selectTDetail(TransactionDetail.Tipe.OSISTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.TRANSFER){
+                                data[j][7] = Control.selectTDetail(TransactionDetail.Tipe.OSISTransaction, setTDetailIds).amount;
+                             }
                         }
                         if(data[j][3] == null){
                         data[j][3] = 0f;
@@ -495,11 +523,15 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
                         if(data[j][6] == null){
                             data[j][6] = 0f;
                         }
+                        if(data[j][7] == null){
+                            data[j][7] = 0f;
+                        }
                     }else{
                         data[j][3]=0f;
                         data[j][4]=0f;
                         data[j][5]=0f;
                         data[j][6]=0f;
+                        data[j][7]=0f;
                     }
                 }
                 
@@ -560,8 +592,8 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
        
     }
     public TableModel buildOSISSubmitTableModel(Profil profil, int tahun) throws SQLException, KasirException {
-       String columnNames[] = {"OSIS", "Biaya OSIS", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan"};
-       Object[][] data = new Object[1][7];
+       String columnNames[] = {"OSIS", "Biaya OSIS", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan", "Bank"};
+       Object[][] data = new Object[1][8];
        
        final boolean[] canEdit = new boolean [1];
          
@@ -578,6 +610,7 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
                         data[i][4] = iDDAmounts.get(i);
                         data[i][5] = beasiswaAmounts.get(i);
                         data[i][6] = beasiswaCostAmounts.get(i);
+                        data[i][7] = bankOsisAmounts.get(i);
 //                    }
                 }else{
 //                    if(jTableOSIS !=null){
@@ -589,6 +622,7 @@ public class InputTransactionOSIS extends javax.swing.JFrame {
                         data[i][4] = iDDAmounts.get(i);
                         data[i][5] = beasiswaAmounts.get(i);
                         data[i][6] = beasiswaCostAmounts.get(i);
+                        data[i][7] = bankOsisAmounts.get(i);
 //                    }
                 }
        }

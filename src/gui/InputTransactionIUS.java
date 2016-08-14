@@ -33,6 +33,7 @@ public class InputTransactionIUS extends javax.swing.JFrame {
     public ArrayList<Float> beasiswaAmounts;
     public ArrayList<Float> beasiswaCostAmounts;
     public ArrayList<Float> iUSAmounts;
+    public ArrayList<Float> bankIusAmounts;
     private IUS iusCurrent;
     private IUS iusStoreToDB;
     private IDD idd;
@@ -84,7 +85,7 @@ public class InputTransactionIUS extends javax.swing.JFrame {
 
         setTitle(org.openide.util.NbBundle.getMessage(InputTransactionIUS.class, "InputTransactionIUS.title")); // NOI18N
 
-        jPanelIPP.setMinimumSize(new java.awt.Dimension(570, 380));
+        jPanelIPP.setMinimumSize(new java.awt.Dimension(630, 380));
         jPanelIPP.setPreferredSize(new java.awt.Dimension(680, 450));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -180,7 +181,7 @@ public class InputTransactionIUS extends javax.swing.JFrame {
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jFormattedTextFieldIDDSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 9, Short.MAX_VALUE)))
+                        .addGap(0, 69, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelIPPLayout.setVerticalGroup(
@@ -205,11 +206,13 @@ public class InputTransactionIUS extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        jComboBoxTahun.setSelectedItem(String.valueOf(this.profil.currentLevel.tahun).concat(" - ").concat(String.valueOf(this.profil.currentLevel.tahun+1)));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelIPP, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+            .addComponent(jPanelIPP, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,6 +263,7 @@ public class InputTransactionIUS extends javax.swing.JFrame {
         iDDAmounts = new ArrayList();
         beasiswaAmounts = new ArrayList();
         beasiswaCostAmounts = new ArrayList();
+        bankIusAmounts = new ArrayList();
         /////BLOOOOOOOOOOM SELESAIIIIIIIIIIIIIIIIIIII
         int i = 0;
         iusCurrent = new IUS();
@@ -279,6 +283,7 @@ public class InputTransactionIUS extends javax.swing.JFrame {
                     iDDAmounts.add(0f);
                     beasiswaAmounts.add(0f);
                     beasiswaCostAmounts.add(0f);
+                    bankIusAmounts.add(0f);
                     //below is when jTableIUS property changed, especially check box is Changed or Editing IDD, Beasiswa, Beasiswa Cost 
                 } else if ((iusCurrent.entries.get(i) != null) ^ (iusFromDB.entries.get(i).transactDetailIDs.size() > 0)) {
                     System.out.println("IDD dari db ");
@@ -289,9 +294,10 @@ public class InputTransactionIUS extends javax.swing.JFrame {
                     iDDAmounts.add((Float) jTableIUS.getValueAt(i, 4));
                     beasiswaAmounts.add((Float) jTableIUS.getValueAt(i, 5));
                     beasiswaCostAmounts.add((Float) jTableIUS.getValueAt(i, 6));
+                    bankIusAmounts.add((Float) jTableIUS.getValueAt(i,7));
                     //jTableIUS.setValueAt(iusFromDB.entries.get(i).amount - (iDDAmounts.get(i) + beasiswaAmounts.get(i) + beasiswaCostAmounts.get(i)), i, 3);
                     //iusStoreToDB.entries.add(new Entry(i, iusFromDB.entries.get(i).amount));
-                    iusStoreToDB.entries.add(new Entry(i, iUSAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)));
+                    iusStoreToDB.entries.add(new Entry(i, iUSAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)+bankIusAmounts.get(i)));
                 } else {
                     try {
                         if(isIUSEnough(iusFromDB.entries.get(i).transactDetailIDs, iusFromDB.entries.get(i).amount)){
@@ -299,13 +305,15 @@ public class InputTransactionIUS extends javax.swing.JFrame {
                             iDDAmounts.add(0f);
                             beasiswaAmounts.add(0f);
                             beasiswaCostAmounts.add(0f);
+                            bankIusAmounts.add(0f);
                             iusStoreToDB.entries.add(null);
                         }else{
                             iUSAmounts.add((Float) jTableIUS.getModel().getValueAt(i,3));
                             iDDAmounts.add((Float) jTableIUS.getValueAt(i, 4));
                             beasiswaAmounts.add((Float) jTableIUS.getValueAt(i, 5));
                             beasiswaCostAmounts.add((Float) jTableIUS.getValueAt(i, 6));
-                            iusStoreToDB.entries.add(new Entry(i, iUSAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)));
+                            bankIusAmounts.add((Float) jTableIUS.getValueAt(i,7));
+                            iusStoreToDB.entries.add(new Entry(i, iUSAmounts.get(i)+iDDAmounts.get(i)+beasiswaAmounts.get(i)+beasiswaCostAmounts.get(i)+bankIusAmounts.get(i)));
                         }
                     } catch (SQLException ex) {
                         Exceptions.printStackTrace(ex);
@@ -331,7 +339,8 @@ public class InputTransactionIUS extends javax.swing.JFrame {
                 iusAmountTemp = iusAmountTemp + (Float)jTableIUS.getModel().getValueAt(i,3)
                                 +(Float)jTableIUS.getModel().getValueAt(i,4)
                                 +(Float)jTableIUS.getModel().getValueAt(i,5)
-                                +(Float)jTableIUS.getModel().getValueAt(i,6);
+                                +(Float)jTableIUS.getModel().getValueAt(i,6)
+                                +(Float)jTableIUS.getModel().getValueAt(i,7);
             }
         }
         itfs.jTextFieldIUSAmountSimple.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
@@ -405,26 +414,34 @@ public class InputTransactionIUS extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public TableModel buildIUSTableModel(Profil profil, int tahun) throws SQLException, KasirException {
-       String columnNames[] = {"Semester", "Biaya IUS", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan"};
+       String columnNames[] = {"Semester", "Biaya IUS", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan", "Bank"};
        Set<IUS> iusFilters = new HashSet<>();
        ArrayList<Entry> entries = new ArrayList<>();
        iusFilters.clear();
        iusFilters.add(new IUS(profil.noInduk, new Level(null,null,null,tahun), entries));
        Map<Long, IUS> searchResultMap = Control.exactFilterSelectIurans(Iuran.Tipe.IUS, iusFilters);
-       Object[][] data = new Object[4][7];
+       Object[][] data = new Object[4][8];
        int i = 0;
        final boolean[] canEdit = new boolean [4];
        iusFromDB = new IUS();
        float amountIUSinTable;
        float amountIUSinTDetail;
        iusDebt = 0f;
+       Calendar calendarRunning = Calendar.getInstance();
+       int targetMonth = calendarRunning.get(Calendar.MONTH);
+       int targetYear = calendarRunning.get(Calendar.YEAR);
+       
        if(searchResultMap.size() > 0){
         for(Map.Entry<Long, IUS> entry: searchResultMap.entrySet()){
             for(int j =0 ; j< entry.getValue().entries.size(); j++){
                 data[j][0]= namaBulan[j];//entry.getValue().entries.get(j).period;
                 data[j][1]= entry.getValue().entries.get(j).amount - calculatePaidIUS(entry.getValue().entries.get(j).transactDetailIDs); // ANEH NIH MASA BEGINI, DI KALI DUA SIH?
                 amountIUSinTable = entry.getValue().entries.get(j).amount;
-                iusDebt += entry.getValue().entries.get(j).debt;
+               if(entry.getValue().chargedLevel.tahun < targetYear){
+                     iusDebt += entry.getValue().entries.get(j).debt;
+                }else if(entry.getValue().chargedLevel.tahun == targetYear && j < targetMonth){
+                     iusDebt += entry.getValue().entries.get(j).debt;
+                }
                 //if(jTable2 != null){data[j][2]= jTable2.getModel().getValueAt(j,2);}else{data[j][2]= new Boolean(false);}
                 //if(entry.getValue().entries.get(j).transactDetailIDs.size() > 0){
                 if(isIUSEnough(entry.getValue().entries.get(j).transactDetailIDs, amountIUSinTable)){        
@@ -434,6 +451,7 @@ public class InputTransactionIUS extends javax.swing.JFrame {
                     Float data4 = 0f;
                     Float data5 = 0f;
                     Float data6 = 0f;
+                    Float data7 = 0f;
                     
                     for(Long setTDetailIds:entry.getValue().entries.get(j).transactDetailIDs){
                         System.out.println(setTDetailIds + " Set TDetailsID");
@@ -453,6 +471,10 @@ public class InputTransactionIUS extends javax.swing.JFrame {
                             data6 += Control.selectTDetail(TransactionDetail.Tipe.IUSTransaction, setTDetailIds).amount;
                             data[j][6] = data6;
                         }
+                        if(Control.selectTDetail(TransactionDetail.Tipe.IUSTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.TRANSFER){
+                            data7 += Control.selectTDetail(TransactionDetail.Tipe.IUSTransaction, setTDetailIds).amount;
+                            data[j][7] = data7;
+                        }
                     }
                     if(data[j][3] == null){
                         data[j][3] = 0f;
@@ -465,6 +487,9 @@ public class InputTransactionIUS extends javax.swing.JFrame {
                     }
                     if(data[j][6] == null){
                         data[j][6] = 0f;
+                    }
+                    if(data[j][7] == null){
+                        data[j][7] = 0f;
                     }
                             
                 }else{
@@ -484,6 +509,9 @@ public class InputTransactionIUS extends javax.swing.JFrame {
                             if(Control.selectTDetail(TransactionDetail.Tipe.IUSTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.BEASISWA_COST){
                                 data[j][6] = Control.selectTDetail(TransactionDetail.Tipe.IUSTransaction, setTDetailIds).amount;
                             }
+                            if(Control.selectTDetail(TransactionDetail.Tipe.IUSTransaction, setTDetailIds).paymentMethod == TransactionDetail.PaymentMethod.TRANSFER){
+                                data[j][7] = Control.selectTDetail(TransactionDetail.Tipe.IUSTransaction, setTDetailIds).amount;
+                            }
                         }
                         if(data[j][3] == null){
                         data[j][3] = 0f;
@@ -497,11 +525,15 @@ public class InputTransactionIUS extends javax.swing.JFrame {
                         if(data[j][6] == null){
                             data[j][6] = 0f;
                         }
+                        if(data[j][7] == null){
+                            data[j][7] = 0f;
+                        }
                     }else{
                         data[j][3]=0f;
                         data[j][4]=0f;
                         data[j][5]=0f;
                         data[j][6]=0f;
+                        data[j][7]=0f;
                     }
                 }
                 
@@ -514,7 +546,6 @@ public class InputTransactionIUS extends javax.swing.JFrame {
                 for(int k=0;k<4;k++){
                     canEdit[k] = (entry.getValue().entries.get(k).debt > 0?true:false);
                 }
-                
                 
             }
             iusFromDB.id = entry.getValue().id;
@@ -563,8 +594,8 @@ public class InputTransactionIUS extends javax.swing.JFrame {
        
     }
     public TableModel buildIUSSubmitTableModel(Profil profil, int tahun) throws SQLException, KasirException {
-       String columnNames[] = {"Semester", "Biaya IUS", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan"};
-       Object[][] data = new Object[4][7];
+       String columnNames[] = {"Semester", "Biaya IUS", "Check Box", "Tunai", "Iuran Dibayar Dimuka", "Beasiswa", "Beasiswa Yayasan", "Bank"};
+       Object[][] data = new Object[4][8];
        
        final boolean[] canEdit = new boolean [4];
          
@@ -581,6 +612,7 @@ public class InputTransactionIUS extends javax.swing.JFrame {
                         data[i][4] = iDDAmounts.get(i);
                         data[i][5] = beasiswaAmounts.get(i);
                         data[i][6] = beasiswaCostAmounts.get(i);
+                        data[i][7] = bankIusAmounts.get(i);
 //                    }
                 }else{
 //                    if(jTableIUS !=null){
@@ -592,6 +624,7 @@ public class InputTransactionIUS extends javax.swing.JFrame {
                         data[i][4] = iDDAmounts.get(i);
                         data[i][5] = beasiswaAmounts.get(i);
                         data[i][6] = beasiswaCostAmounts.get(i);
+                        data[i][7] = bankIusAmounts.get(i);
 //                    }
                 }
        }

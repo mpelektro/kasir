@@ -468,9 +468,13 @@ public class Control {
     public static <T extends TransactionDetail> List<T> selectTDetails(T.Tipe tipe, String colName, boolean caseSentivie, String val) throws SQLException, KasirException{
         return TransactionDetail.selectS(tipe, colName, caseSentivie, val);
     }
+    public static <T extends TransactionDetail> List<T> selectTDetails(T.Tipe tipe, String colName, String val) throws SQLException, KasirException{
+        return TransactionDetail.selectS(tipe, colName, val);
+    }
     public static <T extends TransactionDetail> List<T> selectTDetails(T.Tipe tipe, String colName, boolean val) throws SQLException, KasirException{
         return TransactionDetail.selectS(tipe, colName, val);
     }
+    
     
     public static <T extends TransactionDetail> Map<Long,T> selectTDetails(T.Tipe tipe, Set<Long> ids) throws SQLException, KasirException{
         return TransactionDetail.selectS(tipe, ids);
