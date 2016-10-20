@@ -1159,13 +1159,13 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
         try {
             //Only UPDATE Amount and NOte for IDD
             Set<IDD> filterIDD = new HashSet<>();
-            IDD temp = new IDD(idd.noInduk, idd.chargedLevel, null, 0.0f, null);
+            IDD temp = new IDD(idd.noInduk, null, null, 0.0f, null);
             
             filterIDD.add(temp);
             Map<Long,IDD> map = new HashMap<>();
             map = Control.filterSelectIurans(Iuran.Tipe.IDD, filterIDD);
              for(IDD tempIDD : map.values()){
-                if(tempIDD.noInduk.equals(idd.noInduk) && (tempIDD.chargedLevel.tahun ==idd.chargedLevel.tahun))
+                if(tempIDD.noInduk.equals(idd.noInduk) || (tempIDD.chargedLevel.tahun ==idd.chargedLevel.tahun))
                 { 
                     idd.id = tempIDD.id;
                     idd.note = tempIDD.note.concat(" Biaya IDD Sebelumnya:").concat(String.valueOf(tempIDD.amount));
@@ -1195,13 +1195,13 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
         try {
             //Only UPDATE Amount and NOte for Beasiswa
             Set<Beasiswa> filterBeasiswa = new HashSet<>();
-            Beasiswa temp = new Beasiswa(beasiswa.noInduk, beasiswa.chargedLevel, null, 0.0f, null);
+            Beasiswa temp = new Beasiswa(beasiswa.noInduk, null, null, 0.0f, null);
             
             filterBeasiswa.add(temp);
             Map<Long,Beasiswa> map = new HashMap<>();
             map = Control.filterSelectIurans(Iuran.Tipe.Beasiswa, filterBeasiswa);
              for(Beasiswa tempBeasiswa : map.values()){
-                if(tempBeasiswa.noInduk.equals(beasiswa.noInduk) && (tempBeasiswa.chargedLevel.tahun ==beasiswa.chargedLevel.tahun))
+                if(tempBeasiswa.noInduk.equals(beasiswa.noInduk) || (tempBeasiswa.chargedLevel.tahun ==beasiswa.chargedLevel.tahun))
                 { 
                     beasiswa.id = tempBeasiswa.id;
                     beasiswa.note = tempBeasiswa.note.concat(" Biaya Beasiswa Sebelumnya:").concat(String.valueOf(tempBeasiswa.amount));
@@ -1232,19 +1232,20 @@ public class InputBeasiswaFrame extends javax.swing.JFrame {
         try {
             //Only UPDATE Amount and NOte for BeasiswaCost
             Set<BeasiswaCost> filterBeasiswaCost = new HashSet<>();
-            BeasiswaCost temp = new BeasiswaCost(beasiswacost.noInduk, beasiswacost.chargedLevel, null, 0.0f, null);
+            BeasiswaCost temp = new BeasiswaCost(beasiswacost.noInduk, null, null, 0.0f, null);
             
             filterBeasiswaCost.add(temp);
             Map<Long,BeasiswaCost> map = new HashMap<>();
             map = Control.filterSelectIurans(Iuran.Tipe.BeasiswaCost, filterBeasiswaCost);
              for(BeasiswaCost tempBeasiswaCost : map.values()){
-                if(tempBeasiswaCost.noInduk.equals(beasiswacost.noInduk) && (tempBeasiswaCost.chargedLevel.tahun ==beasiswacost.chargedLevel.tahun))
+                if(tempBeasiswaCost.noInduk.equals(beasiswacost.noInduk) || (tempBeasiswaCost.chargedLevel.tahun ==beasiswacost.chargedLevel.tahun))
                 { 
                     beasiswacost.id = tempBeasiswaCost.id;
                     beasiswacost.note = tempBeasiswaCost.note.concat(" Biaya BeasiswaCost Sebelumnya:").concat(String.valueOf(tempBeasiswaCost.amount));
                     beasiswacost.amount = tempBeasiswaCost.amount + Float.valueOf(jTextFieldBeasiswaCostAmount.getText());
                     beasiswacost.debt = 0;
                     beasiswacost.note = "<--".concat(jTextAreaBeasiswaCostNote.getText().concat(beasiswacost.note));
+                    
                 }
              }
              

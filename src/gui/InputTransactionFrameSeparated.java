@@ -4395,7 +4395,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                         transactionSummary.note = "TIDAK_TUNAI";
                     }
                     if(inputTransactionIPP.beasiswaAmounts.get(i) > 0f){
-                        if(Beasiswa.transactOut(profil, transactionSummary.id, beasiswaAmounts.get(i))){
+                        if(Beasiswa.transactOut(profil, transactionSummary.id, inputTransactionIPP.beasiswaAmounts.get(i))){
                         IPPTransactionDetail ippTransactionDetail = new IPPTransactionDetail(ippTDetailUUID, 
                                                                                             ippFromDB.id, 
                                                                                             clerk.id, 
@@ -4510,7 +4510,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                             transactionSummary.note = "TIDAK_TUNAI";
                         }
                         if(inputTransactionIUAP.beasiswaAmounts.get(i) > 0f){
-                            if(Beasiswa.transactOut(profil, transactionSummary.id, beasiswaAmounts.get(i))){
+                            if(Beasiswa.transactOut(profil, transactionSummary.id, inputTransactionIUAP.beasiswaAmounts.get(i))){
                             IUAPTransactionDetail iuapTransactionDetail = new IUAPTransactionDetail(iuapTDetailUUID, 
                                                                                                 iuapFromDB.id, 
                                                                                                 clerk.id, 
