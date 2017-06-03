@@ -2525,9 +2525,10 @@ public class AppFrame extends javax.swing.JFrame {
         ArrayList<Profil> smaProfils = new ArrayList();     
         ArrayList<Profil> smkProfils = new ArrayList();     
         try {
-            smpProfils = Profil.selectS("SMP-7-1-2016");
-            smaProfils = Profil.selectS("SMA-10-1-2016");
-            smkProfils = Profil.selectS("SMK-10-1-2016");
+            String curYear = String.valueOf(Kalender.getInstance().get(Calendar.YEAR));
+            smpProfils = Profil.selectS("SMP-7-1-".concat(curYear));
+            smaProfils = Profil.selectS("SMA-10-1-".concat(curYear));
+            smkProfils = Profil.selectS("SMK-10-1-".concat(curYear));
         } catch (KasirException ex) {
             Exceptions.printStackTrace(ex);
         }
@@ -2966,9 +2967,10 @@ public class AppFrame extends javax.swing.JFrame {
         BigDecimal smkIppLunas2=BigDecimal.ZERO, smkIpspLunas2=BigDecimal.ZERO, smkIksLunas2=BigDecimal.ZERO, smkPasbLunas2=BigDecimal.ZERO, smkIpsbLunas2=BigDecimal.ZERO, smkSeragamLunas2=BigDecimal.ZERO, smkOsisLunas2=BigDecimal.ZERO, smkAttributeLunas2=BigDecimal.ZERO, smkAlmamaterLunas2=BigDecimal.ZERO, smkPvtLunas2= BigDecimal.ZERO;
         BigDecimal smkIppBatal2=BigDecimal.ZERO, smkIpspBatal2=BigDecimal.ZERO, smkIksBatal2=BigDecimal.ZERO, smkPasbBatal2=BigDecimal.ZERO, smkIpsbBatal2=BigDecimal.ZERO, smkSeragamBatal2=BigDecimal.ZERO, smkOsisBatal2=BigDecimal.ZERO, smkAttributeBatal2=BigDecimal.ZERO, smkAlmamaterBatal2=BigDecimal.ZERO, smkPvtBatal2= BigDecimal.ZERO;
         try {
-            smpProfils = Profil.selectS("SMP-7-1-2016");
-            smaProfils = Profil.selectS("SMA-10-1-2016");
-            smkProfils = Profil.selectS("SMK-10-1-2016");
+            String curYear = String.valueOf(Kalender.getInstance().get(Calendar.YEAR));
+            smpProfils = Profil.selectS("SMP-7-1-".concat(curYear));
+            smaProfils = Profil.selectS("SMA-10-1-".concat(curYear));
+            smkProfils = Profil.selectS("SMK-10-1-".concat(curYear));
         } catch (KasirException ex) {
             Exceptions.printStackTrace(ex);
         }
