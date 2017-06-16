@@ -403,14 +403,14 @@ public class AppFrame extends javax.swing.JFrame {
         jTableInitialSearch.setModel(tableModelInitialSearch);
         jTableInitialSearch.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTableInitialSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableInitialSearchMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTableInitialSearchMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jTableInitialSearchMouseReleased(evt);
-            }
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableInitialSearchMouseClicked(evt);
             }
         });
         jTableInitialSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1636,16 +1636,16 @@ public class AppFrame extends javax.swing.JFrame {
        };
        
        // part update status DAFTAR, PROSES, LUNAS
-       if(profil.statusPendaftaran != Profil.StatusPendaftaran.BATAL){
+       if(profil.statusPendaftaran != Profil.StatusPendaftaran.BATAL && (profil.currentLevel.level2 == profil.currentLevel.level2.TUJUH || profil.currentLevel.level2 == profil.currentLevel.level2.SEPULUH)){
         if(ppdbIni.get("program", "name", String.class).equals("ppdb")){
             switch(profil.currentLevel.level1.toString()){
                 case "SMP":
                     profil.currentLevel.level2 = profil.currentLevel.level2.TUJUH;
                     if(totalDebt == 0){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.LUNAS;
-                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?2910000:3410000) && totalDebt > 0){
+                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?2500000:2500000) && totalDebt > 0){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.PROSES;
-                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?2910000:3410000)){
+                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?2500000:2500000)){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.DAFTAR;
                     }
                  break;
@@ -1653,9 +1653,9 @@ public class AppFrame extends javax.swing.JFrame {
                     profil.currentLevel.level2 = profil.currentLevel.level2.SEPULUH;
                     if(totalDebt == 0){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.LUNAS;
-                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?5965000:6715000) && totalDebt > 0){
+                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?6750000:6750000) && totalDebt > 0){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.PROSES;
-                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?5965000:6715000)){
+                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?6750000:6750000)){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.DAFTAR;
                     }
                     break;
@@ -1663,15 +1663,15 @@ public class AppFrame extends javax.swing.JFrame {
                     profil.currentLevel.level2 = profil.currentLevel.level2.SEPULUH;
                     if(totalDebt == 0){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.LUNAS;
-                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?4355000:4355000) && totalDebt > 0){
+                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?4450000:4450000) && totalDebt > 0){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.PROSES;
-                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?4355000:4355000)){
+                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?4450000:4450000)){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.DAFTAR;
                     }
                     break;               
             }
        
-            if(profil.statusPendaftaran!= Profil.StatusPendaftaran.DAFTAR){
+            if(profil.statusPendaftaran!= Profil.StatusPendaftaran.BATAL){
                 profil.update();
             }
         }
@@ -2523,12 +2523,36 @@ public class AppFrame extends javax.swing.JFrame {
     public void printStatusPendaftaran(Clerk cl) throws JRException, PrinterException, SQLException {
         ArrayList<Profil> smpProfils = new ArrayList();
         ArrayList<Profil> smaProfils = new ArrayList();     
-        ArrayList<Profil> smkProfils = new ArrayList();     
+        ArrayList<Profil> smkProfils = new ArrayList();
+        ArrayList<Profil> dirtySmpProfils = new ArrayList();
+        ArrayList<Profil> dirtySmaProfils = new ArrayList();     
+        ArrayList<Profil> dirtySmkProfils = new ArrayList();     
         try {
             String curYear = String.valueOf(Kalender.getInstance().get(Calendar.YEAR));
             smpProfils = Profil.selectS("SMP-7-1-".concat(curYear));
+            dirtySmpProfils.addAll(smpProfils);
+            smpProfils.clear();
+            for(int fi=0; fi<dirtySmpProfils.size(); fi++){
+                if(dirtySmpProfils.get(fi).noInduk.toString().startsWith("P")){
+                    smpProfils.add(dirtySmpProfils.get(fi));
+                }
+            }
             smaProfils = Profil.selectS("SMA-10-1-".concat(curYear));
+            dirtySmaProfils.addAll(smaProfils);
+            smaProfils.clear();
+            for(int fi=0; fi<dirtySmaProfils.size(); fi++){
+                if(dirtySmaProfils.get(fi).noInduk.toString().startsWith("A")){
+                    smaProfils.add(dirtySmaProfils.get(fi));
+                }
+            }
             smkProfils = Profil.selectS("SMK-10-1-".concat(curYear));
+            dirtySmkProfils.addAll(smkProfils);
+            smkProfils.clear();
+            for(int fi=0; fi<dirtySmkProfils.size(); fi++){
+                if(dirtySmkProfils.get(fi).noInduk.toString().startsWith("K")){
+                    smkProfils.add(dirtySmkProfils.get(fi));
+                }
+            }
         } catch (KasirException ex) {
             Exceptions.printStackTrace(ex);
         }

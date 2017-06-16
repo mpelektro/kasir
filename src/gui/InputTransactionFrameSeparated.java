@@ -5090,7 +5090,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         }
         
         //PASB Part (automatic PASB)
-        if(appFrame.isPPDB){
+        if(appFrame.isPPDB && (profil.currentLevel.level2.equals(Level.Level2.TUJUH) || profil.currentLevel.level2.equals(Level.Level2.SEPULUH))){
             PASB pasb = Control.selectIuran(Iuran.Tipe.PASB, PASB.noIndukColName,false, profil.noInduk);
             this.pasb = pasb;
             if(pasb != null){
