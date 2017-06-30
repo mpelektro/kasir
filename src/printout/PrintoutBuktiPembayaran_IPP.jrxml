@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintoutBuktiPembayaran_IPP" pageWidth="378" pageHeight="410" columnWidth="378" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="82dd9f8c-8229-4774-af0e-436a8ecbecbf">
 	<property name="ireport.zoom" value="2.9282000000000017"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="256"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
@@ -47,26 +47,24 @@ WHERE
      IPPTransaction.`IDTransactionSummary` = $P{Param_IPP_TransactionSummary_ID}
 UNION
 SELECT
-     CicilanHutangTransaction.`ID` AS CicilanHutangTransaction_ID,
-     CicilanHutangTransaction.`UUID` AS CicilanHutangTransaction_UUID,
-     CicilanHutangTransaction.`IDIuran` AS CicilanHutangTransaction_IDIuran,
-     CicilanHutangTransaction.`IDClerk` AS CicilanHutangTransaction_IDClerk,
-     CicilanHutangTransaction.`IDTransactionSummary` AS CicilanHutangTransaction_IDTransactionSummary,
-     CicilanHutangTransaction.`NomorInduk` AS CicilanHutangTransaction_NomorInduk,
-     CicilanHutangTransaction.`PaymentMethod` AS CicilanHutangTransaction_PaymentMethod,
-     CicilanHutangTransaction.`CreateDate` AS CicilanHutangTransaction_CreateDate,
-     CicilanHutangTransaction.`LastUpdateDate` AS CicilanHutangTransaction_LastUpdateDate,
-     CicilanHutangTransaction.`Note` AS CicilanHutangTransaction_Note,
-     CicilanHutangTransaction.`Amount` AS CicilanHutangTransaction_Amount,
-     CicilanHutangTransaction.`Settled` AS CicilanHutangTransaction_Settled,
-     CicilanHutangTransaction.`Piutang` AS CicilanHutangTransaction_Piutang
+     TunggakanPascaTransaction.`ID` AS TunggakanPascaTransaction_ID,
+     TunggakanPascaTransaction.`UUID` AS TunggakanPascaTransaction_UUID,
+     TunggakanPascaTransaction.`IDIuran` AS TunggakanPascaTransaction_IDIuran,
+     TunggakanPascaTransaction.`IDClerk` AS TunggakanPascaTransaction_IDClerk,
+     TunggakanPascaTransaction.`IDTransactionSummary` AS TunggakanPascaTransaction_IDTransactionSummary,
+     TunggakanPascaTransaction.`NomorInduk` AS TunggakanPascaTransaction_NomorInduk,
+     TunggakanPascaTransaction.`PaymentMethod` AS TunggakanPascaTransaction_PaymentMethod,
+     TunggakanPascaTransaction.`CreateDate` AS TunggakanPascaTransaction_CreateDate,
+     TunggakanPascaTransaction.`LastUpdateDate` AS TunggakanPascaTransaction_LastUpdateDate,
+     TunggakanPascaTransaction.`Note` AS TunggakanPascaTransaction_Note,
+     TunggakanPascaTransaction.`Amount` AS TunggakanPascaTransaction_Amount,
+     TunggakanPascaTransaction.`Settled` AS TunggakanPascaTransaction_Settled,
+     TunggakanPascaTransaction.`Piutang` AS TunggakanPascaTransaction_Piutang
 FROM
-     `CicilanHutangTransaction` CicilanHutangTransaction
+     `TunggakanPascaTransaction` TunggakanPascaTransaction
 WHERE
-     CicilanHutangTransaction.`IDTransactionSummary` = $P{Param_IPP_TransactionSummary_ID}
-ORDER BY IPPTransaction_ID
-
-]]>
+     TunggakanPascaTransaction.`IDTransactionSummary` = $P{Param_IPP_TransactionSummary_ID}
+ORDER BY IPPTransaction_ID]]>
 	</queryString>
 	<field name="IPPTransaction_ID" class="java.math.BigInteger"/>
 	<field name="IPPTransaction_UUID" class="java.lang.String"/>
@@ -137,51 +135,4 @@ ORDER BY IPPTransaction_ID
 			</staticText>
 		</band>
 	</detail>
-	<summary>
-		<band height="13" splitType="Stretch">
-			<printWhenExpression><![CDATA[$V{IPPTransaction_Amount_1} >= $F{IPPTransaction_Amount}]]></printWhenExpression>
-			<textField pattern="Rp #,##0">
-				<reportElement x="320" y="1" width="58" height="12" uuid="e692c6d3-d27f-4dc1-9dd6-b71fd86be67c"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{IPPTransaction_Amount_1}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="55" y="1" width="157" height="12" forecolor="#000000" uuid="e8c6988d-bbc5-46bc-ae64-fa8f39857972"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{IPPTransaction_Note}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="212" y="1" width="59" height="12" uuid="eaf95bc2-ac12-40b0-b7f8-27a100f8076d"/>
-				<textElement textAlignment="Center">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{IPPTransaction_PaymentMethod}.equals("CASH")?"TUNAI":($F{IPPTransaction_PaymentMethod}.equals("TRANSFER")?"BANK":($F{IPPTransaction_PaymentMethod}.equals("IDD")?"DANA SISWA":($F{IPPTransaction_PaymentMethod}.equals("BEASISWA")?"BEASISWA":"B. AKADEMIK")))]]></textFieldExpression>
-			</textField>
-			<textField pattern="dd-MMM-yyyy">
-				<reportElement x="271" y="1" width="49" height="12" uuid="8e6c2d24-68bc-45d7-be25-43f9bebee26f"/>
-				<textElement textAlignment="Center">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{IPPTransaction_LastUpdateDate}]]></textFieldExpression>
-			</textField>
-			<textField pattern=".">
-				<reportElement x="35" y="1" width="20" height="12" uuid="9d0b07f6-b383-46d0-b8d8-9c5a45bf8651"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="0" y="1" width="35" height="12" uuid="4fb97e07-feba-4309-bfab-37420f81323c"/>
-				<textElement>
-					<font size="8" isBold="false"/>
-				</textElement>
-				<text><![CDATA[IPP]]></text>
-			</staticText>
-		</band>
-	</summary>
 </jasperReport>

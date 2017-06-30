@@ -46,7 +46,7 @@ public abstract class Iuran<IuranType extends Iuran> extends KasirObject<IuranTy
     //beasiswa = i beasiswa ada duitnya
     //beasiswacost = i beasiswa gak ada duitnya
     */
-    public enum Tipe{IPSP, IPS, IUA, IPSB, IPP, IUS, IUAP, OSIS, IKS, PVT, Seragam, Attribute, PASB, Buku, Sumbangan, ILL, Tabungan, IDD, Beasiswa, BeasiswaCost, CicilanHutang, Almamater}
+    public enum Tipe{IPSP, IPS, IUA, IPSB, IPP, IUS, IUAP, OSIS, IKS, PVT, Seragam, Attribute, PASB, Buku, Sumbangan, ILL, Tabungan, IDD, Beasiswa, BeasiswaCost, TunggakanPasca, Almamater}
     
     public long id; //primary-key
     public String noInduk; //not-null
@@ -154,8 +154,8 @@ public abstract class Iuran<IuranType extends Iuran> extends KasirObject<IuranTy
                 return (T) new Beasiswa().dynFromResultSet(rs, true);
             case BeasiswaCost:
                 return (T) new BeasiswaCost().dynFromResultSet(rs, true);
-            case CicilanHutang:
-                return (T) new CicilanHutang().dynFromResultSet(rs, true);
+            case TunggakanPasca:
+                return (T) new TunggakanPasca().dynFromResultSet(rs, true);
             case Almamater:
                 return (T) new Almamater().dynFromResultSet(rs, true);
             default:

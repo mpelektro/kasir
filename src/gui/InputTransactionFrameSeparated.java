@@ -65,7 +65,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
     
     private ArrayList<IPP> tIPPs;
     private ArrayList<IUAP> tIUAPs;
-    private ArrayList<CicilanHutang> tCicilanHutangs;
+    private ArrayList<TunggakanPasca> tTunggakanPascas;
     private ArrayList<Seragam> tSeragams;
     private ArrayList<Almamater> tAlmamaters;
     private ArrayList<Buku> tBukus;
@@ -109,18 +109,18 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
     private String tunggakanIUAPString = new String("");
     private String tunggakanIUAPEachAmountString = new String("");
     
-    //CicilanHutang PART
-    private InputTransactionCicilanHutang inputTransactionCicilanHutang;
-    private TableModel tableModelCicilanHutang;
-    public CicilanHutang cicilanHutangFromDB;
-    public CicilanHutang cicilanHutangCurrent;
-    public CicilanHutang cicilanHutangStoreToDB;
-    private ArrayList<Float> cicilanHutangAmounts;
-    private UUID cicilanHutangTDetailUUID;
-    private float unpaidCicilanHutang = 0f;
-    private List<Integer> tahunCicilanHutang;
-    private String tunggakanCicilanHutangString = new String("");
-    private String tunggakanCicilanHutangEachAmountString = new String("");
+    //TunggakanPasca PART
+    private InputTransactionTunggakanPasca inputTransactionTunggakanPasca;
+    private TableModel tableModelTunggakanPasca;
+    public TunggakanPasca tunggakanPascaFromDB;
+    public TunggakanPasca tunggakanPascaCurrent;
+    public TunggakanPasca tunggakanPascaStoreToDB;
+    private ArrayList<Float> tunggakanPascaAmounts;
+    private UUID tunggakanPascaTDetailUUID;
+    private float unpaidTunggakanPasca = 0f;
+    private List<Integer> tahunTunggakanPasca;
+    private String tunggakanTunggakanPascaString = new String("");
+    private String tunggakanTunggakanPascaEachAmountString = new String("");
     
     //IPSP PART
     private InputTransactionIPSP inputTransactionIPSP;
@@ -363,14 +363,14 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         initComponents();
     }
     
-    public InputTransactionFrameSeparated(AppFrame af, Clerk cl, Profil profil, ArrayList<IPP> paramIPPs, IPSP paramIPSP, ArrayList<Seragam> paramSeragams, ArrayList<Buku> paramBukus, ArrayList<IKS> paramIKSs, ArrayList<ILL> paramILLs, IPSB paramIPSB, IUA paramIUA, ArrayList<IUS> paramIUSs, ArrayList<OSIS> paramOSISs, ArrayList<Attribute> paramAttributes, ArrayList<PVT> paramPVTs, ArrayList<Tabungan> paramTabungans, ArrayList<Sumbangan> paramSumbangans, PASB paramPASB, ArrayList<CicilanHutang> paramCicilanHutangs, ArrayList<Almamater> paramAlmamaters, ArrayList<IUAP> paramIUAPs) {
+    public InputTransactionFrameSeparated(AppFrame af, Clerk cl, Profil profil, ArrayList<IPP> paramIPPs, IPSP paramIPSP, ArrayList<Seragam> paramSeragams, ArrayList<Buku> paramBukus, ArrayList<IKS> paramIKSs, ArrayList<ILL> paramILLs, IPSB paramIPSB, IUA paramIUA, ArrayList<IUS> paramIUSs, ArrayList<OSIS> paramOSISs, ArrayList<Attribute> paramAttributes, ArrayList<PVT> paramPVTs, ArrayList<Tabungan> paramTabungans, ArrayList<Sumbangan> paramSumbangans, PASB paramPASB, ArrayList<TunggakanPasca> paramTunggakanPascas, ArrayList<Almamater> paramAlmamaters, ArrayList<IUAP> paramIUAPs) {
         this.appFrame = af;
         this.clerk = cl;
         Clerk.current.id = this.clerk.id;
         this.profil = profil;
         tIPPs = paramIPPs;
         tIUAPs = paramIUAPs;
-        tCicilanHutangs = paramCicilanHutangs;
+        tTunggakanPascas = paramTunggakanPascas;
         tIPSP = paramIPSP;
         tSeragams = paramSeragams;
         tAlmamaters = paramAlmamaters;
@@ -396,14 +396,14 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         initComponents();
     }
     
-    public InputTransactionFrameSeparated(AppFramePendaftaran af, Clerk cl, Profil profil, ArrayList<IPP> paramIPPs, IPSP paramIPSP, ArrayList<Seragam> paramSeragams, ArrayList<Buku> paramBukus, ArrayList<IKS> paramIKSs, ArrayList<ILL> paramILLs, IPSB paramIPSB, IUA paramIUA, ArrayList<IUS> paramIUSs, ArrayList<OSIS> paramOSISs, ArrayList<Attribute> paramAttributes, ArrayList<PVT> paramPVTs, ArrayList<Tabungan> paramTabungans, ArrayList<Sumbangan> paramSumbangans, ArrayList<CicilanHutang> paramCicilanHutangs, ArrayList<Almamater> paramAlmamaters, ArrayList<IUAP> paramIUAPs) {
+    public InputTransactionFrameSeparated(AppFramePendaftaran af, Clerk cl, Profil profil, ArrayList<IPP> paramIPPs, IPSP paramIPSP, ArrayList<Seragam> paramSeragams, ArrayList<Buku> paramBukus, ArrayList<IKS> paramIKSs, ArrayList<ILL> paramILLs, IPSB paramIPSB, IUA paramIUA, ArrayList<IUS> paramIUSs, ArrayList<OSIS> paramOSISs, ArrayList<Attribute> paramAttributes, ArrayList<PVT> paramPVTs, ArrayList<Tabungan> paramTabungans, ArrayList<Sumbangan> paramSumbangans, ArrayList<TunggakanPasca> paramTunggakanPascas, ArrayList<Almamater> paramAlmamaters, ArrayList<IUAP> paramIUAPs) {
         this.appFramePendaftaran = af;
         this.clerk = cl;
         Clerk.current.id = this.clerk.id;
         this.profil = profil;
         tIPPs = paramIPPs;
         tIUAPs = paramIUAPs;
-        tCicilanHutangs = paramCicilanHutangs;
+        tTunggakanPascas = paramTunggakanPascas;
         tIPSP = paramIPSP;
         tSeragams = paramSeragams;
         tBukus = paramBukus;
@@ -580,16 +580,16 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         jButtonBayarIKS = new javax.swing.JButton();
         jLabel34 = new javax.swing.JLabel();
         jFormattedTextFieldIDDSaldo1 = new javax.swing.JFormattedTextField();
-        jFrameCicilanHutang = new javax.swing.JFrame();
-        jPanelCicilanHutang = new javax.swing.JPanel();
+        jFrameTunggakanPasca = new javax.swing.JFrame();
+        jPanelTunggakanPasca = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         jLabelTahun1 = new javax.swing.JLabel();
         jComboBoxTahun1 = new javax.swing.JComboBox();
         jLabel36 = new javax.swing.JLabel();
-        jUnpaidCicilanHutang = new javax.swing.JTextField();
+        jUnpaidTunggakanPasca = new javax.swing.JTextField();
         jScrollPane12 = new javax.swing.JScrollPane();
-        jTableCicilanHutang = new javax.swing.JTable();
-        jButtonBayarCicilanHutang = new javax.swing.JButton();
+        jTableTunggakanPasca = new javax.swing.JTable();
+        jButtonBayarTunggakanPasca = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jFormattedTextFieldIDDSaldo2 = new javax.swing.JFormattedTextField();
         jFrameAlmamater = new javax.swing.JFrame();
@@ -706,7 +706,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             }
         };
 
-        tableModelCicilanHutang = new javax.swing.table.DefaultTableModel(
+        tableModelTunggakanPasca = new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"JULI", null},
                 {"AGUSTUS", null},
@@ -866,8 +866,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         jTextFieldSumbanganAmountSimple = new javax.swing.JFormattedTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableTunggakanAll = new javax.swing.JTable();
-        jButtonCicilanHutang = new javax.swing.JButton();
-        jTextFieldCicilanHutangAmountSimple = new javax.swing.JFormattedTextField();
+        jButtonTunggakanPasca = new javax.swing.JButton();
+        jTextFieldTunggakanPascaAmountSimple = new javax.swing.JFormattedTextField();
         jButtonAlmamater = new javax.swing.JButton();
         jTextFieldAlmamaterAmountSimple = new javax.swing.JFormattedTextField();
 
@@ -2253,10 +2253,10 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             .addComponent(jPanelIKS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
         );
 
-        jFrameCicilanHutang.setMinimumSize(new java.awt.Dimension(680, 450));
+        jFrameTunggakanPasca.setMinimumSize(new java.awt.Dimension(680, 450));
 
-        jPanelCicilanHutang.setMinimumSize(new java.awt.Dimension(570, 380));
-        jPanelCicilanHutang.setPreferredSize(new java.awt.Dimension(680, 450));
+        jPanelTunggakanPasca.setMinimumSize(new java.awt.Dimension(570, 380));
+        jPanelTunggakanPasca.setPreferredSize(new java.awt.Dimension(680, 450));
 
         jLabel35.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel35.setText(org.openide.util.NbBundle.getMessage(InputTransactionFrameSeparated.class, "InputTransactionFrameSeparated.jLabel35.text")); // NOI18N
@@ -2265,7 +2265,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         jLabelTahun1.setText(org.openide.util.NbBundle.getMessage(InputTransactionFrameSeparated.class, "InputTransactionFrameSeparated.jLabelTahun1.text")); // NOI18N
 
         try{
-            tahunComboBoxModel = buildCicilanHutangtahunComboBoxModel(profil);
+            tahunComboBoxModel = buildTunggakanPascatahunComboBoxModel(profil);
         }catch(SQLException ex){
             ex.printStackTrace();
         }catch(KasirException ex){
@@ -2285,27 +2285,27 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
 
         jLabel36.setText(org.openide.util.NbBundle.getMessage(InputTransactionFrameSeparated.class, "InputTransactionFrameSeparated.jLabel36.text")); // NOI18N
 
-        jUnpaidCicilanHutang.setText(String.valueOf(unpaidCicilanHutang));
-        jUnpaidCicilanHutang.setEnabled(false);
+        jUnpaidTunggakanPasca.setText(String.valueOf(unpaidTunggakanPasca));
+        jUnpaidTunggakanPasca.setEnabled(false);
 
-        jTableCicilanHutang.setModel(tableModelCicilanHutang);
-        jTableCicilanHutang.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jTableCicilanHutang.addFocusListener(new java.awt.event.FocusAdapter() {
+        jTableTunggakanPasca.setModel(tableModelTunggakanPasca);
+        jTableTunggakanPasca.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTableTunggakanPasca.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTableCicilanHutangFocusLost(evt);
+                jTableTunggakanPascaFocusLost(evt);
             }
         });
-        jTableCicilanHutang.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        jTableTunggakanPasca.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jTableCicilanHutangPropertyChange(evt);
+                jTableTunggakanPascaPropertyChange(evt);
             }
         });
-        jScrollPane12.setViewportView(jTableCicilanHutang);
+        jScrollPane12.setViewportView(jTableTunggakanPasca);
 
-        jButtonBayarCicilanHutang.setText(org.openide.util.NbBundle.getMessage(InputTransactionFrameSeparated.class, "InputTransactionFrameSeparated.jButtonBayarCicilanHutang.text")); // NOI18N
-        jButtonBayarCicilanHutang.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBayarTunggakanPasca.setText(org.openide.util.NbBundle.getMessage(InputTransactionFrameSeparated.class, "InputTransactionFrameSeparated.jButtonBayarTunggakanPasca.text")); // NOI18N
+        jButtonBayarTunggakanPasca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBayarCicilanHutangActionPerformed(evt);
+                jButtonBayarTunggakanPascaActionPerformed(evt);
             }
         });
 
@@ -2314,67 +2314,67 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         jFormattedTextFieldIDDSaldo2.setText(org.openide.util.NbBundle.getMessage(InputTransactionFrameSeparated.class, "InputTransactionFrameSeparated.jFormattedTextFieldIDDSaldo2.text")); // NOI18N
         jFormattedTextFieldIDDSaldo2.setEnabled(false);
 
-        javax.swing.GroupLayout jPanelCicilanHutangLayout = new javax.swing.GroupLayout(jPanelCicilanHutang);
-        jPanelCicilanHutang.setLayout(jPanelCicilanHutangLayout);
-        jPanelCicilanHutangLayout.setHorizontalGroup(
-            jPanelCicilanHutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCicilanHutangLayout.createSequentialGroup()
-                .addGroup(jPanelCicilanHutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCicilanHutangLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelTunggakanPascaLayout = new javax.swing.GroupLayout(jPanelTunggakanPasca);
+        jPanelTunggakanPasca.setLayout(jPanelTunggakanPascaLayout);
+        jPanelTunggakanPascaLayout.setHorizontalGroup(
+            jPanelTunggakanPascaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTunggakanPascaLayout.createSequentialGroup()
+                .addGroup(jPanelTunggakanPascaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelTunggakanPascaLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane12))
-                    .addGroup(jPanelCicilanHutangLayout.createSequentialGroup()
-                        .addGroup(jPanelCicilanHutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelCicilanHutangLayout.createSequentialGroup()
+                    .addGroup(jPanelTunggakanPascaLayout.createSequentialGroup()
+                        .addGroup(jPanelTunggakanPascaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelTunggakanPascaLayout.createSequentialGroup()
                                 .addGap(248, 248, 248)
-                                .addComponent(jButtonBayarCicilanHutang))
-                            .addGroup(jPanelCicilanHutangLayout.createSequentialGroup()
+                                .addComponent(jButtonBayarTunggakanPasca))
+                            .addGroup(jPanelTunggakanPascaLayout.createSequentialGroup()
                                 .addComponent(jLabel35)
                                 .addGap(39, 39, 39)
                                 .addComponent(jLabelTahun1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBoxTahun1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(82, 82, 82)
-                                .addGroup(jPanelCicilanHutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanelTunggakanPascaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel36)
                                     .addComponent(jLabel11))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanelCicilanHutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jUnpaidCicilanHutang, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                                .addGroup(jPanelTunggakanPascaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jUnpaidTunggakanPasca, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                                     .addComponent(jFormattedTextFieldIDDSaldo2))))
                         .addGap(0, 13, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanelCicilanHutangLayout.setVerticalGroup(
-            jPanelCicilanHutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCicilanHutangLayout.createSequentialGroup()
+        jPanelTunggakanPascaLayout.setVerticalGroup(
+            jPanelTunggakanPascaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTunggakanPascaLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addGroup(jPanelCicilanHutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelTunggakanPascaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxTahun1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelTahun1)
                     .addComponent(jLabel35)
                     .addComponent(jLabel36)
-                    .addComponent(jUnpaidCicilanHutang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jUnpaidTunggakanPasca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelCicilanHutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelTunggakanPascaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jFormattedTextFieldIDDSaldo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonBayarCicilanHutang)
+                .addComponent(jButtonBayarTunggakanPasca)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jFrameCicilanHutangLayout = new javax.swing.GroupLayout(jFrameCicilanHutang.getContentPane());
-        jFrameCicilanHutang.getContentPane().setLayout(jFrameCicilanHutangLayout);
-        jFrameCicilanHutangLayout.setHorizontalGroup(
-            jFrameCicilanHutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelCicilanHutang, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+        javax.swing.GroupLayout jFrameTunggakanPascaLayout = new javax.swing.GroupLayout(jFrameTunggakanPasca.getContentPane());
+        jFrameTunggakanPasca.getContentPane().setLayout(jFrameTunggakanPascaLayout);
+        jFrameTunggakanPascaLayout.setHorizontalGroup(
+            jFrameTunggakanPascaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelTunggakanPasca, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
         );
-        jFrameCicilanHutangLayout.setVerticalGroup(
-            jFrameCicilanHutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelCicilanHutang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+        jFrameTunggakanPascaLayout.setVerticalGroup(
+            jFrameTunggakanPascaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelTunggakanPasca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
         );
 
         jFrameAlmamater.setMinimumSize(new java.awt.Dimension(640, 480));
@@ -2759,16 +2759,16 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         jTableTunggakanAll.setRowHeight(32);
         jScrollPane3.setViewportView(jTableTunggakanAll);
 
-        jButtonCicilanHutang.setText(org.openide.util.NbBundle.getMessage(InputTransactionFrameSeparated.class, "InputTransactionFrameSeparated.jButtonCicilanHutang.text")); // NOI18N
-        jButtonCicilanHutang.addActionListener(new java.awt.event.ActionListener() {
+        jButtonTunggakanPasca.setText(org.openide.util.NbBundle.getMessage(InputTransactionFrameSeparated.class, "InputTransactionFrameSeparated.jButtonTunggakanPasca.text")); // NOI18N
+        jButtonTunggakanPasca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCicilanHutangActionPerformed(evt);
+                jButtonTunggakanPascaActionPerformed(evt);
             }
         });
 
-        jTextFieldCicilanHutangAmountSimple.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
-        jTextFieldCicilanHutangAmountSimple.setText(org.openide.util.NbBundle.getMessage(InputTransactionFrameSeparated.class, "InputTransactionFrameSeparated.jTextFieldCicilanHutangAmountSimple.text")); // NOI18N
-        jTextFieldCicilanHutangAmountSimple.setPreferredSize(new java.awt.Dimension(6, 25));
+        jTextFieldTunggakanPascaAmountSimple.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
+        jTextFieldTunggakanPascaAmountSimple.setText(org.openide.util.NbBundle.getMessage(InputTransactionFrameSeparated.class, "InputTransactionFrameSeparated.jTextFieldTunggakanPascaAmountSimple.text")); // NOI18N
+        jTextFieldTunggakanPascaAmountSimple.setPreferredSize(new java.awt.Dimension(6, 25));
 
         jButtonAlmamater.setText(org.openide.util.NbBundle.getMessage(InputTransactionFrameSeparated.class, "InputTransactionFrameSeparated.jButtonAlmamater.text")); // NOI18N
         jButtonAlmamater.addActionListener(new java.awt.event.ActionListener() {
@@ -2805,7 +2805,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                             .addComponent(jButtonPVT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonTabungan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonSumbangan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonCicilanHutang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonTunggakanPasca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonAlmamater, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -2827,7 +2827,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                     .addComponent(jTextFieldIDDAmountSimple, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                                     .addComponent(jTextFieldBukuAmountSimple, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                                     .addComponent(jTextFieldSeragamAmountSimple, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jTextFieldCicilanHutangAmountSimple, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldTunggakanPascaAmountSimple, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldAlmamaterAmountSimple, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2907,8 +2907,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                     .addComponent(jTextFieldSumbanganAmountSimple, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButtonCicilanHutang)
-                                    .addComponent(jTextFieldCicilanHutangAmountSimple, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButtonTunggakanPasca)
+                                    .addComponent(jTextFieldTunggakanPascaAmountSimple, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButtonAlmamater)
@@ -3630,12 +3630,12 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         new InputBeasiswaFrame(this.clerk, this.profil, this).setVisible(true);
     }//GEN-LAST:event_jButtonIBFActionPerformed
 
-    private void jButtonCicilanHutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCicilanHutangActionPerformed
+    private void jButtonTunggakanPascaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTunggakanPascaActionPerformed
         // TODO add your handling code here:
-        inputTransactionCicilanHutang =  new InputTransactionCicilanHutang(profil, this);
-        inputTransactionCicilanHutang.setVisible(true);
+        inputTransactionTunggakanPasca =  new InputTransactionTunggakanPasca(profil, this);
+        inputTransactionTunggakanPasca.setVisible(true);
         
-    }//GEN-LAST:event_jButtonCicilanHutangActionPerformed
+    }//GEN-LAST:event_jButtonTunggakanPascaActionPerformed
 
     private void jComboBoxTahun1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTahun1ActionPerformed
         // TODO add your handling code here:
@@ -3645,17 +3645,17 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTahun1PropertyChange
 
-    private void jTableCicilanHutangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTableCicilanHutangFocusLost
+    private void jTableTunggakanPascaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTableTunggakanPascaFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTableCicilanHutangFocusLost
+    }//GEN-LAST:event_jTableTunggakanPascaFocusLost
 
-    private void jTableCicilanHutangPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTableCicilanHutangPropertyChange
+    private void jTableTunggakanPascaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTableTunggakanPascaPropertyChange
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTableCicilanHutangPropertyChange
+    }//GEN-LAST:event_jTableTunggakanPascaPropertyChange
 
-    private void jButtonBayarCicilanHutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBayarCicilanHutangActionPerformed
+    private void jButtonBayarTunggakanPascaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBayarTunggakanPascaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonBayarCicilanHutangActionPerformed
+    }//GEN-LAST:event_jButtonBayarTunggakanPascaActionPerformed
 
     private void jTableAlmamaterPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTableAlmamaterPropertyChange
         // TODO add your handling code here:
@@ -3747,12 +3747,11 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAttribute;
     private javax.swing.JButton jButtonBayarAlmamater;
     private javax.swing.JButton jButtonBayarBuku;
-    private javax.swing.JButton jButtonBayarCicilanHutang;
     private javax.swing.JButton jButtonBayarIKS;
     private javax.swing.JButton jButtonBayarIPP;
     private javax.swing.JButton jButtonBayarSeragam;
+    private javax.swing.JButton jButtonBayarTunggakanPasca;
     private javax.swing.JButton jButtonBuku;
-    private javax.swing.JButton jButtonCicilanHutang;
     private javax.swing.JButton jButtonDialogCancel;
     private javax.swing.JButton jButtonDialogCancel1;
     private javax.swing.JButton jButtonIBF;
@@ -3775,6 +3774,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSubmit;
     private javax.swing.JButton jButtonSumbangan;
     private javax.swing.JButton jButtonTabungan;
+    private javax.swing.JButton jButtonTunggakanPasca;
     private javax.swing.JComboBox jComboBoxDialogIPSB;
     private javax.swing.JComboBox jComboBoxDialogIPSP;
     private javax.swing.JComboBox jComboBoxDialogIPSP1;
@@ -3789,12 +3789,12 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextFieldIDDSaldo2;
     private javax.swing.JFrame jFrameAlmamater;
     private javax.swing.JFrame jFrameBuku;
-    private javax.swing.JFrame jFrameCicilanHutang;
     private javax.swing.JFrame jFrameIDD;
     private javax.swing.JFrame jFrameIKS;
     private javax.swing.JFrame jFrameIPP;
     private javax.swing.JFrame jFrameIPSP;
     private javax.swing.JFrame jFrameSeragam;
+    private javax.swing.JFrame jFrameTunggakanPasca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3864,7 +3864,6 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
     private javax.swing.JPanel jPaneBuku;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanelAlmamater;
-    private javax.swing.JPanel jPanelCicilanHutang;
     private javax.swing.JPanel jPanelDialogAlmamater;
     private javax.swing.JPanel jPanelDialogBuku;
     private javax.swing.JPanel jPanelDialogIPP1;
@@ -3886,6 +3885,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelSeragam;
     private javax.swing.JPanel jPanelTransactionSummary1;
     private javax.swing.JPanel jPanelTransactionSummary2;
+    private javax.swing.JPanel jPanelTunggakanPasca;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -3902,7 +3902,6 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTableAlmamater;
     private javax.swing.JTable jTableBuku;
-    private javax.swing.JTable jTableCicilanHutang;
     private javax.swing.JTable jTableDialogAlmamater;
     private javax.swing.JTable jTableDialogBuku;
     private javax.swing.JTable jTableDialogSeragam;
@@ -3912,11 +3911,11 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
     private javax.swing.JTable jTableIPP2;
     private javax.swing.JTable jTableSeragam;
     private javax.swing.JTable jTableTunggakanAll;
+    private javax.swing.JTable jTableTunggakanPasca;
     private javax.swing.JTextArea jTextAreaIDDNote;
     public javax.swing.JFormattedTextField jTextFieldAlmamaterAmountSimple;
     public javax.swing.JFormattedTextField jTextFieldAttributeAmountSimple;
     public javax.swing.JFormattedTextField jTextFieldBukuAmountSimple;
-    public javax.swing.JFormattedTextField jTextFieldCicilanHutangAmountSimple;
     private javax.swing.JTextField jTextFieldIDDAmount;
     private javax.swing.JFormattedTextField jTextFieldIDDAmountSimple;
     private javax.swing.JTextField jTextFieldIDDTransactionName;
@@ -3956,13 +3955,14 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldTransactionSummaryNote;
     private javax.swing.JTextField jTextFieldTransactionSummaryNote1;
     private javax.swing.JTextField jTextFieldTransactionSummaryNote2;
+    public javax.swing.JFormattedTextField jTextFieldTunggakanPascaAmountSimple;
     private javax.swing.JToggleButton jToggleButtonLunas;
     private javax.swing.JTextField jUnpaidAlmamater;
     private javax.swing.JTextField jUnpaidBuku;
-    private javax.swing.JTextField jUnpaidCicilanHutang;
     private javax.swing.JTextField jUnpaidIKS;
     private javax.swing.JTextField jUnpaidIPP;
     private javax.swing.JTextField jUnpaidSeragam;
+    private javax.swing.JTextField jUnpaidTunggakanPasca;
     // End of variables declaration//GEN-END:variables
     
     private void continueToConfirmationDialog() {
@@ -4050,7 +4050,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                         ipspFromDB.debt -= iPSPTransactionDetails.get(j).amount;
                         /*----- BAGIAN CICILAN HUTANG -------*/
                         if(iPSPTransactionDetails.get(j).piutang)
-                            Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, iPSPTransactionDetails.get(j));
+                            Control.insertTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, iPSPTransactionDetails.get(j));
                     }
             
             ipspStoreToDB.id = ipspFromDB.id;
@@ -4160,7 +4160,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                         ipsbFromDB.debt -= iPSBTransactionDetails.get(j).amount;
                         /*----- BAGIAN CICILAN HUTANG -------*/
                         if(iPSBTransactionDetails.get(j).piutang)
-                            Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, iPSBTransactionDetails.get(j));
+                            Control.insertTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, iPSBTransactionDetails.get(j));
                     }
             
             ipsbStoreToDB.id = ipsbFromDB.id;
@@ -4199,7 +4199,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     //this.transactionSummary.totalAmount = (Float)jTableSeragam.getModel().getValueAt(i,3);
                     Control.updateTSummary(this.transactionSummary);
                     if(this.seragamTransactionDetail.piutang)
-                        Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, this.seragamTransactionDetail);
+                        Control.insertTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, this.seragamTransactionDetail);
                 }else{
                     System.out.println("Seragam transaction : nothing");
                 }
@@ -4225,7 +4225,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     //this.transactionSummary.totalAmount = (Float)jTableAlmamater.getModel().getValueAt(i,3);
                     Control.updateTSummary(this.transactionSummary);
                     if(this.almamaterTransactionDetail.piutang)
-                        Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, this.almamaterTransactionDetail);
+                        Control.insertTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, this.almamaterTransactionDetail);
                 }else{
                     System.out.println("Almamater transaction : nothing");
                 }
@@ -4252,7 +4252,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     //this.transactionSummary.totalAmount = (Float)jTableAttribute.getModel().getValueAt(i,3);
                     Control.updateTSummary(this.transactionSummary);
                     if(this.attributeTransactionDetail.piutang)
-                        Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, this.attributeTransactionDetail);
+                        Control.insertTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, this.attributeTransactionDetail);
                 }else{
                     System.out.println("Attribute transaction : nothing");
                 }
@@ -4278,7 +4278,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     //this.transactionSummary.totalAmount = (Float)jTableBuku.getModel().getValueAt(i,3);
                     Control.updateTSummary(this.transactionSummary);
                     if(this.bukuTransactionDetail.piutang)
-                        Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, this.bukuTransactionDetail);
+                        Control.insertTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, this.bukuTransactionDetail);
                 }else{
                     System.out.println("Buku transaction : nothing");
                 }
@@ -4305,7 +4305,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     //this.transactionSummary.totalAmount = (Float)jTableILL.getModel().getValueAt(i,3);
                     Control.updateTSummary(this.transactionSummary);
                     if(this.illTransactionDetail.piutang)
-                        Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, this.illTransactionDetail);
+                        Control.insertTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, this.illTransactionDetail);
                 }else{
                     System.out.println("ILL transaction : nothing");
                 }
@@ -4332,7 +4332,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     //this.transactionSummary.totalAmount = (Float)jTableTabungan.getModel().getValueAt(i,3);
                     Control.updateTSummary(this.transactionSummary);
                     if(this.tabunganTransactionDetail.piutang)
-                        Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, this.tabunganTransactionDetail);
+                        Control.insertTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, this.tabunganTransactionDetail);
                 }else{
                     System.out.println("Tabungan transaction : nothing");
                 }
@@ -4359,7 +4359,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     //this.transactionSummary.totalAmount = (Float)jTableSumbangan.getModel().getValueAt(i,3);
                     Control.updateTSummary(this.transactionSummary);
                     if(this.sumbanganTransactionDetail.piutang)
-                        Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, this.sumbanganTransactionDetail);
+                        Control.insertTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, this.sumbanganTransactionDetail);
                 }else{
                     System.out.println("Sumbangan transaction : nothing");
                 }
@@ -4475,7 +4475,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             //this.transactionSummary.totalAmount = totalAmount;
             Control.updateTSummary(transactionSummary);
             if(this.iUATransactionDetail.piutang)
-                        Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, this.iUATransactionDetail);
+                        Control.insertTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, this.iUATransactionDetail);
         }
         
         //PART IUAP
@@ -4495,7 +4495,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
 
                             iuapTransactionDetails.add(iuapTransactionDetail);
                             if(iuapTransactionDetail.piutang)
-                                 Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, iuapTransactionDetail);
+                                 Control.insertTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, iuapTransactionDetail);
                         }
                         if(inputTransactionIUAP.iDDAmounts.get(i) > 0f){
                             IUAPTransactionDetail iuapTransactionDetail = new IUAPTransactionDetail(iuapTDetailUUID, 
@@ -4572,82 +4572,82 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
 
             }
         }
-        //PART CicilanHutang
-        if(jTextFieldCicilanHutangAmountSimple.getValue() != null){
+        //PART TunggakanPasca
+        if(jTextFieldTunggakanPascaAmountSimple.getValue() != null){
             for(int i = 0 ; i < 12 ; i++){
-                cicilanHutangTDetailUUID = UUID.randomUUID();
-                if(cicilanHutangStoreToDB.entries.get(i)!=null){
-                    if(!inputTransactionCicilanHutang.isCicilanHutangEnough(cicilanHutangFromDB.entries.get(i).transactDetailIDs, cicilanHutangFromDB.entries.get(i).amount)){
-                    ArrayList<CicilanHutangTransactionDetail> cicilanHutangTransactionDetails = new ArrayList();
-                    if(inputTransactionCicilanHutang.cicilanHutangAmounts.get(i) > 0f){
-                        CicilanHutangTransactionDetail cicilanHutangTransactionDetail = new CicilanHutangTransactionDetail(cicilanHutangTDetailUUID, 
-                                                                                            cicilanHutangFromDB.id, 
+                tunggakanPascaTDetailUUID = UUID.randomUUID();
+                if(tunggakanPascaStoreToDB.entries.get(i)!=null){
+                    if(!inputTransactionTunggakanPasca.isTunggakanPascaEnough(tunggakanPascaFromDB.entries.get(i).transactDetailIDs, tunggakanPascaFromDB.entries.get(i).amount)){
+                    ArrayList<TunggakanPascaTransactionDetail> tunggakanPascaTransactionDetails = new ArrayList();
+                    if(inputTransactionTunggakanPasca.tunggakanPascaAmounts.get(i) > 0f){
+                        TunggakanPascaTransactionDetail tunggakanPascaTransactionDetail = new TunggakanPascaTransactionDetail(tunggakanPascaTDetailUUID, 
+                                                                                            tunggakanPascaFromDB.id, 
                                                                                             clerk.id, 
-                                                                                            transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (inputTransactionCicilanHutang.cicilanHutangAmounts.get(i)), TransactionDetail.PaymentMethod.CASH,
-                                                                                            jTableCicilanHutang.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                            transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (inputTransactionTunggakanPasca.tunggakanPascaAmounts.get(i)), TransactionDetail.PaymentMethod.CASH,
+                                                                                            jTableTunggakanPasca.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
 
-                        cicilanHutangTransactionDetails.add(cicilanHutangTransactionDetail);
+                        tunggakanPascaTransactionDetails.add(tunggakanPascaTransactionDetail);
                     }
-                    if(inputTransactionCicilanHutang.iDDAmounts.get(i) > 0f){
-                        CicilanHutangTransactionDetail cicilanHutangTransactionDetail = new CicilanHutangTransactionDetail(cicilanHutangTDetailUUID, 
-                                                                                            cicilanHutangFromDB.id, 
+                    if(inputTransactionTunggakanPasca.iDDAmounts.get(i) > 0f){
+                        TunggakanPascaTransactionDetail tunggakanPascaTransactionDetail = new TunggakanPascaTransactionDetail(tunggakanPascaTDetailUUID, 
+                                                                                            tunggakanPascaFromDB.id, 
                                                                                             clerk.id, 
-                                                                                            transactionSummary.id, profil.noInduk, profil.currentLevel.level1, inputTransactionCicilanHutang.iDDAmounts.get(i), TransactionDetail.PaymentMethod.IDD,
-                                                                                            jTableCicilanHutang.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
-                        cicilanHutangTransactionDetails.add(cicilanHutangTransactionDetail);
+                                                                                            transactionSummary.id, profil.noInduk, profil.currentLevel.level1, inputTransactionTunggakanPasca.iDDAmounts.get(i), TransactionDetail.PaymentMethod.IDD,
+                                                                                            jTableTunggakanPasca.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                        tunggakanPascaTransactionDetails.add(tunggakanPascaTransactionDetail);
                         // transactOUT IDD , kurangin IDD amount sama insert TDetail IDD
 
                         IDD.transactOut(profil, transactionSummary.id, iDDAmounts.get(i));
                         transactionSummary.note = "TIDAK_TUNAI";
                     }
-                    if(inputTransactionCicilanHutang.beasiswaAmounts.get(i) > 0f){
-                        if(Beasiswa.transactOut(profil, transactionSummary.id, inputTransactionCicilanHutang.beasiswaAmounts.get(i))){
-                        CicilanHutangTransactionDetail cicilanHutangTransactionDetail = new CicilanHutangTransactionDetail(cicilanHutangTDetailUUID, 
-                                                                                            cicilanHutangFromDB.id, 
+                    if(inputTransactionTunggakanPasca.beasiswaAmounts.get(i) > 0f){
+                        if(Beasiswa.transactOut(profil, transactionSummary.id, inputTransactionTunggakanPasca.beasiswaAmounts.get(i))){
+                        TunggakanPascaTransactionDetail tunggakanPascaTransactionDetail = new TunggakanPascaTransactionDetail(tunggakanPascaTDetailUUID, 
+                                                                                            tunggakanPascaFromDB.id, 
                                                                                             clerk.id, 
-                                                                                            transactionSummary.id, profil.noInduk, profil.currentLevel.level1, inputTransactionCicilanHutang.beasiswaAmounts.get(i), TransactionDetail.PaymentMethod.BEASISWA,
-                                                                                            jTableCicilanHutang.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
-                        cicilanHutangTransactionDetails.add(cicilanHutangTransactionDetail);
+                                                                                            transactionSummary.id, profil.noInduk, profil.currentLevel.level1, inputTransactionTunggakanPasca.beasiswaAmounts.get(i), TransactionDetail.PaymentMethod.BEASISWA,
+                                                                                            jTableTunggakanPasca.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                        tunggakanPascaTransactionDetails.add(tunggakanPascaTransactionDetail);
                         }
                         transactionSummary.note = "TIDAK_TUNAI";
                     }
-                    if(inputTransactionCicilanHutang.beasiswaCostAmounts.get(i) > 0f){
-                        CicilanHutangTransactionDetail cicilanHutangTransactionDetail = new CicilanHutangTransactionDetail(cicilanHutangTDetailUUID, 
-                                                                                            cicilanHutangFromDB.id, 
+                    if(inputTransactionTunggakanPasca.beasiswaCostAmounts.get(i) > 0f){
+                        TunggakanPascaTransactionDetail tunggakanPascaTransactionDetail = new TunggakanPascaTransactionDetail(tunggakanPascaTDetailUUID, 
+                                                                                            tunggakanPascaFromDB.id, 
                                                                                             clerk.id, 
-                                                                                            transactionSummary.id, profil.noInduk, profil.currentLevel.level1, inputTransactionCicilanHutang.beasiswaCostAmounts.get(i), TransactionDetail.PaymentMethod.BEASISWA_COST,
-                                                                                            jTableCicilanHutang.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
-                        cicilanHutangTransactionDetails.add(cicilanHutangTransactionDetail);
-                        BeasiswaCost.transactOut(profil, transactionSummary.id, inputTransactionCicilanHutang.beasiswaCostAmounts.get(i));
+                                                                                            transactionSummary.id, profil.noInduk, profil.currentLevel.level1, inputTransactionTunggakanPasca.beasiswaCostAmounts.get(i), TransactionDetail.PaymentMethod.BEASISWA_COST,
+                                                                                            jTableTunggakanPasca.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                        tunggakanPascaTransactionDetails.add(tunggakanPascaTransactionDetail);
+                        BeasiswaCost.transactOut(profil, transactionSummary.id, inputTransactionTunggakanPasca.beasiswaCostAmounts.get(i));
                         transactionSummary.note = "TIDAK_TUNAI";
                     }
-                    Control.insertTDetails(TransactionDetail.Tipe.CicilanHutangTransaction, cicilanHutangTransactionDetails);
-                    cicilanHutangTransactionDetails.clear();
-                    cicilanHutangTransactionDetails = new ArrayList(Control.selectTDetails(TransactionDetail.Tipe.CicilanHutangTransaction, TransactionDetail.uuidColName, false, cicilanHutangTDetailUUID.toString()));
-                    for(int j = 0 ; j < cicilanHutangTransactionDetails.size(); j++){
-                        cicilanHutangFromDB.entries.get(i).transactDetailIDs.add(cicilanHutangTransactionDetails.get(j).id);
-                        cicilanHutangFromDB.entries.get(i).debt -= cicilanHutangTransactionDetails.get(j).amount;
+                    Control.insertTDetails(TransactionDetail.Tipe.TunggakanPascaTransaction, tunggakanPascaTransactionDetails);
+                    tunggakanPascaTransactionDetails.clear();
+                    tunggakanPascaTransactionDetails = new ArrayList(Control.selectTDetails(TransactionDetail.Tipe.TunggakanPascaTransaction, TransactionDetail.uuidColName, false, tunggakanPascaTDetailUUID.toString()));
+                    for(int j = 0 ; j < tunggakanPascaTransactionDetails.size(); j++){
+                        tunggakanPascaFromDB.entries.get(i).transactDetailIDs.add(tunggakanPascaTransactionDetails.get(j).id);
+                        tunggakanPascaFromDB.entries.get(i).debt -= tunggakanPascaTransactionDetails.get(j).amount;
                     }
-    //                Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, cicilanHutangTransactionDetail);
-    //                cicilanHutangTransactionDetail = Control.selectTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, TransactionDetail.uuidColName, false, cicilanHutangTDetailUUID.toString());
-    //                cicilanHutangStoreToDB.entries.get(i).transactDetailIDs.add(cicilanHutangTransactionDetail.id);
+    //                Control.insertTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, tunggakanPascaTransactionDetail);
+    //                tunggakanPascaTransactionDetail = Control.selectTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, TransactionDetail.uuidColName, false, tunggakanPascaTDetailUUID.toString());
+    //                tunggakanPascaStoreToDB.entries.get(i).transactDetailIDs.add(tunggakanPascaTransactionDetail.id);
 
                     }
                 }
             }
-            cicilanHutangStoreToDB.id = cicilanHutangFromDB.id;
-            cicilanHutangStoreToDB.noInduk = cicilanHutangFromDB.noInduk;
-            cicilanHutangStoreToDB.chargedLevel = cicilanHutangFromDB.chargedLevel;
+            tunggakanPascaStoreToDB.id = tunggakanPascaFromDB.id;
+            tunggakanPascaStoreToDB.noInduk = tunggakanPascaFromDB.noInduk;
+            tunggakanPascaStoreToDB.chargedLevel = tunggakanPascaFromDB.chargedLevel;
 
-            for(int i = 0 ; i < cicilanHutangStoreToDB.entries.size(); i++){
-                if(cicilanHutangStoreToDB.entries.get(i) != null){
-                    cicilanHutangStoreToDB.entries.get(i).amount = cicilanHutangFromDB.entries.get(i).amount;
-                    cicilanHutangStoreToDB.entries.get(i).debt = cicilanHutangFromDB.entries.get(i).debt;
-                    cicilanHutangStoreToDB.entries.get(i).transactDetailIDs = cicilanHutangFromDB.entries.get(i).transactDetailIDs;
+            for(int i = 0 ; i < tunggakanPascaStoreToDB.entries.size(); i++){
+                if(tunggakanPascaStoreToDB.entries.get(i) != null){
+                    tunggakanPascaStoreToDB.entries.get(i).amount = tunggakanPascaFromDB.entries.get(i).amount;
+                    tunggakanPascaStoreToDB.entries.get(i).debt = tunggakanPascaFromDB.entries.get(i).debt;
+                    tunggakanPascaStoreToDB.entries.get(i).transactDetailIDs = tunggakanPascaFromDB.entries.get(i).transactDetailIDs;
 
                 }
             }
-            Control.updateIuran(Iuran.Tipe.CicilanHutang, cicilanHutangStoreToDB);
+            Control.updateIuran(Iuran.Tipe.TunggakanPasca, tunggakanPascaStoreToDB);
             this.transactionSummary.totalAmount = totalAmount;
             Control.updateTSummary(transactionSummary);
 
@@ -4669,7 +4669,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
 
                         iusTransactionDetails.add(iusTransactionDetail);
                         if(iusTransactionDetail.piutang)
-                                 Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, iusTransactionDetail);
+                                 Control.insertTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, iusTransactionDetail);
                     }
                     if(inputTransactionIUS.iDDAmounts.get(i) > 0f){
                         IUSTransactionDetail iusTransactionDetail = new IUSTransactionDetail(iusTDetailUUID, 
@@ -4762,7 +4762,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
 
                         iksTransactionDetails.add(iksTransactionDetail);
                         if(iksTransactionDetail.piutang)
-                                 Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, iksTransactionDetail);
+                                 Control.insertTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, iksTransactionDetail);
                     }
                     if(inputTransactionIKS.iDDAmounts.get(i) > 0f){
                         IKSTransactionDetail iksTransactionDetail = new IKSTransactionDetail(iksTDetailUUID, 
@@ -4855,7 +4855,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
 
                             pvtTransactionDetails.add(pvtTransactionDetail);
                             if(pvtTransactionDetail.piutang)
-                                 Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, pvtTransactionDetail);
+                                 Control.insertTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, pvtTransactionDetail);
                         }
                         if(inputTransactionPVT.iDDAmounts.get(i) > 0f){
                             PVTTransactionDetail pvtTransactionDetail = new PVTTransactionDetail(pvtTDetailUUID, 
@@ -4940,7 +4940,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
 
                             osisTransactionDetails.add(osisTransactionDetail);
                             if(osisTransactionDetail.piutang)
-                                 Control.insertTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, osisTransactionDetail);
+                                 Control.insertTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, osisTransactionDetail);
                         }
                         if(inputTransactionOSIS.iDDAmounts.get(i) > 0f){
                             OSISTransactionDetail osisTransactionDetail = new OSISTransactionDetail(osisTDetailUUID, 
@@ -5242,10 +5242,10 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             for(int i = 0 ; i<12; i++){
                 if(ippStoreToDB.entries.get(i) != null){
                     //totalAmount = totalAmount + (ippFromDB.entries.get(i).amount - iDDAmounts.get(i));
-                    totalAmount += iDDAmounts.get(i)+inputTransactionIPP.iPPAmounts.get(i)+inputTransactionIPP.beasiswaAmounts.get(i)+inputTransactionIPP.beasiswaCostAmounts.get(i)+inputTransactionIPP.bankAmounts.get(i);
+                    totalAmount += inputTransactionIPP.iDDAmounts.get(i)+inputTransactionIPP.iPPAmounts.get(i)+inputTransactionIPP.beasiswaAmounts.get(i)+inputTransactionIPP.beasiswaCostAmounts.get(i)+inputTransactionIPP.bankAmounts.get(i);
                     beasiswaRequest +=inputTransactionIPP.beasiswaAmounts.get(i);
                     beasiswaCostRequest += inputTransactionIPP.beasiswaCostAmounts.get(i);
-                    iddRequest += iDDAmounts.get(i);
+                    iddRequest += inputTransactionIPP.iDDAmounts.get(i);
                     bankRequest += inputTransactionIPP.bankAmounts.get(i);
                     if(ippStoreToDB.entries.get(i).amount != 0.0f)
                     transactionList.add(new Transaction(Iuran.Tipe.IPP, ippStoreToDB.entries.get(i).amount, "IPP Bulan ".concat(getMonthName(i+1))));
@@ -5304,22 +5304,22 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                 }
             }
         }        
-        //CicilanHutang PART
-        if(jTextFieldCicilanHutangAmountSimple.getValue() != null){
-            this.tableModelCicilanHutang = inputTransactionCicilanHutang.buildCicilanHutangSubmitTableModel(this.profil, this.tahunCicilanHutang.get(jComboBoxTahun.getSelectedIndex()));
-            jTableCicilanHutang.setModel(this.tableModelCicilanHutang);
-//            jTableCicilanHutang1.setModel(this.tableModelCicilanHutang);
+        //TunggakanPasca PART
+        if(jTextFieldTunggakanPascaAmountSimple.getValue() != null){
+            this.tableModelTunggakanPasca = inputTransactionTunggakanPasca.buildTunggakanPascaSubmitTableModel(this.profil, this.tahunTunggakanPasca.get(jComboBoxTahun.getSelectedIndex()));
+            jTableTunggakanPasca.setModel(this.tableModelTunggakanPasca);
+//            jTableTunggakanPasca1.setModel(this.tableModelTunggakanPasca);
             
             
             for(int i = 0 ; i<12; i++){
-                if(cicilanHutangStoreToDB.entries.get(i) != null){
-                    //totalAmount = totalAmount + (cicilanHutangFromDB.entries.get(i).amount - iDDAmounts.get(i));
-                    totalAmount += iDDAmounts.get(i)+inputTransactionCicilanHutang.cicilanHutangAmounts.get(i)+inputTransactionCicilanHutang.beasiswaAmounts.get(i)+inputTransactionCicilanHutang.beasiswaCostAmounts.get(i);
-                    beasiswaRequest +=inputTransactionCicilanHutang.beasiswaAmounts.get(i);
-                    beasiswaCostRequest += inputTransactionCicilanHutang.beasiswaCostAmounts.get(i);
-                    iddRequest += iDDAmounts.get(i);
-                    if(cicilanHutangStoreToDB.entries.get(i).amount != 0.0f)
-                    transactionList.add(new Transaction(Iuran.Tipe.CicilanHutang, cicilanHutangStoreToDB.entries.get(i).amount, "CicilanHutang Bulan ".concat(getMonthName(i+1))));
+                if(tunggakanPascaStoreToDB.entries.get(i) != null){
+                    //totalAmount = totalAmount + (tunggakanPascaFromDB.entries.get(i).amount - iDDAmounts.get(i));
+                    totalAmount += inputTransactionTunggakanPasca.iDDAmounts.get(i)+inputTransactionTunggakanPasca.tunggakanPascaAmounts.get(i)+inputTransactionTunggakanPasca.beasiswaAmounts.get(i)+inputTransactionTunggakanPasca.beasiswaCostAmounts.get(i);
+                    beasiswaRequest +=inputTransactionTunggakanPasca.beasiswaAmounts.get(i);
+                    beasiswaCostRequest += inputTransactionTunggakanPasca.beasiswaCostAmounts.get(i);
+                    iddRequest += inputTransactionTunggakanPasca.iDDAmounts.get(i);
+                    if(tunggakanPascaStoreToDB.entries.get(i).amount != 0.0f)
+                    transactionList.add(new Transaction(Iuran.Tipe.TunggakanPasca, tunggakanPascaStoreToDB.entries.get(i).amount, "TunggakanPasca Bulan ".concat(getMonthName(i+1))));
                 }
             }
             
@@ -5774,26 +5774,26 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
        return tahunComboBoxModel;
     }
     
-    private ComboBoxModel buildCicilanHutangtahunComboBoxModel(Profil profil) throws SQLException, KasirException {
-       Set<CicilanHutang> cicilanHutangFilters = new HashSet<>();
+    private ComboBoxModel buildTunggakanPascatahunComboBoxModel(Profil profil) throws SQLException, KasirException {
+       Set<TunggakanPasca> tunggakanPascaFilters = new HashSet<>();
        ArrayList<Entry> entries = new ArrayList();
-       cicilanHutangFilters.add(new CicilanHutang(profil.noInduk, null, entries));
-       Map<Long, CicilanHutang> searchResultMap = Control.exactFilterSelectIurans(Iuran.Tipe.CicilanHutang, cicilanHutangFilters);
-       this.tahunCicilanHutang = new ArrayList<>();
+       tunggakanPascaFilters.add(new TunggakanPasca(profil.noInduk, null, entries));
+       Map<Long, TunggakanPasca> searchResultMap = Control.exactFilterSelectIurans(Iuran.Tipe.TunggakanPasca, tunggakanPascaFilters);
+       this.tahunTunggakanPasca = new ArrayList<>();
        List<String> tahunAjaran = new ArrayList<>();
        Object[][] data = new Object[searchResultMap.size()][12];
        int i = 0;
        if(searchResultMap.size() > 0){
-        for(Map.Entry<Long, CicilanHutang> entry: searchResultMap.entrySet()){
+        for(Map.Entry<Long, TunggakanPasca> entry: searchResultMap.entrySet()){
             data[i][0]= entry.getValue().entries.get(i);
             data[i][1]= entry.getValue().entries.get(i).amount;
             
-            this.tahunCicilanHutang.add(entry.getValue().chargedLevel.tahun);
+            this.tahunTunggakanPasca.add(entry.getValue().chargedLevel.tahun);
             tahunAjaran.add(String.valueOf(entry.getValue().chargedLevel.tahun).concat(" - ").concat(String.valueOf(entry.getValue().chargedLevel.tahun+1)));
             i++;
         }
        }
-       calculateUnpaidCicilanHutang(profil, tahunCicilanHutang);
+       calculateUnpaidTunggakanPasca(profil, tahunTunggakanPasca);
        //== bikin tunggakan beans ===
        
        
@@ -6394,13 +6394,13 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
        //Cicilan Hutang
        temp = 0f;
        for(int j = 0 ; j < tahunAjaranInt.size(); j++){
-           if(tCicilanHutangs != null){
-            if(tCicilanHutangs.isEmpty()){
+           if(tTunggakanPascas != null){
+            if(tTunggakanPascas.isEmpty()){
                 data[15][j+1] = 0;
             }
-            for(int k = 0 ; k < tCicilanHutangs.size(); k++){
-                if(tCicilanHutangs.get(k).chargedLevel.tahun == tahunAjaranInt.get(j)){
-                    for(Entry e : tCicilanHutangs.get(k).entries){
+            for(int k = 0 ; k < tTunggakanPascas.size(); k++){
+                if(tTunggakanPascas.get(k).chargedLevel.tahun == tahunAjaranInt.get(j)){
+                    for(Entry e : tTunggakanPascas.get(k).entries){
                         temp += e.debt;
                     }
                     tungs.setValue(temp);
@@ -6415,9 +6415,9 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             }
            }
        }
-       if(tCicilanHutangs !=null){
-        for(int j = 0 ; j< tCicilanHutangs.size(); j++){
-            for(Entry e : tCicilanHutangs.get(j).entries){
+       if(tTunggakanPascas !=null){
+        for(int j = 0 ; j< tTunggakanPascas.size(); j++){
+            for(Entry e : tTunggakanPascas.get(j).entries){
                     temp += e.debt;
             }
         }
@@ -6636,11 +6636,11 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
        return retVals;
     }
     
-    private float calculateUnpaidCicilanHutang(Profil profil, List<Integer> tahuns) throws SQLException, KasirException {
-       Set<CicilanHutang> cicilanHutangFilters = new HashSet<>();
+    private float calculateUnpaidTunggakanPasca(Profil profil, List<Integer> tahuns) throws SQLException, KasirException {
+       Set<TunggakanPasca> tunggakanPascaFilters = new HashSet<>();
        float retVal = 0;
        ArrayList<Entry> entries = new ArrayList<>();
-       cicilanHutangFilters.clear();
+       tunggakanPascaFilters.clear();
        int targetMonth = Calendar.getInstance().get(Calendar.MONTH);
        int targetYear = Calendar.getInstance().get(Calendar.YEAR);
        if(targetMonth>5){//JULY - DECEMBER
@@ -6651,12 +6651,12 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
        }
        System.out.println("Month INT: "+Calendar.getInstance().get(Calendar.MONTH));
        for(int i = 0; i< tahuns.size(); i++){
-           cicilanHutangFilters.add(new CicilanHutang(profil.noInduk, new Level(null,null,null,tahuns.get(i)), entries));
+           tunggakanPascaFilters.add(new TunggakanPasca(profil.noInduk, new Level(null,null,null,tahuns.get(i)), entries));
            
         }
-       Map<Long, CicilanHutang> searchResultMap = Control.exactFilterSelectIurans(Iuran.Tipe.CicilanHutang, cicilanHutangFilters);
+       Map<Long, TunggakanPasca> searchResultMap = Control.exactFilterSelectIurans(Iuran.Tipe.TunggakanPasca, tunggakanPascaFilters);
         if(searchResultMap.size() > 0){
-            for(Map.Entry<Long, CicilanHutang> entry: searchResultMap.entrySet()){
+            for(Map.Entry<Long, TunggakanPasca> entry: searchResultMap.entrySet()){
                 for(int j =0 ; j< entry.getValue().entries.size(); j++){
                     if((entry.getValue().entries.get(j).transactDetailIDs.isEmpty()) 
                             && ((entry.getValue().chargedLevel.tahun < targetYear)? true:(entry.getValue().entries.get(j).period <= targetMonth))){
@@ -6664,7 +6664,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                     }else if(entry.getValue().entries.get(j).transactDetailIDs.size() > 0){
                         Float temp = 0f;
                         for(Long l : entry.getValue().entries.get(j).transactDetailIDs){
-                            temp += Control.selectTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, l).amount;
+                            temp += Control.selectTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, l).amount;
                         }
                         if(temp < entry.getValue().entries.get(j).amount){
                             retVal += temp;
@@ -6673,16 +6673,16 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                 }
             }
         }
-       unpaidCicilanHutang = retVal;
+       unpaidTunggakanPasca = retVal;
        return retVal;
     }
     
-    private ArrayList<TunggakanBean> calculateUnpaidCicilanHutangs(ArrayList<Profil> profils, List<Integer> tahuns) throws SQLException, KasirException {
-       Set<CicilanHutang> cicilanHutangFilters = new HashSet<>();
+    private ArrayList<TunggakanBean> calculateUnpaidTunggakanPascas(ArrayList<Profil> profils, List<Integer> tahuns) throws SQLException, KasirException {
+       Set<TunggakanPasca> tunggakanPascaFilters = new HashSet<>();
        ArrayList<TunggakanBean> retVals = new ArrayList<>();
        float retVal = 0;
        ArrayList<Entry> entries = new ArrayList<>();
-       cicilanHutangFilters.clear();
+       tunggakanPascaFilters.clear();
        int targetMonth = Calendar.getInstance().get(Calendar.MONTH);
        int targetYear = Calendar.getInstance().get(Calendar.YEAR);
        if(targetMonth>5){//JULY - DECEMBER
@@ -6696,46 +6696,46 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
        for(int i = 0; i< profils.size() ; i++){
            noInduks.add(profils.get(i).noInduk);
             for(int j = 0; j< tahuns.size(); j++){
-                cicilanHutangFilters.add(new CicilanHutang(profils.get(i).noInduk, new Level(null,null,null,tahuns.get(j)), entries));
+                tunggakanPascaFilters.add(new TunggakanPasca(profils.get(i).noInduk, new Level(null,null,null,tahuns.get(j)), entries));
 
             }
        }
-       List<CicilanHutang> test = Control.selectIurans(Iuran.Tipe.CicilanHutang, CicilanHutang.noIndukColName, false, noInduks.toArray(new String[0]));
+       List<TunggakanPasca> test = Control.selectIurans(Iuran.Tipe.TunggakanPasca, TunggakanPasca.noIndukColName, false, noInduks.toArray(new String[0]));
        
        for(int i = 0 ; i< test.size(); i++){
            TunggakanBean tb = new TunggakanBean();
            for(int j = 0 ; j < test.get(i).entries.size(); j++){
                if(j==0) retVal=0;
-               Float totalAmountCicilanHutangTDetails = 0f;
+               Float totalAmountTunggakanPascaTDetails = 0f;
                for(Long l : test.get(i).entries.get(j).transactDetailIDs){
-                   totalAmountCicilanHutangTDetails += Control.selectTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, l).amount;
+                   totalAmountTunggakanPascaTDetails += Control.selectTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, l).amount;
                }
-               if((totalAmountCicilanHutangTDetails < test.get(i).entries.get(j).amount)
+               if((totalAmountTunggakanPascaTDetails < test.get(i).entries.get(j).amount)
                    && ((test.get(i).chargedLevel.tahun < targetYear? true: (test.get(i).entries.get(j).period <= targetMonth)))){
                     
                             
-                            retVal += test.get(i).entries.get(j).amount-totalAmountCicilanHutangTDetails;
-                            tunggakanCicilanHutangString = tunggakanCicilanHutangString.concat("CicilanHutang Bulan ");
-                            tunggakanCicilanHutangString = tunggakanCicilanHutangString.concat(getMonthName(test.get(i).entries.get(j).period));
-                            tunggakanCicilanHutangString = tunggakanCicilanHutangString.concat(" "+String.valueOf(test.get(i).chargedLevel.tahun)+"/"+String.valueOf(1+test.get(i).chargedLevel.tahun));
-                            tunggakanCicilanHutangString = tunggakanCicilanHutangString.concat("\r\n");
+                            retVal += test.get(i).entries.get(j).amount-totalAmountTunggakanPascaTDetails;
+                            tunggakanTunggakanPascaString = tunggakanTunggakanPascaString.concat("TunggakanPasca Bulan ");
+                            tunggakanTunggakanPascaString = tunggakanTunggakanPascaString.concat(getMonthName(test.get(i).entries.get(j).period));
+                            tunggakanTunggakanPascaString = tunggakanTunggakanPascaString.concat(" "+String.valueOf(test.get(i).chargedLevel.tahun)+"/"+String.valueOf(1+test.get(i).chargedLevel.tahun));
+                            tunggakanTunggakanPascaString = tunggakanTunggakanPascaString.concat("\r\n");
                             
-                            tunggakanCicilanHutangEachAmountString = tunggakanCicilanHutangEachAmountString.concat("Rp ");
-                            tunggakanCicilanHutangEachAmountString = tunggakanCicilanHutangEachAmountString.concat(String.valueOf(Math.round(test.get(i).entries.get(j).amount-totalAmountCicilanHutangTDetails)));
-                            tunggakanCicilanHutangEachAmountString = tunggakanCicilanHutangEachAmountString.concat("\r\n");
+                            tunggakanTunggakanPascaEachAmountString = tunggakanTunggakanPascaEachAmountString.concat("Rp ");
+                            tunggakanTunggakanPascaEachAmountString = tunggakanTunggakanPascaEachAmountString.concat(String.valueOf(Math.round(test.get(i).entries.get(j).amount-totalAmountTunggakanPascaTDetails)));
+                            tunggakanTunggakanPascaEachAmountString = tunggakanTunggakanPascaEachAmountString.concat("\r\n");
                }
                 
                
                
            }
            tb.setProfil(profils.get(i));
-           tb.setTunggakanCicilanHutang(retVal);
+           tb.setTunggakanTunggakanPasca(retVal);
            retVals.add(tb);
            System.out.println(test.get(i).noInduk);
        }
-//       Map<Long, CicilanHutang> searchResultMap = Control.exactFilterSelectIurans(Iuran.Tipe.CicilanHutang, cicilanHutangFilters);
+//       Map<Long, TunggakanPasca> searchResultMap = Control.exactFilterSelectIurans(Iuran.Tipe.TunggakanPasca, tunggakanPascaFilters);
 //        if(searchResultMap.size() > 0){
-//            for(Map.Entry<Long, CicilanHutang> entry: searchResultMap.entrySet()){
+//            for(Map.Entry<Long, TunggakanPasca> entry: searchResultMap.entrySet()){
 //                for(int j =0 ; j< entry.getValue().entries.size(); j++){
 //                    if((entry.getValue().entries.get(j).transactDetailIDs.size() == 0) 
 //                            && ((entry.getValue().chargedLevel.tahun < targetYear)? true:(entry.getValue().entries.get(j).period <= targetMonth))){
@@ -6748,7 +6748,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
 //                }
 //            }
 //        }
-       unpaidCicilanHutang = retVal;
+       unpaidTunggakanPasca = retVal;
        return retVals;
     }
     
@@ -7531,9 +7531,9 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         tunggakanTotalAmount = "Rp ".concat(tunggakanTotalAmount);
         
         //TEMPORARY SET NULL PARAM_TUNGGAKAN A.K.A. tunggakanDoang tunggakanDoangAmount tunggakanTotalAmount
-        tunggakanDoang = "";
-        tunggakanDoangAmount ="";
-        tunggakanTotalAmount = "";
+//        tunggakanDoang = "";
+//        tunggakanDoangAmount ="";
+//        tunggakanTotalAmount = "";
         
         
         jasperParameter.put("Param_Tunggakan", tunggakanDoang);

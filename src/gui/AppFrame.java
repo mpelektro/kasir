@@ -64,7 +64,7 @@ public class AppFrame extends javax.swing.JFrame {
     private Long tSumID;
     private ArrayList<IPP> paramIPPs;
     private ArrayList<IUAP> paramIUAPs;
-    private ArrayList<CicilanHutang> paramCicilanHutangs;
+    private ArrayList<TunggakanPasca> paramTunggakanPascas;
     private IPSP paramIPSP;
     private PASB paramPASB;
     private ArrayList<IKS> paramIKSs;
@@ -83,9 +83,11 @@ public class AppFrame extends javax.swing.JFrame {
     private String tunggakanTotalAmount;
     private String tunggakanAkumulasiAmount;
     private String cicilanAkumulasi;
+    private String tunggakanBerjalanAmount;
     public Float totalDebt;
     public Float totalAkumulasi;
     public Float rekomendasiCicilanAkumulasi;
+    public Float tunggakanBerjalan;
     public boolean isPPDB = false;
     /* JasperReport is the object
     that holds our compiled jrxml file */
@@ -800,7 +802,7 @@ public class AppFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         //new InputTransactionFrameSeparated(this.clerk, this.profil).setVisible(true);
         //new InputTransactionFrameSeparated(this.clerk, this.profil, paramIPSP).setVisible(true);
-        new InputTransactionFrameSeparated(this, this.clerk, this.profil,paramIPPs, paramIPSP, paramSeragams, paramBukus, paramIKSs, paramILLs, paramIPSB, paramIUA, paramIUSs, paramOSISs, paramAttributes, paramPVTs, paramTabungans, paramSumbangans, paramPASB, paramCicilanHutangs, paramAlmamaters, paramIUAPs).setVisible(true);
+        new InputTransactionFrameSeparated(this, this.clerk, this.profil,paramIPPs, paramIPSP, paramSeragams, paramBukus, paramIKSs, paramILLs, paramIPSB, paramIUA, paramIUSs, paramOSISs, paramAttributes, paramPVTs, paramTabungans, paramSumbangans, paramPASB, paramTunggakanPascas, paramAlmamaters, paramIUAPs).setVisible(true);
     }//GEN-LAST:event_jButtonTransaksiActionPerformed
 
     private void jButtonSettingIuranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSettingIuranActionPerformed
@@ -932,7 +934,7 @@ public class AppFrame extends javax.swing.JFrame {
             TransactionSummary tsum = Control.selectTSummary(tSumID);
             Profil tempProfil = Control.selectProfil(tsum.noInduk);
             TableModel tm = buildTunggakanProfilTableModel(tempProfil);
-            InputTransactionFrameSeparated itfs = new InputTransactionFrameSeparated(this, this.clerk, tempProfil,paramIPPs, paramIPSP, paramSeragams, paramBukus, paramIKSs, paramILLs, paramIPSB, paramIUA, paramIUSs, paramOSISs, paramAttributes, paramPVTs, paramTabungans, paramSumbangans, paramPASB, paramCicilanHutangs, paramAlmamaters, paramIUAPs);
+            InputTransactionFrameSeparated itfs = new InputTransactionFrameSeparated(this, this.clerk, tempProfil,paramIPPs, paramIPSP, paramSeragams, paramBukus, paramIKSs, paramILLs, paramIPSB, paramIUA, paramIUSs, paramOSISs, paramAttributes, paramPVTs, paramTabungans, paramSumbangans, paramPASB, paramTunggakanPascas, paramAlmamaters, paramIUAPs);
             try {
                 itfs.printBuktiPembayaran(tsum, tm, totalDebt);
             } catch (JRException ex) {
@@ -1017,7 +1019,7 @@ public class AppFrame extends javax.swing.JFrame {
     
     private void jButtonBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBatalActionPerformed
         // TODO add your handling code here:
-       // new InputTransactionFrameSeparated(this, this.clerk, this.profil,paramIPPs, paramIPSP, paramSeragams, paramBukus, paramIKSs, paramILLs, paramIPSB, paramIUA, paramIUSs, paramOSISs, paramAttributes, paramPVTs, paramTabungans, paramSumbangans, paramPASB, paramCicilanHutangs, paramAlmamaters, paramIUAPs).setVisible(true);
+       // new InputTransactionFrameSeparated(this, this.clerk, this.profil,paramIPPs, paramIPSP, paramSeragams, paramBukus, paramIKSs, paramILLs, paramIPSB, paramIUA, paramIUSs, paramOSISs, paramAttributes, paramPVTs, paramTabungans, paramSumbangans, paramPASB, paramTunggakanPascas, paramAlmamaters, paramIUAPs).setVisible(true);
        int n = JOptionPane.showConfirmDialog(
                             this, "Yakin ingin mengubah status "+this.profil.biodata.nama+" menjadi BATAL?",
                             "KONFIRMASI",
@@ -1562,18 +1564,18 @@ public class AppFrame extends javax.swing.JFrame {
         }
        }
        
-       //CicilanHutang
+       //TunggakanPasca
+       rekomendasiCicilanAkumulasi = 0f;
+       List<TunggakanPasca> tunggakanTunggakanPascas = new ArrayList<TunggakanPasca>();
        
-       List<CicilanHutang> tunggakanCicilanHutangs = new ArrayList<CicilanHutang>();
-       
-       Set<CicilanHutang> cicilanHutangFilters = new HashSet<>();
-       cicilanHutangFilters.add(new CicilanHutang(profil.noInduk, null, null));
-       Map<Long, CicilanHutang> srmCicilanHutang =new HashMap<>();
-       srmCicilanHutang = Control.exactFilterSelectIurans(Iuran.Tipe.CicilanHutang, cicilanHutangFilters);
+       Set<TunggakanPasca> tunggakanPascaFilters = new HashSet<>();
+       tunggakanPascaFilters.add(new TunggakanPasca(profil.noInduk, null, null));
+       Map<Long, TunggakanPasca> srmTunggakanPasca =new HashMap<>();
+       srmTunggakanPasca = Control.exactFilterSelectIurans(Iuran.Tipe.TunggakanPasca, tunggakanPascaFilters);
        j = 0;
        targetIndex = 12;
-       if(srmCicilanHutang.size() > 0){
-        for(Map.Entry<Long, CicilanHutang> entry: srmCicilanHutang.entrySet()){
+       if(srmTunggakanPasca.size() > 0){
+        for(Map.Entry<Long, TunggakanPasca> entry: srmTunggakanPasca.entrySet()){
             Float temp = 0f;
             if(targetYear == entry.getValue().chargedLevel.tahun){
                 for(int i = 0 ; i < 12 ; i++){
@@ -1585,48 +1587,63 @@ public class AppFrame extends javax.swing.JFrame {
                     }
                 }
                 if(temp > 0){
-                    //tunggakans.add(new Tunggakan("CicilanHutang", temp, "CicilanHutang ".concat(getTahunAjaran(entry.getValue().chargedLevel.tahun))));
-                    tunggakans.set(0,new Tunggakan(tunggakans.get(0).tipeIuran, tunggakans.get(0).debt + temp, tunggakans.get(0).note, tunggakans.get(0).tahun));
-                    tunggakanCicilanHutangs.add(entry.getValue());
+                    tunggakans.add(new Tunggakan("TunggakanPasca", temp, "TunggakanPasca ".concat(getTahunAjaran(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
+                    tunggakanTunggakanPascas.add(entry.getValue());
                 }
             }else{
                 for(int i = 0 ; i < 12 ; i++){
                     temp += entry.getValue().entries.get(i).debt;
                 }
                 if(temp > 0){
-                    //tunggakans.add(new Tunggakan("CicilanHutang", temp, "CicilanHutang ".concat(getTahunAjaran(entry.getValue().chargedLevel.tahun))));
-                    tunggakans.set(0,new Tunggakan(tunggakans.get(0).tipeIuran, tunggakans.get(0).debt + temp, tunggakans.get(0).note, tunggakans.get(0).tahun));
-                    tunggakanCicilanHutangs.add(entry.getValue());
+                    tunggakans.add(new Tunggakan("TunggakanPasca", temp, "TunggakanPasca ".concat(getTahunAjaran(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
+                    tunggakanTunggakanPascas.add(entry.getValue());
                 }
             }
-            
+            rekomendasiCicilanAkumulasi = entry.getValue().entries.get(0).amount;
             temp = 0f;
             j++;
         }
-        paramCicilanHutangs = new ArrayList<>(tunggakanCicilanHutangs);
+        paramTunggakanPascas = new ArrayList<>(tunggakanTunggakanPascas);
        }
        
        JFormattedTextField debtFTF = new JFormattedTextField(0.0);
        debtFTF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("Rp #,##0"))));
        
+       int pembagi;
+       pembagi = 12;
+//       if(this.profil.currentLevel.level2.toString().equals("9") || this.profil.currentLevel.level2.toString().equals("12"))
+//           pembagi = 10;
+//       int bulanIni = Kalender.getInstance().get(Calendar.MONTH);
+       
        
        Object[][] data = new Object[tunggakans.size()][3];
        totalDebt= 0f;
        totalAkumulasi = 0f;
+       tunggakanBerjalan = 0f;
        for(int i = 0 ; i < tunggakans.size(); i++){
            data[i][0] = getModifiedNameTipeIuran(tunggakans.get(i).tipeIuran);
            debtFTF.setValue(tunggakans.get(i).debt);
            data[i][1] = debtFTF.getText();
            data[i][2] = tunggakans.get(i).note;
            totalDebt += tunggakans.get(i).debt;
-           if(tunggakans.get(i).tahun < profil.currentLevel.tahun)
+           if(tunggakans.get(i).tipeIuran.equals("TunggakanPasca")){
+           //if(tunggakans.get(i).tahun < profil.currentLevel.tahun)
                totalAkumulasi += tunggakans.get(i).debt;
+               
+           }else{
+               tunggakanBerjalan += tunggakans.get(i).debt;
+           }
+           
        }
        tunggakanTotalAmount = NumberFormat.getInstance().format(totalDebt);
        tunggakanAkumulasiAmount = NumberFormat.getInstance().format(totalAkumulasi);
-       rekomendasiCicilanAkumulasi = totalAkumulasi / 10;
+       tunggakanBerjalanAmount = NumberFormat.getInstance().format(tunggakanBerjalan);
+       
+       
+       //rekomendasiCicilanAkumulasi = totalAkumulasi / pembagi;
+       
        cicilanAkumulasi = NumberFormat.getInstance().format(rekomendasiCicilanAkumulasi);
-       selectedProfilTotalDebt.setText("Jumlah Tunggakan \t: Rp ".concat(tunggakanTotalAmount).concat("\r\n Total Akumulasi \t: Rp ").concat(tunggakanAkumulasiAmount).concat(" Rekomendasi Cicilan : Rp ").concat(cicilanAkumulasi));
+       selectedProfilTotalDebt.setText("Tunggakan Berjalan \t: Rp ".concat(tunggakanBerjalanAmount).concat("\r\n Tunggakan Pasca \t: Rp ").concat(tunggakanAkumulasiAmount).concat(" Rekomendasi Cicilan : Rp ").concat(cicilanAkumulasi));
        TableModel tm = new DefaultTableModel(data, columnNames){
            @Override
             public boolean isCellEditable(int row, int column) {
@@ -2088,17 +2105,19 @@ public class AppFrame extends javax.swing.JFrame {
         startDate.set(Kalender.HOUR_OF_DAY, 0);
         startDate.set(Kalender.MINUTE, 0);
         startDate.set(Kalender.SECOND,0);
+        //startDate.set(Kalender.DAY_OF_MONTH, 1);
         endDate = new Kalender(startDate);
         endDate.set(Kalender.HOUR_OF_DAY, 23);
         endDate.set(Kalender.MINUTE, 59);
         endDate.set(Kalender.SECOND, 59);
+       // endDate.set(Kalender.DAY_OF_MONTH, 31);
         List<BigDecimal> paramIPP = farmIPP(startDate,endDate,clerk);
         List<BigDecimal> paramAlmamater = farmAlmamater(startDate,endDate,clerk);
         List<BigDecimal> paramAttribute = farmAttribute(startDate,endDate,clerk);
         List<BigDecimal> paramBeasiswa = farmBeasiswa(startDate,endDate,clerk);
         List<BigDecimal> paramBeasiswaCost = farmBeasiswaCost(startDate,endDate,clerk);
         List<BigDecimal> paramBuku = farmBuku(startDate,endDate,clerk);
-        List<BigDecimal> paramCicilanHutang = farmCicilanHutang(startDate,endDate,clerk);
+        List<BigDecimal> paramTunggakanPasca = farmTunggakanPasca(startDate,endDate,clerk);
         List<BigDecimal> paramIDD = farmIDD(startDate,endDate,clerk);
         List<BigDecimal> paramIKS = farmIKS(startDate,endDate,clerk);
         List<BigDecimal> paramILL = farmILL(startDate,endDate,clerk);
@@ -2115,11 +2134,11 @@ public class AppFrame extends javax.swing.JFrame {
         List<BigDecimal> paramSumbangan = farmSumbangan(startDate,endDate,clerk);
         List<BigDecimal> paramTabungan = farmTabungan(startDate,endDate,clerk);
         
-        //paramCicilanHutang jadi Jumlah
+        //paramIPS jadi Jumlah
         for(int i = 0 ; i < 14; i++){
-            paramCicilanHutang.set(i, paramIPP.get(i).add(paramAlmamater.get(i)).add(paramAttribute.get(i)).add(paramBeasiswa.get(i)).add(paramBeasiswaCost.get(i)).add(paramBuku.get(i)
-            ).add(paramIDD.get(i)).add(paramIKS.get(i)).add(paramILL.get(i)).add(paramIPS.get(i)).add(paramIPSB.get(i)).add(paramIPSP.get(i)).add(paramIUA.get(i)).add(paramIUAP.get(i)).add(paramIUS.get(i)
-            ).add(paramOSIS.get(i)).add(paramPASB.get(i)).add(paramPVT.get(i)).add(paramSeragam.get(i)).add(paramSumbangan.get(i)).add(paramTabungan.get(i)));
+            paramIPS.set(i, paramIPP.get(i).add(paramAlmamater.get(i)).add(paramAttribute.get(i)).add(paramBeasiswa.get(i)).add(paramBuku.get(i)
+            ).add(paramIDD.get(i)).add(paramIKS.get(i)).add(paramILL.get(i)).add(paramIPSB.get(i)).add(paramIPSP.get(i)).add(paramIUA.get(i)).add(paramIUAP.get(i)).add(paramIUS.get(i)
+            ).add(paramOSIS.get(i)).add(paramPASB.get(i)).add(paramPVT.get(i)).add(paramSeragam.get(i)).add(paramTunggakanPasca.get(i)).add(paramTabungan.get(i)));
         }
         
         printout.PenerimaanKasir pb = new PenerimaanKasir();
@@ -2133,359 +2152,359 @@ public class AppFrame extends javax.swing.JFrame {
             jasperParameter.put("PARAM_ISREKAP", false);
         jasperParameter.put("PARAM_IDCLERK", this.clerk.id);
         jasperParameter.put("PARAM_TANGGAL_TRANSAKSI", startDate.toDate());
-        jasperParameter.put("PARAM_IPPSMP7", paramIPP.get(0));
-        jasperParameter.put("PARAM_IPPSMP8", paramIPP.get(1));
-        jasperParameter.put("PARAM_IPPSMP9", paramIPP.get(2));
-        jasperParameter.put("PARAM_IPPSMPTOTAL", paramIPP.get(3));
-        jasperParameter.put("PARAM_IPPSMPPASCA", paramIPP.get(4));
-        jasperParameter.put("PARAM_IPPSMA10", paramIPP.get(5));
-        jasperParameter.put("PARAM_IPPSMA11", paramIPP.get(6));
-        jasperParameter.put("PARAM_IPPSMA12", paramIPP.get(7));
-        jasperParameter.put("PARAM_IPPSMATOTAL", paramIPP.get(8));
-        jasperParameter.put("PARAM_IPPSMAPASCA", paramIPP.get(9));
-        jasperParameter.put("PARAM_IPPSMK10", paramIPP.get(10));
-        jasperParameter.put("PARAM_IPPSMK11", paramIPP.get(11));
-        jasperParameter.put("PARAM_IPPSMK12", paramIPP.get(12));
-        jasperParameter.put("PARAM_IPPSMKTOTAL", paramIPP.get(13));
-        jasperParameter.put("PARAM_IPPSMKPASCA", paramIPP.get(14));
+        jasperParameter.put("PARAM_IPPSMP7", paramIPP.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPPSMP8", paramIPP.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPPSMP9", paramIPP.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPPSMPTOTAL", paramIPP.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPPSMPPASCA", paramIPP.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPPSMA10", paramIPP.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPPSMA11", paramIPP.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPPSMA12", paramIPP.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPPSMATOTAL", paramIPP.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPPSMAPASCA", paramIPP.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPPSMK10", paramIPP.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPPSMK11", paramIPP.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPPSMK12", paramIPP.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPPSMKTOTAL", paramIPP.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPPSMKPASCA", paramIPP.get(14).divide(new BigDecimal(1000)));
         
         
-        jasperParameter.put("PARAM_AlmamaterSMP7", paramAlmamater.get(0));
-        jasperParameter.put("PARAM_AlmamaterSMP8", paramAlmamater.get(1));
-        jasperParameter.put("PARAM_AlmamaterSMP9", paramAlmamater.get(2));
-        jasperParameter.put("PARAM_AlmamaterSMPTOTAL", paramAlmamater.get(3));
-        jasperParameter.put("PARAM_AlmamaterSMPPASCA", paramAlmamater.get(4));
-        jasperParameter.put("PARAM_AlmamaterSMA10", paramAlmamater.get(5));
-        jasperParameter.put("PARAM_AlmamaterSMA11", paramAlmamater.get(6));
-        jasperParameter.put("PARAM_AlmamaterSMA12", paramAlmamater.get(7));
-        jasperParameter.put("PARAM_AlmamaterSMATOTAL", paramAlmamater.get(8));
-        jasperParameter.put("PARAM_AlmamaterSMAPASCA", paramAlmamater.get(9));
-        jasperParameter.put("PARAM_AlmamaterSMK10", paramAlmamater.get(10));
-        jasperParameter.put("PARAM_AlmamaterSMK11", paramAlmamater.get(11));
-        jasperParameter.put("PARAM_AlmamaterSMK12", paramAlmamater.get(12));
-        jasperParameter.put("PARAM_AlmamaterSMKTOTAL", paramAlmamater.get(13));
-        jasperParameter.put("PARAM_AlmamaterSMKPASCA", paramAlmamater.get(14));
+        jasperParameter.put("PARAM_AlmamaterSMP7", paramAlmamater.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AlmamaterSMP8", paramAlmamater.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AlmamaterSMP9", paramAlmamater.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AlmamaterSMPTOTAL", paramAlmamater.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AlmamaterSMPPASCA", paramAlmamater.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AlmamaterSMA10", paramAlmamater.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AlmamaterSMA11", paramAlmamater.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AlmamaterSMA12", paramAlmamater.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AlmamaterSMATOTAL", paramAlmamater.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AlmamaterSMAPASCA", paramAlmamater.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AlmamaterSMK10", paramAlmamater.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AlmamaterSMK11", paramAlmamater.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AlmamaterSMK12", paramAlmamater.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AlmamaterSMKTOTAL", paramAlmamater.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AlmamaterSMKPASCA", paramAlmamater.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_AttributeSMP7", paramAttribute.get(0));
-        jasperParameter.put("PARAM_AttributeSMP8", paramAttribute.get(1));
-        jasperParameter.put("PARAM_AttributeSMP9", paramAttribute.get(2));
-        jasperParameter.put("PARAM_AttributeSMPTOTAL", paramAttribute.get(3));
-        jasperParameter.put("PARAM_AttributeSMPPASCA", paramAttribute.get(4));
-        jasperParameter.put("PARAM_AttributeSMA10", paramAttribute.get(5));
-        jasperParameter.put("PARAM_AttributeSMA11", paramAttribute.get(6));
-        jasperParameter.put("PARAM_AttributeSMA12", paramAttribute.get(7));
-        jasperParameter.put("PARAM_AttributeSMATOTAL", paramAttribute.get(8));
-        jasperParameter.put("PARAM_AttributeSMAPASCA", paramAttribute.get(9));
-        jasperParameter.put("PARAM_AttributeSMK10", paramAttribute.get(10));
-        jasperParameter.put("PARAM_AttributeSMK11", paramAttribute.get(11));
-        jasperParameter.put("PARAM_AttributeSMK12", paramAttribute.get(12));
-        jasperParameter.put("PARAM_AttributeSMKTOTAL", paramAttribute.get(13));
-        jasperParameter.put("PARAM_AttributeSMKPASCA", paramAttribute.get(14));
+        jasperParameter.put("PARAM_AttributeSMP7", paramAttribute.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AttributeSMP8", paramAttribute.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AttributeSMP9", paramAttribute.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AttributeSMPTOTAL", paramAttribute.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AttributeSMPPASCA", paramAttribute.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AttributeSMA10", paramAttribute.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AttributeSMA11", paramAttribute.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AttributeSMA12", paramAttribute.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AttributeSMATOTAL", paramAttribute.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AttributeSMAPASCA", paramAttribute.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AttributeSMK10", paramAttribute.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AttributeSMK11", paramAttribute.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AttributeSMK12", paramAttribute.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AttributeSMKTOTAL", paramAttribute.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_AttributeSMKPASCA", paramAttribute.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_BeasiswaSMP7", paramBeasiswa.get(0));
-        jasperParameter.put("PARAM_BeasiswaSMP8", paramBeasiswa.get(1));
-        jasperParameter.put("PARAM_BeasiswaSMP9", paramBeasiswa.get(2));
-        jasperParameter.put("PARAM_BeasiswaSMPTOTAL", paramBeasiswa.get(3));
-        jasperParameter.put("PARAM_BeasiswaSMPPASCA", paramBeasiswa.get(4));
-        jasperParameter.put("PARAM_BeasiswaSMA10", paramBeasiswa.get(5));
-        jasperParameter.put("PARAM_BeasiswaSMA11", paramBeasiswa.get(6));
-        jasperParameter.put("PARAM_BeasiswaSMA12", paramBeasiswa.get(7));
-        jasperParameter.put("PARAM_BeasiswaSMATOTAL", paramBeasiswa.get(8));
-        jasperParameter.put("PARAM_BeasiswaSMAPASCA", paramBeasiswa.get(9));
-        jasperParameter.put("PARAM_BeasiswaSMK10", paramBeasiswa.get(10));
-        jasperParameter.put("PARAM_BeasiswaSMK11", paramBeasiswa.get(11));
-        jasperParameter.put("PARAM_BeasiswaSMK12", paramBeasiswa.get(12));
-        jasperParameter.put("PARAM_BeasiswaSMKTOTAL", paramBeasiswa.get(13));
-        jasperParameter.put("PARAM_BeasiswaSMKPASCA", paramBeasiswa.get(14));
+        jasperParameter.put("PARAM_BeasiswaSMP7", paramBeasiswa.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaSMP8", paramBeasiswa.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaSMP9", paramBeasiswa.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaSMPTOTAL", paramBeasiswa.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaSMPPASCA", paramBeasiswa.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaSMA10", paramBeasiswa.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaSMA11", paramBeasiswa.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaSMA12", paramBeasiswa.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaSMATOTAL", paramBeasiswa.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaSMAPASCA", paramBeasiswa.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaSMK10", paramBeasiswa.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaSMK11", paramBeasiswa.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaSMK12", paramBeasiswa.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaSMKTOTAL", paramBeasiswa.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaSMKPASCA", paramBeasiswa.get(14).divide(new BigDecimal(1000)));
         
         
-        jasperParameter.put("PARAM_BeasiswaCostSMP7", paramBeasiswaCost.get(0));
-        jasperParameter.put("PARAM_BeasiswaCostSMP8", paramBeasiswaCost.get(1));
-        jasperParameter.put("PARAM_BeasiswaCostSMP9", paramBeasiswaCost.get(2));
-        jasperParameter.put("PARAM_BeasiswaCostSMPTOTAL", paramBeasiswaCost.get(3));
-        jasperParameter.put("PARAM_BeasiswaCostSMPPASCA", paramBeasiswaCost.get(4));
-        jasperParameter.put("PARAM_BeasiswaCostSMA10", paramBeasiswaCost.get(5));
-        jasperParameter.put("PARAM_BeasiswaCostSMA11", paramBeasiswaCost.get(6));
-        jasperParameter.put("PARAM_BeasiswaCostSMA12", paramBeasiswaCost.get(7));
-        jasperParameter.put("PARAM_BeasiswaCostSMATOTAL", paramBeasiswaCost.get(8));
-        jasperParameter.put("PARAM_BeasiswaCostSMAPASCA", paramBeasiswaCost.get(9));
-        jasperParameter.put("PARAM_BeasiswaCostSMK10", paramBeasiswaCost.get(10));
-        jasperParameter.put("PARAM_BeasiswaCostSMK11", paramBeasiswaCost.get(11));
-        jasperParameter.put("PARAM_BeasiswaCostSMK12", paramBeasiswaCost.get(12));
-        jasperParameter.put("PARAM_BeasiswaCostSMKTOTAL", paramBeasiswaCost.get(13));
-        jasperParameter.put("PARAM_BeasiswaCostSMKPASCA", paramBeasiswaCost.get(14));
+        jasperParameter.put("PARAM_BeasiswaCostSMP7", paramBeasiswaCost.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaCostSMP8", paramBeasiswaCost.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaCostSMP9", paramBeasiswaCost.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaCostSMPTOTAL", paramBeasiswaCost.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaCostSMPPASCA", paramBeasiswaCost.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaCostSMA10", paramBeasiswaCost.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaCostSMA11", paramBeasiswaCost.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaCostSMA12", paramBeasiswaCost.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaCostSMATOTAL", paramBeasiswaCost.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaCostSMAPASCA", paramBeasiswaCost.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaCostSMK10", paramBeasiswaCost.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaCostSMK11", paramBeasiswaCost.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaCostSMK12", paramBeasiswaCost.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaCostSMKTOTAL", paramBeasiswaCost.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BeasiswaCostSMKPASCA", paramBeasiswaCost.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_BukuSMP7", paramBuku.get(0));
-        jasperParameter.put("PARAM_BukuSMP8", paramBuku.get(1));
-        jasperParameter.put("PARAM_BukuSMP9", paramBuku.get(2));
-        jasperParameter.put("PARAM_BukuSMPTOTAL", paramBuku.get(3));
-        jasperParameter.put("PARAM_BukuSMPPASCA", paramBuku.get(4));
-        jasperParameter.put("PARAM_BukuSMA10", paramBuku.get(5));
-        jasperParameter.put("PARAM_BukuSMA11", paramBuku.get(6));
-        jasperParameter.put("PARAM_BukuSMA12", paramBuku.get(7));
-        jasperParameter.put("PARAM_BukuSMATOTAL", paramBuku.get(8));
-        jasperParameter.put("PARAM_BukuSMAPASCA", paramBuku.get(9));
-        jasperParameter.put("PARAM_BukuSMK10", paramBuku.get(10));
-        jasperParameter.put("PARAM_BukuSMK11", paramBuku.get(11));
-        jasperParameter.put("PARAM_BukuSMK12", paramBuku.get(12));
-        jasperParameter.put("PARAM_BukuSMKTOTAL", paramBuku.get(13));
-        jasperParameter.put("PARAM_BukuSMKPASCA", paramBuku.get(14));
+        jasperParameter.put("PARAM_BukuSMP7", paramBuku.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BukuSMP8", paramBuku.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BukuSMP9", paramBuku.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BukuSMPTOTAL", paramBuku.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BukuSMPPASCA", paramBuku.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BukuSMA10", paramBuku.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BukuSMA11", paramBuku.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BukuSMA12", paramBuku.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BukuSMATOTAL", paramBuku.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BukuSMAPASCA", paramBuku.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BukuSMK10", paramBuku.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BukuSMK11", paramBuku.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BukuSMK12", paramBuku.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BukuSMKTOTAL", paramBuku.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_BukuSMKPASCA", paramBuku.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_CicilanHutangSMP7", paramCicilanHutang.get(0));
-        jasperParameter.put("PARAM_CicilanHutangSMP8", paramCicilanHutang.get(1));
-        jasperParameter.put("PARAM_CicilanHutangSMP9", paramCicilanHutang.get(2));
-        jasperParameter.put("PARAM_CicilanHutangSMPTOTAL", paramCicilanHutang.get(3));
-        jasperParameter.put("PARAM_CicilanHutangSMPPASCA", paramCicilanHutang.get(4));
-        jasperParameter.put("PARAM_CicilanHutangSMA10", paramCicilanHutang.get(5));
-        jasperParameter.put("PARAM_CicilanHutangSMA11", paramCicilanHutang.get(6));
-        jasperParameter.put("PARAM_CicilanHutangSMA12", paramCicilanHutang.get(7));
-        jasperParameter.put("PARAM_CicilanHutangSMATOTAL", paramCicilanHutang.get(8));
-        jasperParameter.put("PARAM_CicilanHutangSMAPASCA", paramCicilanHutang.get(9));
-        jasperParameter.put("PARAM_CicilanHutangSMK10", paramCicilanHutang.get(10));
-        jasperParameter.put("PARAM_CicilanHutangSMK11", paramCicilanHutang.get(11));
-        jasperParameter.put("PARAM_CicilanHutangSMK12", paramCicilanHutang.get(12));
-        jasperParameter.put("PARAM_CicilanHutangSMKTOTAL", paramCicilanHutang.get(13));
-        jasperParameter.put("PARAM_CicilanHutangSMKPASCA", paramCicilanHutang.get(14));
+        jasperParameter.put("PARAM_TunggakanPascaSMP7", paramTunggakanPasca.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TunggakanPascaSMP8", paramTunggakanPasca.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TunggakanPascaSMP9", paramTunggakanPasca.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TunggakanPascaSMPTOTAL", paramTunggakanPasca.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TunggakanPascaSMPPASCA", paramTunggakanPasca.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TunggakanPascaSMA10", paramTunggakanPasca.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TunggakanPascaSMA11", paramTunggakanPasca.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TunggakanPascaSMA12", paramTunggakanPasca.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TunggakanPascaSMATOTAL", paramTunggakanPasca.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TunggakanPascaSMAPASCA", paramTunggakanPasca.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TunggakanPascaSMK10", paramTunggakanPasca.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TunggakanPascaSMK11", paramTunggakanPasca.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TunggakanPascaSMK12", paramTunggakanPasca.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TunggakanPascaSMKTOTAL", paramTunggakanPasca.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TunggakanPascaSMKPASCA", paramTunggakanPasca.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_IDDSMP7", paramIDD.get(0));
-        jasperParameter.put("PARAM_IDDSMP8", paramIDD.get(1));
-        jasperParameter.put("PARAM_IDDSMP9", paramIDD.get(2));
-        jasperParameter.put("PARAM_IDDSMPTOTAL", paramIDD.get(3));
-        jasperParameter.put("PARAM_IDDSMPPASCA", paramIDD.get(4));
-        jasperParameter.put("PARAM_IDDSMA10", paramIDD.get(5));
-        jasperParameter.put("PARAM_IDDSMA11", paramIDD.get(6));
-        jasperParameter.put("PARAM_IDDSMA12", paramIDD.get(7));
-        jasperParameter.put("PARAM_IDDSMATOTAL", paramIDD.get(8));
-        jasperParameter.put("PARAM_IDDSMAPASCA", paramIDD.get(9));
-        jasperParameter.put("PARAM_IDDSMK10", paramIDD.get(10));
-        jasperParameter.put("PARAM_IDDSMK11", paramIDD.get(11));
-        jasperParameter.put("PARAM_IDDSMK12", paramIDD.get(12));
-        jasperParameter.put("PARAM_IDDSMKTOTAL", paramIDD.get(13));
-        jasperParameter.put("PARAM_IDDSMKPASCA", paramIDD.get(14));
+        jasperParameter.put("PARAM_IDDSMP7", paramIDD.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IDDSMP8", paramIDD.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IDDSMP9", paramIDD.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IDDSMPTOTAL", paramIDD.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IDDSMPPASCA", paramIDD.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IDDSMA10", paramIDD.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IDDSMA11", paramIDD.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IDDSMA12", paramIDD.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IDDSMATOTAL", paramIDD.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IDDSMAPASCA", paramIDD.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IDDSMK10", paramIDD.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IDDSMK11", paramIDD.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IDDSMK12", paramIDD.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IDDSMKTOTAL", paramIDD.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IDDSMKPASCA", paramIDD.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_IKSSMP7", paramIKS.get(0));
-        jasperParameter.put("PARAM_IKSSMP8", paramIKS.get(1));
-        jasperParameter.put("PARAM_IKSSMP9", paramIKS.get(2));
-        jasperParameter.put("PARAM_IKSSMPTOTAL", paramIKS.get(3));
-        jasperParameter.put("PARAM_IKSSMPPASCA", paramIKS.get(4));
-        jasperParameter.put("PARAM_IKSSMA10", paramIKS.get(5));
-        jasperParameter.put("PARAM_IKSSMA11", paramIKS.get(6));
-        jasperParameter.put("PARAM_IKSSMA12", paramIKS.get(7));
-        jasperParameter.put("PARAM_IKSSMATOTAL", paramIKS.get(8));
-        jasperParameter.put("PARAM_IKSSMAPASCA", paramIKS.get(9));
-        jasperParameter.put("PARAM_IKSSMK10", paramIKS.get(10));
-        jasperParameter.put("PARAM_IKSSMK11", paramIKS.get(11));
-        jasperParameter.put("PARAM_IKSSMK12", paramIKS.get(12));
-        jasperParameter.put("PARAM_IKSSMKTOTAL", paramIKS.get(13));
-        jasperParameter.put("PARAM_IKSSMKPASCA", paramIKS.get(14));
+        jasperParameter.put("PARAM_IKSSMP7", paramIKS.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IKSSMP8", paramIKS.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IKSSMP9", paramIKS.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IKSSMPTOTAL", paramIKS.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IKSSMPPASCA", paramIKS.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IKSSMA10", paramIKS.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IKSSMA11", paramIKS.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IKSSMA12", paramIKS.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IKSSMATOTAL", paramIKS.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IKSSMAPASCA", paramIKS.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IKSSMK10", paramIKS.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IKSSMK11", paramIKS.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IKSSMK12", paramIKS.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IKSSMKTOTAL", paramIKS.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IKSSMKPASCA", paramIKS.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_ILLSMP7", paramILL.get(0));
-        jasperParameter.put("PARAM_ILLSMP8", paramILL.get(1));
-        jasperParameter.put("PARAM_ILLSMP9", paramILL.get(2));
-        jasperParameter.put("PARAM_ILLSMPTOTAL", paramILL.get(3));
-        jasperParameter.put("PARAM_ILLSMPPASCA", paramILL.get(4));
-        jasperParameter.put("PARAM_ILLSMA10", paramILL.get(5));
-        jasperParameter.put("PARAM_ILLSMA11", paramILL.get(6));
-        jasperParameter.put("PARAM_ILLSMA12", paramILL.get(7));
-        jasperParameter.put("PARAM_ILLSMATOTAL", paramILL.get(8));
-        jasperParameter.put("PARAM_ILLSMAPASCA", paramILL.get(9));
-        jasperParameter.put("PARAM_ILLSMK10", paramILL.get(10));
-        jasperParameter.put("PARAM_ILLSMK11", paramILL.get(11));
-        jasperParameter.put("PARAM_ILLSMK12", paramILL.get(12));
-        jasperParameter.put("PARAM_ILLSMKTOTAL", paramILL.get(13));
-        jasperParameter.put("PARAM_ILLSMKPASCA", paramILL.get(14));
+        jasperParameter.put("PARAM_ILLSMP7", paramILL.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_ILLSMP8", paramILL.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_ILLSMP9", paramILL.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_ILLSMPTOTAL", paramILL.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_ILLSMPPASCA", paramILL.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_ILLSMA10", paramILL.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_ILLSMA11", paramILL.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_ILLSMA12", paramILL.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_ILLSMATOTAL", paramILL.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_ILLSMAPASCA", paramILL.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_ILLSMK10", paramILL.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_ILLSMK11", paramILL.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_ILLSMK12", paramILL.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_ILLSMKTOTAL", paramILL.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_ILLSMKPASCA", paramILL.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_IPSSMP7", paramIPS.get(0));
-        jasperParameter.put("PARAM_IPSSMP8", paramIPS.get(1));
-        jasperParameter.put("PARAM_IPSSMP9", paramIPS.get(2));
-        jasperParameter.put("PARAM_IPSSMPTOTAL", paramIPS.get(3));
-        jasperParameter.put("PARAM_IPSSMPPASCA", paramIPS.get(4));
-        jasperParameter.put("PARAM_IPSSMA10", paramIPS.get(5));
-        jasperParameter.put("PARAM_IPSSMA11", paramIPS.get(6));
-        jasperParameter.put("PARAM_IPSSMA12", paramIPS.get(7));
-        jasperParameter.put("PARAM_IPSSMATOTAL", paramIPS.get(8));
-        jasperParameter.put("PARAM_IPSSMAPASCA", paramIPS.get(9));
-        jasperParameter.put("PARAM_IPSSMK10", paramIPS.get(10));
-        jasperParameter.put("PARAM_IPSSMK11", paramIPS.get(11));
-        jasperParameter.put("PARAM_IPSSMK12", paramIPS.get(12));
-        jasperParameter.put("PARAM_IPSSMKTOTAL", paramIPS.get(13));
-        jasperParameter.put("PARAM_IPSSMKPASCA", paramIPS.get(14));
+        jasperParameter.put("PARAM_IPSSMP7", paramIPS.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSSMP8", paramIPS.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSSMP9", paramIPS.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSSMPTOTAL", paramIPS.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSSMPPASCA", paramIPS.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSSMA10", paramIPS.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSSMA11", paramIPS.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSSMA12", paramIPS.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSSMATOTAL", paramIPS.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSSMAPASCA", paramIPS.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSSMK10", paramIPS.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSSMK11", paramIPS.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSSMK12", paramIPS.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSSMKTOTAL", paramIPS.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSSMKPASCA", paramIPS.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_IPSBSMP7", paramIPSB.get(0));
-        jasperParameter.put("PARAM_IPSBSMP8", paramIPSB.get(1));
-        jasperParameter.put("PARAM_IPSBSMP9", paramIPSB.get(2));
-        jasperParameter.put("PARAM_IPSBSMPTOTAL", paramIPSB.get(3));
-        jasperParameter.put("PARAM_IPSBSMPPASCA", paramIPSB.get(4));
-        jasperParameter.put("PARAM_IPSBSMA10", paramIPSB.get(5));
-        jasperParameter.put("PARAM_IPSBSMA11", paramIPSB.get(6));
-        jasperParameter.put("PARAM_IPSBSMA12", paramIPSB.get(7));
-        jasperParameter.put("PARAM_IPSBSMATOTAL", paramIPSB.get(8));
-        jasperParameter.put("PARAM_IPSBSMAPASCA", paramIPSB.get(9));
-        jasperParameter.put("PARAM_IPSBSMK10", paramIPSB.get(10));
-        jasperParameter.put("PARAM_IPSBSMK11", paramIPSB.get(11));
-        jasperParameter.put("PARAM_IPSBSMK12", paramIPSB.get(12));
-        jasperParameter.put("PARAM_IPSBSMKTOTAL", paramIPSB.get(13));
-        jasperParameter.put("PARAM_IPSBSMKPASCA", paramIPSB.get(14));
+        jasperParameter.put("PARAM_IPSBSMP7", paramIPSB.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSBSMP8", paramIPSB.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSBSMP9", paramIPSB.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSBSMPTOTAL", paramIPSB.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSBSMPPASCA", paramIPSB.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSBSMA10", paramIPSB.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSBSMA11", paramIPSB.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSBSMA12", paramIPSB.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSBSMATOTAL", paramIPSB.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSBSMAPASCA", paramIPSB.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSBSMK10", paramIPSB.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSBSMK11", paramIPSB.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSBSMK12", paramIPSB.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSBSMKTOTAL", paramIPSB.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSBSMKPASCA", paramIPSB.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_IPSPSMP7", paramIPSP.get(0));
-        jasperParameter.put("PARAM_IPSPSMP8", paramIPSP.get(1));
-        jasperParameter.put("PARAM_IPSPSMP9", paramIPSP.get(2));
-        jasperParameter.put("PARAM_IPSPSMPTOTAL", paramIPSP.get(3));
-        jasperParameter.put("PARAM_IPSPSMPPASCA", paramIPSP.get(4));
-        jasperParameter.put("PARAM_IPSPSMA10", paramIPSP.get(5));
-        jasperParameter.put("PARAM_IPSPSMA11", paramIPSP.get(6));
-        jasperParameter.put("PARAM_IPSPSMA12", paramIPSP.get(7));
-        jasperParameter.put("PARAM_IPSPSMATOTAL", paramIPSP.get(8));
-        jasperParameter.put("PARAM_IPSPSMAPASCA", paramIPSP.get(9));
-        jasperParameter.put("PARAM_IPSPSMK10", paramIPSP.get(10));
-        jasperParameter.put("PARAM_IPSPSMK11", paramIPSP.get(11));
-        jasperParameter.put("PARAM_IPSPSMK12", paramIPSP.get(12));
-        jasperParameter.put("PARAM_IPSPSMKTOTAL", paramIPSP.get(13));
-        jasperParameter.put("PARAM_IPSPSMKPASCA", paramIPSP.get(14));
+        jasperParameter.put("PARAM_IPSPSMP7", paramIPSP.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSPSMP8", paramIPSP.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSPSMP9", paramIPSP.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSPSMPTOTAL", paramIPSP.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSPSMPPASCA", paramIPSP.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSPSMA10", paramIPSP.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSPSMA11", paramIPSP.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSPSMA12", paramIPSP.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSPSMATOTAL", paramIPSP.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSPSMAPASCA", paramIPSP.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSPSMK10", paramIPSP.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSPSMK11", paramIPSP.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSPSMK12", paramIPSP.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSPSMKTOTAL", paramIPSP.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IPSPSMKPASCA", paramIPSP.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_IUASMP7", paramIUA.get(0));
-        jasperParameter.put("PARAM_IUASMP8", paramIUA.get(1));
-        jasperParameter.put("PARAM_IUASMP9", paramIUA.get(2));
-        jasperParameter.put("PARAM_IUASMPTOTAL", paramIUA.get(3));
-        jasperParameter.put("PARAM_IUASMPPASCA", paramIUA.get(4));
-        jasperParameter.put("PARAM_IUASMA10", paramIUA.get(5));
-        jasperParameter.put("PARAM_IUASMA11", paramIUA.get(6));
-        jasperParameter.put("PARAM_IUASMA12", paramIUA.get(7));
-        jasperParameter.put("PARAM_IUASMATOTAL", paramIUA.get(8));
-        jasperParameter.put("PARAM_IUASMAPASCA", paramIUA.get(9));
-        jasperParameter.put("PARAM_IUASMK10", paramIUA.get(10));
-        jasperParameter.put("PARAM_IUASMK11", paramIUA.get(11));
-        jasperParameter.put("PARAM_IUASMK12", paramIUA.get(12));
-        jasperParameter.put("PARAM_IUASMKTOTAL", paramIUA.get(13));
-        jasperParameter.put("PARAM_IUASMKPASCA", paramIUA.get(14));
+        jasperParameter.put("PARAM_IUASMP7", paramIUA.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUASMP8", paramIUA.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUASMP9", paramIUA.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUASMPTOTAL", paramIUA.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUASMPPASCA", paramIUA.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUASMA10", paramIUA.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUASMA11", paramIUA.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUASMA12", paramIUA.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUASMATOTAL", paramIUA.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUASMAPASCA", paramIUA.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUASMK10", paramIUA.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUASMK11", paramIUA.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUASMK12", paramIUA.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUASMKTOTAL", paramIUA.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUASMKPASCA", paramIUA.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_IUAPSMP7", paramIUAP.get(0));
-        jasperParameter.put("PARAM_IUAPSMP8", paramIUAP.get(1));
-        jasperParameter.put("PARAM_IUAPSMP9", paramIUAP.get(2));
-        jasperParameter.put("PARAM_IUAPSMPTOTAL", paramIUAP.get(3));
-        jasperParameter.put("PARAM_IUAPSMPPASCA", paramIUAP.get(4));
-        jasperParameter.put("PARAM_IUAPSMA10", paramIUAP.get(5));
-        jasperParameter.put("PARAM_IUAPSMA11", paramIUAP.get(6));
-        jasperParameter.put("PARAM_IUAPSMA12", paramIUAP.get(7));
-        jasperParameter.put("PARAM_IUAPSMATOTAL", paramIUAP.get(8));
-        jasperParameter.put("PARAM_IUAPSMAPASCA", paramIUAP.get(9));
-        jasperParameter.put("PARAM_IUAPSMK10", paramIUAP.get(10));
-        jasperParameter.put("PARAM_IUAPSMK11", paramIUAP.get(11));
-        jasperParameter.put("PARAM_IUAPSMK12", paramIUAP.get(12));
-        jasperParameter.put("PARAM_IUAPSMKTOTAL", paramIUAP.get(13));
-        jasperParameter.put("PARAM_IUAPSMKPASCA", paramIUAP.get(14));
+        jasperParameter.put("PARAM_IUAPSMP7", paramIUAP.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUAPSMP8", paramIUAP.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUAPSMP9", paramIUAP.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUAPSMPTOTAL", paramIUAP.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUAPSMPPASCA", paramIUAP.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUAPSMA10", paramIUAP.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUAPSMA11", paramIUAP.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUAPSMA12", paramIUAP.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUAPSMATOTAL", paramIUAP.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUAPSMAPASCA", paramIUAP.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUAPSMK10", paramIUAP.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUAPSMK11", paramIUAP.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUAPSMK12", paramIUAP.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUAPSMKTOTAL", paramIUAP.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUAPSMKPASCA", paramIUAP.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_IUSSMP7", paramIUS.get(0));
-        jasperParameter.put("PARAM_IUSSMP8", paramIUS.get(1));
-        jasperParameter.put("PARAM_IUSSMP9", paramIUS.get(2));
-        jasperParameter.put("PARAM_IUSSMPTOTAL", paramIUS.get(3));
-        jasperParameter.put("PARAM_IUSSMPPASCA", paramIUS.get(4));
-        jasperParameter.put("PARAM_IUSSMA10", paramIUS.get(5));
-        jasperParameter.put("PARAM_IUSSMA11", paramIUS.get(6));
-        jasperParameter.put("PARAM_IUSSMA12", paramIUS.get(7));
-        jasperParameter.put("PARAM_IUSSMATOTAL", paramIUS.get(8));
-        jasperParameter.put("PARAM_IUSSMAPASCA", paramIUS.get(9));
-        jasperParameter.put("PARAM_IUSSMK10", paramIUS.get(10));
-        jasperParameter.put("PARAM_IUSSMK11", paramIUS.get(11));
-        jasperParameter.put("PARAM_IUSSMK12", paramIUS.get(12));
-        jasperParameter.put("PARAM_IUSSMKTOTAL", paramIUS.get(13));
-        jasperParameter.put("PARAM_IUSSMKPASCA", paramIUS.get(14));
+        jasperParameter.put("PARAM_IUSSMP7", paramIUS.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUSSMP8", paramIUS.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUSSMP9", paramIUS.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUSSMPTOTAL", paramIUS.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUSSMPPASCA", paramIUS.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUSSMA10", paramIUS.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUSSMA11", paramIUS.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUSSMA12", paramIUS.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUSSMATOTAL", paramIUS.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUSSMAPASCA", paramIUS.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUSSMK10", paramIUS.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUSSMK11", paramIUS.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUSSMK12", paramIUS.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUSSMKTOTAL", paramIUS.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_IUSSMKPASCA", paramIUS.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_OSISSMP7", paramOSIS.get(0));
-        jasperParameter.put("PARAM_OSISSMP8", paramOSIS.get(1));
-        jasperParameter.put("PARAM_OSISSMP9", paramOSIS.get(2));
-        jasperParameter.put("PARAM_OSISSMPTOTAL", paramOSIS.get(3));
-        jasperParameter.put("PARAM_OSISSMPPASCA", paramOSIS.get(4));
-        jasperParameter.put("PARAM_OSISSMA10", paramOSIS.get(5));
-        jasperParameter.put("PARAM_OSISSMA11", paramOSIS.get(6));
-        jasperParameter.put("PARAM_OSISSMA12", paramOSIS.get(7));
-        jasperParameter.put("PARAM_OSISSMATOTAL", paramOSIS.get(8));
-        jasperParameter.put("PARAM_OSISSMAPASCA", paramOSIS.get(9));
-        jasperParameter.put("PARAM_OSISSMK10", paramOSIS.get(10));
-        jasperParameter.put("PARAM_OSISSMK11", paramOSIS.get(11));
-        jasperParameter.put("PARAM_OSISSMK12", paramOSIS.get(12));
-        jasperParameter.put("PARAM_OSISSMKTOTAL", paramOSIS.get(13));
-        jasperParameter.put("PARAM_OSISSMKPASCA", paramOSIS.get(14));
+        jasperParameter.put("PARAM_OSISSMP7", paramOSIS.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_OSISSMP8", paramOSIS.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_OSISSMP9", paramOSIS.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_OSISSMPTOTAL", paramOSIS.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_OSISSMPPASCA", paramOSIS.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_OSISSMA10", paramOSIS.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_OSISSMA11", paramOSIS.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_OSISSMA12", paramOSIS.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_OSISSMATOTAL", paramOSIS.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_OSISSMAPASCA", paramOSIS.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_OSISSMK10", paramOSIS.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_OSISSMK11", paramOSIS.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_OSISSMK12", paramOSIS.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_OSISSMKTOTAL", paramOSIS.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_OSISSMKPASCA", paramOSIS.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_PASBSMP7", paramPASB.get(0));
-        jasperParameter.put("PARAM_PASBSMP8", paramPASB.get(1));
-        jasperParameter.put("PARAM_PASBSMP9", paramPASB.get(2));
-        jasperParameter.put("PARAM_PASBSMPTOTAL", paramPASB.get(3));
-        jasperParameter.put("PARAM_PASBSMPPASCA", paramPASB.get(4));
-        jasperParameter.put("PARAM_PASBSMA10", paramPASB.get(5));
-        jasperParameter.put("PARAM_PASBSMA11", paramPASB.get(6));
-        jasperParameter.put("PARAM_PASBSMA12", paramPASB.get(7));
-        jasperParameter.put("PARAM_PASBSMATOTAL", paramPASB.get(8));
-        jasperParameter.put("PARAM_PASBSMAPASCA", paramPASB.get(9));
-        jasperParameter.put("PARAM_PASBSMK10", paramPASB.get(10));
-        jasperParameter.put("PARAM_PASBSMK11", paramPASB.get(11));
-        jasperParameter.put("PARAM_PASBSMK12", paramPASB.get(12));
-        jasperParameter.put("PARAM_PASBSMKTOTAL", paramPASB.get(13));
-        jasperParameter.put("PARAM_PASBSMKPASCA", paramPASB.get(14));
+        jasperParameter.put("PARAM_PASBSMP7", paramPASB.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PASBSMP8", paramPASB.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PASBSMP9", paramPASB.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PASBSMPTOTAL", paramPASB.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PASBSMPPASCA", paramPASB.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PASBSMA10", paramPASB.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PASBSMA11", paramPASB.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PASBSMA12", paramPASB.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PASBSMATOTAL", paramPASB.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PASBSMAPASCA", paramPASB.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PASBSMK10", paramPASB.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PASBSMK11", paramPASB.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PASBSMK12", paramPASB.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PASBSMKTOTAL", paramPASB.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PASBSMKPASCA", paramPASB.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_PVTSMP7", paramPVT.get(0));
-        jasperParameter.put("PARAM_PVTSMP8", paramPVT.get(1));
-        jasperParameter.put("PARAM_PVTSMP9", paramPVT.get(2));
-        jasperParameter.put("PARAM_PVTSMPTOTAL", paramPVT.get(3));
-        jasperParameter.put("PARAM_PVTSMPPASCA", paramPVT.get(4));
-        jasperParameter.put("PARAM_PVTSMA10", paramPVT.get(5));
-        jasperParameter.put("PARAM_PVTSMA11", paramPVT.get(6));
-        jasperParameter.put("PARAM_PVTSMA12", paramPVT.get(7));
-        jasperParameter.put("PARAM_PVTSMATOTAL", paramPVT.get(8));
-        jasperParameter.put("PARAM_PVTSMAPASCA", paramPVT.get(9));
-        jasperParameter.put("PARAM_PVTSMK10", paramPVT.get(10));
-        jasperParameter.put("PARAM_PVTSMK11", paramPVT.get(11));
-        jasperParameter.put("PARAM_PVTSMK12", paramPVT.get(12));
-        jasperParameter.put("PARAM_PVTSMKTOTAL", paramPVT.get(13));
-        jasperParameter.put("PARAM_PVTSMKPASCA", paramPVT.get(14));
+        jasperParameter.put("PARAM_PVTSMP7", paramPVT.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PVTSMP8", paramPVT.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PVTSMP9", paramPVT.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PVTSMPTOTAL", paramPVT.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PVTSMPPASCA", paramPVT.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PVTSMA10", paramPVT.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PVTSMA11", paramPVT.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PVTSMA12", paramPVT.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PVTSMATOTAL", paramPVT.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PVTSMAPASCA", paramPVT.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PVTSMK10", paramPVT.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PVTSMK11", paramPVT.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PVTSMK12", paramPVT.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PVTSMKTOTAL", paramPVT.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_PVTSMKPASCA", paramPVT.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_SeragamSMP7", paramSeragam.get(0));
-        jasperParameter.put("PARAM_SeragamSMP8", paramSeragam.get(1));
-        jasperParameter.put("PARAM_SeragamSMP9", paramSeragam.get(2));
-        jasperParameter.put("PARAM_SeragamSMPTOTAL", paramSeragam.get(3));
-        jasperParameter.put("PARAM_SeragamSMPPASCA", paramSeragam.get(4));
-        jasperParameter.put("PARAM_SeragamSMA10", paramSeragam.get(5));
-        jasperParameter.put("PARAM_SeragamSMA11", paramSeragam.get(6));
-        jasperParameter.put("PARAM_SeragamSMA12", paramSeragam.get(7));
-        jasperParameter.put("PARAM_SeragamSMATOTAL", paramSeragam.get(8));
-        jasperParameter.put("PARAM_SeragamSMAPASCA", paramSeragam.get(9));
-        jasperParameter.put("PARAM_SeragamSMK10", paramSeragam.get(10));
-        jasperParameter.put("PARAM_SeragamSMK11", paramSeragam.get(11));
-        jasperParameter.put("PARAM_SeragamSMK12", paramSeragam.get(12));
-        jasperParameter.put("PARAM_SeragamSMKTOTAL", paramSeragam.get(13));
-        jasperParameter.put("PARAM_SeragamSMKPASCA", paramSeragam.get(14));
+        jasperParameter.put("PARAM_SeragamSMP7", paramSeragam.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SeragamSMP8", paramSeragam.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SeragamSMP9", paramSeragam.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SeragamSMPTOTAL", paramSeragam.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SeragamSMPPASCA", paramSeragam.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SeragamSMA10", paramSeragam.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SeragamSMA11", paramSeragam.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SeragamSMA12", paramSeragam.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SeragamSMATOTAL", paramSeragam.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SeragamSMAPASCA", paramSeragam.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SeragamSMK10", paramSeragam.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SeragamSMK11", paramSeragam.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SeragamSMK12", paramSeragam.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SeragamSMKTOTAL", paramSeragam.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SeragamSMKPASCA", paramSeragam.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_SumbanganSMP7", paramSumbangan.get(0));
-        jasperParameter.put("PARAM_SumbanganSMP8", paramSumbangan.get(1));
-        jasperParameter.put("PARAM_SumbanganSMP9", paramSumbangan.get(2));
-        jasperParameter.put("PARAM_SumbanganSMPTOTAL", paramSumbangan.get(3));
-        jasperParameter.put("PARAM_SumbanganSMPPASCA", paramSumbangan.get(4));
-        jasperParameter.put("PARAM_SumbanganSMA10", paramSumbangan.get(5));
-        jasperParameter.put("PARAM_SumbanganSMA11", paramSumbangan.get(6));
-        jasperParameter.put("PARAM_SumbanganSMA12", paramSumbangan.get(7));
-        jasperParameter.put("PARAM_SumbanganSMATOTAL", paramSumbangan.get(8));
-        jasperParameter.put("PARAM_SumbanganSMAPASCA", paramSumbangan.get(9));
-        jasperParameter.put("PARAM_SumbanganSMK10", paramSumbangan.get(10));
-        jasperParameter.put("PARAM_SumbanganSMK11", paramSumbangan.get(11));
-        jasperParameter.put("PARAM_SumbanganSMK12", paramSumbangan.get(12));
-        jasperParameter.put("PARAM_SumbanganSMKTOTAL", paramSumbangan.get(13));
-        jasperParameter.put("PARAM_SumbanganSMKPASCA", paramSumbangan.get(14));
+        jasperParameter.put("PARAM_SumbanganSMP7", paramSumbangan.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SumbanganSMP8", paramSumbangan.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SumbanganSMP9", paramSumbangan.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SumbanganSMPTOTAL", paramSumbangan.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SumbanganSMPPASCA", paramSumbangan.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SumbanganSMA10", paramSumbangan.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SumbanganSMA11", paramSumbangan.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SumbanganSMA12", paramSumbangan.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SumbanganSMATOTAL", paramSumbangan.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SumbanganSMAPASCA", paramSumbangan.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SumbanganSMK10", paramSumbangan.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SumbanganSMK11", paramSumbangan.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SumbanganSMK12", paramSumbangan.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SumbanganSMKTOTAL", paramSumbangan.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_SumbanganSMKPASCA", paramSumbangan.get(14).divide(new BigDecimal(1000)));
         
-        jasperParameter.put("PARAM_TabunganSMP7", paramTabungan.get(0));
-        jasperParameter.put("PARAM_TabunganSMP8", paramTabungan.get(1));
-        jasperParameter.put("PARAM_TabunganSMP9", paramTabungan.get(2));
-        jasperParameter.put("PARAM_TabunganSMPTOTAL", paramTabungan.get(3));
-        jasperParameter.put("PARAM_TabunganSMPPASCA", paramTabungan.get(4));
-        jasperParameter.put("PARAM_TabunganSMA10", paramTabungan.get(5));
-        jasperParameter.put("PARAM_TabunganSMA11", paramTabungan.get(6));
-        jasperParameter.put("PARAM_TabunganSMA12", paramTabungan.get(7));
-        jasperParameter.put("PARAM_TabunganSMATOTAL", paramTabungan.get(8));
-        jasperParameter.put("PARAM_TabunganSMAPASCA", paramTabungan.get(9));
-        jasperParameter.put("PARAM_TabunganSMK10", paramTabungan.get(10));
-        jasperParameter.put("PARAM_TabunganSMK11", paramTabungan.get(11));
-        jasperParameter.put("PARAM_TabunganSMK12", paramTabungan.get(12));
-        jasperParameter.put("PARAM_TabunganSMKTOTAL", paramTabungan.get(13));
-        jasperParameter.put("PARAM_TabunganSMKPASCA", paramTabungan.get(14));
+        jasperParameter.put("PARAM_TabunganSMP7", paramTabungan.get(0).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TabunganSMP8", paramTabungan.get(1).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TabunganSMP9", paramTabungan.get(2).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TabunganSMPTOTAL", paramTabungan.get(3).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TabunganSMPPASCA", paramTabungan.get(4).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TabunganSMA10", paramTabungan.get(5).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TabunganSMA11", paramTabungan.get(6).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TabunganSMA12", paramTabungan.get(7).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TabunganSMATOTAL", paramTabungan.get(8).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TabunganSMAPASCA", paramTabungan.get(9).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TabunganSMK10", paramTabungan.get(10).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TabunganSMK11", paramTabungan.get(11).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TabunganSMK12", paramTabungan.get(12).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TabunganSMKTOTAL", paramTabungan.get(13).divide(new BigDecimal(1000)));
+        jasperParameter.put("PARAM_TabunganSMKPASCA", paramTabungan.get(14).divide(new BigDecimal(1000)));
         
         
         String fileName = "C://printout//PrintOutRekapPenerimaan.jrxml";
@@ -4815,7 +4834,7 @@ public class AppFrame extends javax.swing.JFrame {
           return retVal;
       }
     
-    private ArrayList<BigDecimal> farmCicilanHutang(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
+    private ArrayList<BigDecimal> farmTunggakanPasca(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<BigDecimal> retVal = new ArrayList();
         printout.PenerimaanKasir pb = new PenerimaanKasir();
         Connection connection = pb.establishConnection(); 
@@ -4831,38 +4850,38 @@ public class AppFrame extends javax.swing.JFrame {
         BigDecimal amountSMAPasca=BigDecimal.ZERO;
         BigDecimal amountSMKPasca=BigDecimal.ZERO;
         BigDecimal amountSMPPasca=BigDecimal.ZERO;
-        List<TransactionDetail> cicilanhutangTransactionDetails = new ArrayList<>();
+        List<TransactionDetail> tunggakanPascaTransactionDetails = new ArrayList<>();
         
         Statement stmt = null;
         //STEP 4: Execute a query
         stmt = connection.createStatement();
         String sql;
         if(clerk!=null)
-            sql = "SELECT * FROM CicilanHutangTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
+            sql = "SELECT * FROM TunggakanPascaTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH' AND IDClerk="+clerk.id;
         else
-            sql = "SELECT * FROM CicilanHutangTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
+            sql = "SELECT * FROM TunggakanPascaTransaction WHERE CreateDate >'"+startDate.toString()+"' AND CreateDate <'"+endDate.toString()+"' AND PaymentMethod = 'CASH'";
         ResultSet rs = stmt.executeQuery(sql);
         //STEP 5: Extract data from result set
         while(rs.next()){
            //Retrieve by column name
            int id  = rs.getInt("ID");
-           cicilanhutangTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.CicilanHutangTransaction, id));
+           tunggakanPascaTransactionDetails.add(Control.selectTDetail(TransactionDetail.Tipe.TunggakanPascaTransaction, id));
         }
         Profil temp = new Profil();
-        for(int i=0;i<cicilanhutangTransactionDetails.size();i++){
-            temp = Control.selectProfil(cicilanhutangTransactionDetails.get(i).noIndukProfil);
+        for(int i=0;i<tunggakanPascaTransactionDetails.size();i++){
+            temp = Control.selectProfil(tunggakanPascaTransactionDetails.get(i).noIndukProfil);
             if(temp.tanggalLulus==null){
                 switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
+                              amountSMA10 = amountSMA10.add(BigDecimal.valueOf(tunggakanPascaTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
+                              amountSMA11 = amountSMA11.add(BigDecimal.valueOf(tunggakanPascaTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
+                              amountSMA12= amountSMA12.add(BigDecimal.valueOf(tunggakanPascaTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4871,13 +4890,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMP":
                       switch(temp.currentLevel.level2.toString()){
                           case "7":
-                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
+                              amountSMP7 = amountSMP7.add(BigDecimal.valueOf(tunggakanPascaTransactionDetails.get(i).amount));
                               break;
                           case "8":
-                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
+                              amountSMP8 = amountSMP8.add(BigDecimal.valueOf(tunggakanPascaTransactionDetails.get(i).amount));
                               break;
                           case "9":
-                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
+                              amountSMP9 = amountSMP9.add(BigDecimal.valueOf(tunggakanPascaTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4886,13 +4905,13 @@ public class AppFrame extends javax.swing.JFrame {
                   case "SMK":
                       switch(temp.currentLevel.level2.toString()){
                           case "10":
-                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
+                              amountSMK10 = amountSMK10.add(BigDecimal.valueOf(tunggakanPascaTransactionDetails.get(i).amount));
                               break;
                           case "11":
-                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
+                              amountSMK11 = amountSMK11.add(BigDecimal.valueOf(tunggakanPascaTransactionDetails.get(i).amount));
                               break;
                           case "12":
-                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
+                              amountSMK12 = amountSMK12.add(BigDecimal.valueOf(tunggakanPascaTransactionDetails.get(i).amount));
                               break;
                           default:
                               break;
@@ -4904,13 +4923,13 @@ public class AppFrame extends javax.swing.JFrame {
             }else{ // FOR PASCA
                  switch(temp.currentLevel.level1.toString()){
                   case "SMA" : 
-                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
+                      amountSMAPasca = amountSMAPasca.add(BigDecimal.valueOf(tunggakanPascaTransactionDetails.get(i).amount));
                       break;
                   case "SMP":
-                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
+                      amountSMPPasca = amountSMPPasca.add(BigDecimal.valueOf(tunggakanPascaTransactionDetails.get(i).amount));
                       break;
                   case "SMK":
-                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(cicilanhutangTransactionDetails.get(i).amount));
+                      amountSMKPasca = amountSMKPasca.add(BigDecimal.valueOf(tunggakanPascaTransactionDetails.get(i).amount));
                       break;
                   default : ;
                       break;

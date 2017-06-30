@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintoutBuktiPembayaran_IUAP" pageWidth="378" pageHeight="410" columnWidth="378" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="82dd9f8c-8229-4774-af0e-436a8ecbecbf">
-	<property name="ireport.zoom" value="2.0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintoutBuktiPembayaran_TunggakanPasca" pageWidth="378" pageHeight="410" columnWidth="378" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="82dd9f8c-8229-4774-af0e-436a8ecbecbf">
+	<property name="ireport.zoom" value="2.9282000000000017"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
@@ -23,22 +23,11 @@
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<parameter name="Param_IUAP_TransactionSummary_ID" class="java.lang.Integer">
+	<parameter name="Param_TunggakanPasca_TransactionSummary_ID" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
-     IUAPTransaction.`ID` AS IUAPTransaction_ID,
-     IUAPTransaction.`UUID` AS IUAPTransaction_UUID,
-     IUAPTransaction.`IDIuran` AS IUAPTransaction_IDIuran,
-     IUAPTransaction.`IDClerk` AS IUAPTransaction_IDClerk,
-     IUAPTransaction.`IDTransactionSummary` AS IUAPTransaction_IDTransactionSummary,
-     IUAPTransaction.`NomorInduk` AS IUAPTransaction_NomorInduk,
-     IUAPTransaction.`Amount` AS IUAPTransaction_Amount,
-     IUAPTransaction.`PaymentMethod` AS IUAPTransaction_PaymentMethod,
-     IUAPTransaction.`CreateDate` AS IUAPTransaction_CreateDate,
-     IUAPTransaction.`LastUpdateDate` AS IUAPTransaction_LastUpdateDate,
-     IUAPTransaction.`Note` AS IUAPTransaction_Note,
      TunggakanPascaTransaction.`ID` AS TunggakanPascaTransaction_ID,
      TunggakanPascaTransaction.`UUID` AS TunggakanPascaTransaction_UUID,
      TunggakanPascaTransaction.`IDIuran` AS TunggakanPascaTransaction_IDIuran,
@@ -54,21 +43,12 @@
      TunggakanPascaTransaction.`Settled` AS TunggakanPascaTransaction_Settled,
      TunggakanPascaTransaction.`Piutang` AS TunggakanPascaTransaction_Piutang
 FROM
-     `TunggakanPascaTransaction` TunggakanPascaTransaction RIGHT OUTER JOIN `IUAPTransaction` IUAPTransaction ON TunggakanPascaTransaction.`IDTransactionSummary` = IUAPTransaction.`IDTransactionSummary`
+     `TunggakanPascaTransaction` TunggakanPascaTransaction
 WHERE
-     IUAPTransaction.`IDTransactionSummary` = $P{Param_IUAP_TransactionSummary_ID} AND IUAPTransaction.`Piutang` = false]]>
+     TunggakanPascaTransaction.`IDTransactionSummary` = $P{Param_TunggakanPasca_TransactionSummary_ID}
+ORDER BY
+     TunggakanPascaTransaction_ID ASC]]>
 	</queryString>
-	<field name="IUAPTransaction_ID" class="java.math.BigInteger"/>
-	<field name="IUAPTransaction_UUID" class="java.lang.String"/>
-	<field name="IUAPTransaction_IDIuran" class="java.math.BigInteger"/>
-	<field name="IUAPTransaction_IDClerk" class="java.lang.Long"/>
-	<field name="IUAPTransaction_IDTransactionSummary" class="java.math.BigInteger"/>
-	<field name="IUAPTransaction_NomorInduk" class="java.lang.String"/>
-	<field name="IUAPTransaction_Amount" class="java.lang.Float"/>
-	<field name="IUAPTransaction_PaymentMethod" class="java.lang.String"/>
-	<field name="IUAPTransaction_CreateDate" class="java.sql.Timestamp"/>
-	<field name="IUAPTransaction_LastUpdateDate" class="java.sql.Timestamp"/>
-	<field name="IUAPTransaction_Note" class="java.lang.String"/>
 	<field name="TunggakanPascaTransaction_ID" class="java.math.BigInteger"/>
 	<field name="TunggakanPascaTransaction_UUID" class="java.lang.String"/>
 	<field name="TunggakanPascaTransaction_IDIuran" class="java.math.BigInteger"/>
@@ -83,8 +63,11 @@ WHERE
 	<field name="TunggakanPascaTransaction_Note" class="java.lang.String"/>
 	<field name="TunggakanPascaTransaction_Settled" class="java.lang.Boolean"/>
 	<field name="TunggakanPascaTransaction_Piutang" class="java.lang.Boolean"/>
-	<group name="IUAPTransaction_IDTransactionSummary">
-		<groupExpression><![CDATA[$F{IUAPTransaction_IDTransactionSummary}]]></groupExpression>
+	<variable name="TunggakanPascaTransaction_Amount_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{TunggakanPascaTransaction_Amount}]]></variableExpression>
+	</variable>
+	<group name="TunggakanPascaTransaction_IDTransactionSummary">
+		<groupExpression><![CDATA[$F{TunggakanPascaTransaction_IDTransactionSummary}]]></groupExpression>
 	</group>
 	<background>
 		<band splitType="Stretch"/>
@@ -96,28 +79,28 @@ WHERE
 				<textElement textAlignment="Justified">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{IUAPTransaction_Note}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{TunggakanPascaTransaction_Note}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="212" y="1" width="59" height="12" uuid="ead615a6-c61b-4777-9a01-87269ff07d0a"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{IUAPTransaction_PaymentMethod}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{TunggakanPascaTransaction_PaymentMethod}.equals("CASH")?"TUNAI":($F{TunggakanPascaTransaction_PaymentMethod}.equals("TRANSFER")?"BANK":($F{TunggakanPascaTransaction_PaymentMethod}.equals("IDD")?"DANA SISWA":($F{TunggakanPascaTransaction_PaymentMethod}.equals("BEASISWA")?"BEASISWA":"B. AKADEMIK")))]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd-MMM-yyyy">
 				<reportElement x="271" y="1" width="49" height="12" uuid="3f3fadea-f9db-406f-b79c-f6cda86e4318"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{IUAPTransaction_LastUpdateDate}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{TunggakanPascaTransaction_LastUpdateDate}]]></textFieldExpression>
 			</textField>
 			<textField pattern="Rp #,##0">
 				<reportElement x="320" y="1" width="58" height="12" uuid="571d225c-c943-477a-b20f-f0677a88668a"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{IUAPTransaction_Amount}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{TunggakanPascaTransaction_Amount}]]></textFieldExpression>
 			</textField>
 			<textField pattern=".">
 				<reportElement x="35" y="1" width="20" height="12" uuid="971b7658-886d-4ea2-b9aa-3e05f2057d14"/>
@@ -131,7 +114,7 @@ WHERE
 				<textElement>
 					<font size="8" isBold="false"/>
 				</textElement>
-				<text><![CDATA[U. Akhir]]></text>
+				<text><![CDATA[Pasca]]></text>
 			</staticText>
 		</band>
 	</detail>

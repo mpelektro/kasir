@@ -13,20 +13,20 @@ import pelajar.Level;
  *
  * @author kedra
  */
-public class CicilanHutang extends IuranPeriodic<CicilanHutang, CicilanHutangTransactionDetail>{
-    public static final String tableName = Tipe.CicilanHutang.toString();
+public class TunggakanPasca extends IuranPeriodic<TunggakanPasca, TunggakanPascaTransactionDetail>{
+    public static final String tableName = Tipe.TunggakanPasca.toString();
     
     public static final int periodInMonth = 1;
     
     //create filter & for insertion
-    public CicilanHutang(String noInduk, Level chargedLevel, ArrayList<Entry> entries){
+    public TunggakanPasca(String noInduk, Level chargedLevel, ArrayList<Entry> entries){
         super(noInduk, chargedLevel, entries);
     }
     
     //create from db
-    public CicilanHutang(){}
+    public TunggakanPasca(){}
     
-    public CicilanHutang(CicilanHutang cicilanhutang){
+    public TunggakanPasca(TunggakanPasca cicilanhutang){
         super(cicilanhutang);
     }
     
@@ -35,10 +35,10 @@ public class CicilanHutang extends IuranPeriodic<CicilanHutang, CicilanHutangTra
     }
     
     public Tipe getTipe(){
-        return Tipe.CicilanHutang;
+        return Tipe.TunggakanPasca;
     }
     public TransactionDetail.Tipe getTipeTDetail(){
-        return TransactionDetail.Tipe.CicilanHutangTransaction;
+        return TransactionDetail.Tipe.TunggakanPascaTransaction;
     }
     
     public static String toStringHeader(){
@@ -49,10 +49,10 @@ public class CicilanHutang extends IuranPeriodic<CicilanHutang, CicilanHutangTra
     }
     
     //==========================
-    public CicilanHutang dynFromResultSet(ResultSet rs, boolean onCallingObj) throws SQLException, KasirException{
+    public TunggakanPasca dynFromResultSet(ResultSet rs, boolean onCallingObj) throws SQLException, KasirException{
         assert !rs.isBeforeFirst();
         
-        CicilanHutang cicilanhutang = onCallingObj? this : new CicilanHutang();
+        TunggakanPasca cicilanhutang = onCallingObj? this : new TunggakanPasca();
         cicilanhutang.dynFromResultSet(rs);
         
         if(cicilanhutang.isDBValid())

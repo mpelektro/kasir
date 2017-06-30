@@ -11,7 +11,7 @@ public abstract class IuranPeriodic<IuranType extends IuranPeriodic, TDetailType
     
     public static final String amountColName = "Amount", debtColName = "Debt", IDTransactionDetailColName = "IDsTransactionDetail";
     
-    //public enum Tipe {IPP, IUS, IUAP, OSIS, IKS, PVT, CicilanHutang}
+    //public enum Tipe {IPP, IUS, IUAP, OSIS, IKS, PVT, TunggakanPasca}
     
     public ArrayList<Entry> entries;
     

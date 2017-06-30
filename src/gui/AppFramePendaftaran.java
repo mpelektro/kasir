@@ -46,7 +46,7 @@ public class AppFramePendaftaran extends javax.swing.JFrame {
     private Long tSumID;
     private ArrayList<IPP> paramIPPs;
     private ArrayList<IUAP> paramIUAPs;
-    private ArrayList<CicilanHutang> paramCicilanHutangs;
+    private ArrayList<TunggakanPasca> paramTunggakanPascas;
     private IPSP paramIPSP;
     private PASB paramPASB;
     private ArrayList<IKS> paramIKSs;
@@ -662,7 +662,7 @@ public class AppFramePendaftaran extends javax.swing.JFrame {
         // TODO add your handling code here:
         //new InputTransactionFrameSeparated(this.clerk, this.profil).setVisible(true);
         //new InputTransactionFrameSeparated(this.clerk, this.profil, paramIPSP).setVisible(true);
-        new InputTransactionFrameSeparated(this, this.clerk, this.profil,paramIPPs, paramIPSP, paramSeragams, paramBukus, paramIKSs, paramILLs, paramIPSB, paramIUA, paramIUSs, paramOSISs, paramAttributes, paramPVTs, paramTabungans, paramSumbangans, paramCicilanHutangs, paramAlmamaters, paramIUAPs).setVisible(true);
+        new InputTransactionFrameSeparated(this, this.clerk, this.profil,paramIPPs, paramIPSP, paramSeragams, paramBukus, paramIKSs, paramILLs, paramIPSB, paramIUA, paramIUSs, paramOSISs, paramAttributes, paramPVTs, paramTabungans, paramSumbangans, paramTunggakanPascas, paramAlmamaters, paramIUAPs).setVisible(true);
     }//GEN-LAST:event_jButtonTransaksiActionPerformed
 
     private void jButtonSettingIuranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSettingIuranActionPerformed
@@ -778,7 +778,7 @@ public class AppFramePendaftaran extends javax.swing.JFrame {
             TransactionSummary tsum = Control.selectTSummary(tSumID);
             Profil tempProfil = Control.selectProfil(tsum.noInduk);
             TableModel tm = buildTunggakanProfilTableModel(tempProfil);
-            InputTransactionFrameSeparated itfs = new InputTransactionFrameSeparated(this, this.clerk, tempProfil,paramIPPs, paramIPSP, paramSeragams, paramBukus, paramIKSs, paramILLs, paramIPSB, paramIUA, paramIUSs, paramOSISs, paramAttributes, paramPVTs, paramTabungans, paramSumbangans, paramCicilanHutangs, paramAlmamaters, paramIUAPs);
+            InputTransactionFrameSeparated itfs = new InputTransactionFrameSeparated(this, this.clerk, tempProfil,paramIPPs, paramIPSP, paramSeragams, paramBukus, paramIKSs, paramILLs, paramIPSB, paramIUA, paramIUSs, paramOSISs, paramAttributes, paramPVTs, paramTabungans, paramSumbangans, paramTunggakanPascas, paramAlmamaters, paramIUAPs);
             try {
                 itfs.printBuktiPembayaran(tsum, tm, totalDebt);
             } catch (JRException ex) {

@@ -645,7 +645,7 @@ public class Control {
                     
                     //for piutang
                     gltrs = GLTransRecordSet.create(type_no, tipe, lv1, pm, piutangTDetails, mapAccGLs);
-                    //gltrs = GLTransRecordSet.create(type_no, TransactionDetail.Tipe.CicilanHutangTransaction, lv1, TransactionDetail.PaymentMethod.CASH, piutangTDetails, mapAccGLs);
+                    //gltrs = GLTransRecordSet.create(type_no, TransactionDetail.Tipe.TunggakanPascaTransaction, lv1, TransactionDetail.PaymentMethod.CASH, piutangTDetails, mapAccGLs);
                     if(gltrs != null){
                         gltrsS.add(gltrs);
                         ++type_no;

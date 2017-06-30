@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintoutBuktiPembayaran" pageWidth="468" pageHeight="595" columnWidth="377" leftMargin="72" rightMargin="19" topMargin="20" bottomMargin="20" uuid="774f77e3-b2e7-4ced-9b65-8b6927fc08fc">
 	<property name="ireport.zoom" value="1.4641000000000013"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="48"/>
+	<property name="ireport.y" value="288"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -484,6 +484,16 @@ WHERE
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_BeasiswaCost.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
+		<band height="12" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="377" height="12" isRemoveLineWhenBlank="true" uuid="80967a56-3bcf-4cd7-8e62-0855833fe96d"/>
+				<subreportParameter name="Param_TunggakanPasca_TransactionSummary_ID">
+					<subreportParameterExpression><![CDATA[$P{Param_TransactionSummary_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintoutBuktiPembayaran_TunggakanPasca.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
 		<band height="29">
 			<textField isStretchWithOverflow="true">
 				<reportElement x="0" y="0" width="222" height="12" uuid="2ba7f026-a954-4d20-aeb4-b10e4de72fc7"/>
@@ -546,12 +556,12 @@ WHERE
 				</textElement>
 				<textFieldExpression><![CDATA[($P{Param_Tunggakan}.isEmpty())?"":"Total Tunggakan:"]]></textFieldExpression>
 			</textField>
-			<textField pattern="Rp #,##0">
+			<textField pattern="Rp #,##0" isBlankWhenNull="true">
 				<reportElement x="301" y="0" width="76" height="12" uuid="fb6a77e3-6a84-4fa2-b522-a4dffee8593e"/>
 				<textElement textAlignment="Right">
 					<font size="8" isBold="true" isUnderline="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{Param_Tunggakan_Total_Amount}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($P{Param_Tunggakan}.isEmpty())?"":$P{Param_Tunggakan_Total_Amount}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
