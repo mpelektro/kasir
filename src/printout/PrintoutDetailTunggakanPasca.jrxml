@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintoutDetailTunggakanPasca" pageWidth="468" pageHeight="595" columnWidth="377" leftMargin="72" rightMargin="19" topMargin="20" bottomMargin="20" uuid="774f77e3-b2e7-4ced-9b65-8b6927fc08fc">
+	<property name="ireport.zoom" value="1.4641000000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\printout\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Param_Profil_ID" class="java.lang.String">
+		<parameterDescription><![CDATA[Profil_ID from DetailTunggakanPasca]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Param_Clerk_ID" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     detailtunggakanpasca.`ID` AS detailtunggakanpasca_ID,
+     detailtunggakanpasca.`NomorInduk` AS detailtunggakanpasca_NomorInduk,
+     detailtunggakanpasca.`ChargedLevel` AS detailtunggakanpasca_ChargedLevel,
+     detailtunggakanpasca.`Amount` AS detailtunggakanpasca_Amount,
+     detailtunggakanpasca.`Debt` AS detailtunggakanpasca_Debt,
+     detailtunggakanpasca.`Note` AS detailtunggakanpasca_Note,
+     profil.`NomorInduk` AS profil_NomorInduk,
+     profil.`Nama` AS profil_Nama,
+     profil.`JenisKelamin` AS profil_JenisKelamin,
+     profil.`Agama` AS profil_Agama,
+     profil.`AsalSekolah` AS profil_AsalSekolah,
+     profil.`TanggalLahir` AS profil_TanggalLahir,
+     profil.`TempatLahir` AS profil_TempatLahir,
+     profil.`Alamat` AS profil_Alamat,
+     profil.`NamaAyah` AS profil_NamaAyah,
+     profil.`NamaIbu` AS profil_NamaIbu,
+     profil.`Telpon1` AS profil_Telpon1,
+     profil.`Telpon2` AS profil_Telpon2,
+     profil.`CurrentLevel` AS profil_CurrentLevel,
+     profil.`TanggalMasuk` AS profil_TanggalMasuk,
+     profil.`TanggalLulus` AS profil_TanggalLulus,
+     profil.`Gelombang` AS profil_Gelombang,
+     profil.`TotalIuran` AS profil_TotalIuran,
+     profil.`StatusPendaftaran` AS profil_StatusPendaftaran,
+     profil.`LastUpdateDate` AS profil_LastUpdateDate,
+     clerk.`ID` AS clerk_ID,
+     clerk.`NIP` AS clerk_NIP,
+     clerk.`Nama` AS clerk_Nama,
+     clerk.`Jabatan` AS clerk_Jabatan,
+     clerk.`Username` AS clerk_Username,
+     clerk.`Password` AS clerk_Password
+FROM
+     `profil` profil INNER JOIN `detailtunggakanpasca` detailtunggakanpasca ON profil.`NomorInduk` = detailtunggakanpasca.`NomorInduk`,
+     `clerk` clerk
+WHERE
+     detailtunggakanpasca.`NomorInduk` LIKE $P{Param_Profil_ID}
+ AND clerk.`ID` = $P{Param_Clerk_ID}
+]]>
+	</queryString>
+	<field name="detailtunggakanpasca_ID" class="java.math.BigInteger"/>
+	<field name="detailtunggakanpasca_NomorInduk" class="java.lang.String"/>
+	<field name="detailtunggakanpasca_ChargedLevel" class="java.lang.String"/>
+	<field name="detailtunggakanpasca_Amount" class="java.lang.Float"/>
+	<field name="detailtunggakanpasca_Debt" class="java.lang.Float"/>
+	<field name="detailtunggakanpasca_Note" class="java.lang.String"/>
+	<field name="profil_NomorInduk" class="java.lang.String"/>
+	<field name="profil_Nama" class="java.lang.String"/>
+	<field name="profil_JenisKelamin" class="java.lang.String"/>
+	<field name="profil_Agama" class="java.lang.String"/>
+	<field name="profil_AsalSekolah" class="java.lang.String"/>
+	<field name="profil_TanggalLahir" class="java.sql.Date"/>
+	<field name="profil_TempatLahir" class="java.lang.String"/>
+	<field name="profil_Alamat" class="java.lang.String"/>
+	<field name="profil_NamaAyah" class="java.lang.String"/>
+	<field name="profil_NamaIbu" class="java.lang.String"/>
+	<field name="profil_Telpon1" class="java.lang.String"/>
+	<field name="profil_Telpon2" class="java.lang.String"/>
+	<field name="profil_CurrentLevel" class="java.lang.String"/>
+	<field name="profil_TanggalMasuk" class="java.sql.Date"/>
+	<field name="profil_TanggalLulus" class="java.sql.Date"/>
+	<field name="profil_Gelombang" class="java.lang.String"/>
+	<field name="profil_TotalIuran" class="java.lang.Float"/>
+	<field name="profil_StatusPendaftaran" class="java.lang.String"/>
+	<field name="profil_LastUpdateDate" class="java.sql.Date"/>
+	<field name="clerk_ID" class="java.lang.Long"/>
+	<field name="clerk_NIP" class="java.lang.String"/>
+	<field name="clerk_Nama" class="java.lang.String"/>
+	<field name="clerk_Jabatan" class="java.lang.String"/>
+	<field name="clerk_Username" class="java.lang.String"/>
+	<field name="clerk_Password" class="java.lang.String"/>
+	<variable name="CURRENT_TIME" class="java.sql.Timestamp">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[new Date()]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="82" splitType="Prevent">
+			<staticText>
+				<reportElement x="73" y="0" width="304" height="14" uuid="a27c8882-2eaa-4a3d-a866-195aef56b331"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[YAYASAN DARMA SETIA KOSGORO]]></text>
+			</staticText>
+			<image>
+				<reportElement positionType="Float" x="0" y="0" width="73" height="70" uuid="c1881b03-7ecb-48fe-a326-012d1c5e8c14"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"SMA_Kosgoro_Logo.gif"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="73" y="14" width="304" height="14" uuid="501e5b25-b48b-4b27-b1c9-8a3258119b48"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Jalan Pajajaran No 217 A  Telp(0251)345168 - 312505"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="69" width="377" height="1" uuid="459395c7-57f4-464f-9308-16ca973265a4"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="58">
+			<staticText>
+				<reportElement x="0" y="30" width="73" height="12" uuid="14ea0555-4bc4-4d4a-b2ad-cd99b6378dbc"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[Orang Tua / Wali]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="2" y="0" width="375" height="18" uuid="3838b615-0879-4d1c-80b1-899d8d1b6e40"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="10" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DETAIL TUNGGAKAN PASCA"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="42" width="73" height="12" uuid="2d6ef4f4-a06d-4626-a87e-221a7595073d"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Dengan Rincian]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="18" width="6" height="12" uuid="d69c92e4-c080-4ae0-a520-db5276572edd"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="30" width="6" height="12" uuid="88f315fb-38c3-46bc-a01d-e7e13a3ece62"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="42" width="6" height="12" uuid="222aa1d1-3c86-46b7-aae3-c58778adaac5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="79" y="30" width="298" height="12" uuid="4d59af94-f7e5-4458-b349-c0cbc88fa67d"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{profil_NamaAyah}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="18" width="73" height="12" uuid="6d62bd1c-56e3-4581-8185-a3c21b18532b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[Peserta Didik]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="79" y="18" width="298" height="12" uuid="e3a7027f-116b-4307-b6a6-25c09d293a0d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{profil_Nama}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12">
+			<textField>
+				<reportElement x="227" y="0" width="88" height="12" uuid="4ca1c392-e688-4bcc-adfd-1d5aef53d906"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detailtunggakanpasca_ChargedLevel}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0">
+				<reportElement x="315" y="0" width="62" height="12" uuid="a7e8c77c-95ae-4a86-81bf-46505f302ce9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detailtunggakanpasca_Debt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="227" height="12" uuid="f56c3e6c-71df-4f02-9681-51bacdc11bc9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detailtunggakanpasca_Note}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="77" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="274" y="12" width="103" height="12" uuid="af89a23c-6b9d-4abe-b0c0-8ad97a9d883d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Kasir"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="0" y="12" width="152" height="12" uuid="23138c89-4a0b-4864-b278-2b6ebef34926"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Mengetahui Orang Tua / Wali"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="0" y="65" width="152" height="12" uuid="2d66aba9-6de9-41de-87f7-b4251bb66748"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(Tanda Tangan Dan Nama Jelas)"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2" y="65" width="150" height="1" uuid="fd0281ac-f70e-4c13-986a-ea455b1e2639"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="274" y="65" width="100" height="12" uuid="15ff714b-748d-46ba-98f0-c7a6e0779aa9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clerk_Nama}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>
