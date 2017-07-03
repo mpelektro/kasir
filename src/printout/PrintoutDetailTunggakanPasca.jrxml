@@ -33,76 +33,76 @@
 	<parameter name="Param_Clerk_ID" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT
-     detailtunggakanpasca.`ID` AS detailtunggakanpasca_ID,
-     detailtunggakanpasca.`NomorInduk` AS detailtunggakanpasca_NomorInduk,
-     detailtunggakanpasca.`ChargedLevel` AS detailtunggakanpasca_ChargedLevel,
-     detailtunggakanpasca.`Amount` AS detailtunggakanpasca_Amount,
-     detailtunggakanpasca.`Debt` AS detailtunggakanpasca_Debt,
-     detailtunggakanpasca.`Note` AS detailtunggakanpasca_Note,
-     profil.`NomorInduk` AS profil_NomorInduk,
-     profil.`Nama` AS profil_Nama,
-     profil.`JenisKelamin` AS profil_JenisKelamin,
-     profil.`Agama` AS profil_Agama,
-     profil.`AsalSekolah` AS profil_AsalSekolah,
-     profil.`TanggalLahir` AS profil_TanggalLahir,
-     profil.`TempatLahir` AS profil_TempatLahir,
-     profil.`Alamat` AS profil_Alamat,
-     profil.`NamaAyah` AS profil_NamaAyah,
-     profil.`NamaIbu` AS profil_NamaIbu,
-     profil.`Telpon1` AS profil_Telpon1,
-     profil.`Telpon2` AS profil_Telpon2,
-     profil.`CurrentLevel` AS profil_CurrentLevel,
-     profil.`TanggalMasuk` AS profil_TanggalMasuk,
-     profil.`TanggalLulus` AS profil_TanggalLulus,
-     profil.`Gelombang` AS profil_Gelombang,
-     profil.`TotalIuran` AS profil_TotalIuran,
-     profil.`StatusPendaftaran` AS profil_StatusPendaftaran,
-     profil.`LastUpdateDate` AS profil_LastUpdateDate,
-     clerk.`ID` AS clerk_ID,
-     clerk.`NIP` AS clerk_NIP,
-     clerk.`Nama` AS clerk_Nama,
-     clerk.`Jabatan` AS clerk_Jabatan,
-     clerk.`Username` AS clerk_Username,
-     clerk.`Password` AS clerk_Password
+     DetailTunggakanPasca.`ID` AS DetailTunggakanPasca_ID,
+     DetailTunggakanPasca.`NomorInduk` AS DetailTunggakanPasca_NomorInduk,
+     DetailTunggakanPasca.`ChargedLevel` AS DetailTunggakanPasca_ChargedLevel,
+     DetailTunggakanPasca.`Amount` AS DetailTunggakanPasca_Amount,
+     DetailTunggakanPasca.`Debt` AS DetailTunggakanPasca_Debt,
+     DetailTunggakanPasca.`Note` AS DetailTunggakanPasca_Note,
+     Profil.`NomorInduk` AS Profil_NomorInduk,
+     Profil.`Nama` AS Profil_Nama,
+     Profil.`JenisKelamin` AS Profil_JenisKelamin,
+     Profil.`Agama` AS Profil_Agama,
+     Profil.`AsalSekolah` AS Profil_AsalSekolah,
+     Profil.`TanggalLahir` AS Profil_TanggalLahir,
+     Profil.`TempatLahir` AS Profil_TempatLahir,
+     Profil.`Alamat` AS Profil_Alamat,
+     Profil.`NamaAyah` AS Profil_NamaAyah,
+     Profil.`NamaIbu` AS Profil_NamaIbu,
+     Profil.`Telpon1` AS Profil_Telpon1,
+     Profil.`Telpon2` AS Profil_Telpon2,
+     Profil.`CurrentLevel` AS Profil_CurrentLevel,
+     Profil.`TanggalMasuk` AS Profil_TanggalMasuk,
+     Profil.`TanggalLulus` AS Profil_TanggalLulus,
+     Profil.`Gelombang` AS Profil_Gelombang,
+     Profil.`TotalIuran` AS Profil_TotalIuran,
+     Profil.`StatusPendaftaran` AS Profil_StatusPendaftaran,
+     Profil.`LastUpdateDate` AS Profil_LastUpdateDate,
+     Clerk.`ID` AS Clerk_ID,
+     Clerk.`NIP` AS Clerk_NIP,
+     Clerk.`Nama` AS Clerk_Nama,
+     Clerk.`Jabatan` AS Clerk_Jabatan,
+     Clerk.`Username` AS Clerk_Username,
+     Clerk.`Password` AS Clerk_Password
 FROM
-     `profil` profil INNER JOIN `detailtunggakanpasca` detailtunggakanpasca ON profil.`NomorInduk` = detailtunggakanpasca.`NomorInduk`,
-     `clerk` clerk
+     `Profil` Profil INNER JOIN `DetailTunggakanPasca` DetailTunggakanPasca ON Profil.`NomorInduk` = DetailTunggakanPasca.`NomorInduk`,
+     `Clerk` Clerk
 WHERE
-     detailtunggakanpasca.`NomorInduk` LIKE $P{Param_Profil_ID}
- AND clerk.`ID` = $P{Param_Clerk_ID}
+     DetailTunggakanPasca.`NomorInduk` LIKE $P{Param_Profil_ID}
+ AND Clerk.`ID` = $P{Param_Clerk_ID}
 ]]>
 	</queryString>
-	<field name="detailtunggakanpasca_ID" class="java.math.BigInteger"/>
-	<field name="detailtunggakanpasca_NomorInduk" class="java.lang.String"/>
-	<field name="detailtunggakanpasca_ChargedLevel" class="java.lang.String"/>
-	<field name="detailtunggakanpasca_Amount" class="java.lang.Float"/>
-	<field name="detailtunggakanpasca_Debt" class="java.lang.Float"/>
-	<field name="detailtunggakanpasca_Note" class="java.lang.String"/>
-	<field name="profil_NomorInduk" class="java.lang.String"/>
-	<field name="profil_Nama" class="java.lang.String"/>
-	<field name="profil_JenisKelamin" class="java.lang.String"/>
-	<field name="profil_Agama" class="java.lang.String"/>
-	<field name="profil_AsalSekolah" class="java.lang.String"/>
-	<field name="profil_TanggalLahir" class="java.sql.Date"/>
-	<field name="profil_TempatLahir" class="java.lang.String"/>
-	<field name="profil_Alamat" class="java.lang.String"/>
-	<field name="profil_NamaAyah" class="java.lang.String"/>
-	<field name="profil_NamaIbu" class="java.lang.String"/>
-	<field name="profil_Telpon1" class="java.lang.String"/>
-	<field name="profil_Telpon2" class="java.lang.String"/>
-	<field name="profil_CurrentLevel" class="java.lang.String"/>
-	<field name="profil_TanggalMasuk" class="java.sql.Date"/>
-	<field name="profil_TanggalLulus" class="java.sql.Date"/>
-	<field name="profil_Gelombang" class="java.lang.String"/>
-	<field name="profil_TotalIuran" class="java.lang.Float"/>
-	<field name="profil_StatusPendaftaran" class="java.lang.String"/>
-	<field name="profil_LastUpdateDate" class="java.sql.Date"/>
-	<field name="clerk_ID" class="java.lang.Long"/>
-	<field name="clerk_NIP" class="java.lang.String"/>
-	<field name="clerk_Nama" class="java.lang.String"/>
-	<field name="clerk_Jabatan" class="java.lang.String"/>
-	<field name="clerk_Username" class="java.lang.String"/>
-	<field name="clerk_Password" class="java.lang.String"/>
+	<field name="DetailTunggakanPasca_ID" class="java.math.BigInteger"/>
+	<field name="DetailTunggakanPasca_NomorInduk" class="java.lang.String"/>
+	<field name="DetailTunggakanPasca_ChargedLevel" class="java.lang.String"/>
+	<field name="DetailTunggakanPasca_Amount" class="java.lang.Float"/>
+	<field name="DetailTunggakanPasca_Debt" class="java.lang.Float"/>
+	<field name="DetailTunggakanPasca_Note" class="java.lang.String"/>
+	<field name="Profil_NomorInduk" class="java.lang.String"/>
+	<field name="Profil_Nama" class="java.lang.String"/>
+	<field name="Profil_JenisKelamin" class="java.lang.String"/>
+	<field name="Profil_Agama" class="java.lang.String"/>
+	<field name="Profil_AsalSekolah" class="java.lang.String"/>
+	<field name="Profil_TanggalLahir" class="java.sql.Date"/>
+	<field name="Profil_TempatLahir" class="java.lang.String"/>
+	<field name="Profil_Alamat" class="java.lang.String"/>
+	<field name="Profil_NamaAyah" class="java.lang.String"/>
+	<field name="Profil_NamaIbu" class="java.lang.String"/>
+	<field name="Profil_Telpon1" class="java.lang.String"/>
+	<field name="Profil_Telpon2" class="java.lang.String"/>
+	<field name="Profil_CurrentLevel" class="java.lang.String"/>
+	<field name="Profil_TanggalMasuk" class="java.sql.Date"/>
+	<field name="Profil_TanggalLulus" class="java.sql.Date"/>
+	<field name="Profil_Gelombang" class="java.lang.String"/>
+	<field name="Profil_TotalIuran" class="java.lang.Float"/>
+	<field name="Profil_StatusPendaftaran" class="java.lang.String"/>
+	<field name="Profil_LastUpdateDate" class="java.sql.Date"/>
+	<field name="Clerk_ID" class="java.lang.Long"/>
+	<field name="Clerk_NIP" class="java.lang.String"/>
+	<field name="Clerk_Nama" class="java.lang.String"/>
+	<field name="Clerk_Jabatan" class="java.lang.String"/>
+	<field name="Clerk_Username" class="java.lang.String"/>
+	<field name="Clerk_Password" class="java.lang.String"/>
 	<variable name="CURRENT_TIME" class="java.sql.Timestamp">
 		<variableExpression><![CDATA[]]></variableExpression>
 		<initialValueExpression><![CDATA[new Date()]]></initialValueExpression>
@@ -187,7 +187,7 @@ WHERE
 				<textElement>
 					<font fontName="Times New Roman" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{profil_NamaAyah}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Profil_NamaAyah}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="18" width="73" height="12" uuid="6d62bd1c-56e3-4581-8185-a3c21b18532b"/>
@@ -201,7 +201,7 @@ WHERE
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{profil_Nama}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Profil_Nama}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
@@ -212,21 +212,21 @@ WHERE
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{detailtunggakanpasca_ChargedLevel}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{DetailTunggakanPasca_ChargedLevel}]]></textFieldExpression>
 			</textField>
 			<textField pattern="Rp #,##0">
 				<reportElement x="315" y="0" width="62" height="12" uuid="a7e8c77c-95ae-4a86-81bf-46505f302ce9"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{detailtunggakanpasca_Debt}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{DetailTunggakanPasca_Debt}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="0" width="227" height="12" uuid="f56c3e6c-71df-4f02-9681-51bacdc11bc9"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{detailtunggakanpasca_Note}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{DetailTunggakanPasca_Note}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -264,7 +264,7 @@ WHERE
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{clerk_Nama}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Clerk_Nama}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>
