@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutTunggakanPerKelas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="10" uuid="4fedb1e8-eac0-4299-bf7c-9759dca59f0c">
-	<property name="ireport.zoom" value="2.3579476910000023"/>
+	<property name="ireport.zoom" value="2.4200000000000013"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
@@ -26,79 +26,342 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\Master\\Documents\\NetBeansProjects\\Kasir7\\src\\printout\\"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="CurrentLevel" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CurrentDate" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[]]>
+		<![CDATA[SELECT
+     IPP.`NomorInduk` AS IPP_NomorInduk,
+     IPP.`ChargedLevel` AS IPP_ChargedLevel,
+     IPP.`Debt1` AS IPP_Debt1,
+     IPP.`Debt2` AS IPP_Debt2,
+     IPP.`Debt3` AS IPP_Debt3,
+     IPP.`Debt4` AS IPP_Debt4,
+     IPP.`Debt5` AS IPP_Debt5,
+     IPP.`Debt6` AS IPP_Debt6,
+     IPP.`Debt7` AS IPP_Debt7,
+     IPP.`Debt8` AS IPP_Debt8,
+     IPP.`Debt9` AS IPP_Debt9,
+     IPP.`Debt10` AS IPP_Debt10,
+     IPP.`Debt11` AS IPP_Debt11,
+     IPP.`Debt12` AS IPP_Debt12,
+     Profil.`NomorInduk` AS Profil_NomorInduk,
+     Profil.`Nama` AS Profil_Nama,
+     Profil.`JenisKelamin` AS Profil_JenisKelamin,
+     Profil.`Agama` AS Profil_Agama,
+     Profil.`AsalSekolah` AS Profil_AsalSekolah,
+     Profil.`TanggalLahir` AS Profil_TanggalLahir,
+     Profil.`TempatLahir` AS Profil_TempatLahir,
+     Profil.`Alamat` AS Profil_Alamat,
+     Profil.`NamaAyah` AS Profil_NamaAyah,
+     Profil.`NamaIbu` AS Profil_NamaIbu,
+     Profil.`Telpon1` AS Profil_Telpon1,
+     Profil.`Telpon2` AS Profil_Telpon2,
+     Profil.`CurrentLevel` AS Profil_CurrentLevel,
+     Profil.`TanggalMasuk` AS Profil_TanggalMasuk,
+     Profil.`TanggalLulus` AS Profil_TanggalLulus,
+     Profil.`Gelombang` AS Profil_Gelombang,
+     Profil.`TotalIuran` AS Profil_TotalIuran,
+     Profil.`StatusPendaftaran` AS Profil_StatusPendaftaran,
+     Profil.`LastUpdateDate` AS Profil_LastUpdateDate,
+     TunggakanPasca.`NomorInduk` AS TunggakanPasca_NomorInduk,
+     TunggakanPasca.`ChargedLevel` AS TunggakanPasca_ChargedLevel,
+     TunggakanPasca.`Debt1` AS TunggakanPasca_Debt1,
+     TunggakanPasca.`Debt2` AS TunggakanPasca_Debt2,
+     TunggakanPasca.`Debt3` AS TunggakanPasca_Debt3,
+     TunggakanPasca.`Debt4` AS TunggakanPasca_Debt4,
+     TunggakanPasca.`Debt5` AS TunggakanPasca_Debt5,
+     TunggakanPasca.`Debt6` AS TunggakanPasca_Debt6,
+     TunggakanPasca.`Debt7` AS TunggakanPasca_Debt7,
+     TunggakanPasca.`Debt8` AS TunggakanPasca_Debt8,
+     TunggakanPasca.`Debt10` AS TunggakanPasca_Debt10,
+     TunggakanPasca.`Debt11` AS TunggakanPasca_Debt11,
+     TunggakanPasca.`Debt12` AS TunggakanPasca_Debt12,
+     TunggakanPasca.`Debt9` AS TunggakanPasca_Debt9,
+     IKS.`NomorInduk` AS IKS_NomorInduk,
+     IKS.`ChargedLevel` AS IKS_ChargedLevel,
+     IKS.`Debt1` AS IKS_Debt1,
+     IUAP.`NomorInduk` AS IUAP_NomorInduk,
+     IUAP.`ChargedLevel` AS IUAP_ChargedLevel,
+     IUAP.`Debt1` AS IUAP_Debt1,
+     IUAP.`Debt4` AS IUAP_Debt4,
+     IUAP.`Debt5` AS IUAP_Debt5,
+     IUAP.`Debt6` AS IUAP_Debt6,
+     IUAP.`Debt7` AS IUAP_Debt7,
+     IUAP.`Debt8` AS IUAP_Debt8,
+     IUAP.`Debt9` AS IUAP_Debt9,
+     IUAP.`Debt10` AS IUAP_Debt10,
+     IUAP.`Debt12` AS IUAP_Debt12,
+     IUAP.`Debt2` AS IUAP_Debt2,
+     IUAP.`Debt3` AS IUAP_Debt3,
+     IUAP.`Debt11` AS IUAP_Debt11,
+     IUS.`NomorInduk` AS IUS_NomorInduk,
+     IUS.`ChargedLevel` AS IUS_ChargedLevel,
+     IUS.`Debt1` AS IUS_Debt1,
+     IUS.`Debt2` AS IUS_Debt2,
+     IUS.`Debt3` AS IUS_Debt3,
+     IUS.`Debt4` AS IUS_Debt4,
+     OSIS.`NomorInduk` AS OSIS_NomorInduk,
+     OSIS.`ChargedLevel` AS OSIS_ChargedLevel,
+     OSIS.`Debt1` AS OSIS_Debt1,
+     PVT.`NomorInduk` AS PVT_NomorInduk,
+     PVT.`ChargedLevel` AS PVT_ChargedLevel,
+     PVT.`Debt1` AS PVT_Debt1,
+     Almamater.`NomorInduk` AS Almamater_NomorInduk,
+     Almamater.`ChargedLevel` AS Almamater_ChargedLevel,
+     Almamater.`Debt` AS Almamater_Debt,
+     Attribute.`NomorInduk` AS Attribute_NomorInduk,
+     Attribute.`ChargedLevel` AS Attribute_ChargedLevel,
+     Attribute.`Debt` AS Attribute_Debt,
+     Seragam.`NomorInduk` AS Seragam_NomorInduk,
+     Seragam.`ChargedLevel` AS Seragam_ChargedLevel,
+     Seragam.`Debt` AS Seragam_Debt,
+     IPSB.`NomorInduk` AS IPSB_NomorInduk,
+     IPSB.`ChargedLevel` AS IPSB_ChargedLevel,
+     IPSB.`Debt` AS IPSB_Debt,
+     IUA.`NomorInduk` AS IUA_NomorInduk,
+     IUA.`ChargedLevel` AS IUA_ChargedLevel,
+     IUA.`Debt` AS IUA_Debt
+FROM
+     `Profil` Profil INNER JOIN `IPP` IPP ON Profil.`NomorInduk` = IPP.`NomorInduk`
+     AND Profil.`CurrentLevel` = IPP.`ChargedLevel`
+     LEFT JOIN TunggakanPasca ON Profil.`NomorInduk` = TunggakanPasca.`NomorInduk`
+     AND Profil.`CurrentLevel` = TunggakanPasca.`ChargedLevel`
+     LEFT JOIN IKS ON Profil.`NomorInduk` = IKS.`NomorInduk`
+     AND Profil.`CurrentLevel` = IKS.`ChargedLevel`
+     LEFT JOIN IUAP ON Profil.`NomorInduk` = IUAP.`NomorInduk`
+     AND Profil.`CurrentLevel` = IUAP.`ChargedLevel`
+     LEFT JOIN IUS ON Profil.`NomorInduk` = IUS.`NomorInduk`
+     AND Profil.`CurrentLevel` = IUS.`ChargedLevel`
+     LEFT JOIN OSIS ON Profil.`NomorInduk` = OSIS.`NomorInduk`
+     AND Profil.`CurrentLevel` = OSIS.`ChargedLevel`
+     LEFT JOIN PVT ON Profil.`NomorInduk` = PVT.`NomorInduk`
+     AND Profil.`CurrentLevel` = PVT.`ChargedLevel`
+     LEFT JOIN Almamater ON Profil.`NomorInduk` = Almamater.`NomorInduk`
+     AND Profil.`CurrentLevel` = Almamater.`ChargedLevel`
+     LEFT JOIN Attribute ON Profil.`NomorInduk` = Attribute.`NomorInduk`
+     AND Profil.`CurrentLevel` = Attribute.`ChargedLevel`
+     LEFT JOIN Seragam ON Profil.`NomorInduk` = Seragam.`NomorInduk`
+     AND Profil.`CurrentLevel` = Seragam.`ChargedLevel`
+     LEFT JOIN IPSB ON Profil.`NomorInduk` = IPSB.`NomorInduk`
+     AND Profil.`CurrentLevel` = IPSB.`ChargedLevel`
+     LEFT JOIN IUA ON Profil.`NomorInduk` = IPSB.`NomorInduk`
+     AND Profil.`CurrentLevel` = IUA.`ChargedLevel`
+WHERE
+     Profil.`CurrentLevel` LIKE $P{CurrentLevel}
+ORDER BY
+     Profil.`Nama` ASC]]>
 	</queryString>
-	<field name="kelas" class="java.lang.String">
-		<fieldDescription><![CDATA[kelas]]></fieldDescription>
-	</field>
-	<field name="nama" class="java.lang.String">
-		<fieldDescription><![CDATA[nama]]></fieldDescription>
-	</field>
-	<field name="noInduk" class="java.lang.String">
-		<fieldDescription><![CDATA[noInduk]]></fieldDescription>
-	</field>
-	<field name="profil" class="pelajar.Profil">
-		<fieldDescription><![CDATA[profil]]></fieldDescription>
-	</field>
-	<field name="sekolah" class="java.lang.String">
-		<fieldDescription><![CDATA[sekolah]]></fieldDescription>
-	</field>
-	<field name="subKelas" class="java.lang.String">
-		<fieldDescription><![CDATA[subKelas]]></fieldDescription>
-	</field>
-	<field name="tahun" class="java.lang.Integer">
-		<fieldDescription><![CDATA[tahun]]></fieldDescription>
-	</field>
-	<field name="tunggakanIPP" class="java.lang.Float">
-		<fieldDescription><![CDATA[tunggakanIPP]]></fieldDescription>
-	</field>
+	<field name="IPP_NomorInduk" class="java.lang.String"/>
+	<field name="IPP_ChargedLevel" class="java.lang.String"/>
+	<field name="IPP_Debt1" class="java.lang.Float"/>
+	<field name="IPP_Debt2" class="java.lang.Float"/>
+	<field name="IPP_Debt3" class="java.lang.Float"/>
+	<field name="IPP_Debt4" class="java.lang.Float"/>
+	<field name="IPP_Debt5" class="java.lang.Float"/>
+	<field name="IPP_Debt6" class="java.lang.Float"/>
+	<field name="IPP_Debt7" class="java.lang.Float"/>
+	<field name="IPP_Debt8" class="java.lang.Float"/>
+	<field name="IPP_Debt9" class="java.lang.Float"/>
+	<field name="IPP_Debt10" class="java.lang.Float"/>
+	<field name="IPP_Debt11" class="java.lang.Float"/>
+	<field name="IPP_Debt12" class="java.lang.Float"/>
+	<field name="Profil_NomorInduk" class="java.lang.String"/>
+	<field name="Profil_Nama" class="java.lang.String"/>
+	<field name="Profil_JenisKelamin" class="java.lang.String"/>
+	<field name="Profil_Agama" class="java.lang.String"/>
+	<field name="Profil_AsalSekolah" class="java.lang.String"/>
+	<field name="Profil_TanggalLahir" class="java.sql.Date"/>
+	<field name="Profil_TempatLahir" class="java.lang.String"/>
+	<field name="Profil_Alamat" class="java.lang.String"/>
+	<field name="Profil_NamaAyah" class="java.lang.String"/>
+	<field name="Profil_NamaIbu" class="java.lang.String"/>
+	<field name="Profil_Telpon1" class="java.lang.String"/>
+	<field name="Profil_Telpon2" class="java.lang.String"/>
+	<field name="Profil_CurrentLevel" class="java.lang.String"/>
+	<field name="Profil_TanggalMasuk" class="java.sql.Date"/>
+	<field name="Profil_TanggalLulus" class="java.sql.Date"/>
+	<field name="Profil_Gelombang" class="java.lang.String"/>
+	<field name="Profil_TotalIuran" class="java.lang.Float"/>
+	<field name="Profil_StatusPendaftaran" class="java.lang.String"/>
+	<field name="Profil_LastUpdateDate" class="java.sql.Date"/>
+	<field name="TunggakanPasca_NomorInduk" class="java.lang.String"/>
+	<field name="TunggakanPasca_ChargedLevel" class="java.lang.String"/>
+	<field name="TunggakanPasca_Debt1" class="java.lang.Float"/>
+	<field name="TunggakanPasca_Debt2" class="java.lang.Float"/>
+	<field name="TunggakanPasca_Debt3" class="java.lang.Float"/>
+	<field name="TunggakanPasca_Debt4" class="java.lang.Float"/>
+	<field name="TunggakanPasca_Debt5" class="java.lang.Float"/>
+	<field name="TunggakanPasca_Debt6" class="java.lang.Float"/>
+	<field name="TunggakanPasca_Debt7" class="java.lang.Float"/>
+	<field name="TunggakanPasca_Debt8" class="java.lang.Float"/>
+	<field name="TunggakanPasca_Debt10" class="java.lang.Float"/>
+	<field name="TunggakanPasca_Debt11" class="java.lang.Float"/>
+	<field name="TunggakanPasca_Debt12" class="java.lang.Float"/>
+	<field name="TunggakanPasca_Debt9" class="java.lang.Float"/>
+	<field name="IKS_NomorInduk" class="java.lang.String"/>
+	<field name="IKS_ChargedLevel" class="java.lang.String"/>
+	<field name="IKS_Debt1" class="java.lang.Float"/>
+	<field name="IUAP_NomorInduk" class="java.lang.String"/>
+	<field name="IUAP_ChargedLevel" class="java.lang.String"/>
+	<field name="IUAP_Debt1" class="java.lang.Float"/>
+	<field name="IUAP_Debt4" class="java.lang.Float"/>
+	<field name="IUAP_Debt5" class="java.lang.Float"/>
+	<field name="IUAP_Debt6" class="java.lang.Float"/>
+	<field name="IUAP_Debt7" class="java.lang.Float"/>
+	<field name="IUAP_Debt8" class="java.lang.Float"/>
+	<field name="IUAP_Debt9" class="java.lang.Float"/>
+	<field name="IUAP_Debt10" class="java.lang.Float"/>
+	<field name="IUAP_Debt12" class="java.lang.Float"/>
+	<field name="IUAP_Debt2" class="java.lang.Float"/>
+	<field name="IUAP_Debt3" class="java.lang.Float"/>
+	<field name="IUAP_Debt11" class="java.lang.Float"/>
+	<field name="IUS_NomorInduk" class="java.lang.String"/>
+	<field name="IUS_ChargedLevel" class="java.lang.String"/>
+	<field name="IUS_Debt1" class="java.lang.Float"/>
+	<field name="IUS_Debt2" class="java.lang.Float"/>
+	<field name="IUS_Debt3" class="java.lang.Float"/>
+	<field name="IUS_Debt4" class="java.lang.Float"/>
+	<field name="OSIS_NomorInduk" class="java.lang.String"/>
+	<field name="OSIS_ChargedLevel" class="java.lang.String"/>
+	<field name="OSIS_Debt1" class="java.lang.Float"/>
+	<field name="PVT_NomorInduk" class="java.lang.String"/>
+	<field name="PVT_ChargedLevel" class="java.lang.String"/>
+	<field name="PVT_Debt1" class="java.lang.Float"/>
+	<field name="Almamater_NomorInduk" class="java.lang.String"/>
+	<field name="Almamater_ChargedLevel" class="java.lang.String"/>
+	<field name="Almamater_Debt" class="java.lang.Float"/>
+	<field name="Attribute_NomorInduk" class="java.lang.String"/>
+	<field name="Attribute_ChargedLevel" class="java.lang.String"/>
+	<field name="Attribute_Debt" class="java.lang.Float"/>
+	<field name="Seragam_NomorInduk" class="java.lang.String"/>
+	<field name="Seragam_ChargedLevel" class="java.lang.String"/>
+	<field name="Seragam_Debt" class="java.lang.Float"/>
+	<field name="IPSB_NomorInduk" class="java.lang.String"/>
+	<field name="IPSB_ChargedLevel" class="java.lang.String"/>
+	<field name="IPSB_Debt" class="java.lang.Float"/>
+	<field name="IUA_NomorInduk" class="java.lang.String"/>
+	<field name="IUA_ChargedLevel" class="java.lang.String"/>
+	<field name="IUA_Debt" class="java.lang.Float"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="20" splitType="Stretch">
+		<band height="18" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="802" height="18" uuid="de369499-939f-4eed-ba2e-8c0ac903c591"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Print Out Tunggakan Siswa ".concat($F{sekolah}).concat(" Kelas ").concat($F{kelas}).concat(" - ").concat($F{subKelas})]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Print Out Tunggakan Siswa"]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="16" splitType="Stretch">
+		<band height="12" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="387" height="13" uuid="d43f2398-6be3-4e6b-8ff2-49313aa30c9c"/>
+				<reportElement x="0" y="0" width="802" height="12" uuid="d43f2398-6be3-4e6b-8ff2-49313aa30c9c"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="33" y="0" width="143" height="15" uuid="50240418-7b6f-4466-a227-05a8e2f9ebdd"/>
+				<reportElement x="33" y="0" width="130" height="12" uuid="50240418-7b6f-4466-a227-05a8e2f9ebdd"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Nama]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="176" y="0" width="111" height="15" uuid="d675bac8-e1e1-41c4-ab8e-8bf05b7ba8d9"/>
+				<reportElement x="163" y="0" width="48" height="12" uuid="d675bac8-e1e1-41c4-ab8e-8bf05b7ba8d9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[No Induk]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="287" y="0" width="100" height="15" uuid="4794755b-d869-4f3c-9284-ebe401962ef6"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[Tunggakan IPP]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="0" width="33" height="15" uuid="ed8792b3-986d-44bb-812a-5f7769d9c422"/>
+				<reportElement x="0" y="0" width="33" height="12" uuid="ed8792b3-986d-44bb-812a-5f7769d9c422"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="0" width="52" height="12" uuid="4794755b-d869-4f3c-9284-ebe401962ef6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[IPP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="262" y="0" width="52" height="12" uuid="23178ad1-7afd-45e1-a77c-34b73200ea70"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Pasca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="314" y="0" width="52" height="12" uuid="b8c62fb4-20e2-4818-b137-9d986776591b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[UN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="366" y="0" width="52" height="12" uuid="754f176e-7d12-4a4b-b24c-40a11cea92da"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[U. Semester]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="418" y="0" width="52" height="12" uuid="41dcb6f9-e455-49bc-bd91-e762b97e0627"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[OSIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="0" width="52" height="12" uuid="9f5c6cb5-e7b4-4a48-ba07-5f5465744fcd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[IKS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="522" y="0" width="52" height="12" uuid="dbd68a5b-3c08-47f5-a88d-6ae04ce81aa1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[PTV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="574" y="0" width="52" height="12" uuid="c648c8e5-05c6-4169-9c3a-d79601a9b707"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Attribute]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="626" y="0" width="52" height="12" uuid="b41e95b2-ec15-4b32-97c9-9f071db1eaf7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Seragam]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="678" y="0" width="52" height="12" uuid="271f39a1-c570-45d6-acb0-79c510cfd27a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Almamater]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="730" y="0" width="52" height="12" uuid="90feed0b-2d7b-4d5d-8c5b-82276b95152a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[MOS]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -108,32 +371,128 @@
 	<detail>
 		<band height="14" splitType="Stretch">
 			<textField>
-				<reportElement x="33" y="0" width="143" height="14" uuid="5ccb8643-c4b7-4df8-a37a-9a61f3330027"/>
-				<textElement verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="176" y="0" width="111" height="14" uuid="7dc15730-5b5f-40d8-a4a3-b0d82009cfb7"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{noInduk}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="287" y="0" width="100" height="14" uuid="5f8dddbf-cd8b-4826-8118-b619e6d002d6"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{tunggakanIPP}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="0" y="0" width="33" height="14" uuid="eb27324f-879c-4750-b503-37587d3a68c0"/>
+				<reportElement x="0" y="0" width="33" height="12" uuid="eb27324f-879c-4750-b503-37587d3a68c0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="0" width="48" height="12" uuid="822613d6-0ab8-4604-860c-063307370e54"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CurrentLevel}.substring(0,3).equals("SMA")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="0" width="130" height="12" uuid="6a756a1e-265f-4a03-af7c-94eee90b73ed"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Profil_Nama}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="Rp #,##0" isBlankWhenNull="true">
+				<reportElement x="210" y="0" width="52" height="12" uuid="97618d72-5911-443c-b540-9030e1e77331"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("01")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Debt6}+$F{IPP_Debt7}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("02")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Debt6}+$F{IPP_Debt7}+$F{IPP_Debt8}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("03")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Debt6}+$F{IPP_Debt7}+$F{IPP_Debt8}+$F{IPP_Debt9}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("04")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Debt6}+$F{IPP_Debt7}+$F{IPP_Debt8}+$F{IPP_Debt9}+$F{IPP_Debt10}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("05")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Debt6}+$F{IPP_Debt7}+$F{IPP_Debt8}+$F{IPP_Debt9}+$F{IPP_Debt10}+$F{IPP_Debt11}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("06")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Debt6}+$F{IPP_Debt7}+$F{IPP_Debt8}+$F{IPP_Debt9}+$F{IPP_Debt10}+$F{IPP_Debt11}+$F{IPP_Debt12}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("07")?$F{IPP_Debt1}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("08")?$F{IPP_Debt1}+$F{IPP_Debt2}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("09")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("10")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("11")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}:
+$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Debt6}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="Rp #,##0" isBlankWhenNull="true">
+				<reportElement x="262" y="0" width="52" height="12" isPrintWhenDetailOverflows="true" uuid="0a2a8b1c-f6b3-4bee-885c-a1e48404a007"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TunggakanPasca_Debt1}+$F{TunggakanPasca_Debt2}+$F{TunggakanPasca_Debt3}+$F{TunggakanPasca_Debt4}+$F{TunggakanPasca_Debt5}+$F{TunggakanPasca_Debt6}+$F{TunggakanPasca_Debt7}+$F{TunggakanPasca_Debt8}+$F{TunggakanPasca_Debt9}+$F{TunggakanPasca_Debt10}+$F{TunggakanPasca_Debt11}+$F{TunggakanPasca_Debt12}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0" isBlankWhenNull="true">
+				<reportElement x="314" y="0" width="52" height="12" uuid="4ffaadac-6fe7-4a8d-b5cc-7e3714f8bb1d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CurrentLevel}.substring(0,3).equals("SMA")?
+((new SimpleDateFormat("MM").format($P{CurrentDate})).equals("01")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IUAP_Debt6}+$F{IUAP_Debt7}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("02")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IUAP_Debt6}+$F{IUAP_Debt7}+$F{IUAP_Debt8}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("03")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IUAP_Debt6}+$F{IUAP_Debt7}+$F{IUAP_Debt8}+$F{IUAP_Debt9}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("04")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IUAP_Debt6}+$F{IUAP_Debt7}+$F{IUAP_Debt8}+$F{IUAP_Debt9}+$F{IUAP_Debt10}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("05")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IUAP_Debt6}+$F{IUAP_Debt7}+$F{IUAP_Debt8}+$F{IUAP_Debt9}+$F{IUAP_Debt10}+$F{IUAP_Debt11}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("06")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IUAP_Debt6}+$F{IUAP_Debt7}+$F{IUAP_Debt8}+$F{IUAP_Debt9}+$F{IUAP_Debt10}+$F{IUAP_Debt11}+$F{IUAP_Debt12}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("07")?$F{IUAP_Debt1}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("08")?$F{IUAP_Debt1}+$F{IUAP_Debt2}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("09")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("10")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("11")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}:
+$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IUAP_Debt6}):$F{IUA_Debt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0" isBlankWhenNull="true">
+				<reportElement x="366" y="0" width="50" height="12" uuid="a644fd1c-f541-41cf-86cc-a2791806b2e6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IUS_Debt1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0" isBlankWhenNull="true">
+				<reportElement x="418" y="0" width="52" height="12" uuid="b117e48e-34ed-4322-baef-ce721ebcd3a5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OSIS_Debt1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0" isBlankWhenNull="true">
+				<reportElement x="470" y="0" width="52" height="12" uuid="ea2aed49-b6f9-4742-a945-b385efdbf205"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IKS_Debt1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0" isBlankWhenNull="true">
+				<reportElement x="522" y="0" width="52" height="12" uuid="79a5808f-45c3-4398-8ab3-5ebf91c2c00a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PVT_Debt1}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="12" width="802" height="1" uuid="2bf61bc3-0a31-40b5-8cc7-d7973fb7f626"/>
+			</line>
+			<textField pattern="Rp #,##0" isBlankWhenNull="true">
+				<reportElement x="574" y="0" width="52" height="12" uuid="f5c97c5c-eab7-41a1-8036-cfb06c567ad6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Attribute_Debt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0" isBlankWhenNull="true">
+				<reportElement x="626" y="0" width="52" height="12" uuid="9532319e-0fff-4f51-9b80-6567fb6d0887"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Seragam_Debt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0" isBlankWhenNull="true">
+				<reportElement x="678" y="0" width="52" height="12" uuid="3855f242-9797-4486-a03b-26ce345cc94a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Almamater_Debt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0" isBlankWhenNull="true">
+				<reportElement x="730" y="0" width="52" height="12" uuid="37cb37e5-72b6-4b9a-af1e-896b06f56564"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IPSB_Debt}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
