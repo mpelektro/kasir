@@ -382,7 +382,7 @@ ORDER BY
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{CurrentLevel}.substring(0,3).equals("SMA")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{IPP_NomorInduk}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="33" y="0" width="130" height="12" uuid="6a756a1e-265f-4a03-af7c-94eee90b73ed"/>

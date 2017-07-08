@@ -54,6 +54,7 @@ import printout.BuktiPembayaran;
 import printout.DetailTunggakanPasca;
 import printout.PenerimaanKasir;
 import printout.StatusPendaftaran;
+import printout.TunggakanPerKelas;
 import sak.Kalender;
 import sak.KasirException;
 
@@ -172,6 +173,7 @@ public class AppFrame extends javax.swing.JFrame {
         jButtonRekapPenerimaan = new javax.swing.JButton();
         jButtonRekapPenerimaanPerKasir = new javax.swing.JButton();
         jButtonLapStatusPendaftaran = new javax.swing.JButton();
+        jButtonTunggakanPerKelas = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableInitialSearch = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -401,6 +403,18 @@ public class AppFrame extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButtonLapStatusPendaftaran);
+
+        jButtonTunggakanPerKelas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/document_16.png"))); // NOI18N
+        jButtonTunggakanPerKelas.setText(org.openide.util.NbBundle.getMessage(AppFrame.class, "AppFrame.jButtonTunggakanPerKelas.text")); // NOI18N
+        jButtonTunggakanPerKelas.setFocusable(false);
+        jButtonTunggakanPerKelas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonTunggakanPerKelas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonTunggakanPerKelas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTunggakanPerKelasActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonTunggakanPerKelas);
 
         jTableInitialSearch.setAutoCreateRowSorter(true);
         jTableInitialSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1097,6 +1111,21 @@ public class AppFrame extends javax.swing.JFrame {
             Exceptions.printStackTrace(e);
         }
     }//GEN-LAST:event_jButtonTunggakanPascaActionPerformed
+
+    private void jButtonTunggakanPerKelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTunggakanPerKelasActionPerformed
+        // TODO add your handling code here:
+        String lv1 = jComboBoxLevel1.getSelectedItem().toString();
+        String lv2 = jComboBoxLevel2.getSelectedItem().toString();
+        String lv3 = jComboBoxLevel3.getSelectedItem().toString();
+        Kalender kalS = new Kalender(dateChooserComboTSumS.getSelectedDate().getTime());
+        String yr = String.valueOf(kalS.get(Kalender.YEAR));
+        String targetYear = lv1.concat("-").concat(lv2).concat("-").concat(lv3).concat("-").concat(yr);
+        try{
+            printTunggakanPerKelas(targetYear);
+        } catch (JRException | PrinterException | SQLException e){
+            Exceptions.printStackTrace(e);
+        }
+    }//GEN-LAST:event_jButtonTunggakanPerKelasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1886,6 +1915,7 @@ public class AppFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTSumPrint;
     private javax.swing.JButton jButtonTransaksi;
     private javax.swing.JButton jButtonTunggakanPasca;
+    private javax.swing.JButton jButtonTunggakanPerKelas;
     private javax.swing.JComboBox jComboBoxLevel1;
     private javax.swing.JComboBox jComboBoxLevel2;
     private javax.swing.JComboBox jComboBoxLevel3;
@@ -1986,91 +2016,7 @@ public class AppFrame extends javax.swing.JFrame {
     
     private void printPenerimaanKasKasir(Clerk cl, Kalender startDate, Kalender endDate) throws JRException, PrinterException {
                   
-        
-        // jasperParameter is a Hashmap contains the parameters
-        // passed from application to the jrxml layout
-//        HashMap jasperParameter = new HashMap();
-//        jasperParameter.put("Param_TransactionSummary_ID", ((Long)transactionSummary.id).intValue());
-//        jasperParameter.put("Param_Clerk_ID", transactionSummary.idClerk);
-//        jasperParameter.put("Param_Profil_ID", profil.noInduk);
-//        jasperParameter.put("SUBREPORT_DIR", "C://printout//");
-//        jasperParameter.put("Param_TotalAmountTerbilang", totalATString);
-//        
-//        
-//        // Tunggakan IPP
-////        jasperParameter.put("Param_Tunggakan_IPP", tunggakanIPP);
-////        jasperParameter.put("Param_Tunggakan_IPP_Amount", unpaidIPP);
-////        jasperParameter.put("Param_Tunggakan_IPP_Each_Amount", tunggakanIPPEachAmountString);
-//        
-//        // Tunggakan IPSP
-//        
-//        
-//        // Tunggakan Seragam
-////        jasperParameter.put("Param_Tunggakan_Seragam", tunggakanSeragam);
-////        jasperParameter.put("Param_Tunggakan_Seragam_Amount", unpaidSeragam);
-//        
-//        // Tunggakan Buku
-////        jasperParameter.put("Param_Tunggakan_Buku", tunggakanBuku);
-////        jasperParameter.put("Param_Tunggakan_Buku_Amount", unpaidBuku);
-//        
-//        
-//        // Tunggakan DOANG
-//        String tunggakanDoang = "";
-//        String tunggakanDoangAmount = "";
-//        
-//        for(int i = 0; i < tm.getRowCount(); i++){
-//            tunggakanDoang = tunggakanDoang.concat(tm.getValueAt(i, 2).toString()).concat("\r\n");
-//            tunggakanDoangAmount = tunggakanDoangAmount.concat(tm.getValueAt(i, 1).toString()).concat("\r\n");
-//            System.out.println(tm.getValueAt(i,0));
-//            System.out.println(tm.getValueAt(i,1));
-//            System.out.println(tm.getValueAt(i,2));
-//        }
-//        String tunggakanTotalAmount = NumberFormat.getInstance().format(totalDebt);
-//        tunggakanTotalAmount = "Rp ".concat(tunggakanTotalAmount);
-//        jasperParameter.put("Param_Tunggakan", tunggakanDoang);
-//        jasperParameter.put("Param_Tunggakan_Amount", tunggakanDoangAmount); 
-//        jasperParameter.put("Param_Tunggakan_Total_Amount", tunggakanTotalAmount);
-//        //dari HKD
-//        
-//        String fileName = "C://printout//PrintoutBuktiPembayaran.jrxml";
-//            String filetoPrint = "C://printout//PrintoutBuktiPembayaran.jrprint";
-//            String filetoFill = "C://printout//PrintoutBuktiPembayaran.jasper";
-//            String filePdf = "C://printout//PrintoutBuktiPembayaran.pdf";
-//            
-//            //JasperCompileManager always make file named: "report name.jasper"
-//            JasperCompileManager.compileReportToFile(fileName);
-//            
-//            
-//            JasperFillManager.fillReportToFile(filetoFill, jasperParameter , connection);
-//            JasperPrint jp = JasperFillManager.fillReport(filetoFill, jasperParameter, connection);
-//            JasperViewer.viewReport(jp, false);
-//            JasperExportManager.exportReportToPdfFile(jp, filePdf);
-//            JasperPrintManager.printReport(filetoPrint, true);
-//        
-//        //end dari HKD
-//        
-//        
-//        
-//        // jrxml compiling process
-//        jasperReport = JasperCompileManager.compileReport
-//        ("C://printout//PrintoutBuktiPembayaran.jrxml");
-//
-//        // filling report with data from data source
-//
-//        jasperPrint = JasperFillManager.fillReport(jasperReport,jasperParameter, connection); 
-//        // exporting process
-//        // 1- export to PDF
-//        JasperExportManager.exportReportToPdfFile(jasperPrint, "C://printout//sample_report.pdf");
-//
-//        // 2- export to HTML
-//        JasperExportManager.exportReportToHtmlFile(jasperPrint, "C://printout//sample_report.html" ); 
-//
-//        // 3- export to Excel sheet
-//        JRXlsExporter exporter = new JRXlsExporter();
-//        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-//        exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "C://printout//sample_report.xls" );
-//
-//        exporter.exportReport();
+       
         
         
         
@@ -2120,52 +2066,7 @@ public class AppFrame extends javax.swing.JFrame {
         exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "C://printout//PrintOutReportPerKasir.xls" );
 
         exporter.exportReport();
-        // jrxml compiling process
-//        jasperReport = JasperCompileManager.compileReport
-//        ("C://Users//Master//Documents//NetBeansProjects//Kasir7//src//printout//PrintoutBuktiPembayaran.jrxml");
-//        jasperReport = JasperCompileManager.compileReport
-//        ("C://printout//PrintOutReportPerKasir.jrxml");
-//
-//        // filling report with data from data source
-//
-//        jasperPrint = JasperFillManager.fillReport(jasperReport,jasperParameter, connection); 
-//        // exporting process
-//        // 1- export to PDF
-////        JasperExportManager.exportReportToPdfFile(jasperPrint, "F://sample_report.pdf");
-//        JasperExportManager.exportReportToPdfFile(jasperPrint, "C://printout//kasir_report.pdf");
-//
-//        // 2- export to HTML
-////        JasperExportManager.exportReportToHtmlFile(jasperPrint, "F://sample_report.html" ); 
-//        JasperExportManager.exportReportToHtmlFile(jasperPrint, "C://printout//kasir_report.html" ); 
-//
-//        // 3- export to Excel sheet
-//        JRXlsExporter exporter = new JRXlsExporter();
-//        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-//        //exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "F://sample_report.xls" );
-//        exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "C://printout//kasir_report.xls" );
-//
-//        exporter.exportReport();
-//       
-//        PrinterJob job = PrinterJob.getPrinterJob();
-//        PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
-//        printRequestAttributeSet.add(OrientationRequested.PORTRAIT);
-//        printRequestAttributeSet.add(MediaSizeName.ISO_A4); 
-//        MediaSizeName mediaSizeName = MediaSize.findMedia(64,25,MediaPrintableArea.MM);
-//        printRequestAttributeSet.add(mediaSizeName);
-//        printRequestAttributeSet.add(new Copies(1));
-//        JRPrintServiceExporter exporter1;
-//        exporter1 = new JRPrintServiceExporter();
-//        //jasperParameter.put(JRExporterParameter.JASPER_PRINT, jasperPrint);
-//        jasperParameter.put(JRPrintServiceExporterParameter.PRINT_REQUEST_ATTRIBUTE_SET, printRequestAttributeSet);
-//        jasperParameter.put(JRPrintServiceExporterParameter.DISPLAY_PAGE_DIALOG, Boolean.TRUE);
-//        jasperParameter.put(JRPrintServiceExporterParameter.DISPLAY_PRINT_DIALOG, Boolean.TRUE);
-//        jasperPrint = JasperFillManager.fillReport(jasperReport,jasperParameter, connection); 
-//        jasperParameter.put(JRExporterParameter.JASPER_PRINT, jasperPrint);
-//        System.out.println(jasperPrint.getPages().size());
-//        exporter1.setParameters(jasperParameter);
-//        exporter1.exportReport();
-//        
-//        job.print(printRequestAttributeSet);
+       
         
     }
     
@@ -4559,6 +4460,54 @@ public class AppFrame extends javax.swing.JFrame {
 
         exporter.exportReport();
     }
+    
+    public void printTunggakanPerKelas(String targetLevel) throws JRException, PrinterException, SQLException {
+         HashMap jasperParameter = new HashMap();
+        //jasperParameter.put("PARAM_CLERK_ID", Long.valueOf(cl.id));
+         printout.TunggakanPerKelas pb = new TunggakanPerKelas();
+        Connection connection = pb.establishConnection(); 
+        //jasperParameter.put("Param_Level", "%".concat(jComboBoxLevel1.getSelectedItem().toString()).concat("%"));
+        
+        jasperParameter.put("CurrentLevel", targetLevel);
+        
+        
+         String fileName = "C://printout//PrintOutTunggakanPerkelas.jrxml";
+            String filetoPrint = "C://printout//PrintOutTunggakanPerkelas.jrprint";
+            String filetoFill = "C://printout//PrintOutTunggakanPerkelas.jasper";
+            //String filePdf = "C://printout//PrintOutReportPerKasir.pdf";
+            String filePdf = "C://printout//PrintOutTunggakanPerkelas.pdf";
+       JasperCompileManager.compileReportToFile(fileName);
+            
+            
+            JasperFillManager.fillReportToFile(filetoFill, jasperParameter , connection);
+            JasperPrint jp = JasperFillManager.fillReport(filetoFill, jasperParameter, connection);
+            JasperViewer.viewReport(jp, false);
+            JasperExportManager.exportReportToPdfFile(jp, filePdf);
+            JasperPrintManager.printReport(filetoPrint, true);
+            
+            
+            jasperReport = JasperCompileManager.compileReport
+        ("C://printout//PrintOutTunggakanPerkelas.jrxml");
+
+        // filling report with data from data source
+
+        jasperPrint = JasperFillManager.fillReport(jasperReport,jasperParameter, connection); 
+        // exporting process
+        // 1- export to PDF
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "C://printout//PrintOutTunggakanPerkelas.pdf");
+
+        // 2- export to HTML
+        JasperExportManager.exportReportToHtmlFile(jasperPrint, "C://printout//PrintOutTunggakanPerkelas.html" ); 
+
+        // 3- export to Excel sheet
+        JRXlsExporter exporter = new JRXlsExporter();
+        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "C://printout//PrintOutTunggakanPerkelas.xls" );
+
+        exporter.exportReport();
+    }
+    
+    
     
     private ArrayList<BigDecimal> farmIPP(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{
         ArrayList<BigDecimal> retVal = new ArrayList();
