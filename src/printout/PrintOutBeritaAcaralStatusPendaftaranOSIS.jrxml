@@ -22,7 +22,7 @@
      OSISTransaction.`Piutang` AS OSISTransaction_Piutang
 FROM
      `OSISTransaction` OSISTransaction
-WHERE OSISTransaction.`NomorInduk` LIKE $P{ParamNomorInduk}]]>
+WHERE OSISTransaction.`NomorInduk` LIKE $P{ParamNomorInduk} AND OSISTransaction.`PaymentMethod` LIKE 'CASH']]>
 	</queryString>
 	<field name="OSISTransaction_ID" class="java.math.BigInteger"/>
 	<field name="OSISTransaction_UUID" class="java.lang.String"/>

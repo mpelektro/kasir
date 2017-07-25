@@ -22,7 +22,7 @@
      PASBTransaction.`Piutang` AS PASBTransaction_Piutang
 FROM
      `PASBTransaction` PASBTransaction
-WHERE PASBTransaction.`NomorInduk` LIKE $P{ParamNomorInduk}]]>
+WHERE PASBTransaction.`NomorInduk` LIKE $P{ParamNomorInduk} AND PASBTransaction.`PaymentMethod` LIKE 'CASH']]>
 	</queryString>
 	<field name="PASBTransaction_ID" class="java.math.BigInteger"/>
 	<field name="PASBTransaction_UUID" class="java.lang.String"/>

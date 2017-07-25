@@ -23,7 +23,7 @@
 FROM
      `IPSBTransaction` IPSBTransaction
 WHERE
-     IPSBTransaction.`NomorInduk` LIKE $P{ParamNomorInduk}]]>
+     IPSBTransaction.`NomorInduk` LIKE $P{ParamNomorInduk} AND IPSBTransaction.`PaymentMethod` LIKE 'CASH']]>
 	</queryString>
 	<field name="IPSBTransaction_ID" class="java.math.BigInteger"/>
 	<field name="IPSBTransaction_UUID" class="java.lang.String"/>

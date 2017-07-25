@@ -22,7 +22,7 @@
      AlmamaterTransaction.`Piutang` AS AlmamaterTransaction_Piutang
 FROM
      `AlmamaterTransaction` AlmamaterTransaction
-WHERE AlmamaterTransaction.`NomorInduk` LIKE $P{ParamNomorInduk}]]>
+WHERE AlmamaterTransaction.`NomorInduk` LIKE $P{ParamNomorInduk} AND AlmamaterTransaction.`PaymentMethod` LIKE 'CASH']]>
 	</queryString>
 	<field name="AlmamaterTransaction_ID" class="java.math.BigInteger"/>
 	<field name="AlmamaterTransaction_UUID" class="java.lang.String"/>

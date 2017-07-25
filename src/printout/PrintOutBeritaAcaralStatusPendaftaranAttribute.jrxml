@@ -22,7 +22,7 @@
      AttributeTransaction.`Piutang` AS AttributeTransaction_Piutang
 FROM
      `AttributeTransaction` AttributeTransaction
-WHERE AttributeTransaction.`NomorInduk` LIKE $P{ParamNomorInduk}]]>
+WHERE AttributeTransaction.`NomorInduk` LIKE $P{ParamNomorInduk} AND AttributeTransaction.`PaymentMethod` LIKE 'CASH']]>
 	</queryString>
 	<field name="AttributeTransaction_ID" class="java.math.BigInteger"/>
 	<field name="AttributeTransaction_UUID" class="java.lang.String"/>
