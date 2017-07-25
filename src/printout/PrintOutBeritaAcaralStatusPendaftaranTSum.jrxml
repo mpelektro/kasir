@@ -17,7 +17,7 @@
 FROM
      `TransactionSummary` TransactionSummary
 WHERE
-     TransactionSummary.`NomorInduk` LIKE $P{ParamNomorInduk}]]>
+     TransactionSummary.`NomorInduk` LIKE $P{ParamNomorInduk} AND TransactionSummary.`Note` NOT LIKE 'TIDAK_TUNAI']]>
 	</queryString>
 	<field name="TransactionSummary_ID" class="java.math.BigInteger"/>
 	<field name="TransactionSummary_UUID" class="java.lang.String"/>
