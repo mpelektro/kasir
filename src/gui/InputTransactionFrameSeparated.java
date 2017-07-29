@@ -54,6 +54,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import printout.BuktiPembayaran;
 import printout.TunggakanBean;
 import printout.TunggakanBeanFactory;
+import sak.SmsMaskingSender;
 
 /**
  *
@@ -5013,7 +5014,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
 //SMS GATEWAY PART
         //SMS LOGGING TO DATABASE
         if(appFrame.ppdbIni.get("program","sms",Boolean.class)){
-            String pesanDetail = "%20Detail%20(x1000):%20";
+            String pesanDetail = "%20Detail%20(x1000):%20";           
             for(int i=0; i<transactionList.size();i++){
                 pesanDetail = pesanDetail.concat("%20").concat(transactionList.get(i).iuranTipe.toString()).concat("%20").concat(String.format("%1$,.0f", transactionList.get(i).amount/1000));       
             }
@@ -5056,11 +5057,17 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                         while ((inline = inputReader.readLine()) != null) {
                           sb.append(inline);
                         }
-
+                        System.out.println("SMS Respond SMS Fortunata \r\n");
                         System.out.println(sb.toString());
+                        System.out.println("========================= \r\n");
                         //SAXBuilder builder = new SAXBuilder();
-
+                            
                         //Document document = (Document) builder.build(new ByteArrayInputStream(sb.toString().getBytes()));
+                        
+                        System.out.println("NUSA SMS MASKING \r\n");
+//                        String phone = profil.biodata.telpon1.replaceFirst("0", "62");                        
+//                        SmsMaskingSender sms = new SmsMaskingSender(phone, pesanDetail);
+                        
                     } 
                     catch (MalformedURLException e) { 
                         System.err.println(e);
