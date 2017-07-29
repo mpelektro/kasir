@@ -22,7 +22,7 @@
      PVTTransaction.`Piutang` AS PVTTransaction_Piutang
 FROM
      `PVTTransaction` PVTTransaction
-WHERE PVTTransaction.`NomorInduk` LIKE $P{ParamNomorInduk}]]>
+WHERE PVTTransaction.`NomorInduk` LIKE $P{ParamNomorInduk} AND PVTTransaction.`PaymentMethod` LIKE 'CASH']]>
 	</queryString>
 	<field name="PVTTransaction_ID" class="java.math.BigInteger"/>
 	<field name="PVTTransaction_UUID" class="java.lang.String"/>

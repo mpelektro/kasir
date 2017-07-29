@@ -22,7 +22,7 @@
      IPPTransaction.`Piutang` AS IPPTransaction_Piutang
 FROM
      `IPPTransaction` IPPTransaction
-WHERE IPPTransaction.`NomorInduk` LIKE $P{ParamNomorInduk}]]>
+WHERE IPPTransaction.`NomorInduk` LIKE $P{ParamNomorInduk} AND IPPTransaction.`PaymentMethod` LIKE 'CASH']]>
 	</queryString>
 	<field name="IPPTransaction_ID" class="java.math.BigInteger"/>
 	<field name="IPPTransaction_UUID" class="java.lang.String"/>

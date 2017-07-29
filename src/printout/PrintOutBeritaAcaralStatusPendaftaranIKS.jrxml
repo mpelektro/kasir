@@ -23,7 +23,7 @@
 FROM
      `IKSTransaction` IKSTransaction
 WHERE
-     IKSTransaction.`NomorInduk` LIKE $P{ParamNomorInduk}]]>
+     IKSTransaction.`NomorInduk` LIKE $P{ParamNomorInduk} AND IKSTransaction.`PaymentMethod` LIKE 'CASH']]>
 	</queryString>
 	<field name="IKSTransaction_ID" class="java.math.BigInteger"/>
 	<field name="IKSTransaction_UUID" class="java.lang.String"/>

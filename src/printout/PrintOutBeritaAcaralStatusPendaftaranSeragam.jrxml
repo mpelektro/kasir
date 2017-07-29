@@ -22,7 +22,7 @@
      SeragamTransaction.`Piutang` AS SeragamTransaction_Piutang
 FROM
      `SeragamTransaction` SeragamTransaction
-WHERE SeragamTransaction.`NomorInduk` LIKE $P{ParamNomorInduk}]]>
+WHERE SeragamTransaction.`NomorInduk` LIKE $P{ParamNomorInduk} AND SeragamTransaction.`PaymentMethod` LIKE 'CASH']]>
 	</queryString>
 	<field name="SeragamTransaction_ID" class="java.math.BigInteger"/>
 	<field name="SeragamTransaction_UUID" class="java.lang.String"/>
