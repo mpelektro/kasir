@@ -1627,20 +1627,7 @@ public class AppFrame extends javax.swing.JFrame {
        if(srmTunggakanPasca.size() > 0){
         for(Map.Entry<Long, TunggakanPasca> entry: srmTunggakanPasca.entrySet()){
             Float temp = 0f;
-            if(targetYear == entry.getValue().chargedLevel.tahun){
-                for(int i = 0 ; i < 12 ; i++){
-                    if(i<targetMonth){
-                        temp += entry.getValue().entries.get(i).debt;
-                    }else{
-                        entry.getValue().entries.get(i).debt = 0;
-                        temp += entry.getValue().entries.get(i).debt;
-                    }
-                }
-                if(temp > 0){
-                    tunggakans.add(new Tunggakan("TunggakanPasca", temp, "TunggakanPasca ".concat(getTahunAjaran(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
-                    tunggakanTunggakanPascas.add(entry.getValue());
-                }
-            }else{
+            
                 for(int i = 0 ; i < 12 ; i++){
                     temp += entry.getValue().entries.get(i).debt;
                 }
@@ -1648,7 +1635,7 @@ public class AppFrame extends javax.swing.JFrame {
                     tunggakans.add(new Tunggakan("TunggakanPasca", temp, "TunggakanPasca ".concat(getTahunAjaran(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
                     tunggakanTunggakanPascas.add(entry.getValue());
                 }
-            }
+            
             rekomendasiCicilanAkumulasi = entry.getValue().entries.get(0).amount;
             temp = 0f;
             j++;

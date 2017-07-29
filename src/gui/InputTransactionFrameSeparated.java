@@ -8,9 +8,11 @@ import com.lowagie.text.Font;
 import iuran.*;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -5009,7 +5011,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             Control.updateTSummary(transactionSummary);
         }
 //SMS GATEWAY PART
-        
+        //SMS LOGGING TO DATABASE
         if(appFrame.ppdbIni.get("program","sms",Boolean.class)){
             String pesanDetail = "%20Detail%20(x1000):%20";
             for(int i=0; i<transactionList.size();i++){
@@ -5022,30 +5024,57 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                 String regexStr = "^[0-9]*$";
                 if(profil.biodata.telpon1 != null && !profil.biodata.telpon1.isEmpty() && profil.biodata.telpon1.substring(1).matches(regexStr) && profil.biodata.telpon1.length() > 9)
                     Control.insertSms(new Sms(profil.noInduk, profil.biodata.telpon1, pesanDetail));
+                
+                
+                    //SEND SMS USING SMSFORTUNATA GATEWAY
+                    try {
+                        String pesanSms = pesanDetail.replace(" ", "%20");
+        //                URL myURL = new URL("http://smsfortunata.com/api?user=mpelektro@yahoo.com&pass=spyderco123&"
+        //                        + "pesan=Total%20Rp.%20"+String.format("%1$,.0f", transactionSummary.totalAmount)
+        //                        + pesanDetail.concat("%20No.%20"+String.valueOf(transactionSummary.id))
+        //                        + "%20-YDS%20Kosgoro-"
+        //                        +"&senderid=modem2&nomor="
+        //                        +profil.biodata.telpon1);
+
+                        URL myURL = new URL("http://smsfortunata.com/api?user=mpelektro@yahoo.com&pass=spyderco123&"
+                                + "pesan="
+                                + pesanSms
+                                +"&senderid=mars&nomor="
+                                +profil.biodata.telpon1);
+                        URLConnection myURLConnection = myURL.openConnection();
+                        myURLConnection.connect();
+                        myURLConnection.getInputStream();
+                        
+                        URL myURL2 = new URL("http://ark3.dayarka.com/smskasir.php?format=xml");
+                        URLConnection myURLConnection2 = myURL2.openConnection();
+                        myURLConnection2.connect();
+                       // myURLConnection2.getInputStream();
+                        
+                        BufferedReader inputReader = new BufferedReader(new InputStreamReader(myURLConnection2.getInputStream()));
+                        StringBuilder sb = new StringBuilder();
+                        String inline = "";
+                        while ((inline = inputReader.readLine()) != null) {
+                          sb.append(inline);
+                        }
+
+                        System.out.println(sb.toString());
+                        //SAXBuilder builder = new SAXBuilder();
+
+                        //Document document = (Document) builder.build(new ByteArrayInputStream(sb.toString().getBytes()));
+                    } 
+                    catch (MalformedURLException e) { 
+                        System.err.println(e);
+                    } 
+                    catch (IOException e){   
+                        System.err.println(e);
+                    }
             }catch (KasirException e){
                 System.err.println(e);
             }catch (SQLException e){
                 System.err.println(e);
             }
-//            try {
-//
-//                URL myURL = new URL("http://smsfortunata.com/api?user=mpelektro@yahoo.com&pass=spyderco123&"
-//                        + "pesan=Total%20Rp.%20"+String.format("%1$,.0f", transactionSummary.totalAmount)
-//                        + pesanDetail.concat("%20No.%20"+String.valueOf(transactionSummary.id))
-//                        + "%20-YDS%20Kosgoro-"
-//                        +"&senderid=modem2&nomor="
-//                        +profil.biodata.telpon1);
-//                URLConnection myURLConnection = myURL.openConnection();
-//                myURLConnection.connect();
-//                myURLConnection.getInputStream();
-//                
-//            } 
-//            catch (MalformedURLException e) { 
-//                System.err.println(e);
-//            } 
-//            catch (IOException e){   
-//                System.err.println(e);
-//            }
+            
+            
         }
 
     }
