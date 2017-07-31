@@ -51,11 +51,18 @@ import net.sf.jasperreports.engine.export.JRPrintServiceExporterParameter;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import printout.BuktiPembayaran;
 import printout.TunggakanBean;
 import printout.TunggakanBeanFactory;
 import sak.SmsMaskingSender;
-
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
 /**
  *
  * @author Master
@@ -5020,7 +5027,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             }
             pesanDetail = pesanDetail.replace("%20".subSequence(0, 3), " ".subSequence(0, 1));
             String nickname = nicknameFactory(profil.biodata.nama);
-            pesanDetail = "Terima kasih "+nickname+"Total Rp. "+String.format("%1$,.0f", transactionSummary.totalAmount)+ pesanDetail.concat(" No. "+String.valueOf(transactionSummary.id))+ " -YDS Kosgoro-";
+            pesanDetail = "Terima kasih "+nickname+"Total Rp. "+String.format("%1$,.0f", transactionSummary.totalAmount)+ pesanDetail.concat(" No. "+String.valueOf(transactionSummary.id));
             try{
                 String regexStr = "^[0-9]*$";
                 if(profil.biodata.telpon1 != null && !profil.biodata.telpon1.isEmpty() && profil.biodata.telpon1.substring(1).matches(regexStr) && profil.biodata.telpon1.length() > 9)
@@ -5036,38 +5043,73 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         //                        + "%20-YDS%20Kosgoro-"
         //                        +"&senderid=modem2&nomor="
         //                        +profil.biodata.telpon1);
+                        String phone = profil.biodata.telpon1.replaceFirst("0", "62"); 
+                        if(isXl(phone) || isTsel(phone)){ //SMS FORTUNATA
+                            URL myURL = new URL("http://smsfortunata.com/api?user=mpelektro@yahoo.com&pass=spyderco123&"
+                                    + "pesan="
+                                    + pesanSms
+                                    +"&senderid=mars&nomor="
+                                    +profil.biodata.telpon1);
+                            URLConnection myURLConnection = myURL.openConnection();
+                            myURLConnection.connect();
+                            myURLConnection.getInputStream();
+ 
+                        }else{  //SMS VIRO                                                                                                               
+//                        SmsMaskingSender sms = new SmsMaskingSender(phone, pesanDetail);
 
-                        URL myURL = new URL("http://smsfortunata.com/api?user=mpelektro@yahoo.com&pass=spyderco123&"
-                                + "pesan="
-                                + pesanSms
-                                +"&senderid=mars&nomor="
-                                +profil.biodata.telpon1);
-                        URLConnection myURLConnection = myURL.openConnection();
-                        myURLConnection.connect();
-                        myURLConnection.getInputStream();
+                         HttpClient httpClient = HttpClientBuilder.create().build(); //Use this instead 
+                         String userAuthorization = Base64.getEncoder().encodeToString("rusly:P@ssw0rdspyderco123".getBytes("utf-8"));
+                            try {
+                                HttpPost request = new HttpPost("http://107.20.199.106/restapi/sms/1/text/single");
+                                 JSONObject obj = new JSONObject();
+                                 switch(profil.currentLevel.level1.toString()){
+                                     case "SMA": obj.put("from","SMA KOSGORO");
+                                        break;
+                                     case "SMP": obj.put("from","SMP KOSGORO");
+                                        break;
+                                     case "SMK": obj.put("from","SMK KOSGORO");
+                                        break;
+                                     default:
+                                        obj.put("from","SMSVIRO");
+                                        break;
+                                 }
+                                
+                                obj.put("to", phone);
+                                obj.put("text", pesanDetail);
+                                StringEntity params = new StringEntity(obj.toJSONString());
+                                String result = "";
+                                request.addHeader("Authorization", "Basic "+userAuthorization);
+                                request.addHeader("Content-Type", "application/json");
+                                request.addHeader("Accept", "application/json");
+                                request.setEntity(params);
+                                HttpResponse response = httpClient.execute(request);
+                                HttpEntity entity = response.getEntity();
+                                InputStream instream = entity.getContent();
+                                result = convertStreamToString(instream);
+                                // now you have the string representation of the HTML request                               
+                                instream.close();                                                               
+                                
+                            }catch (Exception ex) {
+                                System.err.println(ex);
+                                //handle exception here
+
+                            } finally {
+                                //Deprecated
+                                //httpClient.getConnectionManager().shutdown(); 
+                            }
+                        }
                         
                         URL myURL2 = new URL("http://ark3.dayarka.com/smskasir.php?format=xml");
                         URLConnection myURLConnection2 = myURL2.openConnection();
                         myURLConnection2.connect();
                        // myURLConnection2.getInputStream();
-                        
+
                         BufferedReader inputReader = new BufferedReader(new InputStreamReader(myURLConnection2.getInputStream()));
                         StringBuilder sb = new StringBuilder();
                         String inline = "";
                         while ((inline = inputReader.readLine()) != null) {
                           sb.append(inline);
                         }
-                        System.out.println("SMS Respond SMS Fortunata \r\n");
-                        System.out.println(sb.toString());
-                        System.out.println("========================= \r\n");
-                        //SAXBuilder builder = new SAXBuilder();
-                            
-                        //Document document = (Document) builder.build(new ByteArrayInputStream(sb.toString().getBytes()));
-                        
-                        System.out.println("NUSA SMS MASKING \r\n");
-//                        String phone = profil.biodata.telpon1.replaceFirst("0", "62");                        
-//                        SmsMaskingSender sms = new SmsMaskingSender(phone, pesanDetail);
-                        
                     } 
                     catch (MalformedURLException e) { 
                         System.err.println(e);
@@ -5084,6 +5126,53 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             
         }
 
+    }
+    
+    private static String convertStreamToString(InputStream is) {
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+
+        String line = null;
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return sb.toString();
+    }
+    
+    private boolean isXl(String phone){
+        boolean ret = false;
+        ret = phone.substring(0,5).equals("62817");
+        ret |= phone.substring(0,5).equals("62818");
+        ret |= phone.substring(0,5).equals("62819");
+        ret |= phone.substring(0,5).equals("62859");
+        ret |= phone.substring(0,5).equals("62877");
+        ret |= phone.substring(0,5).equals("62878");
+        return ret;
+    }
+    
+    private boolean isTsel(String phone){
+        boolean ret = false;
+        ret = phone.substring(0,5).equals("62811");
+        ret |= phone.substring(0,5).equals("62812");
+        ret |= phone.substring(0,5).equals("62813");
+        ret |= phone.substring(0,5).equals("62821");
+        ret |= phone.substring(0,5).equals("62822");
+        ret |= phone.substring(0,5).equals("62823");
+        ret |= phone.substring(0,5).equals("62852");
+        ret |= phone.substring(0,5).equals("62853");
+        ret |= phone.substring(0,5).equals("62851");
+        return ret;
     }
 
     private void prepareSubmitObjects() throws SQLException, KasirException, IOException {
