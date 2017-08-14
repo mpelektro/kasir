@@ -188,6 +188,7 @@ public class AppFrame extends javax.swing.JFrame {
         jButtonRips = new javax.swing.JButton();
         jButtonBatal = new javax.swing.JButton();
         jButtonTunggakanPasca = new javax.swing.JButton();
+        jButtonRekapTunggakanPasca = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableTunggakanProfil = new javax.swing.JTable();
@@ -553,6 +554,17 @@ public class AppFrame extends javax.swing.JFrame {
             }
         });
         jToolBar3.add(jButtonTunggakanPasca);
+
+        jButtonRekapTunggakanPasca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Print.png"))); // NOI18N
+        jButtonRekapTunggakanPasca.setText(org.openide.util.NbBundle.getMessage(AppFrame.class, "AppFrame.jButtonRekapTunggakanPasca.text")); // NOI18N
+        jButtonRekapTunggakanPasca.setFocusable(false);
+        jButtonRekapTunggakanPasca.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jButtonRekapTunggakanPasca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRekapTunggakanPascaActionPerformed(evt);
+            }
+        });
+        jToolBar3.add(jButtonRekapTunggakanPasca);
 
         jTableTunggakanProfil.setModel(tableModelTunggakanProfil);
         jScrollPane3.setViewportView(jTableTunggakanProfil);
@@ -1126,6 +1138,17 @@ public class AppFrame extends javax.swing.JFrame {
             Exceptions.printStackTrace(e);
         }
     }//GEN-LAST:event_jButtonTunggakanPerKelasActionPerformed
+
+    private void jButtonRekapTunggakanPascaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRekapTunggakanPascaActionPerformed
+        try {
+            // TODO add your handling code here:
+            printRekapTunggakanPasca(clerk, null, null);
+        } catch (JRException ex) {
+            Exceptions.printStackTrace(ex);
+        } catch (PrinterException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+    }//GEN-LAST:event_jButtonRekapTunggakanPascaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1892,6 +1915,7 @@ public class AppFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonPrintReportKasir;
     private javax.swing.JButton jButtonRekapPenerimaan;
     private javax.swing.JButton jButtonRekapPenerimaanPerKasir;
+    private javax.swing.JButton jButtonRekapTunggakanPasca;
     private javax.swing.JButton jButtonRips;
     private javax.swing.JButton jButtonSearch;
     private javax.swing.JButton jButtonSettingGL;
@@ -2051,6 +2075,58 @@ public class AppFrame extends javax.swing.JFrame {
         JRXlsExporter exporter = new JRXlsExporter();
         exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
         exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "C://printout//PrintOutReportPerKasir.xls" );
+
+        exporter.exportReport();
+       
+        
+    }
+    
+    private void printRekapTunggakanPasca(Clerk cl, Kalender startDate, Kalender endDate) throws JRException, PrinterException {
+                  
+       
+        
+        
+        
+        // connection is the data source we used to fetch the data from
+        printout.PenerimaanKasir pb = new PenerimaanKasir();
+        Connection connection = pb.establishConnection(); 
+        // jasperParameter is a Hashmap contains the parameters
+        // passed from application to the jrxml layout
+        HashMap jasperParameter = new HashMap();
+        
+               
+         String fileName = "C://printout//PrintOutRekapTunggakanPasca.jrxml";
+            String filetoPrint = "C://printout//PrintOutRekapTunggakanPasca.jrprint";
+            String filetoFill = "C://printout//PrintOutRekapTunggakanPasca.jasper";
+            //String filePdf = "C://printout//PrintOutReportPerKasir.pdf";
+            String filePdf = "C://printout//PrintOutRekapTunggakanPasca.pdf";
+       JasperCompileManager.compileReportToFile(fileName);
+            
+            
+            JasperFillManager.fillReportToFile(filetoFill, jasperParameter , connection);
+            JasperPrint jp = JasperFillManager.fillReport(filetoFill, jasperParameter, connection);
+            JasperViewer.viewReport(jp, false);
+            JasperExportManager.exportReportToPdfFile(jp, filePdf);
+            JasperPrintManager.printReport(filetoPrint, true);
+            
+            
+            jasperReport = JasperCompileManager.compileReport
+        ("C://printout//PrintOutRekapTunggakanPasca.jrxml");
+
+        // filling report with data from data source
+
+        jasperPrint = JasperFillManager.fillReport(jasperReport,jasperParameter, connection); 
+        // exporting process
+        // 1- export to PDF
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "C://printout//PrintOutRekapTunggakanPasca.pdf");
+
+        // 2- export to HTML
+        JasperExportManager.exportReportToHtmlFile(jasperPrint, "C://printout//PrintOutRekapTunggakanPasca.html" ); 
+
+        // 3- export to Excel sheet
+        JRXlsExporter exporter = new JRXlsExporter();
+        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "C://printout//PrintOutRekapTunggakanPasca.xls" );
 
         exporter.exportReport();
        

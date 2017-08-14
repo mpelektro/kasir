@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutRekapTunggakanPascaSMP8" pageWidth="565" pageHeight="22" columnWidth="565" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3d61dfcd-a1ca-4fc7-b6ff-0f3a4de93a1e">
+	<property name="ireport.zoom" value="0.9090909090909091"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+ SUM(Debt1)+SUM(Debt2)+SUM(Debt3)+SUM(Debt4)+SUM(Debt5)+SUM(Debt6)+SUM(Debt7)+SUM(Debt8)+SUM(Debt9)+SUM(Debt10)+SUM(Debt11)+SUM(Debt12) AS 'Debt'
+FROM
+    rusly_kasirdb.TunggakanPasca
+WHERE ChargedLevel LIKE "SMP-8-%-2017"]]>
+	</queryString>
+	<field name="Debt" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="variable1" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{Debt}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="22">
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" uuid="0dd1cfd0-5e63-4be5-8c7a-7d83d18ee5e8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Rockwell" size="12"/>
+				</textElement>
+				<text><![CDATA[SMP Kelas 8]]></text>
+			</staticText>
+			<textField pattern="Rp #,##0">
+				<reportElement x="100" y="2" width="100" height="20" uuid="9c5887b3-814e-40ff-a6cc-8e9d11c245f0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Rockwell" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Debt}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

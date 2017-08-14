@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutRekapTunggakanPasca" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ab0b5293-fed6-46c4-97be-8830b47c5fe2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\printout\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 1]]>
+	</queryString>
+	<field name="1" class="java.lang.Long"/>
+	<variable name="variable1" class="java.math.BigDecimal"/>
+	<variable name="variable2" class="java.math.BigDecimal"/>
+	<variable name="variable3" class="java.math.BigDecimal"/>
+	<variable name="variable4" class="java.math.BigDecimal"/>
+	<variable name="variable5" class="java.math.BigDecimal"/>
+	<variable name="variable6" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="50" uuid="6b9aa7f0-0382-4063-a7c4-afefec7fb4eb"/>
+				<textElement textAlignment="Center">
+					<font fontName="Rockwell" size="36"/>
+				</textElement>
+				<text><![CDATA[Rekap Tunggakan Pasca]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="32">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="32" uuid="53cb460d-90d0-4d6d-aee2-e59b55fe1bed"/>
+				<textElement textAlignment="Center">
+					<font fontName="Rockwell" size="24"/>
+				</textElement>
+				<text><![CDATA[Yayasan Dharma Setia Kosgoro]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="50"/>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="22" uuid="4533298d-3bf2-4e5b-b3fe-f3d42484b5fa"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="variable1" toVariable="variable1"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutRekapTunggakanPascaSMP8.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="22" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="22" uuid="4533298d-3bf2-4e5b-b3fe-f3d42484b5fa"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="variable1" toVariable="variable2"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutRekapTunggakanPascaSMP9.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="22" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="22" uuid="4533298d-3bf2-4e5b-b3fe-f3d42484b5fa"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="variable1" toVariable="variable3"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutRekapTunggakanPascaSMA11.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="22" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="22" uuid="4533298d-3bf2-4e5b-b3fe-f3d42484b5fa"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="variable1" toVariable="variable4"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutRekapTunggakanPascaSMA12.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="22" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="22" uuid="4533298d-3bf2-4e5b-b3fe-f3d42484b5fa"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="variable1" toVariable="variable5"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutRekapTunggakanPascaSMK11.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="22" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="22" uuid="4533298d-3bf2-4e5b-b3fe-f3d42484b5fa"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="variable1" toVariable="variable6"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PrintOutRekapTunggakanPascaSMK12.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="0" y="21" width="211" height="1" uuid="cddb8437-46c4-4597-b217-3c376aca044a"/>
+			</line>
+		</band>
+		<band height="22">
+			<textField pattern="Rp #,##0">
+				<reportElement x="110" y="0" width="149" height="20" uuid="d37816c0-d5fa-48d2-977e-697d676aa365"/>
+				<textElement>
+					<font fontName="Rockwell" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable1}.add($V{variable2}).add($V{variable3}).add($V{variable4}).add($V{variable5}).add($V{variable6})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="563abc6c-cd3f-4599-a84e-72ec73368f62"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Rockwell" size="14"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="455" y="2" width="100" height="20" uuid="a46c6ae5-5e0f-49a2-887c-a630c70ab575"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Rockwell" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[ new SimpleDateFormat("dd-MMM-yyyy").format(new Date().getTime())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="349" y="2" width="100" height="20" uuid="1871eac2-f141-4c44-ab31-405cdf5b329e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Rockwell" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Printed On"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
