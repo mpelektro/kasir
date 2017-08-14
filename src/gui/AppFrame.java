@@ -2128,12 +2128,12 @@ public class AppFrame extends javax.swing.JFrame {
         
         //paramIPS jadi Jumlah
         for(int i = 0 ; i < 14; i++){
-            paramIPS.set(i, paramIPP.get(i).add(paramAlmamater.get(i)).add(paramAttribute.get(i)).add(paramBeasiswa.get(i)).add(paramBuku.get(i)
-            ).add(paramIDD.get(i)).add(paramIKS.get(i)).add(paramILL.get(i)).add(paramIPSB.get(i)).add(paramIPSP.get(i)).add(paramIUA.get(i)).add(paramIUAP.get(i)).add(paramIUS.get(i)
+            paramIPS.set(i, paramIPP.get(i).add(paramAlmamater.get(i)).add(paramAttribute.get(i)).add(paramBeasiswa.get(i))
+            .add(paramIDD.get(i)).add(paramIKS.get(i)).add(paramILL.get(i)).add(paramIPSB.get(i)).add(paramIPSP.get(i)).add(paramIUA.get(i)).add(paramIUAP.get(i)).add(paramIUS.get(i)
             ).add(paramOSIS.get(i)).add(paramPASB.get(i)).add(paramPVT.get(i)).add(paramSeragam.get(i)).add(paramTunggakanPasca.get(i)).add(paramTabungan.get(i)));
             
-             paramCIPS.set(i, paramCIPP.get(i).add(paramCAlmamater.get(i)).add(paramCAttribute.get(i)).add(paramCBeasiswa.get(i)).add(paramCBuku.get(i)
-            ).add(paramCIDD.get(i)).add(paramCIKS.get(i)).add(paramCILL.get(i)).add(paramCIPSB.get(i)).add(paramCIPSP.get(i)).add(paramCIUA.get(i)).add(paramCIUAP.get(i)).add(paramCIUS.get(i)
+             paramCIPS.set(i, paramCIPP.get(i).add(paramCAlmamater.get(i)).add(paramCAttribute.get(i)).add(paramCBeasiswa.get(i))
+            .add(paramCIDD.get(i)).add(paramCIKS.get(i)).add(paramCILL.get(i)).add(paramCIPSB.get(i)).add(paramCIPSP.get(i)).add(paramCIUA.get(i)).add(paramCIUAP.get(i)).add(paramCIUS.get(i)
             ).add(paramCOSIS.get(i)).add(paramCPASB.get(i)).add(paramCPVT.get(i)).add(paramCSeragam.get(i)).add(paramCTunggakanPasca.get(i)).add(paramCTabungan.get(i)));
         }
         

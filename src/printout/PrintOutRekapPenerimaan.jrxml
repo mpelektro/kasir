@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutRekapPenerimaan" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="794" leftMargin="20" rightMargin="28" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="a2535970-65f6-460b-8218-d34f0b2d6b5f">
-	<property name="ireport.zoom" value="1.4641000000000046"/>
-	<property name="ireport.x" value="174"/>
-	<property name="ireport.y" value="271"/>
+	<property name="ireport.zoom" value="1.2100000000000044"/>
+	<property name="ireport.x" value="27"/>
+	<property name="ireport.y" value="53"/>
 	<parameter name="PARAM_IPPSMP7" class="java.math.BigDecimal" isForPrompting="false"/>
 	<parameter name="PARAM_IPPSMP8" class="java.math.BigDecimal" isForPrompting="false"/>
 	<parameter name="PARAM_IPPSMP9" class="java.math.BigDecimal" isForPrompting="false"/>
@@ -1208,7 +1208,14 @@ WHERE
 				<text><![CDATA[Attribute]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="180" width="60" height="20" uuid="e683ad23-e3ca-4f2a-ad18-4a397872d548"/>
+				<reportElement x="0" y="400" width="60" height="20" uuid="e683ad23-e3ca-4f2a-ad18-4a397872d548"/>
+				<box leftPadding="1" bottomPadding="1" rightPadding="0">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="10"/>
 				</textElement>
@@ -1264,7 +1271,7 @@ WHERE
 				<text><![CDATA[Almamater]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="300" width="60" height="20" uuid="c1d4992b-0d82-41ca-b100-836286be1c01"/>
+				<reportElement x="0" y="180" width="60" height="20" uuid="c1d4992b-0d82-41ca-b100-836286be1c01"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="10"/>
 				</textElement>
@@ -2134,7 +2141,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_AttributeSMKTOTAL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="60" y="180" width="30" height="20" uuid="2ee3e12a-a58c-4937-ae88-06ff1d05380d"/>
+				<reportElement x="60" y="400" width="30" height="20" uuid="2ee3e12a-a58c-4937-ae88-06ff1d05380d"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2142,7 +2156,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_BukuSMP7}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="120" y="180" width="30" height="20" uuid="ae597471-36a9-4312-963f-5002b5916852"/>
+				<reportElement x="120" y="400" width="30" height="20" uuid="ae597471-36a9-4312-963f-5002b5916852"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2150,7 +2171,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_BukuSMP8}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="180" y="180" width="30" height="20" uuid="558541e3-bf10-41c2-9b00-b1eae09ed63d"/>
+				<reportElement x="180" y="400" width="30" height="20" uuid="558541e3-bf10-41c2-9b00-b1eae09ed63d"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2158,7 +2186,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_BukuSMP9}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="240" y="180" width="32" height="20" uuid="9f50e5a5-cf12-4fb4-b888-1f5b0495a423"/>
+				<reportElement x="240" y="400" width="32" height="20" uuid="9f50e5a5-cf12-4fb4-b888-1f5b0495a423"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2166,7 +2201,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_BukuSMPTOTAL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="304" y="180" width="30" height="20" uuid="dad08889-057b-4b0f-b9a5-988402cb8b43"/>
+				<reportElement x="304" y="400" width="30" height="20" uuid="dad08889-057b-4b0f-b9a5-988402cb8b43"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2174,7 +2216,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_BukuSMA10}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="364" y="180" width="30" height="20" uuid="611689fb-005f-48c9-8beb-26cc42144a54"/>
+				<reportElement x="364" y="400" width="30" height="20" uuid="611689fb-005f-48c9-8beb-26cc42144a54"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2182,7 +2231,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_BukuSMA11}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="424" y="180" width="30" height="20" uuid="c2b20ec4-eeb5-4c15-a5f7-4277863bd815"/>
+				<reportElement x="424" y="400" width="30" height="20" uuid="c2b20ec4-eeb5-4c15-a5f7-4277863bd815"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2190,7 +2246,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_BukuSMA12}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="484" y="180" width="33" height="20" uuid="99743af8-3f69-4d15-81bd-a165b98362a8"/>
+				<reportElement x="484" y="400" width="33" height="20" uuid="99743af8-3f69-4d15-81bd-a165b98362a8"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2198,7 +2261,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_BukuSMATOTAL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="550" y="180" width="30" height="20" uuid="360c44d8-d3ed-42dd-9c73-76373fad1576"/>
+				<reportElement x="550" y="400" width="30" height="20" uuid="360c44d8-d3ed-42dd-9c73-76373fad1576"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2206,7 +2276,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_BukuSMK10}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="610" y="180" width="30" height="20" uuid="3b29b967-d6d3-45bb-aa14-eef8fdafd01b"/>
+				<reportElement x="610" y="400" width="30" height="20" uuid="3b29b967-d6d3-45bb-aa14-eef8fdafd01b"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2214,7 +2291,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_BukuSMK11}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="670" y="180" width="30" height="20" uuid="b49c78cb-ab96-4094-be57-567cc613c24c"/>
+				<reportElement x="670" y="400" width="30" height="20" uuid="b49c78cb-ab96-4094-be57-567cc613c24c"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2222,7 +2306,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_BukuSMK12}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="730" y="180" width="32" height="20" uuid="d1c175c8-8e39-456e-9e41-f249d5f55987"/>
+				<reportElement x="730" y="400" width="32" height="20" uuid="d1c175c8-8e39-456e-9e41-f249d5f55987"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2890,7 +2981,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_AlmamaterSMKTOTAL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="60" y="300" width="30" height="20" uuid="2ee3e12a-a58c-4937-ae88-06ff1d05380d"/>
+				<reportElement x="60" y="180" width="30" height="20" uuid="2ee3e12a-a58c-4937-ae88-06ff1d05380d"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2898,7 +2989,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_TunggakanPascaSMP7}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="120" y="300" width="30" height="20" uuid="ae597471-36a9-4312-963f-5002b5916852"/>
+				<reportElement x="120" y="180" width="30" height="20" uuid="ae597471-36a9-4312-963f-5002b5916852"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2906,7 +2997,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_TunggakanPascaSMP8}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="180" y="300" width="30" height="20" uuid="558541e3-bf10-41c2-9b00-b1eae09ed63d"/>
+				<reportElement x="180" y="180" width="30" height="20" uuid="558541e3-bf10-41c2-9b00-b1eae09ed63d"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2914,7 +3005,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_TunggakanPascaSMP9}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="240" y="300" width="32" height="20" uuid="9f50e5a5-cf12-4fb4-b888-1f5b0495a423"/>
+				<reportElement x="240" y="180" width="32" height="20" uuid="9f50e5a5-cf12-4fb4-b888-1f5b0495a423"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2922,7 +3013,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_TunggakanPascaSMPTOTAL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="304" y="300" width="30" height="20" uuid="dad08889-057b-4b0f-b9a5-988402cb8b43"/>
+				<reportElement x="304" y="180" width="30" height="20" uuid="dad08889-057b-4b0f-b9a5-988402cb8b43"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2930,7 +3021,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_TunggakanPascaSMA10}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="364" y="300" width="30" height="20" uuid="611689fb-005f-48c9-8beb-26cc42144a54"/>
+				<reportElement x="364" y="180" width="30" height="20" uuid="611689fb-005f-48c9-8beb-26cc42144a54"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2938,7 +3029,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_TunggakanPascaSMA11}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="424" y="300" width="30" height="20" uuid="c2b20ec4-eeb5-4c15-a5f7-4277863bd815"/>
+				<reportElement x="424" y="180" width="30" height="20" uuid="c2b20ec4-eeb5-4c15-a5f7-4277863bd815"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2946,7 +3037,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_TunggakanPascaSMA12}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="484" y="300" width="33" height="20" uuid="99743af8-3f69-4d15-81bd-a165b98362a8"/>
+				<reportElement x="484" y="180" width="33" height="20" uuid="99743af8-3f69-4d15-81bd-a165b98362a8"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2954,7 +3045,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_TunggakanPascaSMATOTAL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="550" y="300" width="30" height="20" uuid="360c44d8-d3ed-42dd-9c73-76373fad1576"/>
+				<reportElement x="550" y="180" width="30" height="20" uuid="360c44d8-d3ed-42dd-9c73-76373fad1576"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2962,7 +3053,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_TunggakanPascaSMK10}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="610" y="300" width="30" height="20" uuid="3b29b967-d6d3-45bb-aa14-eef8fdafd01b"/>
+				<reportElement x="610" y="180" width="30" height="20" uuid="3b29b967-d6d3-45bb-aa14-eef8fdafd01b"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2970,7 +3061,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_TunggakanPascaSMK11}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="670" y="300" width="30" height="20" uuid="b49c78cb-ab96-4094-be57-567cc613c24c"/>
+				<reportElement x="670" y="180" width="30" height="20" uuid="b49c78cb-ab96-4094-be57-567cc613c24c"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -2978,7 +3069,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_TunggakanPascaSMK12}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="730" y="300" width="32" height="20" uuid="d1c175c8-8e39-456e-9e41-f249d5f55987"/>
+				<reportElement x="730" y="180" width="32" height="20" uuid="d1c175c8-8e39-456e-9e41-f249d5f55987"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3951,7 +4042,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CAttributeSMKTOTAL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="90" y="180" width="30" height="20" uuid="2ee3e12a-a58c-4937-ae88-06ff1d05380d"/>
+				<reportElement x="90" y="400" width="30" height="20" uuid="2ee3e12a-a58c-4937-ae88-06ff1d05380d"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3959,7 +4057,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CBukuSMP7}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="150" y="180" width="30" height="20" uuid="ae597471-36a9-4312-963f-5002b5916852"/>
+				<reportElement x="150" y="400" width="30" height="20" uuid="ae597471-36a9-4312-963f-5002b5916852"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3967,7 +4072,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CBukuSMP8}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="210" y="180" width="30" height="20" uuid="558541e3-bf10-41c2-9b00-b1eae09ed63d"/>
+				<reportElement x="210" y="400" width="30" height="20" uuid="558541e3-bf10-41c2-9b00-b1eae09ed63d"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3975,7 +4087,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CBukuSMP9}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="272" y="180" width="32" height="20" uuid="9f50e5a5-cf12-4fb4-b888-1f5b0495a423"/>
+				<reportElement x="272" y="400" width="32" height="20" uuid="9f50e5a5-cf12-4fb4-b888-1f5b0495a423"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3983,7 +4102,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CBukuSMPTOTAL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="334" y="180" width="30" height="20" uuid="dad08889-057b-4b0f-b9a5-988402cb8b43"/>
+				<reportElement x="334" y="400" width="30" height="20" uuid="dad08889-057b-4b0f-b9a5-988402cb8b43"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3991,7 +4117,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CBukuSMA10}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="394" y="180" width="30" height="20" uuid="611689fb-005f-48c9-8beb-26cc42144a54"/>
+				<reportElement x="394" y="400" width="30" height="20" uuid="611689fb-005f-48c9-8beb-26cc42144a54"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -3999,7 +4132,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CBukuSMA11}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="454" y="180" width="30" height="20" uuid="c2b20ec4-eeb5-4c15-a5f7-4277863bd815"/>
+				<reportElement x="454" y="400" width="30" height="20" uuid="c2b20ec4-eeb5-4c15-a5f7-4277863bd815"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4007,7 +4147,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CBukuSMA12}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="517" y="180" width="33" height="20" uuid="99743af8-3f69-4d15-81bd-a165b98362a8"/>
+				<reportElement x="517" y="400" width="33" height="20" uuid="99743af8-3f69-4d15-81bd-a165b98362a8"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4015,7 +4162,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CBukuSMATOTAL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="580" y="180" width="30" height="20" uuid="360c44d8-d3ed-42dd-9c73-76373fad1576"/>
+				<reportElement x="580" y="400" width="30" height="20" uuid="360c44d8-d3ed-42dd-9c73-76373fad1576"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4023,7 +4177,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CBukuSMK10}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="640" y="180" width="30" height="20" uuid="3b29b967-d6d3-45bb-aa14-eef8fdafd01b"/>
+				<reportElement x="640" y="400" width="30" height="20" uuid="3b29b967-d6d3-45bb-aa14-eef8fdafd01b"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4031,7 +4192,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CBukuSMK11}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="700" y="180" width="30" height="20" uuid="b49c78cb-ab96-4094-be57-567cc613c24c"/>
+				<reportElement x="700" y="400" width="30" height="20" uuid="b49c78cb-ab96-4094-be57-567cc613c24c"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4039,7 +4207,14 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CBukuSMK12}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="762" y="180" width="32" height="20" uuid="d1c175c8-8e39-456e-9e41-f249d5f55987"/>
+				<reportElement x="762" y="400" width="32" height="20" uuid="d1c175c8-8e39-456e-9e41-f249d5f55987"/>
+				<box bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4707,7 +4882,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CAlmamaterSMKTOTAL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="90" y="300" width="30" height="20" uuid="2ee3e12a-a58c-4937-ae88-06ff1d05380d"/>
+				<reportElement x="90" y="180" width="30" height="20" uuid="2ee3e12a-a58c-4937-ae88-06ff1d05380d"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4715,7 +4890,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CTunggakanPascaSMP7}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="150" y="300" width="30" height="20" uuid="ae597471-36a9-4312-963f-5002b5916852"/>
+				<reportElement x="150" y="180" width="30" height="20" uuid="ae597471-36a9-4312-963f-5002b5916852"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4723,7 +4898,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CTunggakanPascaSMP8}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="210" y="300" width="30" height="20" uuid="558541e3-bf10-41c2-9b00-b1eae09ed63d"/>
+				<reportElement x="210" y="180" width="30" height="20" uuid="558541e3-bf10-41c2-9b00-b1eae09ed63d"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4731,7 +4906,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CTunggakanPascaSMP9}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="272" y="300" width="32" height="20" uuid="9f50e5a5-cf12-4fb4-b888-1f5b0495a423"/>
+				<reportElement x="272" y="180" width="32" height="20" uuid="9f50e5a5-cf12-4fb4-b888-1f5b0495a423"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4739,7 +4914,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CTunggakanPascaSMPTOTAL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="334" y="300" width="30" height="20" uuid="dad08889-057b-4b0f-b9a5-988402cb8b43"/>
+				<reportElement x="334" y="180" width="30" height="20" uuid="dad08889-057b-4b0f-b9a5-988402cb8b43"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4747,7 +4922,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CTunggakanPascaSMA10}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="394" y="300" width="30" height="20" uuid="611689fb-005f-48c9-8beb-26cc42144a54"/>
+				<reportElement x="394" y="180" width="30" height="20" uuid="611689fb-005f-48c9-8beb-26cc42144a54"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4755,7 +4930,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CTunggakanPascaSMA11}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="454" y="300" width="30" height="20" uuid="c2b20ec4-eeb5-4c15-a5f7-4277863bd815"/>
+				<reportElement x="454" y="180" width="30" height="20" uuid="c2b20ec4-eeb5-4c15-a5f7-4277863bd815"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4763,7 +4938,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CTunggakanPascaSMA12}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="517" y="300" width="33" height="20" uuid="99743af8-3f69-4d15-81bd-a165b98362a8"/>
+				<reportElement x="517" y="180" width="33" height="20" uuid="99743af8-3f69-4d15-81bd-a165b98362a8"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4771,7 +4946,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CTunggakanPascaSMATOTAL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="580" y="300" width="30" height="20" uuid="360c44d8-d3ed-42dd-9c73-76373fad1576"/>
+				<reportElement x="580" y="180" width="30" height="20" uuid="360c44d8-d3ed-42dd-9c73-76373fad1576"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4779,7 +4954,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CTunggakanPascaSMK10}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="640" y="300" width="30" height="20" uuid="3b29b967-d6d3-45bb-aa14-eef8fdafd01b"/>
+				<reportElement x="640" y="180" width="30" height="20" uuid="3b29b967-d6d3-45bb-aa14-eef8fdafd01b"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4787,7 +4962,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CTunggakanPascaSMK11}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="700" y="300" width="30" height="20" uuid="b49c78cb-ab96-4094-be57-567cc613c24c"/>
+				<reportElement x="700" y="180" width="30" height="20" uuid="b49c78cb-ab96-4094-be57-567cc613c24c"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>
@@ -4795,7 +4970,7 @@ WHERE
 				<textFieldExpression><![CDATA[$P{PARAM_CTunggakanPascaSMK12}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="762" y="300" width="32" height="20" uuid="d1c175c8-8e39-456e-9e41-f249d5f55987"/>
+				<reportElement x="762" y="180" width="32" height="20" uuid="d1c175c8-8e39-456e-9e41-f249d5f55987"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="7"/>
 					<paragraph rightIndent="1"/>

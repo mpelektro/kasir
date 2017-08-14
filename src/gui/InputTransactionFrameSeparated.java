@@ -2579,6 +2579,11 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         );
 
         jButtonSubmit.setText(org.openide.util.NbBundle.getMessage(InputTransactionFrameSeparated.class, "InputTransactionFrameSeparated.jButtonSubmit.text")); // NOI18N
+        jButtonSubmit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonSubmitMouseEntered(evt);
+            }
+        });
         jButtonSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSubmitActionPerformed(evt);
@@ -2930,6 +2935,21 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jTextFieldIPPAmountSimple.setValue((long)0);
+        jTextFieldIPSPAmountSimple.setValue((long)0);
+        jTextFieldSeragamAmountSimple.setValue((long)0);
+        jTextFieldBukuAmountSimple.setValue((long)0);
+        jTextFieldIKSAmountSimple.setValue((long)0);
+        jTextFieldILLAmountSimple.setValue((long)0);
+        jTextFieldIPSBAmountSimple.setValue((long)0);
+        jTextFieldIUAAmountSimple.setValue((long)0);
+        jTextFieldIUSAmountSimple.setValue((long)0);
+        jTextFieldAttributeAmountSimple.setValue((long)0);
+        jTextFieldPVTAmountSimple.setValue((long)0);
+        jTextFieldTunggakanPascaAmountSimple.setValue((long)0);
+        jTextFieldAlmamaterAmountSimple.setValue((long)0);
+        jTextFieldOSISAmountSimple.setValue((long)0);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -3709,6 +3729,21 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
     private void jComboBoxDialogIPSBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDialogIPSBActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxDialogIPSBActionPerformed
+
+    private void jButtonSubmitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSubmitMouseEntered
+        // TODO add your handling code here:
+        if(jTextFieldBukuAmountSimple.getValue() != null){
+            if((long)jTextFieldBukuAmountSimple.getValue() > 0 && ((long)jTextFieldIPPAmountSimple.getValue()>0 || (long)jTextFieldIKSAmountSimple.getValue()>0 ||
+                    (long)jTextFieldIPSPAmountSimple.getValue()>0 || (long)jTextFieldIUAAmountSimple.getValue()>0 || (long)jTextFieldIUSAmountSimple.getValue()>0 ||
+                    (long)jTextFieldOSISAmountSimple.getValue()>0 || (long)jTextFieldSeragamAmountSimple.getValue()>0 || (long)jTextFieldPVTAmountSimple.getValue()>0 ||
+                    (long)jTextFieldTunggakanPascaAmountSimple.getValue()>0 || (long)jTextFieldIPSBAmountSimple.getValue()>0 || (long)jTextFieldAttributeAmountSimple.getValue()>0||
+                    (long)jTextFieldAlmamaterAmountSimple.getValue()>0 || (long)jTextFieldIPSBAmountSimple.getValue()>0)){            
+                jButtonSubmit.setEnabled(false);
+            }else{
+                jButtonSubmit.setEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_jButtonSubmitMouseEntered
 
     /**
      * @param args the command line arguments
@@ -5358,7 +5393,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         
         
 //IPP PART
-        if(jTextFieldIPPAmountSimple.getValue() != null && !jToggleButtonLunas.isSelected()){
+        if(jTextFieldIPPAmountSimple.getValue() != null && !jToggleButtonLunas.isSelected() && (long)jTextFieldIPPAmountSimple.getValue()>0){
             this.tableModelIPP = inputTransactionIPP.buildIPPSubmitTableModel(this.profil, this.tahunIPP.get(jComboBoxTahun.getSelectedIndex()));
             jTableIPP.setModel(this.tableModelIPP);
 //            jTableIPP1.setModel(this.tableModelIPP);
@@ -5377,7 +5412,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                 }
             }
             
-        }else if(jTextFieldIPPAmountSimple.getValue() != null && jToggleButtonLunas.isSelected()){
+        }else if(jTextFieldIPPAmountSimple.getValue() != null && jToggleButtonLunas.isSelected() && (long)jTextFieldIPPAmountSimple.getValue()>0){
              ippTDetailUUID = UUID.randomUUID();
              buildIPPTableModel(profil, profil.currentLevel.tahun);
                     IPPTransactionDetail ippTransactionDetail = new IPPTransactionDetail(ippTDetailUUID, ippFromDB.id, clerk.id, 0L, profil.noInduk,profil.currentLevel.level1, ippFromDB.entries.get(0).amount, TransactionDetail.PaymentMethod.CASH, "IPP Bulan JULI", false);
@@ -5390,7 +5425,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         
         //IUAP PART
         if(this.profil.currentLevel.level1.toString().equals("SMA")){
-            if(jTextFieldIUAAmountSimple.getValue() != null){
+            if(jTextFieldIUAAmountSimple.getValue() != null && (long)jTextFieldIUAAmountSimple.getValue() > 0){
                 this.tableModelIUAP = new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"JULI", null},
@@ -5430,7 +5465,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
             }
         }        
         //TunggakanPasca PART
-        if(jTextFieldTunggakanPascaAmountSimple.getValue() != null){
+        if(jTextFieldTunggakanPascaAmountSimple.getValue() != null && (long)jTextFieldTunggakanPascaAmountSimple.getValue() > 0){
             this.tableModelTunggakanPasca = inputTransactionTunggakanPasca.buildTunggakanPascaSubmitTableModel(this.profil, this.tahunTunggakanPasca.get(jComboBoxTahun.getSelectedIndex()));
             jTableTunggakanPasca.setModel(this.tableModelTunggakanPasca);
 //            jTableTunggakanPasca1.setModel(this.tableModelTunggakanPasca);
@@ -5451,7 +5486,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         }
         
         //IUS PART
-        if(jTextFieldIUSAmountSimple.getValue() != null){
+        if(jTextFieldIUSAmountSimple.getValue() != null && (long)jTextFieldIUSAmountSimple.getValue() > 0){
             this.tahunIUS = inputTransactionIUS.tahunIUS;
             this.tableModelIUS = inputTransactionIUS.buildIUSSubmitTableModel(this.profil, this.tahunIUS.get(inputTransactionIUS.jComboBoxTahun.getSelectedIndex()));
             //jTableIUS.setModel(this.tableModelIUS);
@@ -5473,7 +5508,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         }
         
         //IKS PART
-        if(jTextFieldIKSAmountSimple.getValue() != null){
+        if(jTextFieldIKSAmountSimple.getValue() != null && (long)jTextFieldIKSAmountSimple.getValue()>0){
             this.tahunIKS = inputTransactionIKS.tahunIKS;
             this.tableModelIKS = inputTransactionIKS.buildIKSSubmitTableModel(this.profil, this.tahunIKS.get(inputTransactionIKS.jComboBoxTahun.getSelectedIndex()));
             for(int i = 0 ; i<1; i++){
@@ -5488,7 +5523,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         }
         
         //PVT PART
-        if(jTextFieldPVTAmountSimple.getValue() != null){
+        if(jTextFieldPVTAmountSimple.getValue() != null && (long)jTextFieldPVTAmountSimple.getValue()>0){
             this.tahunPVT = inputTransactionPVT.tahunPVT;
             this.tableModelPVT = inputTransactionPVT.buildPVTSubmitTableModel(this.profil, this.tahunPVT.get(inputTransactionPVT.jComboBoxTahun.getSelectedIndex()));
             for(int i = 0 ; i<1; i++){
@@ -5503,7 +5538,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         }
         
         //OSIS PART
-        if(jTextFieldOSISAmountSimple.getValue() != null){
+        if(jTextFieldOSISAmountSimple.getValue() != null && (long)jTextFieldOSISAmountSimple.getValue()>0){
             this.tahunOSIS = inputTransactionOSIS.tahunOSIS;
             this.tableModelOSIS = inputTransactionOSIS.buildOSISSubmitTableModel(this.profil, this.tahunOSIS.get(inputTransactionOSIS.jComboBoxTahun.getSelectedIndex()));
             for(int i = 0 ; i<1; i++){

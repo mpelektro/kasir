@@ -2893,6 +2893,9 @@
       </Layout>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="jPanelProfil">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jTextFieldIPPAmountSimple.setValue((long)0);&#xa;jTextFieldIPSPAmountSimple.setValue((long)0);&#xa;jTextFieldSeragamAmountSimple.setValue((long)0);&#xa;jTextFieldBukuAmountSimple.setValue((long)0);&#xa;jTextFieldIKSAmountSimple.setValue((long)0);&#xa;jTextFieldILLAmountSimple.setValue((long)0);&#xa;jTextFieldIPSBAmountSimple.setValue((long)0);&#xa;jTextFieldIUAAmountSimple.setValue((long)0);&#xa;jTextFieldIUSAmountSimple.setValue((long)0);&#xa;jTextFieldAttributeAmountSimple.setValue((long)0);&#xa;jTextFieldPVTAmountSimple.setValue((long)0);&#xa;jTextFieldTunggakanPascaAmountSimple.setValue((long)0);&#xa;jTextFieldAlmamaterAmountSimple.setValue((long)0);&#xa;jTextFieldOSISAmountSimple.setValue((long)0);"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -3080,6 +3083,7 @@
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonSubmitMouseEntered"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSubmitActionPerformed"/>
           </Events>
         </Component>
