@@ -306,6 +306,10 @@ public class LoginFrame extends javax.swing.JFrame {
                 AppFramePendaftaran appFramePendaftaran = new AppFramePendaftaran(clerk);
                 JOptionPane.showMessageDialog(appFramePendaftaran, "Login Success");
                 appFramePendaftaran.setVisible(true);
+            }else if(clerk.jabatan.toLowerCase().equals("buku smp") || clerk.jabatan.toLowerCase().equals("buku sma") || clerk.jabatan.toLowerCase().equals("buku smk")){
+                AppFrameBuku appFrameBuku = new AppFrameBuku(clerk);
+                JOptionPane.showMessageDialog(appFrameBuku, "Login Success");
+                appFrameBuku.setVisible(true);
             }else{
                 AppFrame appFrame = new AppFrame(clerk);
                 JOptionPane.showMessageDialog(appFrame, "Login Success");

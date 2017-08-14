@@ -71,6 +71,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
     
     private AppFrame appFrame;
     private AppFramePendaftaran appFramePendaftaran;
+    private AppFrameBuku appFrameBuku;
     //Tunggakan Iuran-iuran
     
     private ArrayList<IPP> tIPPs;
@@ -375,6 +376,39 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
     
     public InputTransactionFrameSeparated(AppFrame af, Clerk cl, Profil profil, ArrayList<IPP> paramIPPs, IPSP paramIPSP, ArrayList<Seragam> paramSeragams, ArrayList<Buku> paramBukus, ArrayList<IKS> paramIKSs, ArrayList<ILL> paramILLs, IPSB paramIPSB, IUA paramIUA, ArrayList<IUS> paramIUSs, ArrayList<OSIS> paramOSISs, ArrayList<Attribute> paramAttributes, ArrayList<PVT> paramPVTs, ArrayList<Tabungan> paramTabungans, ArrayList<Sumbangan> paramSumbangans, PASB paramPASB, ArrayList<TunggakanPasca> paramTunggakanPascas, ArrayList<Almamater> paramAlmamaters, ArrayList<IUAP> paramIUAPs) {
         this.appFrame = af;
+        this.clerk = cl;
+        Clerk.current.id = this.clerk.id;
+        this.profil = profil;
+        tIPPs = paramIPPs;
+        tIUAPs = paramIUAPs;
+        tTunggakanPascas = paramTunggakanPascas;
+        tIPSP = paramIPSP;
+        tSeragams = paramSeragams;
+        tAlmamaters = paramAlmamaters;
+        tBukus = paramBukus;
+        tIKSs = paramIKSs;
+        tILLs = paramILLs;
+        tIPSB = paramIPSB;
+        tIUA = paramIUA;
+        tIUSs = paramIUSs;
+        tOSISs = paramOSISs;
+        tAttributes = paramAttributes;
+        tPVTs = paramPVTs;
+        tTabungans = paramTabungans;
+        tSumbangans= paramSumbangans;
+        tPASB = paramPASB;
+//        if(DBSR.dbURL.equals("jdbc:mysql://ark3.dayarka.com/rusly_ppdbdb")){
+//            System.out.println("PPDB");
+//            
+//        }else{
+//            System.out.println("Kasir");
+//        }
+        
+        initComponents();
+    }
+    
+    public InputTransactionFrameSeparated(AppFrameBuku af, Clerk cl, Profil profil, ArrayList<IPP> paramIPPs, IPSP paramIPSP, ArrayList<Seragam> paramSeragams, ArrayList<Buku> paramBukus, ArrayList<IKS> paramIKSs, ArrayList<ILL> paramILLs, IPSB paramIPSB, IUA paramIUA, ArrayList<IUS> paramIUSs, ArrayList<OSIS> paramOSISs, ArrayList<Attribute> paramAttributes, ArrayList<PVT> paramPVTs, ArrayList<Tabungan> paramTabungans, ArrayList<Sumbangan> paramSumbangans, PASB paramPASB, ArrayList<TunggakanPasca> paramTunggakanPascas, ArrayList<Almamater> paramAlmamaters, ArrayList<IUAP> paramIUAPs) {
+        this.appFrameBuku = af;
         this.clerk = cl;
         Clerk.current.id = this.clerk.id;
         this.profil = profil;
@@ -5071,66 +5105,64 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                 
                     //SEND SMS USING SMSFORTUNATA GATEWAY
                     try {
-                        String pesanSms = pesanDetail.replace(" ", "%20");
-        //                URL myURL = new URL("http://smsfortunata.com/api?user=mpelektro@yahoo.com&pass=spyderco123&"
-        //                        + "pesan=Total%20Rp.%20"+String.format("%1$,.0f", transactionSummary.totalAmount)
-        //                        + pesanDetail.concat("%20No.%20"+String.valueOf(transactionSummary.id))
-        //                        + "%20-YDS%20Kosgoro-"
-        //                        +"&senderid=modem2&nomor="
-        //                        +profil.biodata.telpon1);
-                        String phone = profil.biodata.telpon1.replaceFirst("0", "62"); 
-                        if(isXl(phone) || isTsel(phone)){ //SMS FORTUNATA
-                            URL myURL = new URL("http://smsfortunata.com/api?user=mpelektro@yahoo.com&pass=spyderco123&"
-                                    + "pesan="
-                                    + pesanSms
-                                    +"&senderid=mars&nomor="
-                                    +profil.biodata.telpon1);
-                            URLConnection myURLConnection = myURL.openConnection();
-                            myURLConnection.connect();
-                            myURLConnection.getInputStream();
- 
-                        }else{  //SMS VIRO                                                                                                               
-//                        SmsMaskingSender sms = new SmsMaskingSender(phone, pesanDetail);
+                        String pesanSms = pesanDetail.replace(" ", "%20");                      
+                        String phone = profil.biodata.telpon1.replaceFirst("0", "62");
+                        if(phone.substring(0, 3).equals("628")){
+                            System.out.println("Valid phone");
+                            if(isXl(phone) || isTsel(phone)){ //SMS FORTUNATA
+                                URL myURL = new URL("http://smsfortunata.com/api?user=mpelektro@yahoo.com&pass=spyderco123&"
+                                        + "pesan="
+                                        + pesanSms
+                                        +"&senderid=mars&nomor="
+                                        +profil.biodata.telpon1);
+                                URLConnection myURLConnection = myURL.openConnection();
+                                myURLConnection.connect();
+                                myURLConnection.getInputStream();
 
-                         HttpClient httpClient = HttpClientBuilder.create().build(); //Use this instead 
-                         String userAuthorization = Base64.getEncoder().encodeToString("rusly:P@ssw0rdspyderco123".getBytes("utf-8"));
-                            try {
-                                HttpPost request = new HttpPost("http://107.20.199.106/restapi/sms/1/text/single");
-                                 JSONObject obj = new JSONObject();
-                                 switch(profil.currentLevel.level1.toString()){
-                                     case "SMA": obj.put("from","SMA KOSGORO");
-                                        break;
-                                     case "SMP": obj.put("from","SMP KOSGORO");
-                                        break;
-                                     case "SMK": obj.put("from","SMK KOSGORO");
-                                        break;
-                                     default:
-                                        obj.put("from","SMSVIRO");
-                                        break;
-                                 }
-                                
-                                obj.put("to", phone);
-                                obj.put("text", pesanDetail);
-                                StringEntity params = new StringEntity(obj.toJSONString());
-                                String result = "";
-                                request.addHeader("Authorization", "Basic "+userAuthorization);
-                                request.addHeader("Content-Type", "application/json");
-                                request.addHeader("Accept", "application/json");
-                                request.setEntity(params);
-                                HttpResponse response = httpClient.execute(request);
-                                HttpEntity entity = response.getEntity();
-                                InputStream instream = entity.getContent();
-                                result = convertStreamToString(instream);
-                                // now you have the string representation of the HTML request                               
-                                instream.close();                                                               
-                                
-                            }catch (Exception ex) {
-                                System.err.println(ex);
-                                //handle exception here
+                            }else{  //SMS VIRO                                                                                                               
+    //                        SmsMaskingSender sms = new SmsMaskingSender(phone, pesanDetail);
 
-                            } finally {
-                                //Deprecated
-                                //httpClient.getConnectionManager().shutdown(); 
+                             HttpClient httpClient = HttpClientBuilder.create().build(); //Use this instead 
+                             //String userAuthorization = Base64.getEncoder().encodeToString("rusly:P@ssw0rdspyderco123".getBytes("utf-8"));
+                             String userAuthorization = "cnVzbHk6UEBzc3cwcmRzcHlkZXJjbzEyMw==";                         
+                                try {
+                                    HttpPost request = new HttpPost("http://107.20.199.106/restapi/sms/1/text/single");
+                                     JSONObject obj = new JSONObject();
+                                     switch(profil.currentLevel.level1.toString()){
+                                         case "SMA": obj.put("from","SMA KOSGORO");
+                                            break;
+                                         case "SMP": obj.put("from","SMP KOSGORO");
+                                            break;
+                                         case "SMK": obj.put("from","SMK KOSGORO");
+                                            break;
+                                         default:
+                                            obj.put("from","SMSVIRO");
+                                            break;
+                                     }
+
+                                    obj.put("to", phone);
+                                    obj.put("text", pesanDetail);
+                                    StringEntity params = new StringEntity(obj.toJSONString());
+                                    String result = "";
+                                    request.addHeader("Authorization", "Basic "+userAuthorization);
+                                    request.addHeader("Content-Type", "application/json");
+                                    request.addHeader("Accept", "application/json");
+                                    request.setEntity(params);
+                                    HttpResponse response = httpClient.execute(request);
+                                    HttpEntity entity = response.getEntity();
+                                    InputStream instream = entity.getContent();
+                                    result = convertStreamToString(instream);
+                                    // now you have the string representation of the HTML request                               
+                                    instream.close();                                                               
+
+                                }catch (Exception ex) {
+                                    System.err.println(ex);
+                                    //handle exception here
+
+                                } finally {
+                                    //Deprecated
+                                    //httpClient.getConnectionManager().shutdown(); 
+                                }
                             }
                         }
                         
@@ -7656,7 +7688,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         jasperParameter.put("Param_Profil_ID", profil.noInduk);
         jasperParameter.put("SUBREPORT_DIR", "C://printout//");
         jasperParameter.put("Param_TotalAmountTerbilang", totalATString);
-        jasperParameter.put("Param_Is_PPDB", appFrame.isPPDB);
+        jasperParameter.put("Param_Is_PPDB", appFrame==null?appFrameBuku.isPPDB:appFrame.isPPDB);
         
         // Tunggakan IPP
 //        jasperParameter.put("Param_Tunggakan_IPP", tunggakanIPP);
