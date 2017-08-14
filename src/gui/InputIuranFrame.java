@@ -834,6 +834,12 @@ public class InputIuranFrame extends javax.swing.JFrame {
             e.printStackTrace();
         }
         jTableBuku.setModel(tableModelBuku);
+        jTableBuku.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableBuku.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTableBukuMouseReleased(evt);
+            }
+        });
         jScrollPane8.setViewportView(jTableBuku);
 
         javax.swing.GroupLayout jPanelBukuLayout = new javax.swing.GroupLayout(jPanelBuku);
@@ -973,7 +979,7 @@ public class InputIuranFrame extends javax.swing.JFrame {
             StringValidators.REQUIRE_VALID_NUMBER,
             StringValidators.REQUIRE_NON_NEGATIVE_NUMBER));
     //validationPanel.getValidationGroup().add(jTextFieldIPSPAmount, d);
-    jButtonSaveAll.setEnabled(false);
+    //jButtonSaveAll.setEnabled(false);
 
     pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1128,6 +1134,12 @@ public class InputIuranFrame extends javax.swing.JFrame {
     private void jTextFieldBukuTransactionNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBukuTransactionNameKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldBukuTransactionNameKeyTyped
+
+    private void jTableBukuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableBukuMouseReleased
+        // TODO add your handling code here:
+       
+        System.out.println(bukuS.get(jTableBuku.getSelectedRow()).id);
+    }//GEN-LAST:event_jTableBukuMouseReleased
 
     /**
      * @param args the command line arguments
@@ -1456,6 +1468,7 @@ public class InputIuranFrame extends javax.swing.JFrame {
             }else{
                 data[i][3] = new Boolean(false);
             }
+            data[i][4] = entry.getValue().id;
             //if(jTableBuku != null){data[i][3]= jTableBuku.getValueAt(i,3);}else{data[i][3]= new Boolean(false);}
             bukuS.add(entry.getValue());
             i++;
