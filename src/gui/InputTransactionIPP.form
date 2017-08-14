@@ -145,6 +145,7 @@
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try{&#xa;    tahunComboBoxModel = buildIPPtahunComboBoxModel(profil);&#xa;}catch(SQLException ex){&#xa;    ex.printStackTrace();&#xa;}catch(KasirException ex){&#xa;    ex.printStackTrace();&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">

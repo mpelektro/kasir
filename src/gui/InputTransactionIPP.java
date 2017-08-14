@@ -397,7 +397,7 @@ public class InputTransactionIPP extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBayarIPP;
-    private javax.swing.JComboBox jComboBoxTahun;
+    public javax.swing.JComboBox jComboBoxTahun;
     private javax.swing.JFormattedTextField jFormattedTextFieldIDDSaldo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
