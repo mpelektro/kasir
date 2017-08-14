@@ -4350,11 +4350,11 @@ public class AppFrameBuku extends javax.swing.JFrame {
         jasperParameter.put("CurrentLevel", targetLevel);
         
         
-         String fileName = "C://printout//PrintOutTunggakanPerkelas.jrxml";
-            String filetoPrint = "C://printout//PrintOutTunggakanPerkelas.jrprint";
-            String filetoFill = "C://printout//PrintOutTunggakanPerkelas.jasper";
+         String fileName = "C://printout//PrintOutTunggakanBukuPerkelas.jrxml";
+            String filetoPrint = "C://printout//PrintOutTunggakanBukuPerkelas.jrprint";
+            String filetoFill = "C://printout//PrintOutTunggakanBukuPerkelas.jasper";
             //String filePdf = "C://printout//PrintOutReportPerKasir.pdf";
-            String filePdf = "C://printout//PrintOutTunggakanPerkelas.pdf";
+            String filePdf = "C://printout//PrintOutTunggakanBukuPerkelas.pdf";
        JasperCompileManager.compileReportToFile(fileName);
             
             
@@ -4366,22 +4366,22 @@ public class AppFrameBuku extends javax.swing.JFrame {
             
             
             jasperReport = JasperCompileManager.compileReport
-        ("C://printout//PrintOutTunggakanPerkelas.jrxml");
+        ("C://printout//PrintOutTunggakanBukuPerkelas.jrxml");
 
         // filling report with data from data source
 
         jasperPrint = JasperFillManager.fillReport(jasperReport,jasperParameter, connection); 
         // exporting process
         // 1- export to PDF
-        JasperExportManager.exportReportToPdfFile(jasperPrint, "C://printout//PrintOutTunggakanPerkelas.pdf");
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "C://printout//PrintOutTunggakanBukuPerkelas.pdf");
 
         // 2- export to HTML
-        JasperExportManager.exportReportToHtmlFile(jasperPrint, "C://printout//PrintOutTunggakanPerkelas.html" ); 
+        JasperExportManager.exportReportToHtmlFile(jasperPrint, "C://printout//PrintOutTunggakanBukuPerkelas.html" ); 
 
         // 3- export to Excel sheet
         JRXlsExporter exporter = new JRXlsExporter();
         exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-        exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "C://printout//PrintOutTunggakanPerkelas.xls" );
+        exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "C://printout//PrintOutTunggakanBukuPerkelas.xls" );
 
         exporter.exportReport();
     }
