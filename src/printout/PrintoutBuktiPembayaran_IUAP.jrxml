@@ -103,7 +103,8 @@ WHERE
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{IUAPTransaction_PaymentMethod}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{IUAPTransaction_PaymentMethod}.equals("CASH")?"TUNAI":($F{IUAPTransaction_PaymentMethod}.equals("TRANSFER")?"BANK":($F{IUAPTransaction_PaymentMethod}.equals("IDD")?"DANA SISWA":($F{IUAPTransaction_PaymentMethod}.equals("BEASISWA")?"BEASISWA":"B. AKADEMIK")))
+]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd-MMM-yyyy">
 				<reportElement x="271" y="1" width="49" height="12" uuid="3f3fadea-f9db-406f-b79c-f6cda86e4318"/>

@@ -45,25 +45,6 @@ FROM
      `IPPTransaction` IPPTransaction
 WHERE
      IPPTransaction.`IDTransactionSummary` = $P{Param_IPP_TransactionSummary_ID}
-UNION
-SELECT
-     TunggakanPascaTransaction.`ID` AS TunggakanPascaTransaction_ID,
-     TunggakanPascaTransaction.`UUID` AS TunggakanPascaTransaction_UUID,
-     TunggakanPascaTransaction.`IDIuran` AS TunggakanPascaTransaction_IDIuran,
-     TunggakanPascaTransaction.`IDClerk` AS TunggakanPascaTransaction_IDClerk,
-     TunggakanPascaTransaction.`IDTransactionSummary` AS TunggakanPascaTransaction_IDTransactionSummary,
-     TunggakanPascaTransaction.`NomorInduk` AS TunggakanPascaTransaction_NomorInduk,
-     TunggakanPascaTransaction.`PaymentMethod` AS TunggakanPascaTransaction_PaymentMethod,
-     TunggakanPascaTransaction.`CreateDate` AS TunggakanPascaTransaction_CreateDate,
-     TunggakanPascaTransaction.`LastUpdateDate` AS TunggakanPascaTransaction_LastUpdateDate,
-     TunggakanPascaTransaction.`Note` AS TunggakanPascaTransaction_Note,
-     TunggakanPascaTransaction.`Amount` AS TunggakanPascaTransaction_Amount,
-     TunggakanPascaTransaction.`Settled` AS TunggakanPascaTransaction_Settled,
-     TunggakanPascaTransaction.`Piutang` AS TunggakanPascaTransaction_Piutang
-FROM
-     `TunggakanPascaTransaction` TunggakanPascaTransaction
-WHERE
-     TunggakanPascaTransaction.`IDTransactionSummary` = $P{Param_IPP_TransactionSummary_ID}
 ORDER BY IPPTransaction_ID]]>
 	</queryString>
 	<field name="IPPTransaction_ID" class="java.math.BigInteger"/>

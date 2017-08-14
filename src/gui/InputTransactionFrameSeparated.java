@@ -4629,7 +4629,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                             tunggakanPascaFromDB.id, 
                                                                                             clerk.id, 
                                                                                             transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (inputTransactionTunggakanPasca.tunggakanPascaAmounts.get(i)), TransactionDetail.PaymentMethod.CASH,
-                                                                                            jTableTunggakanPasca.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                            jTableTunggakanPasca.getValueAt(i,0).toString().concat(" TP ").concat(inputTransactionTunggakanPasca.jComboBoxTahun.getSelectedItem().toString()),false);
 
                         tunggakanPascaTransactionDetails.add(tunggakanPascaTransactionDetail);
                     }
@@ -4638,7 +4638,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                             tunggakanPascaFromDB.id, 
                                                                                             clerk.id, 
                                                                                             transactionSummary.id, profil.noInduk, profil.currentLevel.level1, inputTransactionTunggakanPasca.iDDAmounts.get(i), TransactionDetail.PaymentMethod.IDD,
-                                                                                            jTableTunggakanPasca.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                            jTableTunggakanPasca.getValueAt(i,0).toString().concat(" TP ").concat(inputTransactionTunggakanPasca.jComboBoxTahun.getSelectedItem().toString()),false);
                         tunggakanPascaTransactionDetails.add(tunggakanPascaTransactionDetail);
                         // transactOUT IDD , kurangin IDD amount sama insert TDetail IDD
 
@@ -4651,7 +4651,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                             tunggakanPascaFromDB.id, 
                                                                                             clerk.id, 
                                                                                             transactionSummary.id, profil.noInduk, profil.currentLevel.level1, inputTransactionTunggakanPasca.beasiswaAmounts.get(i), TransactionDetail.PaymentMethod.BEASISWA,
-                                                                                            jTableTunggakanPasca.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                            jTableTunggakanPasca.getValueAt(i,0).toString().concat(" TP ").concat(inputTransactionTunggakanPasca.jComboBoxTahun.getSelectedItem().toString()),false);
                         tunggakanPascaTransactionDetails.add(tunggakanPascaTransactionDetail);
                         }
                         transactionSummary.note = "TIDAK_TUNAI";
@@ -4661,7 +4661,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                             tunggakanPascaFromDB.id, 
                                                                                             clerk.id, 
                                                                                             transactionSummary.id, profil.noInduk, profil.currentLevel.level1, inputTransactionTunggakanPasca.beasiswaCostAmounts.get(i), TransactionDetail.PaymentMethod.BEASISWA_COST,
-                                                                                            jTableTunggakanPasca.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                            jTableTunggakanPasca.getValueAt(i,0).toString().concat(" TP ").concat(inputTransactionTunggakanPasca.jComboBoxTahun.getSelectedItem().toString()),false);
                         tunggakanPascaTransactionDetails.add(tunggakanPascaTransactionDetail);
                         BeasiswaCost.transactOut(profil, transactionSummary.id, inputTransactionTunggakanPasca.beasiswaCostAmounts.get(i));
                         transactionSummary.note = "TIDAK_TUNAI";
