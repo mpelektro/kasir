@@ -323,6 +323,7 @@ public class AppFrameBuku extends javax.swing.JFrame {
 
         jButtonSettingIuran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user_info_16.png"))); // NOI18N
         jButtonSettingIuran.setText(org.openide.util.NbBundle.getMessage(AppFrameBuku.class, "AppFrameBuku.jButtonSettingIuran.text")); // NOI18N
+        jButtonSettingIuran.setEnabled(false);
         jButtonSettingIuran.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonSettingIuran.setMaximumSize(new java.awt.Dimension(101, 41));
         jButtonSettingIuran.setMinimumSize(new java.awt.Dimension(101, 41));
