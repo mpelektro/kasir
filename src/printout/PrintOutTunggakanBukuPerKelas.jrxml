@@ -130,7 +130,9 @@
      BukuLKS2.`Debt` AS BukuLKS2_Debt,
      IUA.`NomorInduk` AS IUA_NomorInduk,
      IUA.`ChargedLevel` AS IUA_ChargedLevel,
-     IUA.`Debt` AS IUA_Debt
+     IUA.`Debt` AS IUA_Debt,
+     IPSP.`NomorInduk` AS IPSP_NomorInduk,
+     IPSP.`Debt` AS IPSP_Debt
 FROM
      `Profil` Profil INNER JOIN `IPP` IPP ON Profil.`NomorInduk` = IPP.`NomorInduk`
      AND Profil.`CurrentLevel` = IPP.`ChargedLevel`
@@ -160,6 +162,7 @@ FROM
      AND Profil.`CurrentLevel` = BukuLKS2.`ChargedLevel`
      LEFT JOIN IUA ON Profil.`NomorInduk` = IUA.`NomorInduk`
      AND Profil.`CurrentLevel` = IUA.`ChargedLevel`
+     LEFT JOIN IPSP ON Profil.`NomorInduk` = IPSP.`NomorInduk`
 WHERE
      Profil.`CurrentLevel` LIKE $P{CurrentLevel}
 ORDER BY
@@ -262,6 +265,8 @@ ORDER BY
 	<field name="IUA_NomorInduk" class="java.lang.String"/>
 	<field name="IUA_ChargedLevel" class="java.lang.String"/>
 	<field name="IUA_Debt" class="java.lang.Float"/>
+	<field name="IPSP_NomorInduk" class="java.lang.String"/>
+	<field name="IPSP_Debt" class="java.lang.Float"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -301,13 +306,6 @@ ORDER BY
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[IPP]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="214" y="0" width="52" height="12" uuid="23178ad1-7afd-45e1-a77c-34b73200ea70"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[Pasca]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="266" y="0" width="52" height="12" uuid="b8c62fb4-20e2-4818-b137-9d986776591b"/>
@@ -386,6 +384,13 @@ ORDER BY
 				</textElement>
 				<text><![CDATA[LKS2]]></text>
 			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="214" y="0" width="52" height="12" uuid="1112f9b7-908e-4ba9-8315-6dd58681d1ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IPP_ChargedLevel}.substring(4,5).equals("7")?"IPSP":($F{IPP_ChargedLevel}.substring(4,6).equals("10"))?"IPSP":"Pasca"]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -443,7 +448,7 @@ $F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Deb
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{TunggakanPasca_Debt1}+$F{TunggakanPasca_Debt2}+$F{TunggakanPasca_Debt3}+$F{TunggakanPasca_Debt4}+$F{TunggakanPasca_Debt5}+$F{TunggakanPasca_Debt6}+$F{TunggakanPasca_Debt7}+$F{TunggakanPasca_Debt8}+$F{TunggakanPasca_Debt9}+$F{TunggakanPasca_Debt10}+$F{TunggakanPasca_Debt11}+$F{TunggakanPasca_Debt12}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{IPP_ChargedLevel}.substring(4,5).equals("7")?$F{IPSP_Debt}:($F{IPP_ChargedLevel}.substring(4,6).equals("10"))?$F{IPSP_Debt}:($F{TunggakanPasca_Debt1}+$F{TunggakanPasca_Debt2}+$F{TunggakanPasca_Debt3}+$F{TunggakanPasca_Debt4}+$F{TunggakanPasca_Debt5}+$F{TunggakanPasca_Debt6}+$F{TunggakanPasca_Debt7}+$F{TunggakanPasca_Debt8}+$F{TunggakanPasca_Debt9}+$F{TunggakanPasca_Debt10}+$F{TunggakanPasca_Debt11}+$F{TunggakanPasca_Debt12})]]></textFieldExpression>
 			</textField>
 			<textField pattern="Rp #,##0" isBlankWhenNull="true">
 				<reportElement x="266" y="0" width="52" height="12" uuid="4ffaadac-6fe7-4a8d-b5cc-7e3714f8bb1d"/>
