@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutTunggakanBukuPerKelas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="10" uuid="4fedb1e8-eac0-4299-bf7c-9759dca59f0c">
 	<property name="ireport.zoom" value="1.6528925619834718"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="14"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
@@ -405,7 +405,7 @@ ORDER BY
 				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="33" y="0" width="130" height="12" uuid="6a756a1e-265f-4a03-af7c-94eee90b73ed"/>
+				<reportElement x="33" y="0" width="129" height="12" isPrintWhenDetailOverflows="true" uuid="6a756a1e-265f-4a03-af7c-94eee90b73ed"/>
 				<box leftPadding="1">
 					<rightPen lineWidth="1.0"/>
 				</box>

@@ -1789,8 +1789,7 @@ public class AppFrameBuku extends javax.swing.JFrame {
 
     private void clearProfilComponents() {
         jTextFieldNamaSiswa.setText("");
-        jTextFieldNomorInduk.setText("");
-        jComboBoxLevel1.setSelectedIndex(0);
+        jTextFieldNomorInduk.setText("");        
         jComboBoxLevel2.setSelectedIndex(0);
         jComboBoxLevel3.setSelectedIndex(0);
     }
