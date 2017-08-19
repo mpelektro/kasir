@@ -87,7 +87,7 @@ public class AppFrame extends javax.swing.JFrame {
     private String cicilanAkumulasi;
     private String tunggakanBerjalanAmount;
     public Float totalDebt;
-    public Float totalAkumulasi;
+    public Float totalTunggakanPasca;
     public Float rekomendasiCicilanAkumulasi;
     public Float tunggakanBerjalan;
     public boolean isPPDB = false;
@@ -1678,7 +1678,7 @@ public class AppFrame extends javax.swing.JFrame {
        
        Object[][] data = new Object[tunggakans.size()][3];
        totalDebt= 0f;
-       totalAkumulasi = 0f;
+       totalTunggakanPasca = 0f;
        tunggakanBerjalan = 0f;
        for(int i = 0 ; i < tunggakans.size(); i++){
            data[i][0] = getModifiedNameTipeIuran(tunggakans.get(i).tipeIuran);
@@ -1688,7 +1688,7 @@ public class AppFrame extends javax.swing.JFrame {
            totalDebt += tunggakans.get(i).debt;
            if(tunggakans.get(i).tipeIuran.equals("TunggakanPasca")){
            //if(tunggakans.get(i).tahun < profil.currentLevel.tahun)
-               totalAkumulasi += tunggakans.get(i).debt;
+               totalTunggakanPasca += tunggakans.get(i).debt;
                
            }else{
                tunggakanBerjalan += tunggakans.get(i).debt;
@@ -1696,7 +1696,7 @@ public class AppFrame extends javax.swing.JFrame {
            
        }
        tunggakanTotalAmount = NumberFormat.getInstance().format(totalDebt);
-       tunggakanAkumulasiAmount = NumberFormat.getInstance().format(totalAkumulasi);
+       tunggakanAkumulasiAmount = NumberFormat.getInstance().format(totalTunggakanPasca);
        tunggakanBerjalanAmount = NumberFormat.getInstance().format(tunggakanBerjalan);
        
        
