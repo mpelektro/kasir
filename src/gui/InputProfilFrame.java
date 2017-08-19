@@ -1359,7 +1359,7 @@ Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
         jNamaTextField1.setBackground(jComboBoxTingkatSekolah.getBackground());
         jNamaTextField1.setForeground(jComboBoxTingkatSekolah.getForeground());
         try {
-            if(profil == null)
+            if(profil == null && ppdbIni.get("program", "name", String.class).equals("ppdb"))
             jNomorIndukTextField1.setText(getNomorInduk((Level.Level1)jComboBoxTingkatSekolah1.getSelectedItem()));
         } catch (SQLException ex) {
             jNomorIndukTextField1.setText("ERROR");
@@ -1517,7 +1517,7 @@ Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
         
         Profil profilData = new Profil(jNomorIndukTextField1.getText(), level, biodata, new sak.Kalender(dateChooserComboTanggalMasuk1.getSelectedDate().getTime()), null, new sak.Kalender(Calendar.getInstance().getTime()));
         sak.Kalender gel2 = new sak.Kalender();
-        gel2.set(2016, 5, 22, 0, 0, 0);
+        gel2.set(2018, 5, 22, 0, 0, 0);
         if(dateChooserComboTanggalMasuk1.getSelectedDate().after(gel2))
             profilData.gelombang = pelajar.Profil.Gelombang.GELOMBANG_2;
         Control.insertProfil(profilData);
@@ -1609,6 +1609,78 @@ Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
             Control.insertIuran(Iuran.Tipe.OSIS, osis);
             Control.insertIuran(Iuran.Tipe.Almamater, almamater);
             Control.insertIuran(Iuran.Tipe.IPSB,ipsb);
+        }else if(ppdbIni.get("program", "name", String.class).equals("kasir")){
+            
+            ArrayList<Entry> entryIKS = new ArrayList<>();
+            ArrayList<Entry> entryIPP = new ArrayList<>();
+            ArrayList<Entry> entryOSIS = new ArrayList<>();
+            ArrayList<Entry> entryPVT = new ArrayList<>();
+            int moon = dateChooserComboTanggalMasuk1.getSelectedDate().get(Calendar.MONTH);
+            moon = moon+1;
+            int temp=0;
+            if(moon < 7){
+                temp = - (moon - 7);
+            }else{
+                temp = 12 - (moon - 7);
+            }
+            switch(profilData.currentLevel.level1){
+                case SMA:
+                   
+                    entryIKS.add(new Entry(0, ppdbIni.get("sma", "iks", float.class)));
+                    entryOSIS.add(new Entry(0, ppdbIni.get("sma", "osis", float.class)));
+                    for(int i = 0; i<12 ; i++){                                                
+                        if((temp+i)<=11){
+                            entryIPP.add(new Entry(i,0f));
+                        }else{
+                            entryIPP.add(new Entry(i,ppdbIni.get("sma", "ipp", float.class)));
+                        }
+                    }
+                    break;
+                case SMP:
+                   
+                    entryIKS.add(new Entry(0, ppdbIni.get("smp", "iks", float.class)));
+                    entryOSIS.add(new Entry(0, ppdbIni.get("smp", "osis", float.class)));
+                    for(int i = 0; i<12 ; i++){
+                         if((temp+i)<=11){
+                            entryIPP.add(new Entry(i,0f));
+                        }else{
+                            entryIPP.add(new Entry(i,ppdbIni.get("smp", "ipp", float.class)));
+                         }
+                    }
+
+                    break;
+                case SMK:
+                    
+                    entryIKS.add(new Entry(0, ppdbIni.get("smk", "iks", float.class)));
+                    entryOSIS.add(new Entry(0, ppdbIni.get("smk", "osis", float.class)));
+                    entryPVT.add(new Entry(0, ppdbIni.get("smk", "pvt", float.class)));                    
+                    PVT pvt = new PVT(profilData.noInduk, profilData.currentLevel, entryPVT);
+                    pvt.entries.get(0).debt = pvt.entries.get(0).amount;
+                    Control.insertIuran(Iuran.Tipe.PVT, pvt);
+                    for(int i = 0; i<12 ; i++){
+                         if((temp+i)<=11){
+                            entryIPP.add(new Entry(i,0f));
+                        }else{
+                            entryIPP.add(new Entry(i,ppdbIni.get("smk", "ipp", float.class)));
+                         }
+                    }
+                    break;
+                default:
+                    
+                    break;
+            }
+            IPP ipp = new IPP(profilData.noInduk, profilData.currentLevel,entryIPP);
+            for(int i = 0; i<12 ; i++){
+                ipp.entries.get(i).debt = ipp.entries.get(i).amount;
+            }            
+            OSIS osis = new OSIS(profilData.noInduk, profilData.currentLevel, entryOSIS);
+            osis.entries.get(0).debt = osis.entries.get(0).amount;
+            IKS iks = new IKS(profilData.noInduk, profilData.currentLevel, entryIKS);
+            iks.entries.get(0).debt = iks.entries.get(0).amount;
+            
+            Control.insertIuran(Iuran.Tipe.IKS, iks);
+            Control.insertIuran(Iuran.Tipe.IPP, ipp);
+            Control.insertIuran(Iuran.Tipe.OSIS, osis);            
         }
         //end autotarget iuran
     }
