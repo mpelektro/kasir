@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutTunggakanPerKelas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="10" uuid="4fedb1e8-eac0-4299-bf7c-9759dca59f0c">
 	<property name="ireport.zoom" value="1.366026910730142"/>
-	<property name="ireport.x" value="151"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
@@ -343,6 +343,10 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</rectangle>
 			<staticText>
 				<reportElement x="33" y="0" width="130" height="12" uuid="50240418-7b6f-4466-a227-05a8e2f9ebdd"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -350,6 +354,10 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</staticText>
 			<staticText>
 				<reportElement x="163" y="0" width="44" height="12" uuid="d675bac8-e1e1-41c4-ab8e-8bf05b7ba8d9"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -357,6 +365,10 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="33" height="12" uuid="ed8792b3-986d-44bb-812a-5f7769d9c422"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -364,6 +376,10 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</staticText>
 			<staticText>
 				<reportElement x="207" y="0" width="44" height="12" uuid="4794755b-d869-4f3c-9284-ebe401962ef6"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -371,6 +387,10 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</staticText>
 			<staticText>
 				<reportElement x="251" y="0" width="44" height="12" uuid="23178ad1-7afd-45e1-a77c-34b73200ea70"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -378,6 +398,10 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</staticText>
 			<staticText>
 				<reportElement x="295" y="0" width="44" height="12" uuid="b8c62fb4-20e2-4818-b137-9d986776591b"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -385,6 +409,10 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</staticText>
 			<staticText>
 				<reportElement x="339" y="0" width="44" height="12" uuid="754f176e-7d12-4a4b-b24c-40a11cea92da"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -392,6 +420,10 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</staticText>
 			<staticText>
 				<reportElement x="383" y="0" width="44" height="12" uuid="41dcb6f9-e455-49bc-bd91-e762b97e0627"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -399,6 +431,10 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</staticText>
 			<staticText>
 				<reportElement x="427" y="0" width="44" height="12" uuid="9f5c6cb5-e7b4-4a48-ba07-5f5465744fcd"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -406,6 +442,10 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</staticText>
 			<staticText>
 				<reportElement x="471" y="0" width="44" height="12" uuid="dbd68a5b-3c08-47f5-a88d-6ae04ce81aa1"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -413,6 +453,10 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</staticText>
 			<staticText>
 				<reportElement x="515" y="0" width="44" height="12" uuid="c648c8e5-05c6-4169-9c3a-d79601a9b707"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -420,6 +464,10 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</staticText>
 			<staticText>
 				<reportElement x="559" y="0" width="44" height="12" uuid="b41e95b2-ec15-4b32-97c9-9f071db1eaf7"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -427,6 +475,10 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</staticText>
 			<staticText>
 				<reportElement x="603" y="0" width="44" height="12" uuid="271f39a1-c570-45d6-acb0-79c510cfd27a"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -434,6 +486,10 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</staticText>
 			<staticText>
 				<reportElement x="647" y="0" width="44" height="12" uuid="90feed0b-2d7b-4d5d-8c5b-82276b95152a"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -441,6 +497,10 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</staticText>
 			<staticText>
 				<reportElement x="691" y="0" width="52" height="12" uuid="d4c03be7-c3fd-4cdc-b7b9-36cca5d9f6d1"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -455,6 +515,9 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 		<band height="14" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="33" height="12" uuid="eb27324f-879c-4750-b503-37587d3a68c0"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -462,6 +525,9 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</textField>
 			<textField>
 				<reportElement x="163" y="0" width="44" height="12" uuid="822613d6-0ab8-4604-860c-063307370e54"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7" isBold="false"/>
 				</textElement>
@@ -469,6 +535,9 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</textField>
 			<textField>
 				<reportElement x="33" y="0" width="130" height="12" uuid="6a756a1e-265f-4a03-af7c-94eee90b73ed"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
 				<textElement verticalAlignment="Middle">
 					<font size="7" isBold="false"/>
 				</textElement>
@@ -476,6 +545,9 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="Rp #,##0" isBlankWhenNull="true">
 				<reportElement x="207" y="0" width="44" height="12" uuid="97618d72-5911-443c-b540-9030e1e77331"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -494,6 +566,9 @@ $F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Deb
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="Rp #,##0" isBlankWhenNull="true">
 				<reportElement x="251" y="0" width="44" height="12" isPrintWhenDetailOverflows="true" uuid="0a2a8b1c-f6b3-4bee-885c-a1e48404a007"/>
+				<box leftPadding="0" rightPadding="1">
+					<leftPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -501,6 +576,9 @@ $F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Deb
 			</textField>
 			<textField pattern="Rp #,##0" isBlankWhenNull="true">
 				<reportElement x="295" y="0" width="44" height="12" uuid="4ffaadac-6fe7-4a8d-b5cc-7e3714f8bb1d"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -520,6 +598,9 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</textField>
 			<textField pattern="Rp #,##0" isBlankWhenNull="true">
 				<reportElement x="339" y="0" width="44" height="12" uuid="a644fd1c-f541-41cf-86cc-a2791806b2e6"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -527,6 +608,9 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</textField>
 			<textField pattern="Rp #,##0" isBlankWhenNull="true">
 				<reportElement x="383" y="0" width="44" height="12" uuid="b117e48e-34ed-4322-baef-ce721ebcd3a5"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -534,6 +618,9 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</textField>
 			<textField pattern="Rp #,##0" isBlankWhenNull="true">
 				<reportElement x="427" y="0" width="44" height="12" uuid="ea2aed49-b6f9-4742-a945-b385efdbf205"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -541,6 +628,9 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</textField>
 			<textField pattern="Rp #,##0" isBlankWhenNull="true">
 				<reportElement x="471" y="0" width="44" height="12" uuid="79a5808f-45c3-4398-8ab3-5ebf91c2c00a"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -551,6 +641,9 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</line>
 			<textField pattern="Rp #,##0" isBlankWhenNull="true">
 				<reportElement x="515" y="0" width="44" height="12" uuid="f5c97c5c-eab7-41a1-8036-cfb06c567ad6"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -558,6 +651,9 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</textField>
 			<textField pattern="Rp #,##0" isBlankWhenNull="true">
 				<reportElement x="559" y="0" width="44" height="12" uuid="9532319e-0fff-4f51-9b80-6567fb6d0887"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -565,6 +661,9 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</textField>
 			<textField pattern="Rp #,##0" isBlankWhenNull="true">
 				<reportElement x="603" y="0" width="44" height="12" uuid="3855f242-9797-4486-a03b-26ce345cc94a"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -572,6 +671,9 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</textField>
 			<textField pattern="Rp #,##0" isBlankWhenNull="true">
 				<reportElement x="647" y="0" width="44" height="12" uuid="37cb37e5-72b6-4b9a-af1e-896b06f56564"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -579,11 +681,18 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</textField>
 			<textField pattern="Rp #,##0" isBlankWhenNull="true">
 				<reportElement x="691" y="0" width="52" height="12" uuid="73f7183a-69f6-4a48-9738-29edf150f3a7"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{IPSP_Debt}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="801" y="0" width="1" height="12" uuid="1ec49b69-3b3d-42cc-811e-ee98cc901c87"/>
+			</line>
 		</band>
 	</detail>
 	<summary>
