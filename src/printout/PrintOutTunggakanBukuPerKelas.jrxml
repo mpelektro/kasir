@@ -277,7 +277,8 @@ ORDER BY
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Print Out Tunggakan Siswa"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Print Out Tunggakan Siswa "+$P{CurrentLevel}
+]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
