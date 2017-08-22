@@ -1126,11 +1126,18 @@ public class AppFrame extends javax.swing.JFrame {
 
     private void jButtonTunggakanPerKelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTunggakanPerKelasActionPerformed
         // TODO add your handling code here:
-        String lv1 = jComboBoxLevel1.getSelectedItem().toString();
-        String lv2 = jComboBoxLevel2.getSelectedItem().toString();
-        String lv3 = jComboBoxLevel3.getSelectedItem().toString();
+        String lv1 = "%", lv2="%", lv3="%", yr;
+        if(jComboBoxLevel1.getSelectedIndex()>=0)
+            lv1 = jComboBoxLevel1.getSelectedItem().toString();
+        if(jComboBoxLevel2.getSelectedIndex()>=0)
+            lv2 = jComboBoxLevel2.getSelectedItem().toString();
+        if(jComboBoxLevel3.getSelectedIndex()>=0)
+            lv3 = jComboBoxLevel3.getSelectedItem().toString();
         Kalender kalS = new Kalender(dateChooserComboTSumS.getSelectedDate().getTime());
-        String yr = String.valueOf(kalS.get(Kalender.YEAR));
+        if(kalS.getMonth()>6)
+            yr = String.valueOf(kalS.get(Kalender.YEAR));
+        else
+            yr = String.valueOf(kalS.get(Kalender.YEAR)-1);
         String targetYear = lv1.concat("-").concat(lv2).concat("-").concat(lv3).concat("-").concat(yr);
         try{
             printTunggakanPerKelas(targetYear);
