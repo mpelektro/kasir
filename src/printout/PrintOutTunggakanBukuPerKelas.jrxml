@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrintOutTunggakanBukuPerKelas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="10" uuid="4fedb1e8-eac0-4299-bf7c-9759dca59f0c">
-	<property name="ireport.zoom" value="1.6528925619834718"/>
-	<property name="ireport.x" value="14"/>
+	<property name="ireport.zoom" value="2.0000000000000018"/>
+	<property name="ireport.x" value="191"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
@@ -267,6 +267,82 @@ ORDER BY
 	<field name="IUA_Debt" class="java.lang.Float"/>
 	<field name="IPSP_NomorInduk" class="java.lang.String"/>
 	<field name="IPSP_Debt" class="java.lang.Float"/>
+	<variable name="TunggakanPasca_Debt1_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{TunggakanPasca_Debt1}+$F{TunggakanPasca_Debt2}+$F{TunggakanPasca_Debt3}+$F{TunggakanPasca_Debt4}+$F{TunggakanPasca_Debt5}+$F{TunggakanPasca_Debt6}+$F{TunggakanPasca_Debt7}+$F{TunggakanPasca_Debt8}+$F{TunggakanPasca_Debt9}+$F{TunggakanPasca_Debt10}+$F{TunggakanPasca_Debt11}+$F{TunggakanPasca_Debt12}]]></variableExpression>
+	</variable>
+	<variable name="IPP_Debt1_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("01")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Debt6}+$F{IPP_Debt7}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("02")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Debt6}+$F{IPP_Debt7}+$F{IPP_Debt8}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("03")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Debt6}+$F{IPP_Debt7}+$F{IPP_Debt8}+$F{IPP_Debt9}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("04")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Debt6}+$F{IPP_Debt7}+$F{IPP_Debt8}+$F{IPP_Debt9}+$F{IPP_Debt10}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("05")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Debt6}+$F{IPP_Debt7}+$F{IPP_Debt8}+$F{IPP_Debt9}+$F{IPP_Debt10}+$F{IPP_Debt11}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("06")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Debt6}+$F{IPP_Debt7}+$F{IPP_Debt8}+$F{IPP_Debt9}+$F{IPP_Debt10}+$F{IPP_Debt11}+$F{IPP_Debt12}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("07")?$F{IPP_Debt1}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("08")?$F{IPP_Debt1}+$F{IPP_Debt2}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("09")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("10")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("11")?$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}:
+$F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Debt6}]]></variableExpression>
+	</variable>
+	<variable name="V_Jumlah_Tunggakan_Berjalan" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="IUAP_Debt1_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$P{CurrentLevel}.substring(0,3).equals("SMA")?
+((new SimpleDateFormat("MM").format($P{CurrentDate})).equals("01")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IUAP_Debt6}+$F{IUAP_Debt7}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("02")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IUAP_Debt6}+$F{IUAP_Debt7}+$F{IUAP_Debt8}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("03")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IUAP_Debt6}+$F{IUAP_Debt7}+$F{IUAP_Debt8}+$F{IUAP_Debt9}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("04")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IUAP_Debt6}+$F{IUAP_Debt7}+$F{IUAP_Debt8}+$F{IUAP_Debt9}+$F{IUAP_Debt10}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("05")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IUAP_Debt6}+$F{IUAP_Debt7}+$F{IUAP_Debt8}+$F{IUAP_Debt9}+$F{IUAP_Debt10}+$F{IUAP_Debt11}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("06")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IUAP_Debt6}+$F{IUAP_Debt7}+$F{IUAP_Debt8}+$F{IUAP_Debt9}+$F{IUAP_Debt10}+$F{IUAP_Debt11}+$F{IUAP_Debt12}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("07")?$F{IUAP_Debt1}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("08")?$F{IUAP_Debt1}+$F{IUAP_Debt2}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("09")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("10")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}:
+(new SimpleDateFormat("MM").format($P{CurrentDate})).equals("11")?$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}:
+$F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IUAP_Debt6}):$F{IUA_Debt}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="IUS_Debt1_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{IUS_Debt1}+$F{IUS_Debt2}+$F{IUS_Debt3}+$F{IUS_Debt4}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="OSIS_Debt" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{OSIS_Debt1}]]></variableExpression>
+	</variable>
+	<variable name="IKS_Debt" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{IKS_Debt1}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="PTV_Debt" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{PVT_Debt1}]]></variableExpression>
+	</variable>
+	<variable name="Attribute_Debt" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{Attribute_Debt}]]></variableExpression>
+	</variable>
+	<variable name="Seragam_Debt" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{Seragam_Debt}]]></variableExpression>
+	</variable>
+	<variable name="Almamater_Debt" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{Almamater_Debt}]]></variableExpression>
+	</variable>
+	<variable name="Buku_Debt" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{Buku_Debt}]]></variableExpression>
+	</variable>
+	<variable name="V_Jumlah_Tunggakan_Pasca" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{TunggakanPasca_Debt1_1}.add($V{IPP_Debt1_1})]]></variableExpression>
+	</variable>
+	<variable name="LKS1_Debt" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{BukuLKS1_Debt}]]></variableExpression>
+	</variable>
+	<variable name="LKS2_Debt" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{BukuLKS2_Debt}]]></variableExpression>
+	</variable>
+	<variable name="IPSP_Debt" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{IPSP_Debt}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -277,8 +353,7 @@ ORDER BY
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Print Out Tunggakan Siswa "+$P{CurrentLevel}
-]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Print Out Tunggakan Siswa "+$P{CurrentLevel}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -481,7 +556,7 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{IUS_Debt1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{IUS_Debt1}+$F{IUS_Debt2}+$F{IUS_Debt3}+$F{IUS_Debt4}]]></textFieldExpression>
 			</textField>
 			<textField pattern="Rp #,##0" isBlankWhenNull="true">
 				<reportElement x="370" y="0" width="52" height="12" uuid="b117e48e-34ed-4322-baef-ce721ebcd3a5"/>
@@ -578,4 +653,106 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 			</textField>
 		</band>
 	</detail>
+	<summary>
+		<band height="12">
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="214" y="0" width="52" height="12" isPrintWhenDetailOverflows="true" uuid="cbb993eb-cf42-45cb-9535-ea9887d5a48f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IPP_ChargedLevel}.substring(4,5).equals("7")?($V{IPSP_Debt}):($F{IPP_ChargedLevel}.substring(4,6).equals("10"))?($V{IPSP_Debt}):$V{TunggakanPasca_Debt1_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="32" y="0" width="130" height="12" uuid="fd9c05a1-f655-4b6c-8f0d-e3060ea57f95"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JUMLAH]]></text>
+			</staticText>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="318" y="0" width="50" height="12" isPrintWhenDetailOverflows="true" uuid="de352496-3984-4004-b6f2-9577e93a627b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{IUS_Debt1_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="368" y="0" width="54" height="12" isPrintWhenDetailOverflows="true" uuid="d8aaf239-630b-4014-b566-23b155b17495"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{OSIS_Debt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="422" y="0" width="48" height="12" isPrintWhenDetailOverflows="true" uuid="57f14edc-ff50-4551-bac0-3d399f854ccf"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{IKS_Debt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="526" y="0" width="52" height="12" isPrintWhenDetailOverflows="true" uuid="83afcf37-a22a-4f6e-bdcc-652e4009c735"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Attribute_Debt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="578" y="0" width="52" height="12" isPrintWhenDetailOverflows="true" uuid="cc66bec7-e099-4945-9b85-dc8c1be33e2e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Seragam_Debt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="630" y="0" width="52" height="12" isPrintWhenDetailOverflows="true" uuid="9bb7ef45-bf79-4dea-82a7-693b0236e4cf"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Almamater_Debt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="470" y="0" width="56" height="12" isPrintWhenDetailOverflows="true" uuid="7b7f67e7-d608-4435-ab8e-810bb108665a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PTV_Debt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="162" y="0" width="52" height="12" isPrintWhenDetailOverflows="true" uuid="2705b5ae-4828-4cb2-849d-19e60d7caed2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{IPP_Debt1_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="266" y="0" width="52" height="12" isPrintWhenDetailOverflows="true" uuid="5ec1be9b-8a08-41f6-80a3-693ff76d9087"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{IUAP_Debt1_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="682" y="0" width="40" height="12" isPrintWhenDetailOverflows="true" uuid="ccbc631e-de58-44d5-b235-f0929b46d23d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Buku_Debt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="722" y="0" width="40" height="12" isPrintWhenDetailOverflows="true" uuid="d5c5c6cb-7b9f-40da-bcfe-370278dbf885"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{LKS1_Debt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="762" y="0" width="40" height="12" isPrintWhenDetailOverflows="true" uuid="06ecb082-101a-4961-a4e0-15e4e223ae21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{LKS2_Debt}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
 </jasperReport>

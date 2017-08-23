@@ -270,8 +270,7 @@ $F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Deb
 	</variable>
 	<variable name="V_Jumlah_Tunggakan_Berjalan" class="java.math.BigDecimal">
 		<variableExpression><![CDATA[]]></variableExpression>
-		<initialValueExpression><![CDATA[BigDecimal.ZERO
-]]></initialValueExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
 	</variable>
 	<variable name="IUAP_Debt1_1" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$P{CurrentLevel}.substring(0,3).equals("SMA")?
@@ -291,8 +290,7 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 	</variable>
 	<variable name="IUS_Debt1_1" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{IUS_Debt1}+$F{IUS_Debt2}+$F{IUS_Debt3}+$F{IUS_Debt4}]]></variableExpression>
-		<initialValueExpression><![CDATA[0
-]]></initialValueExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
 	</variable>
 	<variable name="OSIS_Debt" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{OSIS_Debt1}]]></variableExpression>
@@ -696,7 +694,7 @@ $F{IUAP_Debt1}+$F{IUAP_Debt2}+$F{IUAP_Debt3}+$F{IUAP_Debt4}+$F{IUAP_Debt5}+$F{IU
 		</band>
 	</detail>
 	<summary>
-		<band height="24">
+		<band height="12">
 			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="251" y="0" width="44" height="12" isPrintWhenDetailOverflows="true" uuid="b072837e-558f-429f-b2db-81866678b8ed"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
