@@ -5225,6 +5225,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         ret |= phone.substring(0,5).equals("62859");
         ret |= phone.substring(0,5).equals("62877");
         ret |= phone.substring(0,5).equals("62878");
+        ret |= phone.substring(0,5).equals("62838");
         return ret;
     }
     
