@@ -572,8 +572,8 @@ $F{IPP_Debt1}+$F{IPP_Debt2}+$F{IPP_Debt3}+$F{IPP_Debt4}+$F{IPP_Debt5}+$F{IPP_Deb
 				</textElement>
 				<textFieldExpression><![CDATA[$F{TunggakanPasca_Debt1}+$F{TunggakanPasca_Debt2}+$F{TunggakanPasca_Debt3}+$F{TunggakanPasca_Debt4}+$F{TunggakanPasca_Debt5}+$F{TunggakanPasca_Debt6}+$F{TunggakanPasca_Debt7}+$F{TunggakanPasca_Debt8}+$F{TunggakanPasca_Debt9}+$F{TunggakanPasca_Debt10}+$F{TunggakanPasca_Debt11}+$F{TunggakanPasca_Debt12}]]></textFieldExpression>
 			</textField>
-			<textField pattern="Rp #,##0" isBlankWhenNull="true">
-				<reportElement x="295" y="0" width="44" height="12" uuid="4ffaadac-6fe7-4a8d-b5cc-7e3714f8bb1d"/>
+			<textField isStretchWithOverflow="true" pattern="Rp #,##0" isBlankWhenNull="true">
+				<reportElement x="295" y="0" width="44" height="12" isPrintWhenDetailOverflows="true" uuid="4ffaadac-6fe7-4a8d-b5cc-7e3714f8bb1d"/>
 				<box leftPadding="2" rightPadding="2">
 					<leftPen lineWidth="1.0"/>
 				</box>

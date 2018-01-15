@@ -4546,7 +4546,7 @@ public class AppFrame extends javax.swing.JFrame {
             String filetoFill = "C://printout//PrintOutTunggakanPerkelas.jasper";
             //String filePdf = "C://printout//PrintOutReportPerKasir.pdf";
             String filePdf = "C://printout//PrintOutTunggakanPerkelas.pdf";
-       JasperCompileManager.compileReportToFile(fileName);
+//       JasperCompileManager.compileReportToFile(fileName);
             
             
             JasperFillManager.fillReportToFile(filetoFill, jasperParameter , connection);
