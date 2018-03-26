@@ -5109,7 +5109,9 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                         String phone = profil.biodata.telpon1.replaceFirst("0", "62");
                         if(phone.substring(0, 3).equals("628")){
                             System.out.println("Valid phone");
-                            if(isXl(phone) || isTsel(phone)){ //SMS FORTUNATA
+                            Boolean alwaysFalse = false;
+//                            if(isXl(phone) || isTsel(phone)){ //SMS FORTUNATA
+                            if(alwaysFalse){
                                 URL myURL = new URL("http://smsfortunata.com/api?user=mpelektro@yahoo.com&pass=spyderco123&"
                                         + "pesan="
                                         + pesanSms
