@@ -920,7 +920,7 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="isPPDB?&quot;PPDB&quot;:&quot;KASIR&quot;" type="code"/>
+          <Connection code="isPPDB?&quot;PPDB&quot;:(isDU?&quot;DU&quot;:&quot;KASIR&quot;)" type="code"/>
         </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[80, 29]"/>

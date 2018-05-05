@@ -38,6 +38,7 @@ import kasir.DBSR;
 import static kasir.DBSR.conn;
 import static kasir.DBSR.dbPass;
 import static kasir.DBSR.dbURL;
+import static kasir.DBSR.dbURLdu;
 import static kasir.DBSR.dbURLppdb;
 import static kasir.DBSR.dbUsername;
 import net.sf.jasperreports.engine.*;
@@ -91,6 +92,7 @@ public class AppFrame extends javax.swing.JFrame {
     public Float rekomendasiCicilanAkumulasi;
     public Float tunggakanBerjalan;
     public boolean isPPDB = false;
+    public boolean isDU = false;
     /* JasperReport is the object
     that holds our compiled jrxml file */
     JasperReport jasperReport;
@@ -120,8 +122,12 @@ public class AppFrame extends javax.swing.JFrame {
             ppdbIni = new Ini(new File("lib/ini/ppdb.ini"));
             if(ppdbIni.get("program", "name", String.class).equals("ppdb")){
                  isPPDB = true;
-            }else{
+            }else if(ppdbIni.get("program", "name", String.class).equals("du")){
                  isPPDB = false;
+                 isDU = true;
+            }else{
+                isPPDB = false;
+                isDU = false;
             }
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
@@ -703,7 +709,7 @@ public class AppFrame extends javax.swing.JFrame {
 
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTitle.setText(isPPDB?"PPDB":"KASIR");
+        jLabelTitle.setText(isPPDB?"PPDB":(isDU?"DU":"KASIR"));
         jLabelTitle.setMaximumSize(new java.awt.Dimension(80, 29));
         jLabelTitle.setMinimumSize(new java.awt.Dimension(60, 29));
 

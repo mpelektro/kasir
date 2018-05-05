@@ -37,8 +37,10 @@ public class StatusPendaftaran {
                 Ini ppdbIni = new Ini(new File("lib/ini/ppdb.ini"));
                 if(ppdbIni.get("program", "name", String.class).equals("ppdb")){
                      oracleURL = DBSR.dbURLppdb;
+                }else if(ppdbIni.get("program", "name", String.class).equals("du")){
+                     oracleURL = DBSR.dbURLdu;
                 }else{
-                     oracleURL = DBSR.dbURL;
+                    oracleURL = DBSR.dbURL;
                 }
             } catch (IOException ex) {
                 Exceptions.printStackTrace(ex);

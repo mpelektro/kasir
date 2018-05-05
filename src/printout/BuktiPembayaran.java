@@ -42,14 +42,16 @@ public class BuktiPembayaran {
                
                 Ini ppdbIni = new Ini(new File("lib/ini/ppdb.ini"));
                 if(ppdbIni.get("program", "name", String.class).equals("ppdb")){
-                         oracleURL = DBSR.dbURLppdb;
-                    }else{
-                         oracleURL = DBSR.dbURL;
-                    }
-                } catch (IOException ex) {
-                    Exceptions.printStackTrace(ex);
-                        oracleURL = null;
+                     oracleURL = DBSR.dbURLppdb;
+                }else if(ppdbIni.get("program", "name", String.class).equals("du")){
+                     oracleURL = DBSR.dbURLdu;
+                }else{
+                    oracleURL = DBSR.dbURL;
                 }
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+                    oracleURL = null;
+            }
             connection = DriverManager.getConnection(oracleURL,"marbun","marbun123456");
             connection.setAutoCommit(false);
         }

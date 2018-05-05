@@ -12,7 +12,7 @@ import org.openide.util.Exceptions;
 import sak.*;
 
 public class DBSR{
-    public static final String dbURL = "jdbc:mysql://ark3.dayarka.com/rusly_kasirdb", dbURLppdb = "jdbc:mysql://ark3.dayarka.com/rusly_ppdbdb", dbUsername = "marbun", dbPass = "marbun123456";
+    public static final String dbURLdu= "jdbc:mysql://ark3.dayarka.com/rusly_dudb", dbURL = "jdbc:mysql://ark3.dayarka.com/rusly_kasirdb", dbURLppdb = "jdbc:mysql://ark3.dayarka.com/rusly_ppdbdb", dbUsername = "marbun", dbPass = "marbun123456";
     public static Connection conn;
     public static Statement stmt;
 
@@ -29,8 +29,10 @@ public class DBSR{
                     Ini ppdbIni = new Ini(new File("lib/ini/ppdb.ini"));
                     if(ppdbIni.get("program", "name", String.class).equals("ppdb")){
                          conn = DriverManager.getConnection(dbURLppdb, dbUsername, dbPass);
+                    }else if(ppdbIni.get("program", "name", String.class).equals("du")){
+                         conn = DriverManager.getConnection(dbURLdu, dbUsername, dbPass);
                     }else{
-                         conn = DriverManager.getConnection(dbURL, dbUsername, dbPass);
+                        conn = DriverManager.getConnection(dbURL, dbUsername, dbPass);
                     }
                 } catch (IOException ex) {
                     Exceptions.printStackTrace(ex);
