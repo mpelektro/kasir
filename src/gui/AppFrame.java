@@ -3385,7 +3385,7 @@ public class AppFrame extends javax.swing.JFrame {
             JasperPrint jp = JasperFillManager.fillReport(filetoFill, jasperParameter, connection);
             JasperViewer.viewReport(jp, false);
             JasperExportManager.exportReportToPdfFile(jp, filePdf);
-            JasperPrintManager.printReport(filetoPrint, true);
+           // JasperPrintManager.printReport(filetoPrint, true);
             
             
             jasperReport = JasperCompileManager.compileReport
