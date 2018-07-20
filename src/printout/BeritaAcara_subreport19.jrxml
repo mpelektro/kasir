@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BeritaAcara_subreport3" pageWidth="100" pageHeight="12" columnWidth="100" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="125d9eda-c488-4d3a-b57d-c208ef2e7bdd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="1" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_sekolah" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     SUM(JUMLAH)
+FROM
+     view_b3
+WHERE NomorInduk LIKE '%A%' And TransactionName NOT LIKE '%gel%']]>
+	</queryString>
+	<field name="SUM(JUMLAH)" class="java.lang.Double"/>
+	<variable name="JUMLAH" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{SUM(JUMLAH)}]]></variableExpression>
+	</variable>
+	<columnFooter>
+		<band height="12">
+			<textField isStretchWithOverflow="true" pattern="#,##0">
+				<reportElement x="0" y="0" width="100" height="12" isPrintWhenDetailOverflows="true" uuid="8d5f88a0-3dd5-4932-a671-fe521841a4ce"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{JUMLAH}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

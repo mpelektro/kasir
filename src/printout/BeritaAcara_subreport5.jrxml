@@ -13,11 +13,11 @@
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<detail>
-		<band height="20" splitType="Stretch">
+		<band height="12" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="50" height="20" uuid="5d06683b-2a3b-4168-bac9-36b4a4a68fa1"/>
+				<reportElement x="0" y="0" width="50" height="12" uuid="5d06683b-2a3b-4168-bac9-36b4a4a68fa1"/>
 				<textElement textAlignment="Right">
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{daftar_diterima}]]></textFieldExpression>
 			</textField>

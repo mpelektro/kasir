@@ -25,11 +25,11 @@ WHERE
 		<variableExpression><![CDATA[$F{PASB}]]></variableExpression>
 	</variable>
 	<columnFooter>
-		<band height="20">
+		<band height="12">
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="0" y="0" width="100" height="20" isPrintWhenDetailOverflows="true" uuid="2739f89c-a470-4831-b0a5-c9729ae0f216"/>
+				<reportElement x="0" y="0" width="100" height="12" isPrintWhenDetailOverflows="true" uuid="2739f89c-a470-4831-b0a5-c9729ae0f216"/>
 				<textElement textAlignment="Right">
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PASB_1}]]></textFieldExpression>
 			</textField>

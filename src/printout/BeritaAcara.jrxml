@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BeritaAcara" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="33903088-1d78-4a4a-a1c4-9f41a0c6009f">
 	<property name="ireport.zoom" value="1.3310000000000028"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="402"/>
+	<property name="ireport.y" value="425"/>
 	<parameter name="p_sekolah" class="java.lang.String">
 		<defaultValueExpression><![CDATA["SMA"]]></defaultValueExpression>
 	</parameter>
@@ -51,6 +51,9 @@ $P{p_sekolah}+" Kosgoro Kota Bogor\r\n"+
 	<variable name="IPSB" class="java.math.BigDecimal">
 		<variableExpression><![CDATA[$V{IPSB}]]></variableExpression>
 	</variable>
+	<variable name="Jumlah_Batal" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{Jumlah_Batal}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -66,7 +69,7 @@ $P{p_sekolah}+" Kosgoro Kota Bogor\r\n"+
 		</band>
 	</title>
 	<pageHeader>
-		<band height="592" splitType="Stretch">
+		<band height="723" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="555" height="20" uuid="f2ed2335-26ab-409c-b43a-bfaf4662f688"/>
 				<textElement>
@@ -474,20 +477,39 @@ $P{p_sekolah}+" Kosgoro Kota Bogor\r\n"+
 			<line>
 				<reportElement x="237" y="560" width="261" height="1" uuid="a509d265-f489-4020-9493-723136791e93"/>
 			</line>
+			<staticText>
+				<reportElement x="11" y="541" width="226" height="20" uuid="524ea616-c5a7-47ff-b711-12ce9ee1d968"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Jumlah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="561" width="226" height="20" uuid="5b37afef-2b8c-45ef-8b74-5e21fbd30ff1"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jumlah Dana Yang Diterima]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="580" width="238" height="20" uuid="3ae44e97-92df-420a-bcc4-58e2c5b5a886"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[i. Calon Peserta Didik yang Mengundurkan Diri]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="398" y="580" width="100" height="20" uuid="9dcfb741-d792-445c-ace9-dabcfcbc0e79"/>
+				<subreportParameter name="1"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="view8_Jumlah_1" toVariable="Jumlah_Batal"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport17.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</pageHeader>
-	<columnHeader>
-		<band height="32" splitType="Stretch"/>
-	</columnHeader>
 	<detail>
 		<band height="67" splitType="Stretch"/>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>
 	</summary>
