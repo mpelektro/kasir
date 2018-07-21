@@ -18,7 +18,7 @@ WHERE
 	<field name="sekolah" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="jumlah" class="java.lang.Double">
+	<field name="jumlah" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<variable name="jumlah" class="java.math.BigDecimal">
