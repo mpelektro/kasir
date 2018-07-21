@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BeritaAcara" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="33903088-1d78-4a4a-a1c4-9f41a0c6009f">
-	<property name="ireport.zoom" value="1.3310000000000028"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BeritaAcara" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="40" rightMargin="20" topMargin="20" bottomMargin="20" uuid="33903088-1d78-4a4a-a1c4-9f41a0c6009f">
+	<property name="ireport.zoom" value="1.6105100000000048"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="425"/>
+	<property name="ireport.y" value="435"/>
 	<parameter name="p_sekolah" class="java.lang.String">
 		<defaultValueExpression><![CDATA["SMA"]]></defaultValueExpression>
 	</parameter>
@@ -54,94 +54,82 @@ $P{p_sekolah}+" Kosgoro Kota Bogor\r\n"+
 	<variable name="Jumlah_Batal" class="java.math.BigDecimal">
 		<variableExpression><![CDATA[$V{Jumlah_Batal}]]></variableExpression>
 	</variable>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
+	<variable name="penerimaan_batal" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{penerimaan_batal}]]></variableExpression>
+	</variable>
+	<variable name="bea_non_gel" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{bea_non_gel}]]></variableExpression>
+	</variable>
 	<title>
-		<band height="79" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="555" height="79" uuid="7e03dcdb-503f-46d9-b7f0-e9fef90de86f"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{Title}]]></textFieldExpression>
-			</textField>
-		</band>
+		<band height="40" splitType="Stretch"/>
 	</title>
 	<pageHeader>
 		<band height="723" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="20" uuid="f2ed2335-26ab-409c-b43a-bfaf4662f688"/>
+				<reportElement x="0" y="40" width="535" height="12" uuid="f2ed2335-26ab-409c-b43a-bfaf4662f688"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
-				<text><![CDATA[Pada hari ini Sabtu tanggal dua puluh satu Juli tahun dua ribu delapan belas (21-07-2018), telah dilakukan serah terima]]></text>
+				<text><![CDATA[Pada hari ini Sabtu tanggal dua puluh satu Juli tahun dua ribu delapan belas (21-07-2018), telah dilakukan serah terima Pelaksanaan Penerimaan Peserta]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="188" y="20" width="27" height="20" uuid="eecadc60-4d4b-4c92-b549-059ff0519247"/>
+				<reportElement x="37" y="52" width="27" height="12" uuid="eecadc60-4d4b-4c92-b549-059ff0519247"/>
 				<textElement verticalAlignment="Top">
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{p_sekolah}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="20" width="188" height="20" uuid="96f23dec-0f0d-44ce-b571-bbdd64470dbd"/>
+				<reportElement x="0" y="52" width="37" height="12" uuid="96f23dec-0f0d-44ce-b571-bbdd64470dbd"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
-				<text><![CDATA[Pelaksanaan Penerimaan Peserta Didik Baru ]]></text>
+				<text><![CDATA[Didik Baru ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="215" y="20" width="340" height="20" uuid="b26b165a-f4b3-4c0d-9e37-1351a832bace"/>
+				<reportElement x="64" y="52" width="471" height="12" uuid="b26b165a-f4b3-4c0d-9e37-1351a832bace"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
-				<text><![CDATA[Kosgoro Kota Bogor Tahun Pelajaran 2018-2019 dengan data]]></text>
+				<text><![CDATA[Kosgoro Kota Bogor Tahun Pelajaran 2018-2019 dengan data sebagai berikut:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="40" width="204" height="20" uuid="6eb169b4-ac94-4769-ba58-168495c2247b"/>
+				<reportElement x="0" y="64" width="204" height="12" uuid="4a73d01b-b285-4db6-abb8-2b21f9270443"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<text><![CDATA[sebagai berikut:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="60" width="204" height="20" uuid="4a73d01b-b285-4db6-abb8-2b21f9270443"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="80" width="204" height="20" uuid="a1335ea9-1217-4e0c-be39-3196fbcaa320"/>
+				<reportElement x="0" y="76" width="204" height="12" uuid="a1335ea9-1217-4e0c-be39-3196fbcaa320"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[I. Data Peserta Didik]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="100" width="193" height="20" uuid="714520a6-6a0f-4360-91c6-1825bc4b5da0"/>
+				<reportElement x="11" y="88" width="193" height="12" uuid="714520a6-6a0f-4360-91c6-1825bc4b5da0"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[1. Jumlah Pendaftar]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="271" y="100" width="193" height="20" uuid="8836e03c-880c-4fcb-aa29-7cb15157fb83"/>
+				<reportElement x="271" y="88" width="193" height="12" uuid="8836e03c-880c-4fcb-aa29-7cb15157fb83"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[Calon Peserta Didik (CPD)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="120" width="193" height="20" uuid="9b5b5309-8be6-40ae-b93f-03ca2b6238bb"/>
+				<reportElement x="11" y="100" width="193" height="12" uuid="9b5b5309-8be6-40ae-b93f-03ca2b6238bb"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[2. Jumlah Yang Tidak Kembali]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="204" y="100" width="67" height="20" uuid="fe148d12-55fa-4b60-a606-20e709f1ed00"/>
+				<reportElement x="204" y="88" width="67" height="12" uuid="fe148d12-55fa-4b60-a606-20e709f1ed00"/>
 				<subreportParameter name="p_sekolah">
 					<subreportParameterExpression><![CDATA[$P{p_sekolah}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -149,368 +137,479 @@ $P{p_sekolah}+" Kosgoro Kota Bogor\r\n"+
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="204" y="120" width="67" height="20" uuid="cbbe7161-47c6-4602-b93a-98eff14fe5a1"/>
+				<reportElement x="204" y="100" width="67" height="12" uuid="cbbe7161-47c6-4602-b93a-98eff14fe5a1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport2.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="271" y="120" width="193" height="20" uuid="0ec0da65-3ceb-4043-ab5a-c57b063c469d"/>
+				<reportElement x="271" y="100" width="193" height="12" uuid="0ec0da65-3ceb-4043-ab5a-c57b063c469d"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[Calon Peserta Didik (CPD)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="141" width="193" height="20" uuid="9bb239e7-7db2-435b-a1e3-0472e04286f6"/>
+				<reportElement x="11" y="112" width="193" height="12" uuid="9bb239e7-7db2-435b-a1e3-0472e04286f6"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[3. Jumlah Yang Masuk]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="271" y="141" width="193" height="20" uuid="07abb51e-b5b0-41f0-941e-62019c78f9d1"/>
+				<reportElement x="271" y="112" width="193" height="12" uuid="07abb51e-b5b0-41f0-941e-62019c78f9d1"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[Calon Peserta Didik (CPD)]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="204" y="141" width="67" height="20" uuid="d3a5d0b7-76a1-4cd2-9512-6887fa7505de"/>
+				<reportElement x="204" y="112" width="67" height="12" uuid="d3a5d0b7-76a1-4cd2-9512-6887fa7505de"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport3.jasper"]]></subreportExpression>
 			</subreport>
 			<line>
-				<reportElement x="204" y="140" width="56" height="1" uuid="5071b264-712b-4a29-b89e-55032dc9c02b"/>
+				<reportElement x="204" y="112" width="56" height="1" uuid="5071b264-712b-4a29-b89e-55032dc9c02b"/>
 			</line>
 			<staticText>
-				<reportElement x="11" y="161" width="193" height="20" uuid="488c161b-fa1a-45a9-b21f-2044e4f06b2f"/>
+				<reportElement x="11" y="124" width="193" height="12" uuid="488c161b-fa1a-45a9-b21f-2044e4f06b2f"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[4. Jumlah Yang Mengundurkan Diri]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="271" y="161" width="193" height="20" uuid="8e28faf1-dee5-45e4-905c-21a063515413"/>
+				<reportElement x="271" y="124" width="193" height="12" uuid="8e28faf1-dee5-45e4-905c-21a063515413"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[Calon Peserta Didik (CPD)]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="204" y="161" width="67" height="20" uuid="ef21b265-3c82-4292-9f3f-2e3887dbc317"/>
+				<reportElement x="204" y="124" width="67" height="12" uuid="ef21b265-3c82-4292-9f3f-2e3887dbc317"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport4.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="271" y="181" width="193" height="20" uuid="9df6419c-f5a8-49ff-a487-8f9021faa9ab"/>
+				<reportElement x="271" y="136" width="193" height="12" uuid="9df6419c-f5a8-49ff-a487-8f9021faa9ab"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[Calon Peserta Didik (CPD)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="181" width="193" height="20" uuid="ce06f212-8696-4a31-a811-7480f79e125f"/>
+				<reportElement x="11" y="136" width="193" height="12" uuid="ce06f212-8696-4a31-a811-7480f79e125f"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[5. Jumlah Yang Diterima]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="204" y="181" width="67" height="20" uuid="43e7f7e8-41c7-4fa0-874a-bdcf90efe223"/>
+				<reportElement x="204" y="136" width="67" height="12" uuid="43e7f7e8-41c7-4fa0-874a-bdcf90efe223"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport5.jasper"]]></subreportExpression>
 			</subreport>
 			<line>
-				<reportElement x="204" y="180" width="56" height="1" uuid="9c131b86-3892-4792-8868-2d753f2cd479"/>
+				<reportElement x="204" y="136" width="56" height="1" uuid="9c131b86-3892-4792-8868-2d753f2cd479"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="220" width="204" height="20" uuid="cdc76f7b-0347-4cc8-8535-6a228151a761"/>
+				<reportElement x="0" y="160" width="204" height="12" uuid="cdc76f7b-0347-4cc8-8535-6a228151a761"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[II. Data Keuangan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="240" width="177" height="20" uuid="3cf3c659-19c2-4c20-974f-f02bb993a1fe"/>
+				<reportElement x="11" y="172" width="177" height="12" uuid="3cf3c659-19c2-4c20-974f-f02bb993a1fe"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[1. Total dana yang diterima sebesar]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="188" y="240" width="83" height="20" uuid="81647a89-88c8-425b-94be-c87966796868"/>
+				<reportElement x="188" y="172" width="83" height="12" uuid="81647a89-88c8-425b-94be-c87966796868"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport6.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="11" y="260" width="177" height="20" uuid="8fa9af60-c96f-4515-a77d-d8f8be766ec9"/>
+				<reportElement x="11" y="184" width="177" height="12" uuid="8fa9af60-c96f-4515-a77d-d8f8be766ec9"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="280" width="177" height="20" uuid="5f0b35d1-6eae-4808-a138-42fc689bc925"/>
+				<reportElement x="11" y="196" width="177" height="12" uuid="5f0b35d1-6eae-4808-a138-42fc689bc925"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[Dengan Rincian:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="300" width="226" height="20" uuid="a9fb39f1-cf0e-4dab-8b99-045c4a243eff"/>
+				<reportElement x="11" y="208" width="226" height="12" uuid="a9fb39f1-cf0e-4dab-8b99-045c4a243eff"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[a. Pendaftaran]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="27" y="320" width="210" height="20" uuid="810d264d-e489-4983-bec7-c2fb7cdcc6bf"/>
+				<reportElement x="27" y="220" width="210" height="12" uuid="810d264d-e489-4983-bec7-c2fb7cdcc6bf"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[a.1. Pendaftaran yang diterima]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="237" y="320" width="67" height="20" uuid="de0914f8-6b28-4a62-9b45-974a21583bd8"/>
+				<reportElement x="237" y="220" width="67" height="12" uuid="de0914f8-6b28-4a62-9b45-974a21583bd8"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport5.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="304" y="320" width="11" height="20" uuid="fee0aed8-809e-426b-a482-0f089c8a946c"/>
+				<reportElement x="304" y="220" width="11" height="12" uuid="fee0aed8-809e-426b-a482-0f089c8a946c"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[=]]></text>
 			</staticText>
 			<subreport runToBottom="false">
-				<reportElement x="315" y="320" width="83" height="20" uuid="b68fc242-bda1-470e-9fe5-251eb7e6de60"/>
+				<reportElement x="315" y="220" width="83" height="12" uuid="b68fc242-bda1-470e-9fe5-251eb7e6de60"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="PASB_1" toVariable="PASB_1"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport7.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="27" y="340" width="210" height="20" uuid="0818dff3-7213-4874-aaca-f5fa0bf7871b"/>
+				<reportElement x="27" y="232" width="210" height="12" uuid="0818dff3-7213-4874-aaca-f5fa0bf7871b"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[a.2. Pendaftaran yang tidak kembali]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="237" y="340" width="67" height="20" uuid="43cd2f1a-ab7c-4bf8-bcfa-78dbd3584b72"/>
+				<reportElement x="237" y="232" width="67" height="12" uuid="43cd2f1a-ab7c-4bf8-bcfa-78dbd3584b72"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport2.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="304" y="340" width="11" height="20" uuid="edc20b25-be5b-4815-8c1a-d00c5205d5d2"/>
+				<reportElement x="304" y="232" width="11" height="12" uuid="edc20b25-be5b-4815-8c1a-d00c5205d5d2"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[=]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="315" y="340" width="83" height="20" uuid="06fcb025-2ccd-437d-8557-630f604f20cb"/>
+				<reportElement x="315" y="232" width="83" height="12" uuid="06fcb025-2ccd-437d-8557-630f604f20cb"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="PASB_1" toVariable="PASB_2"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport8.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="27" y="360" width="210" height="20" uuid="395f0c38-93e5-457c-b037-d51fa5ad458f"/>
+				<reportElement x="27" y="244" width="210" height="12" uuid="395f0c38-93e5-457c-b037-d51fa5ad458f"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[a.3. Pendaftaran yang mengundurkan diri]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="237" y="360" width="67" height="20" uuid="d313ebf9-a9db-4081-b4fc-5e73f8f35597"/>
+				<reportElement x="237" y="244" width="67" height="12" uuid="d313ebf9-a9db-4081-b4fc-5e73f8f35597"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport4.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="304" y="360" width="11" height="20" uuid="89e4f771-d50e-408f-b4a8-b3a5fc1fa295"/>
+				<reportElement x="304" y="244" width="11" height="12" uuid="89e4f771-d50e-408f-b4a8-b3a5fc1fa295"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[=]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="315" y="360" width="83" height="20" uuid="c3b2e9bf-5aea-49c4-9608-e5003da8571b"/>
+				<reportElement x="315" y="244" width="83" height="12" uuid="c3b2e9bf-5aea-49c4-9608-e5003da8571b"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="PASB_1" toVariable="PASB_3"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport9.jasper"]]></subreportExpression>
 			</subreport>
 			<textField evaluationTime="Report" pattern="#,##0">
-				<reportElement x="398" y="380" width="100" height="20" uuid="10d9c252-77f8-4597-a37c-5db26afd728f"/>
+				<reportElement x="398" y="256" width="100" height="12" uuid="10d9c252-77f8-4597-a37c-5db26afd728f"/>
 				<textElement textAlignment="Right">
-					<font fontName="Times New Roman" size="12" isBold="true"/>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PASB_1}.add($V{PASB_2}).add($V{PASB_3})]]></textFieldExpression>
 			</textField>
 			<subreport>
-				<reportElement x="237" y="380" width="67" height="20" uuid="3bd89b0a-1ae0-4e1f-9384-5dbb03282b11"/>
+				<reportElement x="237" y="256" width="67" height="12" uuid="3bd89b0a-1ae0-4e1f-9384-5dbb03282b11"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 			<line>
-				<reportElement x="237" y="379" width="261" height="1" uuid="24f75dce-27f9-4306-8f7c-374ab855f6ac"/>
+				<reportElement x="237" y="256" width="261" height="1" uuid="24f75dce-27f9-4306-8f7c-374ab855f6ac"/>
 			</line>
 			<staticText>
-				<reportElement x="11" y="400" width="226" height="20" uuid="6f83f6f6-ec8c-4653-aaa3-ee8d87f74dc5"/>
+				<reportElement x="11" y="268" width="226" height="12" uuid="6f83f6f6-ec8c-4653-aaa3-ee8d87f74dc5"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[b. IPSP (Iuran Pengemb Srn Pendidikan)]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="237" y="400" width="161" height="20" uuid="a3fb7b50-790f-48e9-979e-ac92d7c6c602"/>
+				<reportElement x="237" y="268" width="161" height="12" uuid="a3fb7b50-790f-48e9-979e-ac92d7c6c602"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="IPSP_2" toVariable="IPSP"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport10.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="11" y="420" width="226" height="20" uuid="09277c64-f9ed-4c81-8408-6311a39aafb0"/>
+				<reportElement x="11" y="280" width="226" height="12" uuid="09277c64-f9ed-4c81-8408-6311a39aafb0"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[c. IPP (Iuran Penyenggaraan Penddkan)]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="237" y="420" width="161" height="20" uuid="cd7038d8-48d0-4c4b-8c81-2401bd0e5f43"/>
+				<reportElement x="237" y="280" width="161" height="12" uuid="cd7038d8-48d0-4c4b-8c81-2401bd0e5f43"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="IPP_2" toVariable="IPP"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport11.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="11" y="440" width="226" height="20" uuid="87051afe-4174-4da1-a1ee-7d11a74ed43b"/>
+				<reportElement x="11" y="292" width="226" height="12" uuid="87051afe-4174-4da1-a1ee-7d11a74ed43b"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[d. IKS (Iuran Ketrampilan Siswa) 1 th]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="237" y="440" width="161" height="20" uuid="fa405eb0-36a3-481d-8eb2-491ee79b4610"/>
+				<reportElement x="237" y="292" width="161" height="12" uuid="fa405eb0-36a3-481d-8eb2-491ee79b4610"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="IKS_2" toVariable="IKS"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport12.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="11" y="460" width="226" height="20" uuid="c0f08a7d-d619-488c-b747-fcbd30c691be"/>
+				<reportElement x="11" y="304" width="226" height="12" uuid="c0f08a7d-d619-488c-b747-fcbd30c691be"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[e. OSIS 1 tahun]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="480" width="226" height="20" uuid="fa1cab2c-bc19-472d-87fb-af624e4c860c"/>
+				<reportElement x="11" y="316" width="226" height="12" uuid="fa1cab2c-bc19-472d-87fb-af624e4c860c"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[f. Seragam]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="500" width="226" height="20" uuid="9247c333-a4fb-4f23-9a74-3c8c60863473"/>
+				<reportElement x="11" y="328" width="226" height="12" uuid="9247c333-a4fb-4f23-9a74-3c8c60863473"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[g. Attribute]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="520" width="226" height="20" uuid="c1769325-1baf-4c3d-a176-58f109fdc69b"/>
+				<reportElement x="11" y="340" width="226" height="12" uuid="c1769325-1baf-4c3d-a176-58f109fdc69b"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[h. MPLS]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="237" y="460" width="161" height="20" uuid="938e3d5e-d779-4129-9273-f1e1c7955360"/>
+				<reportElement x="237" y="304" width="161" height="12" uuid="938e3d5e-d779-4129-9273-f1e1c7955360"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="OSIS_2" toVariable="OSIS"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport13.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="237" y="480" width="161" height="20" uuid="419fa884-12fe-4668-9c75-12f6319da68a"/>
+				<reportElement x="237" y="316" width="161" height="12" uuid="419fa884-12fe-4668-9c75-12f6319da68a"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="Seragam_2" toVariable="Seragam"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport14.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="237" y="500" width="161" height="20" uuid="5835f8e5-9843-4bdd-af16-8b7f144bb421"/>
+				<reportElement x="237" y="328" width="161" height="12" uuid="5835f8e5-9843-4bdd-af16-8b7f144bb421"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="Attribute_2" toVariable="Attribute"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport15.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="237" y="520" width="161" height="20" uuid="beb83ca5-13d7-4679-a709-36dfc58f05be"/>
+				<reportElement x="237" y="340" width="161" height="12" uuid="beb83ca5-13d7-4679-a709-36dfc58f05be"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="IPSB_2" toVariable="IPSB"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport16.jasper"]]></subreportExpression>
 			</subreport>
 			<textField evaluationTime="Report" pattern="#,##0">
-				<reportElement x="398" y="540" width="100" height="20" uuid="36bcda54-8010-4ca4-bf1c-c17f16e521fd"/>
+				<reportElement x="398" y="352" width="100" height="12" uuid="36bcda54-8010-4ca4-bf1c-c17f16e521fd"/>
 				<textElement textAlignment="Right">
-					<font fontName="Times New Roman" size="12" isBold="true"/>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{IPSP}.add($V{IPP}).add($V{IKS}).add($V{OSIS}).add($V{Seragam}).add($V{Attribute}).add($V{IPSB})]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report" pattern="#,##0">
-				<reportElement x="398" y="560" width="100" height="20" uuid="b3613df2-8c87-4eac-9dd1-184719bbe9d3"/>
+				<reportElement x="398" y="364" width="100" height="12" uuid="b3613df2-8c87-4eac-9dd1-184719bbe9d3"/>
 				<textElement textAlignment="Right">
-					<font fontName="Times New Roman" size="12" isBold="true"/>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PASB_1}.add($V{PASB_2}).add($V{PASB_3}).add($V{IPSP}).add($V{IPP}).add($V{IKS}).add($V{OSIS}).add($V{Seragam}).add($V{Attribute}).add($V{IPSB})]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="237" y="560" width="261" height="1" uuid="a509d265-f489-4020-9493-723136791e93"/>
+				<reportElement x="237" y="364" width="261" height="1" uuid="a509d265-f489-4020-9493-723136791e93"/>
 			</line>
 			<staticText>
-				<reportElement x="11" y="541" width="226" height="20" uuid="524ea616-c5a7-47ff-b711-12ce9ee1d968"/>
+				<reportElement x="11" y="352" width="226" height="12" uuid="524ea616-c5a7-47ff-b711-12ce9ee1d968"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[Jumlah]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="561" width="226" height="20" uuid="5b37afef-2b8c-45ef-8b74-5e21fbd30ff1"/>
+				<reportElement x="11" y="364" width="226" height="12" uuid="5b37afef-2b8c-45ef-8b74-5e21fbd30ff1"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="true"/>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Jumlah Dana Yang Diterima]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="580" width="238" height="20" uuid="3ae44e97-92df-420a-bcc4-58e2c5b5a886"/>
+				<reportElement x="11" y="376" width="238" height="12" uuid="3ae44e97-92df-420a-bcc4-58e2c5b5a886"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[i. Calon Peserta Didik yang Mengundurkan Diri]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="398" y="580" width="100" height="20" uuid="9dcfb741-d792-445c-ace9-dabcfcbc0e79"/>
+				<reportElement x="398" y="376" width="100" height="12" uuid="9dcfb741-d792-445c-ace9-dabcfcbc0e79"/>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="view8_Jumlah_1" toVariable="Jumlah_Batal"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport17.jasper"]]></subreportExpression>
 			</subreport>
+			<textField>
+				<reportElement x="0" y="0" width="535" height="40" uuid="fb85611d-1a09-4ae5-bbce-6d01794c81ba"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Title}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="148" width="204" height="12" uuid="1089c049-6804-4bf5-b63c-12950849f4b8"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="388" width="226" height="12" uuid="8e56c120-86ca-4e51-9d11-f0e85d967cac"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sisa Dana Yang Diterima]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="398" y="400" width="100" height="12" uuid="8938a46a-0b2a-4498-8f44-a9fcd78356fc"/>
+				<subreportParameter name="1"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="jumlah" toVariable="penerimaan_batal"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport18.jasper"]]></subreportExpression>
+			</subreport>
+			<textField evaluationTime="Report" pattern="#,##0">
+				<reportElement x="398" y="388" width="100" height="12" uuid="2dd1a215-cf5b-44d1-b18a-b990ec66e473"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PASB_1}.add($V{PASB_2}).add($V{PASB_3}).add($V{IPSP}).add($V{IPP}).add($V{IKS}).add($V{OSIS}).add($V{Seragam}).add($V{Attribute}).add($V{IPSB}).subtract($V{Jumlah_Batal})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="400" width="238" height="12" uuid="3128db6b-8e03-4f9c-b311-52153490757a"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[j. Diterima Dari Yang Mengundurkan Diri]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="412" width="226" height="12" uuid="e330fad8-10b7-4064-a782-48fc8240f935"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jumlah Dana Yang Diterima]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="#,##0">
+				<reportElement x="398" y="412" width="100" height="12" uuid="e8c8a1dc-a1c1-4d6d-aac5-b54a8f451a8d"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PASB_1}.add($V{PASB_2}).add($V{PASB_3}).add($V{IPSP}).add($V{IPP}).add($V{IKS}).add($V{OSIS}).add($V{Seragam}).add($V{Attribute}).add($V{IPSB}).subtract($V{Jumlah_Batal}).add($V{penerimaan_batal})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="424" width="238" height="12" uuid="1e25f176-076c-469b-8c15-4cff640f0fc3"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[k. Pemberian potongan / Beasiswa kepada Calon Peserta Didik]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="398" y="424" width="100" height="12" uuid="dd8c6aee-fc05-499a-b7f3-1fa0aa6a6b49"/>
+				<subreportParameter name="1"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="JUMLAH" toVariable="bea_non_gel"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport19.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="398" y="387" width="100" height="1" uuid="01029d1d-c680-4201-8078-7d281b39d999"/>
+			</line>
+			<line>
+				<reportElement x="398" y="412" width="100" height="1" uuid="a586e205-aba0-4ec8-9937-2a579871cb48"/>
+			</line>
+			<staticText>
+				<reportElement x="498" y="376" width="13" height="12" uuid="36a004b8-0c25-4e7f-940d-f1b2df3dbdb9"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="498" y="400" width="13" height="12" uuid="7a29fc88-ff75-4a29-bbf9-c5b5fc975303"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="498" y="352" width="13" height="12" uuid="96897c0a-2657-4a1e-b5fe-dc10ab7306a4"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[+]]></text>
+			</staticText>
+			<line>
+				<reportElement x="398" y="436" width="100" height="1" uuid="aa262cd2-d2ff-4c16-83e9-23f6b77924b0"/>
+			</line>
+			<staticText>
+				<reportElement x="498" y="424" width="13" height="12" uuid="9efee945-fc8b-4906-8947-33045c54fbf9"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[+]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="#,##0">
+				<reportElement x="398" y="436" width="100" height="12" uuid="ebbfeea4-8ad0-4c70-82b7-b909e53f19b1"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PASB_1}.add($V{PASB_2}).add($V{PASB_3}).add($V{IPSP}).add($V{IPP}).add($V{IKS}).add($V{OSIS}).add($V{Seragam}).add($V{Attribute}).add($V{IPSB}).subtract($V{Jumlah_Batal}).add($V{penerimaan_batal}).add($V{bea_non_gel})]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<detail>
 		<band height="67" splitType="Stretch"/>
 	</detail>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
