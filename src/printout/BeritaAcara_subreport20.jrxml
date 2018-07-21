@@ -9,20 +9,14 @@
 	<parameter name="p_sekolah" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
-     *
+     SUM(Jumlah)
 FROM
-     penerimaan_batal
-WHERE
-     sekolah LIKE $P{p_sekolah}]]>
+     view8
+WHERE NomorInduk LIKE '%A%' And Gelombang LIKE 'GELOMBANG_1' AND Status LIKE 'LUNAS']]>
 	</queryString>
-	<field name="sekolah" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="jumlah" class="java.lang.Double">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<variable name="jumlah" class="java.math.BigDecimal">
-		<variableExpression><![CDATA[$F{jumlah}]]></variableExpression>
+	<field name="SUM(Jumlah)" class="java.math.BigDecimal"/>
+	<variable name="Jumlah" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{SUM(Jumlah)}]]></variableExpression>
 	</variable>
 	<columnFooter>
 		<band height="12">
@@ -31,7 +25,7 @@ WHERE
 				<textElement textAlignment="Right">
 					<font fontName="Times New Roman" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{jumlah}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{Jumlah}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>

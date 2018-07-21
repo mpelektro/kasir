@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BeritaAcara" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="40" rightMargin="20" topMargin="20" bottomMargin="20" uuid="33903088-1d78-4a4a-a1c4-9f41a0c6009f">
 	<property name="ireport.zoom" value="1.6105100000000048"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="435"/>
+	<property name="ireport.y" value="556"/>
 	<parameter name="p_sekolah" class="java.lang.String">
 		<defaultValueExpression><![CDATA["SMA"]]></defaultValueExpression>
 	</parameter>
@@ -59,6 +59,15 @@ $P{p_sekolah}+" Kosgoro Kota Bogor\r\n"+
 	</variable>
 	<variable name="bea_non_gel" class="java.math.BigDecimal">
 		<variableExpression><![CDATA[$V{bea_non_gel}]]></variableExpression>
+	</variable>
+	<variable name="gel1_lunas" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{gel1_lunas}]]></variableExpression>
+	</variable>
+	<variable name="gel2_lunas" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{gel2_lunas}]]></variableExpression>
+	</variable>
+	<variable name="all_proses" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{all_proses}]]></variableExpression>
 	</variable>
 	<title>
 		<band height="40" splitType="Stretch"/>
@@ -516,6 +525,9 @@ $P{p_sekolah}+" Kosgoro Kota Bogor\r\n"+
 			</staticText>
 			<subreport>
 				<reportElement x="398" y="400" width="100" height="12" uuid="8938a46a-0b2a-4498-8f44-a9fcd78356fc"/>
+				<subreportParameter name="p_sekolah">
+					<subreportParameterExpression><![CDATA[$P{p_sekolah}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="1"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="jumlah" toVariable="penerimaan_batal"/>
@@ -607,6 +619,109 @@ $P{p_sekolah}+" Kosgoro Kota Bogor\r\n"+
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PASB_1}.add($V{PASB_2}).add($V{PASB_3}).add($V{IPSP}).add($V{IPP}).add($V{IKS}).add($V{OSIS}).add($V{Seragam}).add($V{Attribute}).add($V{IPSB}).subtract($V{Jumlah_Batal}).add($V{penerimaan_batal}).add($V{bea_non_gel})]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="11" y="460" width="487" height="12" uuid="6bd43b82-f4f5-46a5-9da4-d6420acbb131"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[2. Jumlah dana yang diterima Yayasan Dharma Setia Kosgoro pada butir II.1 diatas adalah sebesar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="448" width="177" height="12" uuid="f7eda8af-69f5-4d51-bf4d-eee3ba6ff1b2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="#,##0">
+				<reportElement x="27" y="472" width="78" height="12" uuid="2046d8d7-d6c5-4919-a1de-d924c2672d5c"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PASB_1}.add($V{PASB_2}).add($V{PASB_3}).add($V{IPSP}).add($V{IPP}).add($V{IKS}).add($V{OSIS}).add($V{Seragam}).add($V{Attribute}).add($V{IPSB}).subtract($V{Jumlah_Batal}).add($V{penerimaan_batal}).add($V{bea_non_gel})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="472" width="16" height="12" uuid="b8a2194a-8a43-45f2-80f3-5f59915a05d2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[Rp.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="105" y="472" width="94" height="12" uuid="88ca6105-b35d-4abd-be43-c7c3a2935d0b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[Dengan Rincian:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="484" width="487" height="12" uuid="c71bb1a3-b675-4519-b2c9-604b4eca60db"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[a. CPD yang telah melunasi seluruh kewajibannya]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="182" y="496" width="55" height="12" uuid="26edae54-3431-459a-b782-1abf4c070a5e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[Gelombang I]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="237" y="496" width="100" height="12" uuid="468bbc0f-e8ba-48c6-a93a-c013167e03ee"/>
+				<subreportParameter name="p_sekolah">
+					<subreportParameterExpression><![CDATA[$P{p_sekolah}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="1"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="Jumlah" toVariable="gel1_lunas"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport20.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="182" y="508" width="55" height="12" uuid="51caf6b0-e7fd-474e-a703-826e84679209"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[Gelombang II]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="237" y="508" width="100" height="12" uuid="3318700b-2dd7-45f0-9141-90efd4447637"/>
+				<subreportParameter name="p_sekolah">
+					<subreportParameterExpression><![CDATA[$P{p_sekolah}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="1"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="Jumlah" toVariable="gel2_lunas"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport21.jasper"]]></subreportExpression>
+			</subreport>
+			<textField evaluationTime="Report" pattern="#,##0">
+				<reportElement x="337" y="520" width="100" height="12" uuid="e0a044e7-7f30-4ab8-8798-c3a513a510a1"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{gel1_lunas}.add($V{gel2_lunas})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="237" y="520" width="100" height="1" uuid="053a2932-81f6-4857-8fd3-f081cb029aae"/>
+			</line>
+			<staticText>
+				<reportElement x="11" y="532" width="143" height="12" uuid="83556ebd-4ea8-4f72-8f97-70f5e540de35"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[b. CPD yang belum lunas (mengangsur)]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="337" y="532" width="100" height="12" uuid="1840aeea-b037-420e-aa76-ca8566931387"/>
+				<subreportParameter name="p_sekolah">
+					<subreportParameterExpression><![CDATA[$P{p_sekolah}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="1"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="Jumlah" toVariable="all_proses"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BeritaAcara_subreport22.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</pageHeader>
 	<detail>

@@ -4583,6 +4583,52 @@ public class AppFrame extends javax.swing.JFrame {
         exporter.exportReport();
     }
     
+    public void printBeritaAcara(String targetLevel) throws JRException, PrinterException, SQLException {
+         HashMap jasperParameter = new HashMap();
+        //jasperParameter.put("PARAM_CLERK_ID", Long.valueOf(cl.id));
+         printout.TunggakanPerKelas pb = new TunggakanPerKelas();
+        Connection connection = pb.establishConnection(); 
+        //jasperParameter.put("Param_Level", "%".concat(jComboBoxLevel1.getSelectedItem().toString()).concat("%"));
+        
+        jasperParameter.put("p_sekolah", targetLevel);
+        
+        
+         String fileName = "C://printout//BeritaAcara.jrxml";
+            String filetoPrint = "C://printout//BeritaAcara.jrprint";
+            String filetoFill = "C://printout//BeritaAcara.jasper";
+            //String filePdf = "C://printout//PrintOutReportPerKasir.pdf";
+            String filePdf = "C://printout//BeritaAcara.pdf";
+//       JasperCompileManager.compileReportToFile(fileName);
+            
+            
+            JasperFillManager.fillReportToFile(filetoFill, jasperParameter , connection);
+            JasperPrint jp = JasperFillManager.fillReport(filetoFill, jasperParameter, connection);
+            JasperViewer.viewReport(jp, false);
+            JasperExportManager.exportReportToPdfFile(jp, filePdf);
+            JasperPrintManager.printReport(filetoPrint, true);
+            
+            
+            jasperReport = JasperCompileManager.compileReport
+        ("C://printout//BeritaAcara.jrxml");
+
+        // filling report with data from data source
+
+        jasperPrint = JasperFillManager.fillReport(jasperReport,jasperParameter, connection); 
+        // exporting process
+        // 1- export to PDF
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "C://printout//BeritaAcara.pdf");
+
+        // 2- export to HTML
+        JasperExportManager.exportReportToHtmlFile(jasperPrint, "C://printout//BeritaAcara.html" ); 
+
+        // 3- export to Excel sheet
+        JRXlsExporter exporter = new JRXlsExporter();
+        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "C://printout//BeritaAcara.xls" );
+
+        exporter.exportReport();
+    }
+    
     
     
     private ArrayList<BigDecimal> farmIPP(Kalender startDate, Kalender endDate, Clerk clerk) throws SQLException, KasirException{

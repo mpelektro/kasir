@@ -387,7 +387,7 @@ public class DialogStatusPendaftaran extends JPanel {
 
     /** Creates the panel shown by the second tab. */
     private JPanel createFeatureDialogBox() {
-        final int numButtons = 5;
+        final int numButtons = 6;
         JRadioButton[] radioButtons = new JRadioButton[numButtons];
         final ButtonGroup group = new ButtonGroup();
 
@@ -398,6 +398,7 @@ public class DialogStatusPendaftaran extends JPanel {
         final String nonAutoCommand = "nonautooption";
         final String customOptionCommand = "customoption";
         final String nonModalCommand = "nonmodal";
+        final String rekap2 = "rekap2";
 
         radioButtons[0] = new JRadioButton("Daftar");
         radioButtons[0].setActionCommand(pickOneCommand);
@@ -413,6 +414,9 @@ public class DialogStatusPendaftaran extends JPanel {
 
         radioButtons[4] = new JRadioButton("Rekap");
         radioButtons[4].setActionCommand(nonModalCommand);
+        
+        radioButtons[5] = new JRadioButton("Rekap 2");
+        radioButtons[5].setActionCommand(rekap2);
 
         for (int i = 0; i < numButtons; i++) {
             group.add(radioButtons[i]);
@@ -501,6 +505,20 @@ public class DialogStatusPendaftaran extends JPanel {
                     } catch (SQLException ex) {
                         Exceptions.printStackTrace(ex);
                     } catch (KasirException ex) {
+                        Exceptions.printStackTrace(ex);
+                    }
+                } else if (command == rekap2) {
+                    //Create the dialog.
+                    try {
+                        //                    JOptionPane.showMessageDialog(appFrame,
+//                                "Eggs aren't supposed to be green.");
+                        appFrame.printBeritaAcara("SMA");
+//yes/no dialog
+                    } catch (JRException ex) {
+                        Exceptions.printStackTrace(ex);
+                    } catch (PrinterException ex) {
+                        Exceptions.printStackTrace(ex);
+                    } catch (SQLException ex) {
                         Exceptions.printStackTrace(ex);
                     }
                 }
