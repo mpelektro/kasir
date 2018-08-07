@@ -78,7 +78,7 @@ WHERE
 				<textElement>
 					<font size="8" isBold="false"/>
 				</textElement>
-				<text><![CDATA[IKS]]></text>
+				<text><![CDATA[KOMP]]></text>
 			</staticText>
 		</band>
 	</detail>

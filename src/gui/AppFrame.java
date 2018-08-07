@@ -1464,7 +1464,7 @@ public class AppFrame extends javax.swing.JFrame {
        if(srmIKS.size() > 0){
         for(Map.Entry<Long, IKS> entry: srmIKS.entrySet()){
             if(entry.getValue().entries.get(0).debt > 0){
-                tunggakans.add(new Tunggakan("IKS", entry.getValue().entries.get(0).debt, "IKS ".concat(String.valueOf(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
+                tunggakans.add(new Tunggakan("IKS", entry.getValue().entries.get(0).debt, "KOMPUTER ".concat(String.valueOf(entry.getValue().chargedLevel.tahun)), entry.getValue().chargedLevel.tahun));
                 tunggakanIKSs.add(entry.getValue());
             }
            

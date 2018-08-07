@@ -4837,7 +4837,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                             iksFromDB.id, 
                                                                                             clerk.id, 
                                                                                             transactionSummary.id, profil.noInduk, profil.currentLevel.level1, (inputTransactionIKS.iKSAmounts.get(i)), TransactionDetail.PaymentMethod.CASH,
-                                                                                            inputTransactionIKS.jTableIKS.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),this.iksFromDB.chargedLevel.tahun < profil.currentLevel.tahun);
+                                                                                            //inputTransactionIKS.jTableIKS.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),this.iksFromDB.chargedLevel.tahun < profil.currentLevel.tahun);
+                                                                                            "KOMPUTER".concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),this.iksFromDB.chargedLevel.tahun < profil.currentLevel.tahun);
 
                         iksTransactionDetails.add(iksTransactionDetail);
                         if(iksTransactionDetail.piutang)
@@ -4848,7 +4849,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                             iksFromDB.id, 
                                                                                             clerk.id, 
                                                                                             transactionSummary.id, profil.noInduk, profil.currentLevel.level1, inputTransactionIKS.iDDAmounts.get(i), TransactionDetail.PaymentMethod.IDD,
-                                                                                            inputTransactionIKS.jTableIKS.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                            //inputTransactionIKS.jTableIKS.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                            "KOMPUTER".concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
                         iksTransactionDetails.add(iksTransactionDetail);
                         // transactOUT IDD , kurangin IDD amount sama insert TDetail IDD
 
@@ -4861,7 +4863,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                             iksFromDB.id, 
                                                                                             clerk.id, 
                                                                                             transactionSummary.id, profil.noInduk, profil.currentLevel.level1, inputTransactionIKS.beasiswaAmounts.get(i), TransactionDetail.PaymentMethod.BEASISWA,
-                                                                                            inputTransactionIKS.jTableIKS.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                           // inputTransactionIKS.jTableIKS.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                            "KOMPUTER".concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
                         iksTransactionDetails.add(iksTransactionDetail);
                         }
                         transactionSummary.note = "TIDAK_TUNAI";
@@ -4871,7 +4874,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                             iksFromDB.id, 
                                                                                             clerk.id, 
                                                                                             transactionSummary.id, profil.noInduk, profil.currentLevel.level1, inputTransactionIKS.beasiswaCostAmounts.get(i), TransactionDetail.PaymentMethod.BEASISWA_COST,
-                                                                                            inputTransactionIKS.jTableIKS.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+//                                                                                            inputTransactionIKS.jTableIKS.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                            "KOMPUTER".concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
                         iksTransactionDetails.add(iksTransactionDetail);
                         BeasiswaCost.transactOut(profil, transactionSummary.id, inputTransactionIKS.beasiswaCostAmounts.get(i));
                         transactionSummary.note = "TIDAK_TUNAI";
@@ -4881,7 +4885,8 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
                                                                                             iksFromDB.id, 
                                                                                             clerk.id, 
                                                                                             transactionSummary.id, profil.noInduk, profil.currentLevel.level1, inputTransactionIKS.bankIksAmounts.get(i), TransactionDetail.PaymentMethod.TRANSFER,
-                                                                                            inputTransactionIKS.jTableIKS.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+//                                                                                            inputTransactionIKS.jTableIKS.getValueAt(i,0).toString().concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
+                                                                                            "KOMPUTER".concat(" TP ").concat(jComboBoxTahun.getSelectedItem().toString()),false);
                         iksTransactionDetails.add(iksTransactionDetail);
                         transactionSummary.note = "TIDAK_TUNAI";
                     }
