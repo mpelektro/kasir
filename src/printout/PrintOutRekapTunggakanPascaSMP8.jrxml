@@ -8,9 +8,9 @@
  SUM(Debt1)+SUM(Debt2)+SUM(Debt3)+SUM(Debt4)+SUM(Debt5)+SUM(Debt6)+SUM(Debt7)+SUM(Debt8)+SUM(Debt9)+SUM(Debt10)+SUM(Debt11)+SUM(Debt12) AS 'Debt'
 FROM
     rusly_kasirdb.TunggakanPasca
-WHERE ChargedLevel LIKE "SMP-8-%-2017"]]>
+WHERE ChargedLevel LIKE "SMP-8-%-2018"]]>
 	</queryString>
-	<field name="Debt" class="java.math.BigDecimal">
+	<field name="Debt" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<variable name="variable1" class="java.math.BigDecimal">
