@@ -161,7 +161,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="Level level = new Level();&#xa;List&lt;Level.Level1&gt; listLevel1 = new ArrayList&lt;Level.Level1&gt;(Arrays.asList(Level.Level1.values()));&#xa;List&lt;Level.Level2&gt; listLevel2 = new ArrayList&lt;Level.Level2&gt;(Arrays.asList(Level.Level2.values()));&#xa;List&lt;Level.Level3&gt; listLevel3 = new ArrayList&lt;Level.Level3&gt;(Arrays.asList(Level.Level3.values()));&#xa;listLevel1.add(0, null);&#xa;listLevel2.add(0, null);&#xa;listLevel3.add(0, null);&#xa;DefaultComboBoxModel level1ComboBoxModel = new DefaultComboBoxModel(listLevel1.toArray());&#xa;DefaultComboBoxModel level2ComboBoxModel = new DefaultComboBoxModel(listLevel2.toArray());&#xa;DefaultComboBoxModel level3ComboBoxModel = new DefaultComboBoxModel(listLevel3.toArray());"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="Level level = new Level();&#xa;List&lt;Level.Level1&gt; listLevel1 = new ArrayList&lt;Level.Level1&gt;(Arrays.asList(Level.Level1.values()));&#xa;List&lt;Level.Level2&gt; listLevel2 = new ArrayList&lt;Level.Level2&gt;(Arrays.asList(Level.Level2.values()));&#xa;List&lt;Level.Level3&gt; listLevel3 = new ArrayList&lt;Level.Level3&gt;(Arrays.asList(Level.Level3.values()));&#xa;listLevel1.add(0, null);&#xa;listLevel2.add(0, null);&#xa;listLevel3.add(0, null);&#xa;DefaultComboBoxModel level1ComboBoxModel = new DefaultComboBoxModel(listLevel1.toArray());&#xa;DefaultComboBoxModel level2ComboBoxModel = new DefaultComboBoxModel(listLevel2.toArray());&#xa;DefaultComboBoxModel level3ComboBoxModel = new DefaultComboBoxModel(listLevel3.toArray());&#xa;Integer[] years = new Integer[6];&#xa;for(int i = 0 ; i &lt; years.length; i++){&#xa;    years[i] = 2015+i;&#xa;}&#xa;DefaultComboBoxModel yearComboBoxModel = new DefaultComboBoxModel(years);"/>
           </AuxValues>
 
           <Layout>
@@ -186,6 +186,8 @@
                       <Component id="jComboBoxLevel2" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jComboBoxLevel3" min="-2" pref="79" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jComboBoxYear" min="-2" pref="79" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -199,6 +201,7 @@
                               <Component id="jLabelKelas" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jComboBoxLevel2" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jComboBoxLevel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jComboBoxYear" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabelNamaSiswa" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -280,6 +283,16 @@
                   <Connection code="level3ComboBoxModel" type="code"/>
                 </Property>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="jComboBoxYear">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="yearComboBoxModel" type="code"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="String yr;&#xa;Kalender kalS = new Kalender(dateChooserComboTSumS.getSelectedDate().getTime());&#xa;        if(kalS.getMonth()&gt;6)&#xa;            yr = String.valueOf(kalS.get(Kalender.YEAR));&#xa;        else&#xa;            yr = String.valueOf(kalS.get(Kalender.YEAR)-1);&#xa;jComboBoxYear.setSelectedItem(Integer.valueOf(yr));"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

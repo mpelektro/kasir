@@ -159,6 +159,11 @@ public class AppFrame extends javax.swing.JFrame {
         DefaultComboBoxModel level1ComboBoxModel = new DefaultComboBoxModel(listLevel1.toArray());
         DefaultComboBoxModel level2ComboBoxModel = new DefaultComboBoxModel(listLevel2.toArray());
         DefaultComboBoxModel level3ComboBoxModel = new DefaultComboBoxModel(listLevel3.toArray());
+        Integer[] years = new Integer[6];
+        for(int i = 0 ; i < years.length; i++){
+            years[i] = 2015+i;
+        }
+        DefaultComboBoxModel yearComboBoxModel = new DefaultComboBoxModel(years);
         jPanel2 = new javax.swing.JPanel();
         jLabelNamaSiswa = new javax.swing.JLabel();
         jTextFieldNamaSiswa = new javax.swing.JTextField();
@@ -169,6 +174,7 @@ public class AppFrame extends javax.swing.JFrame {
         jLabelKelas = new javax.swing.JLabel();
         jComboBoxLevel2 = new javax.swing.JComboBox();
         jComboBoxLevel3 = new javax.swing.JComboBox();
+        jComboBoxYear = new javax.swing.JComboBox();
         jToolBar1 = new javax.swing.JToolBar();
         jInputSiswa = new javax.swing.JButton();
         jButtonInsertKasir = new javax.swing.JButton();
@@ -253,6 +259,15 @@ public class AppFrame extends javax.swing.JFrame {
 
         jComboBoxLevel3.setModel(level3ComboBoxModel);
 
+        jComboBoxYear.setModel(yearComboBoxModel);
+        String yr;
+        Kalender kalS = new Kalender(dateChooserComboTSumS.getSelectedDate().getTime());
+        if(kalS.getMonth()>6)
+        yr = String.valueOf(kalS.get(Kalender.YEAR));
+        else
+        yr = String.valueOf(kalS.get(Kalender.YEAR)-1);
+        jComboBoxYear.setSelectedItem(Integer.valueOf(yr));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -276,6 +291,8 @@ public class AppFrame extends javax.swing.JFrame {
                 .addComponent(jComboBoxLevel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jComboBoxLevel3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBoxYear, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -286,7 +303,8 @@ public class AppFrame extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabelKelas)
                         .addComponent(jComboBoxLevel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBoxLevel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBoxLevel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabelNamaSiswa)
                         .addComponent(jTextFieldNamaSiswa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1139,11 +1157,12 @@ public class AppFrame extends javax.swing.JFrame {
             lv2 = jComboBoxLevel2.getSelectedItem().toString();
         if(jComboBoxLevel3.getSelectedIndex()>=0)
             lv3 = jComboBoxLevel3.getSelectedItem().toString();
-        Kalender kalS = new Kalender(dateChooserComboTSumS.getSelectedDate().getTime());
-        if(kalS.getMonth()>6)
-            yr = String.valueOf(kalS.get(Kalender.YEAR));
-        else
-            yr = String.valueOf(kalS.get(Kalender.YEAR)-1);
+//        Kalender kalS = new Kalender(dateChooserComboTSumS.getSelectedDate().getTime());
+//        if(kalS.getMonth()>6)
+//            yr = String.valueOf(kalS.get(Kalender.YEAR));
+//        else
+//            yr = String.valueOf(kalS.get(Kalender.YEAR)-1);
+        yr = jComboBoxYear.getSelectedItem().toString();
         String targetYear = lv1.concat("-").concat(lv2).concat("-").concat(lv3).concat("-").concat(yr);
         try{
             printTunggakanPerKelas(targetYear);
@@ -1943,6 +1962,7 @@ public class AppFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxLevel1;
     private javax.swing.JComboBox jComboBoxLevel2;
     private javax.swing.JComboBox jComboBoxLevel3;
+    private javax.swing.JComboBox jComboBoxYear;
     private javax.swing.JButton jInputSiswa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
