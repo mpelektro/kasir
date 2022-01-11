@@ -1554,9 +1554,9 @@ public class AppFrameBuku extends javax.swing.JFrame {
                     profil.currentLevel.level2 = profil.currentLevel.level2.SEPULUH;
                     if(totalDebt == 0){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.LUNAS;
-                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?4450000:4450000) && totalDebt > 0){
+                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?5600000:5600000) && totalDebt > 0){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.PROSES;
-                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?4450000:4450000)){
+                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?5600000:5600000)){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.DAFTAR;
                     }
                     break;               

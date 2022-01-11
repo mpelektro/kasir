@@ -159,7 +159,7 @@ public class AppFrame extends javax.swing.JFrame {
         DefaultComboBoxModel level1ComboBoxModel = new DefaultComboBoxModel(listLevel1.toArray());
         DefaultComboBoxModel level2ComboBoxModel = new DefaultComboBoxModel(listLevel2.toArray());
         DefaultComboBoxModel level3ComboBoxModel = new DefaultComboBoxModel(listLevel3.toArray());
-        Integer[] years = new Integer[6];
+        Integer[] years = new Integer[12];
         for(int i = 0 ; i < years.length; i++){
             years[i] = 2015+i;
         }
@@ -809,6 +809,7 @@ public class AppFrame extends javax.swing.JFrame {
             level.level1 = (Level.Level1)jComboBoxLevel1.getSelectedItem();
             level.level2 = (Level.Level2)jComboBoxLevel2.getSelectedItem();
             level.level3 = (Level.Level3)jComboBoxLevel3.getSelectedItem();
+            level.tahun = (int)jComboBoxYear.getSelectedItem();
             profil.biodata = biodata.isEmpty()?null:biodata;
             profil.currentLevel = level.isEmpty()?null:level;
             profil.noInduk = noInduk.isEmpty()?null:noInduk;
@@ -1752,9 +1753,9 @@ public class AppFrame extends javax.swing.JFrame {
                     profil.currentLevel.level2 = profil.currentLevel.level2.TUJUH;
                     if(totalDebt == 0){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.LUNAS;
-                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?2500000:2500000) && totalDebt > 0){
+                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?2800000:2800000) && totalDebt > 0){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.PROSES;
-                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?2500000:2500000)){
+                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?2800000:2800000)){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.DAFTAR;
                     }
                  break;
@@ -1762,9 +1763,9 @@ public class AppFrame extends javax.swing.JFrame {
                     profil.currentLevel.level2 = profil.currentLevel.level2.SEPULUH;
                     if(totalDebt == 0){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.LUNAS;
-                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?6495000:6495000) && totalDebt > 0){
+                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?6800000:6800000) && totalDebt > 0){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.PROSES;
-                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?6495000:6495000)){
+                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?6800000:6800000)){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.DAFTAR;
                     }
                     break;
@@ -1772,9 +1773,9 @@ public class AppFrame extends javax.swing.JFrame {
                     profil.currentLevel.level2 = profil.currentLevel.level2.SEPULUH;
                     if(totalDebt == 0){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.LUNAS;
-                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?4450000:4450000) && totalDebt > 0){
+                    }else if(totalDebt < (profil.gelombang == Profil.Gelombang.GELOMBANG_1?5350000:5350000) && totalDebt > 0){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.PROSES;
-                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?4450000:4450000)){
+                    }else if(totalDebt >= (profil.gelombang == Profil.Gelombang.GELOMBANG_1?5350000:5350000)){
                         profil.statusPendaftaran = Profil.StatusPendaftaran.DAFTAR;
                     }
                     break;               
@@ -4772,6 +4773,8 @@ public class AppFrame extends javax.swing.JFrame {
           retVal.add(amountSMK12);
           retVal.add(amountSMK10.add(amountSMK11.add(amountSMK12)));
           retVal.add(amountSMKPasca);
+          System.out.println("kundi");
+          System.out.println(amountSMK11);
           return retVal;
     }
     

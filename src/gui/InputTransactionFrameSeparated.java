@@ -4167,7 +4167,7 @@ public class InputTransactionFrameSeparated extends javax.swing.JFrame {
         if(this.pasbTransactionDetail!=null){
             this.pasbTransactionDetail.transactSummaryID= transactionSummary.id;
             this.pasbTransactionDetail.lastUpdateDate = theCreatedDate;
-            this.pasbTransactionDetail.note = "Administrasi PPDB ".concat(profil.currentLevel.level1.toString());
+            this.pasbTransactionDetail.note = "Pengadaan Perlengkapan Administrasi Kesiswaan ".concat(profil.currentLevel.level1.toString());
            
             Control.insertTDetail(TransactionDetail.Tipe.PASBTransaction, this.pasbTransactionDetail);
             Set<PASBTransactionDetail> filterPASB = new HashSet<>();
