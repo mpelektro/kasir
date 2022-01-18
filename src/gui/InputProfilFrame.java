@@ -1517,7 +1517,7 @@ Validator<String> d = StringValidators.trimString(ValidatorUtils.merge(
         
         Profil profilData = new Profil(jNomorIndukTextField1.getText(), level, biodata, new sak.Kalender(dateChooserComboTanggalMasuk1.getSelectedDate().getTime()), null, new sak.Kalender(Calendar.getInstance().getTime()));
         sak.Kalender gel2 = new sak.Kalender();
-        gel2.set(2018, 5, 22, 0, 0, 0);
+        gel2.set(2022, 8, 22, 0, 0, 0);
         if(dateChooserComboTanggalMasuk1.getSelectedDate().after(gel2))
             profilData.gelombang = pelajar.Profil.Gelombang.GELOMBANG_2;
         Control.insertProfil(profilData);
