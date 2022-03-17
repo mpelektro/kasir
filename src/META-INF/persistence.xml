@@ -6,7 +6,7 @@
     <class>gui.Clerk</class>
     <properties>
       <property name="toplink.jdbc.user" value="marbun"/>
-      <property name="toplink.jdbc.password" value="marbun123456"/>
+      <property name="toplink.jdbc.password" value="kenapa123456"/>
       <property name="toplink.jdbc.url" value="jdbc:mysql://ark3.dayarka.com:3306/rusly_kasirdb"/>
       <property name="toplink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
     </properties>

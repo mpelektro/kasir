@@ -46,7 +46,7 @@ public class StatusPendaftaran {
                 Exceptions.printStackTrace(ex);
                     oracleURL = null;
             }
-            connection = DriverManager.getConnection(oracleURL,"marbun","marbun123456");
+            connection = DriverManager.getConnection(oracleURL,"marbun","kenapa123456");
             connection.setAutoCommit(false);
         }
         catch(SQLException exception)

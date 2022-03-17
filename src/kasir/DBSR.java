@@ -12,7 +12,7 @@ import org.openide.util.Exceptions;
 import sak.*;
 
 public class DBSR{
-    public static final String dbURLdu= "jdbc:mysql://ark3.dayarka.com/rusly_dudb", dbURL = "jdbc:mysql://ark3.dayarka.com/rusly_kasirdb", dbURLppdb = "jdbc:mysql://ark3.dayarka.com/rusly_ppdbdb", dbUsername = "marbun", dbPass = "marbun123456";
+    public static final String dbURLdu= "jdbc:mysql://ark3.dayarka.com/rusly_dudb", dbURL = "jdbc:mysql://ark3.dayarka.com/rusly_kasirdb", dbURLppdb = "jdbc:mysql://ark3.dayarka.com/rusly_ppdbdb", dbUsername = "marbun", dbPass = "kenapa123456";
     //public static final String dbURLdu= "jdbc:mysql://localhost/rusly_dudb", dbURL = "jdbc:mysql://localhost/rusly_kasirdb", dbURLppdb = "jdbc:mysql://localhost/rusly_ppdbdb", dbUsername = "root", dbPass = "";
     public static Connection conn;
     public static Statement stmt;

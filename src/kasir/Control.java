@@ -580,7 +580,7 @@ public class Control {
     
     //===========================================transfer tDetails to gl_trans   
     public static class TDetailToGL_Trans{
-        static final String akunDBurl = "jdbc:mysql://ark3.dayarka.com/rusly_accountingdb2016", akundbUsername = "marbun", akundbPass = "marbun123456";
+        static final String akunDBurl = "jdbc:mysql://ark3.dayarka.com/rusly_accountingdb2016", akundbUsername = "marbun", akundbPass = "kenapa123456";
         static Connection conn;
         static Statement stmt;
         
